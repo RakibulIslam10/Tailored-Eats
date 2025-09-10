@@ -1,3 +1,6 @@
+import 'package:tailored_eats/routes/routes.dart';
+import 'package:tailored_eats/widgets/auth_app_bar.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../controller/reset_password_controller.dart';
 

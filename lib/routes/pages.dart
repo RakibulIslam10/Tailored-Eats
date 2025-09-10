@@ -4,6 +4,11 @@ class RoutePageList {
   static var list = [
     //Page Route List
     GetPage(
+      name: Routes.two_faScreen,
+      page: () => const TwoFaScreen(),
+      binding: TwoFaBinding(),
+    ),
+    GetPage(
       name: Routes.registerScreen,
       page: () => const RegisterScreen(),
       binding: RegisterBinding(),

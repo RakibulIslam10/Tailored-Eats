@@ -6,17 +6,42 @@ class ForgetPasswordScreenMobile extends GetView<ForgetPasswordController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("ForgetPassword", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
+      appBar: CommonAppBar(title: 'Forgot Password'),
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-          children: const [
-            // Add your widgets here
+          children: [
+            Padding(
+              padding: Dimensions.verticalSize.edgeVertical * 1.5,
+              child: Image.asset(
+                Assets.dummy.logo.path,
+                height: 100.h,
+                width: 100.w,
+              ),
+            ),
+            TextWidget(
+              textAlign: TextAlign.center,
+              padding: EdgeInsetsGeometry.only(
+                top: Dimensions.heightSize * 2,
+                bottom: Dimensions.verticalSize,
+              ),
+              'Enter your email and we will send you a verification code',
+              color: CustomColors.grayShade,
+            ),
+
+            PrimaryInputFieldWidget(
+              label: "Email",
+              isEmail: true,
+              controller: controller.emailController,
+              focusNode: controller.emailFocus,
+              hintText: "Enter your email",
+            ),
+            Space.height.betweenInputBox,
+            Space.height.betweenInputBox,
+
+              PrimaryButtonWidget(title: "Send Code", onPressed: () {
+              Get.toNamed(Routes.verificationScreen);
+            }),
           ],
         ),
       ),

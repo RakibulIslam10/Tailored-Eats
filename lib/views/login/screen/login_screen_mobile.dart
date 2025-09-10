@@ -57,7 +57,10 @@ class LoginScreenMobile extends GetView<LoginController> {
             Space.height.v20,
 
             /// Button
-            PrimaryButtonWidget(title: 'Log In', onPressed: () {}),
+            PrimaryButtonWidget(
+              title: 'Log In',
+              onPressed: () => Get.toNamed(Routes.two_faScreen),
+            ),
 
             Space.height.v20,
 

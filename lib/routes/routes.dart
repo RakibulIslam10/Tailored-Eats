@@ -6,6 +6,7 @@ import '../bind/otp_binding.dart';
 import '../bind/register_binding.dart';
 import '../bind/reset_password_binding.dart';
 import '../bind/splash_binding.dart';
+import '../bind/two_fa_binding.dart';
 import '../bind/verification_binding.dart';
 import '../bind/welcome_binding.dart';
 import '../views/forget_password/screen/forget_password_screen.dart';
@@ -14,6 +15,7 @@ import '../views/otp/screen/otp_screen.dart';
 import '../views/register/screen/register_screen.dart';
 import '../views/reset_password/screen/reset_password_screen.dart';
 import '../views/splash/screen/splash_screen.dart';
+import '../views/two_fa/screen/two_fa_screen.dart';
 import '../views/verification/screen/verification_screen.dart';
 import '../views/welcome/screen/welcome_screen.dart';
 
@@ -21,6 +23,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const two_faScreen = '/two_faScreen';
 static const registerScreen = '/registerScreen';
   static const otpScreen = '/otpScreen';
   static const reset_passwordScreen = '/reset_passwordScreen';

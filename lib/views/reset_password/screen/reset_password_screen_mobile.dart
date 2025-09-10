@@ -6,18 +6,37 @@ class ResetPasswordScreenMobile extends GetView<ResetPasswordController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("ResetPassword", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
+      appBar: CommonAppBar(title: 'Reset Password'),
       body: SafeArea(
-        child: ListView(
+        child: Padding(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-          children: const [
-            // Add your widgets here
-          ],
+          child: ListView(
+            children: [
+              Padding(
+                padding: Dimensions.verticalSize.edgeVertical * 1.5,
+                child: Image.asset(
+                  Assets.dummy.logo.path,
+                  height: 100.h,
+                  width: 100.w,
+                ),
+              ),
+
+              Space.height.v30,
+              PrimaryInputFieldWidget(
+                hintText: "Enter your password",
+                label: "Create Password",
+                isPassword: true,
+                controller: controller.passwordController,
+                // focusNode: controller.passwordFocus,
+                nextFocusNode: null,
+              ),
+              Space.height.v30,
+              PrimaryButtonWidget(
+                title: 'Confirm',
+                onPressed: () => Get.offAllNamed(Routes.loginScreen),
+              ),
+            ],
+          ),
         ),
       ),
     );
