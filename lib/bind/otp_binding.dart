@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../views/otp/controller/otp_controller.dart';
+import '../views/auth/otp/controller/otp_controller.dart';
 
 class OtpBinding extends Bindings {
   @override

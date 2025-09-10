@@ -9,14 +9,15 @@ import '../bind/splash_binding.dart';
 import '../bind/two_fa_binding.dart';
 import '../bind/verification_binding.dart';
 import '../bind/welcome_binding.dart';
-import '../views/forget_password/screen/forget_password_screen.dart';
-import '../views/login/screen/login_screen.dart';
-import '../views/otp/screen/otp_screen.dart';
-import '../views/register/screen/register_screen.dart';
-import '../views/reset_password/screen/reset_password_screen.dart';
+import '../views/auth/forget_password/screen/forget_password_screen.dart';
+import '../views/auth/login/screen/login_screen.dart';
+import '../views/auth/otp/screen/otp_screen.dart';
+import '../views/auth/register/screen/register_screen.dart';
+import '../views/auth/reset_password/screen/reset_password_screen.dart';
+import '../views/auth/two_fa/screen/two_fa_screen.dart';
+import '../views/auth/verification/screen/verification_screen.dart';
 import '../views/splash/screen/splash_screen.dart';
-import '../views/two_fa/screen/two_fa_screen.dart';
-import '../views/verification/screen/verification_screen.dart';
+
 import '../views/welcome/screen/welcome_screen.dart';
 
 part 'pages.dart';
