@@ -8,6 +8,7 @@ class CustomColors {
   static const Color primary = Color(0xff26C4F8);
   static const Color secondaryDarkText = Color(0xff64748B);
   static const Color grayShade = Color(0xff777676);
+  static const Color progressColor = Color(0xff4FBAF0);
 
   static Color tertiary = Color(0xffF5F5F5);
   static Color background = Color(0xffF7F8F8);

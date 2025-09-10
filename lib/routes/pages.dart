@@ -3,6 +3,41 @@ part of 'routes.dart';
 class RoutePageList {
   static var list = [
     //Page Route List
+GetPage(
+    name: Routes.friendsScreen,
+    page: () => const FriendsScreen(),
+    binding: FriendsBinding(),
+  ),
+    GetPage(
+      name: Routes.profileScreen,
+      page: () => const ProfileScreen(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: Routes.consistencyScreen,
+      page: () => const ConsistencyScreen(),
+      binding: ConsistencyBinding(),
+    ),
+    GetPage(
+      name: Routes.goalScreen,
+      page: () => const GoalScreen(),
+      binding: GoalBinding(),
+    ),
+    GetPage(
+      name: Routes.nutritionScreen,
+      page: () => const NutritionScreen(),
+      binding: NutritionBinding(),
+    ),
+    GetPage(
+      name: Routes.homeScreen,
+      page: () => const HomeScreen(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: Routes.navigationScreen,
+      page: () => const NavigationScreen(),
+      binding: NavigationBinding(),
+    ),
     GetPage(
       name: Routes.two_faScreen,
       page: () => const TwoFaScreen(),

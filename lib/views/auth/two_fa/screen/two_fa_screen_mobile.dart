@@ -10,7 +10,7 @@ class TwoFaScreenMobile extends GetView<TwoFaController> {
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-          children:  [
+          children: [
             Padding(
               padding: Dimensions.verticalSize.edgeVertical * 1.5,
               child: Image.asset(
@@ -80,15 +80,12 @@ class TwoFaScreenMobile extends GetView<TwoFaController> {
             //   mainAxisAlignment: mainCenter,
             //   children: [TimerWidget(onResendCode: () {})],
             // ),
-
             Space.height.betweenInputBox,
             PrimaryButtonWidget(
               title: "Submit",
-              onPressed: () {
 
-              },
-              // onPressed: () =>  Get.toNamed(Routes.reset_passwordScreen),
-            )
+              onPressed: () => Get.toNamed(Routes.navigationScreen),
+            ),
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/utils/basic_import.dart';
 
+import '../../../../routes/routes.dart';
 import '../../../../widgets/auth_app_bar.dart';
 import '../controller/two_fa_controller.dart';
 
