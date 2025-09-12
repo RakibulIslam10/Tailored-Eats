@@ -51,7 +51,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
   const CalorieProgressWidget({
     super.key,
     required this.totalCalories,
-    this.size = 90.0,
+    this.size = 78.0,
   });
 
   @override
@@ -69,26 +69,31 @@ class CalorieProgressWidget extends GetView<HomeController> {
             CustomPaint(
               size: Size(size, size),
               painter: CalorieProgressPainter(
+                strokeWidth: 5,
                 progress: progress,
-                progressColor: Colors.blueAccent,
+                progressColor: Color(0xff7AD3FF),
                 backgroundColor: Colors.white12,
               ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.local_fire_department,
-                  color: Colors.deepOrange,
-                  size: Dimensions.iconSizeLarge * 0.9,
+                Padding(
+                  padding:  Dimensions.heightSize.edgeBottom * 0.5
+,                  child: Icon(
+                    Icons.local_fire_department,
+                    color: Colors.deepOrange,
+                    size: Dimensions.iconSizeLarge * 0.6,
+                  ),
                 ),
                 Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.end,
                   children: [
                     TextWidget(
                       '$displayValue',
-                      fontSize: Dimensions.titleSmall * 0.9,
+                      fontSize: Dimensions.titleSmall * 0.65,
                       fontWeight: FontWeight.bold,
+                      padding: Dimensions.widthSize.edgeRight * 0.2,
                     ),
                     TextWidget(
                       ' kcal',
