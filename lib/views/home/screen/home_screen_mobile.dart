@@ -12,6 +12,7 @@ class HomeScreenMobile extends GetView<HomeController> {
       ),
       body: SafeArea(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
             const TopTextHeaderWidget(),
@@ -37,26 +38,7 @@ class HomeScreenMobile extends GetView<HomeController> {
               fontWeight: FontWeight.bold,
               padding: Dimensions.heightSize.edgeVertical,
             ),
-
-            Container(
-              color: Colors.cyan,
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadiusGeometry.circular(
-                      Dimensions.radius * 0.8,
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpK1noS9RwpA351YDfG9dRCvSON-j5nZHU0A&s',
-                      width: 100.w,
-                      height: 80.h,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const FoodCardWidget(),
             Space.height.v30,
           ],
         ),

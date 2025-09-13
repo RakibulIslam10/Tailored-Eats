@@ -18,7 +18,7 @@ class TopTextHeaderWidget extends GetView<HomeController> {
           fontSize: Dimensions.titleLarge * 0.8,
         ),
         TextWidget(
-          'Hey Rakib, ready to crush today?',
+          'Your Goal: Lose Weight',
           fontSize: Dimensions.titleSmall * 0.96,
           color: CustomColors.grayShade,
         ),

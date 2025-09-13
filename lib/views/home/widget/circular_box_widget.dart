@@ -14,10 +14,7 @@ class CircularProgressWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFF1F2937),
-            Colors.black,
-          ],
+          colors: [Color(0xFF1F2937), Colors.black],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -65,16 +62,11 @@ class CircularProgressWidget extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextWidget(
-                      'Today',
-                      fontSize: 10.sp,
-
-                    ),
+                    TextWidget('Today', fontSize: 10.sp),
                     TextWidget(
                       '${(percentage * 100).toInt()}%',
-                       fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ],
                 ),
