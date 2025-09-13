@@ -9,7 +9,7 @@ class CalorieProgressPainter extends CustomPainter {
   CalorieProgressPainter({
     required this.progress,
     this.strokeWidth = 7.0,
-    this.backgroundColor = const Color(0xFF333333),
+    this.backgroundColor = Colors.cyan,
     this.progressColor = const Color(0xff4FBAF0),
   });
 
@@ -72,15 +72,15 @@ class CalorieProgressWidget extends GetView<HomeController> {
                 strokeWidth: 5,
                 progress: progress,
                 progressColor: Color(0xff7AD3FF),
-                backgroundColor: Colors.white12,
+                backgroundColor: CustomColors.progressColor.withOpacity(0.15),
               ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding:  Dimensions.heightSize.edgeBottom * 0.5
-,                  child: Icon(
+                  padding: Dimensions.heightSize.edgeBottom * 0.5,
+                  child: Icon(
                     Icons.local_fire_department,
                     color: Colors.deepOrange,
                     size: Dimensions.iconSizeLarge * 0.6,

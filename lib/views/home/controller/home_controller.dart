@@ -1,8 +1,7 @@
 import '../../../core/utils/basic_import.dart';
-class HomeController extends GetxController {
-  final currentCalories = 2500.0.obs;
 
-  // Method to update the calories.
-  void updateCalories(double value) {
-    currentCalories.value = value;
-  }}
+class HomeController extends GetxController {
+  RxDouble currentCalories = 2000.0.obs;
+  RxDouble progress = 0.45.obs;
+  RxDouble percentage = 0.65.obs;
+}
