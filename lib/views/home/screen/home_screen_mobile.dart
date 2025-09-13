@@ -12,7 +12,7 @@ class HomeScreenMobile extends GetView<HomeController> {
       ),
       body: SafeArea(
         child: ScrollConfiguration(
-          behavior: _CustomScrollBehavior(), // 👈 Facebook/LinkedIn style
+          behavior: _CustomScrollBehavior(),
           child: ListView(
             physics: const _SmoothScrollPhysics(),
             padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
@@ -39,12 +39,22 @@ class HomeScreenMobile extends GetView<HomeController> {
                 fontWeight: FontWeight.bold,
                 padding: Dimensions.heightSize.edgeVertical,
               ),
-              const FoodCardWidget(),
+              const FoodCardWidget(
+                title: 'Delicious lobster gourmet',
+                description:
+                    'Use kitchen scissors to cut through the top shell lengthwise,',
+                calories: '271 Kcal',
+                time: '15 min',
+                imageUrl:
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpK1noS9RwpA351YDfG9dRCvSON-j5nZHU0A&s',
+                onShuffle: null,
+              ),
               TextWidget(
                 'Don’t Forget Your Daily Goal',
                 fontWeight: FontWeight.bold,
                 padding: Dimensions.heightSize.edgeVertical,
-              ),              const TaskListWidget(),
+              ),
+              const TaskListWidget(),
               Space.height.v30,
             ],
           ),
@@ -58,7 +68,10 @@ class HomeScreenMobile extends GetView<HomeController> {
 class _CustomScrollBehavior extends ScrollBehavior {
   @override
   Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
     return child; // overscroll glow remove (like FB/LinkedIn)
   }
 }
