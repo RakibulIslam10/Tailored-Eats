@@ -4,9 +4,7 @@ import '../model/goalModel.dart';
 class GoalController extends GetxController {
   final addGoalController = TextEditingController();
   final editGoalController = TextEditingController();
-
   RxDouble progress = 0.0.obs;
-
   RxList<Goal> dailyGoals = <Goal>[].obs;
   RxList<Goal> suggestedGoals = <Goal>[].obs;
 
@@ -30,12 +28,27 @@ class GoalController extends GetxController {
 
   void toggleGoal(int index) {
     dailyGoals[index].completed = !dailyGoals[index].completed;
+    dailyGoals.refresh();
     updateProgress();
   }
 
-  void addSuggestedGoal(int index) {
-    final goal = suggestedGoals.removeAt(index);
-    dailyGoals.add(goal);
+  /// Suggested Goal tick/untick logic
+  void toggleSuggestedGoal(int index) {
+    final goal = suggestedGoals[index];
+    goal.completed = !goal.completed;
+
+    if (goal.completed) {
+      // Add to Daily Goals if not already
+      if (!dailyGoals.any((g) => g.title == goal.title)) {
+        dailyGoals.add(Goal(title: goal.title, completed: true));
+      }
+    } else {
+      // Remove from Daily Goals if exists
+      dailyGoals.removeWhere((g) => g.title == goal.title);
+    }
+
+    suggestedGoals.refresh();
+    dailyGoals.refresh();
     updateProgress();
   }
 

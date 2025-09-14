@@ -4,6 +4,9 @@ import '../controller/goal_controller.dart';
 import '../model/goalModel.dart';
 
 part 'goal_screen_mobile.dart';
+part '../widget/top_progress_widget.dart';
+part '../widget/goal_add_pop_widget.dart';
+part '../widget/goal_list_widget.dart';
 
 class GoalScreen extends GetView<GoalController> {
   const GoalScreen({super.key});
