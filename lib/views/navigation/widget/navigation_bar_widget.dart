@@ -69,7 +69,7 @@ class NavigationBarWidget extends StatelessWidget {
               Expanded(
                 child: BottomBarWidget(
                   path: Assets.icons.profileAdd,
-                  label: "Profile",
+                  label: "Friends",
                   index: 4,
                 ),
               ),
