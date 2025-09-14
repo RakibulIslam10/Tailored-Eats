@@ -1,141 +1,170 @@
 part of 'goal_screen.dart';
 
-
-
 class GoalScreenMobile extends GetView<GoalController> {
   const GoalScreenMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text('Yet to Achieve'),
-        leading: const BackButton(),
+      appBar: CommonAppBar(
+        title: 'Yet to Achieve',
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+          IconButton(
+            onPressed: () {
+              Get.defaultDialog(
+                contentPadding: REdgeInsets.all(Dimensions.paddingSize * 0.5),
+                backgroundColor: CustomColors.blackColor,
+                title: 'Add New Goal',
+                titleStyle: TextStyle(color: CustomColors.whiteColor),
+                content: PrimaryInputFieldWidget(
+                  controller: controller.addGoalController,
+                  hintText: 'Enter goal',
+                ),
+                actions: [
+                  PrimaryButtonWidget(
+                    title: 'Add',
+                    onPressed: () {
+                      if (controller.addGoalController.text.isNotEmpty) {
+                        controller.dailyGoals.add(
+                          Goal(title: controller.addGoalController.text),
+                        );
+                      }
+                      controller.updateProgress();
+                      Get.back();
+                    },
+                  ),
+                ],
+              );
+            },
+            icon: Icon(Icons.add, color: CustomColors.whiteColor),
+          ),
         ],
       ),
       body: Obx(
-            () => Padding(
-          padding: const EdgeInsets.all(16.0),
+        () => Padding(
+          padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           child: Column(
             children: [
-              // Progress Bar
               LinearProgressIndicator(
-                value: controller.progress,
+                borderRadius: BorderRadiusGeometry.circular(Dimensions.radius),
+                value: controller.progress.value,
                 color: Colors.blueAccent,
                 backgroundColor: Colors.grey[800],
                 minHeight: 8,
               ),
-              const SizedBox(height: 20),
 
-              // Daily Goals
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Daily Goal',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: controller.dailyGoals.length,
-                        itemBuilder: (context, index) {
-                          final goal = controller.dailyGoals[index];
-                          return Card(
-                            color: Colors.grey[900],
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            child: ListTile(
-                              leading: Checkbox(
-                                value: goal.completed,
-                                onChanged: (_) =>
-                                    controller.toggleGoal(index),
-                                activeColor: Colors.blueAccent,
-                              ),
-                              title: Text(
-                                goal.title,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.edit,
-                                        color: Colors.blueAccent),
-                                    onPressed: () {
-                                      // Example: simple edit
-                                      Get.defaultDialog(
-                                        title: 'Edit Goal',
-                                        content: TextField(
-                                          autofocus: true,
-                                          onSubmitted: (value) {
-                                            if (value.isNotEmpty) {
-                                              controller.editGoal(index, value);
-                                              Get.back();
-                                            }
-                                          },
-                                          decoration: InputDecoration(
-                                            hintText: goal.title,
-                                            hintStyle:
-                                            const TextStyle(color: Colors.grey),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete,
-                                        color: Colors.redAccent),
-                                    onPressed: () =>
-                                        controller.deleteGoal(index),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextWidget(
+                  padding: EdgeInsetsGeometry.only(
+                    top: Dimensions.verticalSize,
+                    bottom: Dimensions.heightSize,
+                  ),
+                  'Daily Goals',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.sp,
                 ),
               ),
 
-              const SizedBox(height: 10),
-
-              // Suggested Goals
-              const Text(
-                'Suggested goal for you',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-              const SizedBox(height: 10),
               Expanded(
+                flex: 1,
+                child: ListView.builder(
+                  itemCount: controller.dailyGoals.length,
+                  itemBuilder: (context, index) {
+                    final goal = controller.dailyGoals[index];
+                    return Card(
+                      color: Colors.grey[900],
+                      child: ListTile(
+                        leading: Checkbox(
+                          value: goal.completed,
+                          onChanged: (_) => controller.toggleGoal(index),
+                          activeColor: Colors.blueAccent,
+                        ),
+                        title: Text(
+                          goal.title,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.blueAccent,
+                              ),
+                              onPressed: () {
+                                Get.defaultDialog(
+                                  actions: [
+                                    PrimaryButtonWidget(
+                                      title: 'Add',
+                                      onPressed: () {
+                                        if (controller
+                                            .editGoalController
+                                            .text
+                                            .isNotEmpty) {
+                                          controller.editGoal(
+                                            index,
+                                            controller.editGoalController.text,
+                                          );
+                                          Get.back();
+                                        }
+                                        controller.updateProgress();
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                  contentPadding: REdgeInsets.all(
+                                    Dimensions.paddingSize * 0.5,
+                                  ),
+                                  backgroundColor: CustomColors.blackColor,
+                                  title: 'Edit Goal',
+                                  content: PrimaryInputFieldWidget(
+                                    controller: controller.editGoalController,
+                                    hintText: goal.title,
+                                  ),
+                                );
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.redAccent,
+                              ),
+                              onPressed: () => controller.deleteGoal(index),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextWidget(
+                  'Suggested Goals for You',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.sp,
+                ),
+              ),
+              Expanded(
+                flex: 1,
                 child: ListView.builder(
                   itemCount: controller.suggestedGoals.length,
                   itemBuilder: (context, index) {
                     final goal = controller.suggestedGoals[index];
                     return Card(
                       color: Colors.grey[900],
-                      margin: const EdgeInsets.symmetric(vertical: 5),
                       child: ListTile(
-                        leading: Checkbox(
-                          value: false,
-                          onChanged: (_) => controller.addSuggestedGoal(index),
-                          activeColor: Colors.blueAccent,
-                        ),
                         title: Text(
                           goal.title,
                           style: const TextStyle(color: Colors.white),
+                        ),
+                        trailing: Checkbox(
+                          value: false,
+                          onChanged: (_) => controller.addSuggestedGoal(index),
+                          activeColor: Colors.blueAccent,
                         ),
                       ),
                     );

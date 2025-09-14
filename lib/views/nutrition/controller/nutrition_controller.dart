@@ -117,7 +117,7 @@ class NutritionController extends GetxController {
     {
       "title": "Pasta Carbonara",
       "description":
-      "Classic Italian pasta cooked to perfection with creamy sauce, bacon bits, and freshly grated parmesan cheese.",
+          "Classic Italian pasta cooked to perfection with creamy sauce, bacon bits, and freshly grated parmesan cheese.",
       "calories": "320 kcal",
       "time": "15 min",
       "imageUrl": "https://picsum.photos/200/160",
@@ -172,7 +172,6 @@ class NutritionController extends GetxController {
     },
   ].obs;
   RxList dinnerList = <Map<String, String>>[
-
     {
       "title": "Avocado Toast",
       "description":
@@ -192,7 +191,7 @@ class NutritionController extends GetxController {
     {
       "title": "Grilled Chicken",
       "description":
-      "Served with fresh seasonal vegetables and a light drizzle of olive oil for extra flavor.",
+          "Served with fresh seasonal vegetables and a light drizzle of olive oil for extra flavor.",
       "calories": "250 kcal",
       "time": "20 min",
       "imageUrl": "https://picsum.photos/200/150",
@@ -200,7 +199,7 @@ class NutritionController extends GetxController {
     {
       "title": "Pasta Carbonara",
       "description":
-      "Classic Italian pasta cooked to perfection with creamy sauce, bacon bits, and freshly grated parmesan cheese.",
+          "Classic Italian pasta cooked to perfection with creamy sauce, bacon bits, and freshly grated parmesan cheese.",
       "calories": "320 kcal",
       "time": "15 min",
       "imageUrl": "https://picsum.photos/200/160",
@@ -313,14 +312,13 @@ class NutritionController extends GetxController {
     },
   ].obs;
 
-
-
   @override
   void onInit() {
     super.onInit();
     loadInitialData();
   }
-RxBool loadAllData = false.obs;
+
+  RxBool loadAllData = false.obs;
 
   void loadInitialData() {
     loadAllData.value = true; // start loading
@@ -333,11 +331,9 @@ RxBool loadAllData = false.obs;
     } catch (e) {
       print("Error shuffling lists: $e");
     } finally {
-      loadAllData.value = false; // stop loading
+      loadAllData.value = false;
     }
   }
-
-
 
   void shuffleBreakFastList() {
     if (breakFastList.isEmpty) return;

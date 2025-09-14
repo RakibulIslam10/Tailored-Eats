@@ -1,54 +1,60 @@
 import '../../../core/utils/basic_import.dart';
-class DailyGoal {
-  String title;
-  bool completed;
+import '../model/goalModel.dart';
 
-  DailyGoal({required this.title, this.completed = false});
-}
 class GoalController extends GetxController {
-// Daily goals
-  var dailyGoals = <DailyGoal>[
-    DailyGoal(title: 'Steps Target - 9000 Steps', completed: true),
-    DailyGoal(title: 'Drink 2L Water', completed: true),
-    DailyGoal(title: '20 Min exercise', completed: true),
-    DailyGoal(title: '30 Squats'),
-    DailyGoal(title: '10 min sun bath'),
-    DailyGoal(title: '10 min meditation'),
-  ].obs;
+  final addGoalController = TextEditingController();
+  final editGoalController = TextEditingController();
 
-  // Suggested goals (not yet added)
-  var suggestedGoals = <DailyGoal>[
-    DailyGoal(title: 'Steps Target - 9000 Steps'),
-    DailyGoal(title: 'Drink 2L Water'),
-    DailyGoal(title: '20 Min exercise'),
-  ].obs;
+  RxDouble progress = 0.0.obs;
 
-  // Toggle completion
+  RxList<Goal> dailyGoals = <Goal>[].obs;
+  RxList<Goal> suggestedGoals = <Goal>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    dailyGoals.addAll([
+      Goal(title: 'Drink 2L water'),
+      Goal(title: 'Morning walk 30 min'),
+      Goal(title: 'Meditation 10 min'),
+    ]);
+
+    suggestedGoals.addAll([
+      Goal(title: 'Read 20 pages'),
+      Goal(title: 'Sleep by 11 PM'),
+      Goal(title: 'Avoid sugar'),
+    ]);
+
+    updateProgress();
+  }
+
   void toggleGoal(int index) {
     dailyGoals[index].completed = !dailyGoals[index].completed;
-    dailyGoals.refresh();
+    updateProgress();
   }
 
-  // Delete goal
-  void deleteGoal(int index) {
-    dailyGoals.removeAt(index);
+  void addSuggestedGoal(int index) {
+    final goal = suggestedGoals.removeAt(index);
+    dailyGoals.add(goal);
+    updateProgress();
   }
 
-  // Edit goal
   void editGoal(int index, String newTitle) {
     dailyGoals[index].title = newTitle;
     dailyGoals.refresh();
   }
 
-  // Add suggested goal
-  void addSuggestedGoal(int index) {
-    final goal = suggestedGoals[index];
-    dailyGoals.add(DailyGoal(title: goal.title));
+  void deleteGoal(int index) {
+    dailyGoals.removeAt(index);
+    updateProgress();
   }
 
-  // Compute progress percentage
-  double get progress {
-    if (dailyGoals.isEmpty) return 0.0;
-    final completedCount = dailyGoals.where((g) => g.completed).length;
-    return completedCount / dailyGoals.length;
-  }}
+  void updateProgress() {
+    if (dailyGoals.isEmpty) {
+      progress.value = 0.0;
+      return;
+    }
+    int completedCount = dailyGoals.where((g) => g.completed).length;
+    progress.value = completedCount / dailyGoals.length;
+  }
+}
