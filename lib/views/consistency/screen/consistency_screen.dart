@@ -1,5 +1,8 @@
+import 'package:fl_chart/fl_chart.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
+import '../../home/screen/home_screen.dart';
 import '../controller/consistency_controller.dart';
 
 part 'consistency_screen_mobile.dart';

@@ -32,7 +32,19 @@ class HomeScreenMobile extends GetView<HomeController> {
                 fontWeight: FontWeight.bold,
                 padding: Dimensions.heightSize.edgeVertical,
               ),
-              const StudyProgressWidget(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.12,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  children: List.generate(
+                    10,
+                    (index) =>
+                        StudyProgressWidget(percentage: 0.92, date: '27 July'),
+                  ),
+                ),
+              ),
+
               const FriendsProgressWidget(),
               TextWidget(
                 'Your Next Bite',
@@ -54,7 +66,7 @@ class HomeScreenMobile extends GetView<HomeController> {
                     isShuffle: true,
                     onShuffle: controller.shuffleList,
                     onTap: () {
-                     Get.toNamed(Routes.detailsScreen);
+                      Get.toNamed(Routes.detailsScreen);
                     },
                   ),
                 ),

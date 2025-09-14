@@ -8,6 +8,7 @@ class GoalScreenMobile extends GetView<GoalController> {
     return Scaffold(
       appBar: CommonAppBar(
         title: 'Yet to Achieve',
+        isBack: false,
         actions: [GoalAddPopWidget()],
       ),
       body: Obx(

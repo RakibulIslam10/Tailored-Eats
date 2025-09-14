@@ -8,11 +8,21 @@ class FriendsProgressWidget extends GetView<HomeController> {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-        TextWidget(
-          'Don’t Forget Your Daily Goal',
-          fontWeight: FontWeight.bold,
-          padding: Dimensions.heightSize.edgeVertical,
-        ),
+     Padding(
+       padding:  EdgeInsets.only(bottom: Dimensions.heightSize,top: Dimensions.heightSize * 1.2),
+       child: Row(
+         mainAxisAlignment: mainSpaceBet,
+         children: [
+         TextWidget(
+           'How Your Friends Are Doing',
+           fontWeight: FontWeight.bold,
+         ),
+         TextWidget('View All',color: CustomColors.primary,
+
+         fontSize: Dimensions.titleSmall * 0.9,
+         ),
+       ],),
+     ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.10,
           child: ListView.builder(
@@ -30,7 +40,9 @@ class FriendsProgressWidget extends GetView<HomeController> {
                   ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF2C2C2C),
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 0.85),
+                    borderRadius: BorderRadius.circular(
+                      Dimensions.radius * 0.85,
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: crossStart,
