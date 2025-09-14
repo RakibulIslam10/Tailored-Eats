@@ -15,6 +15,7 @@ class GoalScreenMobile extends GetView<GoalController> {
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           child: Column(
             children: [
+              Space.height.v10,
               TopProgressWidget(value: controller.progress.value),
               GoalListWidget(
                 title: "Daily Goals",
