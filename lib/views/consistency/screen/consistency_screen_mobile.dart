@@ -24,16 +24,17 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(
                   10,
-                      (index) =>
+                  (index) =>
                       StudyProgressWidget(percentage: 0.92, date: '27 July'),
                 ),
               ),
             ),
             const FriendsProgressWidget(),
+            Space.height.v10,
+            const WeightChartWidget(),
           ],
         ),
       ),
     );
   }
 }
-
