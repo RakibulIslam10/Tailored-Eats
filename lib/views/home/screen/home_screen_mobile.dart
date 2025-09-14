@@ -39,16 +39,27 @@ class HomeScreenMobile extends GetView<HomeController> {
                 fontWeight: FontWeight.bold,
                 padding: Dimensions.heightSize.edgeVertical,
               ),
-              const FoodCardWidget(
-                title: 'Delicious lobster gourmet',
-                description:
-                    'Use kitchen scissors to cut through the top shell lengthwise,',
-                calories: '271 Kcal',
-                time: '15 min',
-                imageUrl:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpK1noS9RwpA351YDfG9dRCvSON-j5nZHU0A&s',
-                onShuffle: null,
+              Obx(
+                () => AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  transitionBuilder: (child, animation) =>
+                      FadeTransition(opacity: animation, child: child),
+                  child: FoodCardWidget(
+                    key: ValueKey(controller.currentFood["title"]),
+                    title: controller.currentFood["title"] ?? "",
+                    description: controller.currentFood["description"] ?? "",
+                    calories: controller.currentFood["calories"] ?? "",
+                    time: controller.currentFood["time"] ?? "",
+                    imageUrl: controller.currentFood["imageUrl"] ?? "",
+                    isShuffle: true,
+                    onShuffle: controller.shuffleList,
+                    onTap: () {
+                     Get.toNamed(Routes.detailsScreen);
+                    },
+                  ),
+                ),
               ),
+
               TextWidget(
                 'Don’t Forget Your Daily Goal',
                 fontWeight: FontWeight.bold,

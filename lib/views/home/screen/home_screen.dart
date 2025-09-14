@@ -1,4 +1,7 @@
 import 'dart:ui';
+import 'package:shimmer/shimmer.dart';
+import 'package:tailored_eats/routes/routes.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../controller/home_controller.dart';
 part 'home_screen_mobile.dart';
