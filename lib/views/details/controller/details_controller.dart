@@ -1,4 +1,4 @@
 import '../../../core/utils/basic_import.dart';
 class DetailsController extends GetxController {
-  // TODO: Logic
+  RxDouble progress = 0.45.obs;
 }
