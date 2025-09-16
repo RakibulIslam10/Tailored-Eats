@@ -35,7 +35,7 @@ class FriendsRequestWidget extends GetView<FriendsController> {
                       ),
                     ),
                     child: CircleAvatar(
-                      radius: 20.r,
+                      radius: 25.r,
                       backgroundImage: CachedNetworkImageProvider(
                         'https://i.pravatar.cc/150?u=$index',
                       ),
@@ -56,6 +56,7 @@ class FriendsRequestWidget extends GetView<FriendsController> {
                       ),
 
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
                             margin: Dimensions.heightSize.edgeTop * 0.5,

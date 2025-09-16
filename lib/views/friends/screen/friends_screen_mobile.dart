@@ -40,6 +40,7 @@ class FriendsScreenMobile extends GetView<FriendsController> {
                               ),
                               hintText: 'Search...',
                               hintStyle: TextStyle(
+                                fontSize: Dimensions.titleSmall,
                                 color: Colors.white.withOpacity(0.6),
                               ),
                               contentPadding: EdgeInsetsGeometry.only(

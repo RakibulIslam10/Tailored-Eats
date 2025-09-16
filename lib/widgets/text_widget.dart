@@ -1,4 +1,3 @@
-import '../core/themes/token.dart';
 import '../core/utils/basic_import.dart';
 
 class TextWidget extends StatelessWidget {
@@ -46,12 +45,13 @@ class TextWidget extends StatelessWidget {
             textAlign: textAlign,
             overflow: textOverflow,
             maxLines: maxLines,
-            textScaler: TextScaler.linear(ScreenUtil().textScaleFactor),
-            style: TextStyle(
-              color: color ?? CustomColors.whiteColor,
-              fontSize: fontSize ?? Dimensions.titleMedium,
-              fontWeight: fontWeight,
-            ),
+            style:
+                style ??
+                TextStyle(
+                  color: color ?? CustomColors.whiteColor,
+                  fontSize: fontSize ?? Dimensions.titleMedium,
+                  fontWeight: fontWeight,
+                ),
           ),
         ),
       ),
