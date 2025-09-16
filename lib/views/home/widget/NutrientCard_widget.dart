@@ -63,8 +63,8 @@ class NutrientCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 70.w,
-      height: 80.h,
+      width: MediaQuery.of(context).size.width * 0.2,
+      height: MediaQuery.of(context).size.height * 0.12,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
         gradient: const LinearGradient(
@@ -106,16 +106,18 @@ class NutrientCard extends StatelessWidget {
                     child: Icon(
                       icon,
                       color: Colors.redAccent,
-                      size: Dimensions.iconSizeDefault,
+                      size: Dimensions.iconSizeDefault, // now responsive
                     ),
+
                   ),
                   Space.height.v5,
+
                   TextWidget(
                     padding: EdgeInsetsGeometry.only(
                       bottom: Dimensions.heightSize * 0.2,
                     ),
                     title,
-                    fontSize: Dimensions.titleSmall * 0.8,
+                    fontSize: Dimensions.titleSmall,
                     fontWeight: FontWeight.w500,
                   ),
 

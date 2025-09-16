@@ -30,8 +30,8 @@ class StudyProgressWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 45.w,
-            height: 40.h,
+            width: MediaQuery.of(context).size.width * 0.1,
+            height: MediaQuery.of(context).size.height * 0.05,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -43,7 +43,7 @@ class StudyProgressWidget extends StatelessWidget {
                 ),
                 TextWidget(
                   '${(percentage * 100).toInt()}%',
-                  fontSize: 12.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ],

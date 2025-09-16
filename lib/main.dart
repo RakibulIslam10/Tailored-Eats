@@ -1,4 +1,3 @@
-
 import 'core/utils/basic_import.dart';
 import 'initial.dart';
 import 'routes/routes.dart';
@@ -24,15 +23,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     double h =  MediaQuery.of(context).size.height;
-     double w = MediaQuery.of(context).size.width;
-    print(h);
-    print(w);
     return ScreenUtilInit(
+      designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      ensureScreenSize: true,
-      designSize: const Size(375, 812),
       builder: (_, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: Routes.splashScreen,
@@ -47,17 +41,11 @@ class MyApp extends StatelessWidget {
           Get.lazyPut(() => SplashController());
         }),
         builder: (context, widget) {
-          ScreenUtil.init(context);
-          return MediaQuery(
-            data: MediaQuery.of(
-              context,
-            ).copyWith(textScaler: TextScaler.linear(1.0)),
-            child: Directionality(
-              textDirection: Get.locale?.languageCode == 'ar'
-                  ? TextDirection.rtl
-                  : TextDirection.ltr,
-              child: widget!,
-            ),
+          return Directionality(
+            textDirection: Get.locale?.languageCode == 'ar'
+                ? TextDirection.rtl
+                : TextDirection.ltr,
+            child: widget!,
           );
         },
       ),

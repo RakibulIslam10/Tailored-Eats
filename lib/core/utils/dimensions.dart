@@ -14,7 +14,7 @@ class Dimensions {
   static double appBarHeight = 38.h;
 
   static double iconSizeSmall = 8.00.h;
-  static double iconSizeDefault = 16.00.h;
+  static double iconSizeDefault = 16.0.sp; // scalable pixel (responsive)
   static double iconSizeLarge = 24.00.h;
 
   static double radius = 10.00.r;
