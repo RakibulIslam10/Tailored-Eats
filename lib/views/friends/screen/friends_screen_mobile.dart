@@ -40,11 +40,11 @@ class FriendsScreenMobile extends GetView<FriendsController> {
                               ),
                               hintText: 'Search...',
                               hintStyle: TextStyle(
-                                fontSize: Dimensions.titleSmall,
+                                fontSize: Dimensions.titleSmall * 1.1,
                                 color: Colors.white.withOpacity(0.6),
                               ),
                               contentPadding: EdgeInsetsGeometry.only(
-                                top: Dimensions.heightSize,
+                                top: Dimensions.heightSize *  0.1,
                               ),
                             ),
                           ),
@@ -95,10 +95,11 @@ class FriendsScreenMobile extends GetView<FriendsController> {
                               ),
                               hintText: 'Search...',
                               hintStyle: TextStyle(
+                                fontSize: Dimensions.titleSmall * 1.1,
                                 color: Colors.white.withOpacity(0.6),
                               ),
                               contentPadding: EdgeInsetsGeometry.only(
-                                top: Dimensions.heightSize,
+                                top: Dimensions.heightSize *  0.1,
                               ),
                             ),
                           ),

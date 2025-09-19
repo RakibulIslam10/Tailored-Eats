@@ -23,7 +23,6 @@ class TopTextHeaderWidget extends GetView<HomeController> {
           color: CustomColors.grayShade,
         ),
         Space.height.v20,
-
       ],
     );
   }

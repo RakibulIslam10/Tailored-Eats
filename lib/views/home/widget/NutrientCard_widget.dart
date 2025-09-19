@@ -64,16 +64,16 @@ class NutrientCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.2,
-      height: MediaQuery.of(context).size.height * 0.12,
+      height: MediaQuery.of(context).size.height * 0.10,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xFF5F0F40), // Darker shade of your pink #F826A4
-            Color(0xFF1A4D62), // Darker shade of your blue #26C4F8
-            Color(0xFF1A5A2B), // Darker shade of your green #26F865
+            Color(0xFF5F0F40),
+            Color(0xFF1A4D62),
+            Color(0xFF1A5A2B),
           ],
         ),
       ),

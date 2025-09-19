@@ -8,6 +8,10 @@ class SplashScreen extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    return Layout(mobile: SplashScreenMobile());
+    return Layout(
+      mobile: SplashScreenMobile(),
+      tablet: SplashScreenMobile(),
+      desktop: SplashScreenMobile(),
+    );
   }
 }

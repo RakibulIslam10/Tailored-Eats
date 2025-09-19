@@ -14,7 +14,7 @@ class CaloriesRemainingWidget extends GetView<HomeController> {
           padding: Dimensions.verticalSize.edgeVertical * 0.6,
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.1,
+          height: 100.h,
           child: ListView.builder(
             itemCount: 4,
             scrollDirection: Axis.horizontal,
@@ -59,7 +59,7 @@ class CaloriesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Container(
-        margin: Dimensions.widthSize.edgeRight * 0.75,
+        margin: Dimensions.widthSize.edgeRight * 0.8,
         padding: REdgeInsets.all(Dimensions.paddingSize * 0.15),
         decoration: BoxDecoration(
           border: Border.all(color: CustomColors.grayShade),
@@ -80,25 +80,25 @@ class CaloriesCard extends StatelessWidget {
                   ),
                   child: SvgPicture.asset(
                     iconPath,
-                    height: Dimensions.heightSize,
+                    height: Dimensions.iconSizeDefault,
                   ),
                 ),
                 TextWidget(
                   padding: EdgeInsets.only(left: Dimensions.heightSize * 0.4),
                   title,
-                  fontSize: Dimensions.titleSmall * 0.65,
+                  fontSize: Dimensions.titleSmall * 0.9,
                   fontWeight: FontWeight.w500,
                   color: CustomColors.grayShade,
                 ),
               ],
             ),
-            Space.height.v5,
+            Space.height.v10,
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextWidget(
                   value,
-                  fontSize: Dimensions.titleSmall * 0.85,
+                  fontSize: Dimensions.titleSmall * 0.9,
                   fontWeight: FontWeight.bold,
                 ),
                 const SizedBox(width: 4),
@@ -106,7 +106,7 @@ class CaloriesCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 2.0),
                   child: TextWidget(
                     unit,
-                    fontSize: Dimensions.titleSmall * 0.55,
+                    fontSize: Dimensions.titleSmall * 0.8,
                     fontWeight: FontWeight.w500,
                     color: CustomColors.grayShade,
                   ),
@@ -115,9 +115,9 @@ class CaloriesCard extends StatelessWidget {
             ),
             Obx(
               () => Container(
-                margin: Dimensions.verticalSize.edgeVertical * 0.25,
-                width: 65.w,
-                height: 4.h,
+                margin: Dimensions.verticalSize.edgeTop * 0.5,
+                width: 80.w,
+                height: 5.h,
                 decoration: BoxDecoration(
                   color: const Color(0xFF383838),
                   borderRadius: BorderRadius.circular(5),

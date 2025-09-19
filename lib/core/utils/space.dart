@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dimensions.dart';
 
 class Space {
   static SizeHeightModel height = SizeHeightModel(
-    btnInputTitleAndBox:
-        SizedBox(height: Dimensions.spaceBetweenInputTitleAndBox),
+    btnInputTitleAndBox: SizedBox(
+      height: Dimensions.spaceBetweenInputTitleAndBox,
+    ),
     betweenInputBox: SizedBox(height: Dimensions.spaceBetweenInputBox),
     v5: SizedBox(height: Dimensions.heightSize * 0.5),
     v10: SizedBox(height: Dimensions.heightSize),
@@ -13,6 +15,7 @@ class Space {
     v25: SizedBox(height: Dimensions.heightSize * 2.5),
     v30: SizedBox(height: Dimensions.heightSize * 3),
     v40: SizedBox(height: Dimensions.heightSize * 4),
+    v100: SizedBox(height: 100.h),
   );
 
   static SizeWidthModel width = SizeWidthModel(
@@ -36,6 +39,7 @@ class SizeHeightModel {
   final SizedBox v25;
   final SizedBox v30;
   final SizedBox v40;
+    final SizedBox v100;
 
   SizedBox add(double value) => SizedBox(height: value);
 
@@ -49,6 +53,7 @@ class SizeHeightModel {
     required this.v25,
     required this.v30,
     required this.v40,
+    required this.v100,
   });
 }
 

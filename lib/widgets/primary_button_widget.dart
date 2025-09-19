@@ -56,7 +56,7 @@ class PrimaryButtonWidget extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             padding: EdgeInsets.symmetric(horizontal: isPadded ? 5 : 0),
-            height: height ?? Dimensions.buttonHeight * 0.75,
+            height: height ?? Dimensions.buttonHeight * 0.85,
             width: double.infinity,
             child: outlineButton
                 ? OutlinedButton(

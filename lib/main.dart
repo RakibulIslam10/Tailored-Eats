@@ -6,7 +6,6 @@ import 'views/splash/controller/splash_controller.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initial.init();
-  // Get.put(NetworkController());
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -15,6 +14,7 @@ void main() async {
       statusBarBrightness: Brightness.light,
     ),
   );
+
   runApp(const MyApp());
 }
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: const Size(411, 915),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) => GetMaterialApp(
