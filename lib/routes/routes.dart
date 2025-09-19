@@ -11,6 +11,7 @@ import '../bind/navigation_binding.dart';
 import '../bind/nutrition_binding.dart';
 import '../bind/otp_binding.dart';
 import '../bind/profile_binding.dart';
+import '../bind/profile_creation_binding.dart';
 import '../bind/register_binding.dart';
 import '../bind/reset_password_binding.dart';
 import '../bind/splash_binding.dart';
@@ -33,6 +34,7 @@ import '../views/home/screen/home_screen.dart';
 import '../views/navigation/screen/navigation_screen.dart';
 import '../views/nutrition/screen/nutrition_screen.dart';
 import '../views/profile/screen/profile_screen.dart';
+import '../views/profile_creation/screen/profile_creation_screen.dart';
 import '../views/splash/screen/splash_screen.dart';
 
 import '../views/swap/screen/swap_screen.dart';
@@ -42,6 +44,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const profile_creationScreen = '/profile_creationScreen';
   static const detailsScreen = '/detailsScreen';
   static const swapScreen = '/swapScreen';
   static const friendsScreen = '/friendsScreen';

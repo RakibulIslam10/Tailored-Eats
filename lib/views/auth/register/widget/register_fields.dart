@@ -44,7 +44,7 @@ class RegisterFields extends GetView<RegisterController> {
             title: "Next",
             onPressed: () {
               if (controller.fromKey.currentState!.validate()) {
-                // Get.toNamed(Routes.verifyScreen);
+                Get.toNamed(Routes.profile_creationScreen);
               }
             },
           ),

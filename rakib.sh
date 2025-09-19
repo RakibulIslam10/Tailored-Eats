@@ -17,6 +17,8 @@ case "$1" in
     curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/widt.sh | bash -s "$viewName" "${widgetArray[@]}"
     ;;
 
+
+
 "create-structure")
     echo "🛠️ Creating Flutter project folder structure..."
     curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/cs.sh | bash

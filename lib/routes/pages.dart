@@ -4,6 +4,11 @@ class RoutePageList {
   static var list = [
     //Page Route List
     GetPage(
+      name: Routes.profile_creationScreen,
+      page: () => const ProfileCreationScreen(),
+      binding: ProfileCreationBinding(),
+    ),
+    GetPage(
       name: Routes.swapScreen,
       page: () => const SwapScreen(),
       binding: SwapBinding(),
