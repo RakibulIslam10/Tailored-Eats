@@ -51,7 +51,6 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
           transitionBuilder: (Widget child, Animation<double> animation) {
             return SlideTransition(
               position: Tween<Offset>(
-                // ডান থেকে আসা → 1.0, বাম থেকে আসা → -1.0
                 begin: Offset(-1.0, 0.0),
                 end: Offset.zero,
               ).animate(animation),
@@ -60,7 +59,6 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
           },
         );
       }),
-
     );
   }
 }

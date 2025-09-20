@@ -30,6 +30,7 @@ class GoalController extends GetxController {
     dailyGoals[index].completed = !dailyGoals[index].completed;
     dailyGoals.refresh();
     updateProgress();
+    update();
   }
 
   /// Suggested Goal tick/untick logic
@@ -55,11 +56,13 @@ class GoalController extends GetxController {
   void editGoal(int index, String newTitle) {
     dailyGoals[index].title = newTitle;
     dailyGoals.refresh();
+    update();
   }
 
   void deleteGoal(int index) {
     dailyGoals.removeAt(index);
     updateProgress();
+    update();
   }
 
   void updateProgress() {
