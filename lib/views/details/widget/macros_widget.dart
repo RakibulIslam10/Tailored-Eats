@@ -5,6 +5,8 @@ class MacrosWidget extends GetView<DetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
       child: Column(
@@ -15,24 +17,31 @@ class MacrosWidget extends GetView<DetailsController> {
             fontWeight: FontWeight.bold,
             padding: Dimensions.verticalSize.edgeVertical * 0.6,
           ),
-          SizedBox(
-            height: 95.h,
-            child: ListView.builder(
-              itemCount: 4,
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              cacheExtent: 500,
-              itemBuilder: (context, index) {
-                // final calorieItem = controller.caloriesList[index];
-                return CaloriesCard(
-                  iconPath: Assets.icons.calories,
-                  title: 'Calories',
-                  value: '150',
-                  unit: 'gm',
-                  progress: controller.progress,
-                );
-              },
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: screenHeight * 0.15, // screen এর 45%
+              minHeight: screenHeight * 0.10, // কমপক্ষে 25%
+            ),
+            // height: 95.h,
+            child: SizedBox(
+              height: screenHeight * 0.10,
+              child: ListView.builder(
+                itemCount: 4,
+                scrollDirection: Axis.horizontal,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                cacheExtent: 500,
+                itemBuilder: (context, index) {
+                  // final calorieItem = controller.caloriesList[index];
+                  return CaloriesCard(
+                    iconPath: Assets.icons.calories,
+                    title: 'Calories',
+                    value: '150',
+                    unit: 'gm',
+                    progress: controller.progress,
+                  );
+                },
+              ),
             ),
           ),
         ],
