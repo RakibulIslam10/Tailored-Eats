@@ -5,152 +5,197 @@ class HeightSelectorWidget extends GetView<ProfileCreationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 400,
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Stack(
-        children: [
-          // Left side ruler marks
-          Positioned(
-            left: 16,
-            top: 0,
-            bottom: 0,
-            child: Container(
-              width: 60,
-              child: CustomPaint(painter: RulerPainter()),
-            ),
-          ),
+    const double rulerHeight = 350;
 
-          // Main height display
-          Positioned(
-            left: 90,
-            top: 0,
-            right: 16,
-            bottom: 0,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                // Calculate height based on vertical drag
-                double percentage = 1 - (details.localPosition.dy / 400);
-                double newHeight =
-                    controller.minHeight +
-                    (percentage *
-                        (controller.maxHeight - controller.minHeight));
-                controller.setHeight(newHeight);
-              },
-              child: Stack(
-                children: [
-                  // Height value display
-                  Obx(
-                    () => Positioned(
-                      left: 0,
-                      top: _getHeightPosition(controller.height.value) - 20,
-                      child: Row(
-                        children: [
-                          // Blue triangle pointer
-                          Container(
-                            width: 0,
-                            height: 0,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                top: BorderSide(
-                                  width: 8,
-                                  color: Colors.transparent,
-                                ),
-                                bottom: BorderSide(
-                                  width: 8,
-                                  color: Colors.transparent,
-                                ),
-                                right: BorderSide(
-                                  width: 12,
-                                  color: Color(0xFF00BCD4),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          // Height text
-                          Text(
-                            controller.height.value.toInt().toString(),
-                            style: const TextStyle(
-                              color: Color(0xFF00BCD4),
-                              fontSize: 48,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          // "Height (Cm)" text
-                          const Text(
-                            'Height (Cm)',
-                            style: TextStyle(
-                              color: Color(0xFF9E9E9E),
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
+    return Column(
+      children: [
+        TextWidget(
+          'How Do You Identify Yourself ?',
+          fontSize: Dimensions.titleLarge,
+          fontWeight: FontWeight.bold,
+        ),
+        Space.height.v100,
+        SizedBox(
+          height: rulerHeight.h,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                top: 0,
+                bottom: 0,
+                child: SizedBox(
+                  width: 40.h,
+                  child: Obx(
+                    () => CustomPaint(
+                      painter: RulerPainter(
+                        selectedHeight: controller.height.value,
+                        minHeight: controller.minHeight,
+                        maxHeight: controller.maxHeight,
                       ),
                     ),
                   ),
-
-                  // Invisible draggable area
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: Colors.transparent,
-                  ),
-                ],
+                ),
               ),
-            ),
+
+              Positioned(
+                left: 50,
+                top: 0,
+                right: 16,
+                bottom: 0,
+                child: GestureDetector(
+                  onPanUpdate: (details) {
+                    double y = details.localPosition.dy.clamp(0, rulerHeight);
+                    double percentage = 1 - (y / rulerHeight);
+                    double newHeight =
+                        controller.minHeight +
+                        percentage *
+                            (controller.maxHeight - controller.minHeight);
+                    controller.setHeight(newHeight);
+                  },
+                  child: Stack(
+                    children: [
+                      Obx(() {
+                        double pointerY = _getHeightPosition(
+                          controller.height.value,
+                          rulerHeight,
+                        );
+
+                        return Positioned(
+                          left: 0,
+                          top: pointerY,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CustomPaint(
+                                size: const Size(12, 16),
+                                painter: TrianglePointerPainter(),
+                              ),
+                              Space.width.v10,
+                              TextWidget(
+                                controller.height.value.toInt().toString(),
+                                fontWeight: FontWeight.bold,
+                                fontSize: Dimensions.displayLarge,
+                                color: CustomColors.primary,
+                              ),
+                              Space.width.v10,
+                              TextWidget(
+                                'Height (Cm)',
+                                fontWeight: FontWeight.bold,
+                                color: CustomColors.grayShade,
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+
+                      // Transparent draggable overlay
+                      Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.transparent,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  double _getHeightPosition(double height) {
+  double _getHeightPosition(double height, double totalHeight) {
     double percentage =
         (height - controller.minHeight) /
         (controller.maxHeight - controller.minHeight);
-    return 400 - (percentage * 400) - 40;
+    return totalHeight -
+        (percentage * totalHeight) -
+        50; // adjust pointer center
   }
 }
 
 class RulerPainter extends CustomPainter {
+  final double selectedHeight;
+  final double minHeight;
+  final double maxHeight;
+
+  RulerPainter({
+    required this.selectedHeight,
+    required this.minHeight,
+    required this.maxHeight,
+  });
+
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
+    final majorPaint = Paint()
       ..color = Colors.white
-      ..strokeWidth = 1.8  ;
-
-    final shortLinePaint = Paint()
+      ..strokeWidth = 2;
+    final minorPaint = Paint()
       ..color = Colors.white
-      ..strokeWidth = 1;
+      ..strokeWidth = 1.5;
+    final selectedPaint = Paint()
+      ..color = CustomColors.primary
+      ..strokeWidth = 3;
 
-    for (int i = 0; i <= 40; i++) {
-      double y = (i / 40) * size.height;
-      double lineWidth;
-      Paint currentPaint;
+    int totalMarks = 40;
+
+    for (int i = 0; i <= totalMarks; i++) {
+      double y = (i / totalMarks) * size.height;
+
+      // Calculate corresponding height for this mark
+      double currentHeight =
+          maxHeight - (i / totalMarks) * (maxHeight - minHeight);
+      bool isSelected =
+          (currentHeight - selectedHeight).abs() < 2; // Tolerance for selection
+
+      double lineEndX;
+      Paint currentPaint = isSelected
+          ? selectedPaint
+          : (i % 5 == 0 ? majorPaint : minorPaint);
 
       if (i % 10 == 0) {
-        lineWidth = 25;
-        currentPaint = paint;
+        lineEndX = 30; // Major ticks are longer
+        canvas.drawLine(
+          Offset(size.width - lineEndX, y),
+          Offset(size.width, y),
+          currentPaint,
+        );
       } else if (i % 5 == 0) {
-        lineWidth = 20;
-        currentPaint = paint;
+        // Minor tick: medium length
+        lineEndX = 20;
+        canvas.drawLine(
+          Offset(size.width - lineEndX, y),
+          Offset(size.width, y),
+          currentPaint,
+        );
       } else {
-        lineWidth = 15;
-        currentPaint = shortLinePaint;
+        // Shortest tick
+        lineEndX = 15;
+        canvas.drawLine(
+          Offset(size.width - lineEndX, y),
+          Offset(size.width, y),
+          currentPaint,
+        );
       }
-
-      canvas.drawLine(
-        Offset(size.width - lineWidth, y),
-        Offset(size.width, y),
-        currentPaint,
-      );
     }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+/// Blue triangle pointer
+class TrianglePointerPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = CustomColors.primary;
+    final path = Path()
+      ..moveTo(0, size.height / 2)
+      ..lineTo(size.width, 0)
+      ..lineTo(size.width, size.height)
+      ..close();
+    canvas.drawPath(path, paint);
   }
 
   @override

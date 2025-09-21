@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../core/utils/basic_import.dart';
 import '../controller/profile_creation_controller.dart';
+import '../widget/activity_card.dart';
 import '../widget/pogress_widget.dart';
 
 part 'profile_creation_screen_mobile.dart';

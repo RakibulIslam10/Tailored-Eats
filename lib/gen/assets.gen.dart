@@ -45,9 +45,8 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Group 1000004246.svg
   String get group1000004246 => 'assets/icons/Group 1000004246.svg';
 
-  /// File path: assets/icons/Group 1000004247.png
-  AssetGenImage get group1000004247 =>
-      const AssetGenImage('assets/icons/Group 1000004247.png');
+  /// File path: assets/icons/Group 1000004247.svg
+  String get group1000004247 => 'assets/icons/Group 1000004247.svg';
 
   /// File path: assets/icons/Group 1000004249.svg
   String get group1000004249 => 'assets/icons/Group 1000004249.svg';
@@ -119,7 +118,7 @@ class $AssetsIconsGen {
   String get walletMinus => 'assets/icons/wallet-minus.svg';
 
   /// List of all assets
-  List<dynamic> get values => [
+  List<String> get values => [
     calories,
     component85,
     component86,
