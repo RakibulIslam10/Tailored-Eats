@@ -17,6 +17,7 @@ import '../bind/reset_password_binding.dart';
 import '../bind/splash_binding.dart';
 import '../bind/swap_binding.dart';
 import '../bind/two_fa_binding.dart';
+import '../bind/update_profile_binding.dart';
 import '../bind/verification_binding.dart';
 import '../bind/welcome_binding.dart';
 import '../views/auth/forget_password/screen/forget_password_screen.dart';
@@ -38,17 +39,19 @@ import '../views/profile_creation/screen/profile_creation_screen.dart';
 import '../views/splash/screen/splash_screen.dart';
 
 import '../views/swap/screen/swap_screen.dart';
+import '../views/update_profile/screen/update_profile_screen.dart';
 import '../views/welcome/screen/welcome_screen.dart';
 
 part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const updateProfileScreen = '/update_profileScreen';
+static const profileScreen = '/profileScreen';
 static const profile_creationScreen = '/profile_creationScreen';
   static const detailsScreen = '/detailsScreen';
   static const swapScreen = '/swapScreen';
   static const friendsScreen = '/friendsScreen';
-  static const profileScreen = '/profileScreen';
   static const consistencyScreen = '/consistencyScreen';
   static const goalScreen = '/goalScreen';
   static const nutritionScreen = '/nutritionScreen';

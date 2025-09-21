@@ -10,7 +10,15 @@ class ProfileScreenMobile extends GetView<ProfileController> {
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-          children: const [],
+          children: [
+            Space.height.v20,
+            ProfileHeaderWidget(),
+            Space.height.v20,
+            InfoCardWidget(),
+
+            Space.height.v40,
+            MenuItemsCardWidget(),
+          ],
         ),
       ),
     );

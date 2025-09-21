@@ -2,19 +2,19 @@ import '../core/utils/basic_import.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget(
-      this.text, {
-        super.key,
-        this.textAlign,
-        this.textOverflow,
-        this.padding = EdgeInsets.zero,
-        this.opacity = 1.0,
-        this.maxLines,
-        this.fontSize,
-        this.fontWeight,
-        this.color,
-        this.style,
-        this.onTap,
-      });
+    this.text, {
+    super.key,
+    this.textAlign,
+    this.textOverflow,
+    this.padding = EdgeInsets.zero,
+    this.opacity = 1.0,
+    this.maxLines,
+    this.fontSize,
+    this.fontWeight,
+    this.color,
+    this.style,
+    this.onTap,
+  });
 
   final String text;
   final TextAlign? textAlign;
@@ -45,7 +45,8 @@ class TextWidget extends StatelessWidget {
             textAlign: textAlign,
             overflow: textOverflow,
             maxLines: maxLines,
-            style: style ??
+            style:
+                style ??
                 TextStyle(
                   color: color ?? CustomColors.whiteColor,
                   fontSize: fontSize ?? Dimensions.titleMedium, // already .sp
