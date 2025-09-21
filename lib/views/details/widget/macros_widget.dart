@@ -16,10 +16,9 @@ class MacrosWidget extends GetView<DetailsController> {
             padding: Dimensions.verticalSize.edgeVertical * 0.6,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: 95.h,
             child: ListView.builder(
               itemCount: 4,
-
               scrollDirection: Axis.horizontal,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

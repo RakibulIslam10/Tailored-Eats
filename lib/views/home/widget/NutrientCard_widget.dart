@@ -63,8 +63,8 @@ class NutrientCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.2,
-      height: MediaQuery.of(context).size.height * 0.10,
+      width: 86.w,
+      height: 95.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
         gradient: const LinearGradient(

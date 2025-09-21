@@ -61,15 +61,15 @@ class CalorieProgressWidget extends GetView<HomeController> {
       final displayValue = controller.currentCalories.value.toInt();
 
       return SizedBox(
-        width: size,
-        height: size,
+        width: size.w,
+        height: size.h,
         child: Stack(
           alignment: Alignment.center,
           children: [
             CustomPaint(
               size: Size(size, size),
               painter: CalorieProgressPainter(
-                strokeWidth: 4,
+                strokeWidth: 4.w,
                 progress: progress,
                 progressColor: Color(0xff7AD3FF),
                 backgroundColor: CustomColors.progressColor.withOpacity(0.15),

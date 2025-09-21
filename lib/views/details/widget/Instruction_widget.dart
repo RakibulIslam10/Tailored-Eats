@@ -17,7 +17,7 @@ class InstructionWidget extends GetView<DetailsController> {
           ),
 
           Container(
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: 430.h,
             padding: REdgeInsets.all(Dimensions.paddingSize * 0.8),
             decoration: BoxDecoration(
               color: Colors.white12,
