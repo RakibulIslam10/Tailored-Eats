@@ -7,7 +7,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
     GenderViewWidget(),
     AgeViewWidget(),
     WeightPicker(),
-    HeightViewWidget(),
+    HeightSelectorWidget(),
     ActivityLevelWidget(),
   ];
 

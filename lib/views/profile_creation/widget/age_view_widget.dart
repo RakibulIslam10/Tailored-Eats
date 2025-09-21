@@ -25,11 +25,11 @@ class AgeViewWidget extends GetView<ProfileCreationController> {
               scrollController: FixedExtentScrollController(
                 initialItem: controller.selectedAge.value - 11,
               ),
-              selectionOverlay: Container(), // 🚀 removes the default highlight
+              selectionOverlay: Container(),
               onSelectedItemChanged: (index) {
                 controller.setAge(11 + index);
               },
-              children: List.generate(5, (index) {
+              children: List.generate(100, (index) {
                 final age = 11 + index;
                 return Obx(() {
                   final isSelected = controller.selectedAge.value == age;
@@ -41,8 +41,9 @@ class AgeViewWidget extends GetView<ProfileCreationController> {
                         fontSize: isSelected
                             ? Dimensions.displaySmall * 1.2
                             : Dimensions.displaySmall * 0.8,
-                        fontWeight:
-                        isSelected ? FontWeight.bold : FontWeight.normal,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                       ),
                     ),
                   );
