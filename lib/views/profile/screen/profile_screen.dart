@@ -1,3 +1,4 @@
+import 'package:tailored_eats/routes/routes.dart';
 import 'package:tailored_eats/widgets/profile_avater_widget.dart';
 
 import '../../../core/utils/basic_import.dart';

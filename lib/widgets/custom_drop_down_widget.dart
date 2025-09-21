@@ -63,7 +63,7 @@ class _DropdownWidgetState extends State<CustomDropDownWidget> {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              dropdownColor: CustomColors.whiteColor,
+              dropdownColor: CustomColors.grayShade.withAlpha(741),
               iconEnabledColor: _selectedValue == null
                   ? CustomColors.disableColor
                   : CustomColors.primary,

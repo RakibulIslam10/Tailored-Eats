@@ -41,16 +41,19 @@ class ProfileHeaderWidget extends GetView<ProfileController> {
           ),
 
           // Edit Button
-          Container(
-            padding: EdgeInsets.all(Dimensions.paddingSize * 0.25),
-            decoration: BoxDecoration(
-              color: CustomColors.blackColor,
-              borderRadius: BorderRadius.circular(Dimensions.radius),
-            ),
-            child: Icon(
-              Icons.edit_outlined,
-              color: CustomColors.whiteColor,
-              size: Dimensions.iconSizeLarge,
+          InkWell(
+            onTap: () => Get.toNamed(Routes.updateProfileScreen),
+            child: Container(
+              padding: EdgeInsets.all(Dimensions.paddingSize * 0.25),
+              decoration: BoxDecoration(
+                color: CustomColors.blackColor,
+                borderRadius: BorderRadius.circular(Dimensions.radius),
+              ),
+              child: Icon(
+                Icons.edit_outlined,
+                color: CustomColors.whiteColor,
+                size: Dimensions.iconSizeLarge,
+              ),
             ),
           ),
         ],
