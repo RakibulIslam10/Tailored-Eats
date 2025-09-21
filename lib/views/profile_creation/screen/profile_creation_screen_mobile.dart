@@ -6,7 +6,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
   List<Widget> get _screens => [
     GenderViewWidget(),
     AgeViewWidget(),
-    WeightViewWidget(),
+    WeightPicker(),
     HeightViewWidget(),
     ActivityLevelWidget(),
   ];
@@ -14,7 +14,21 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Obx(
+        () => controller.currentStep.value == 0
+            ? SizedBox()
+            : PrimaryButtonWidget(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.defaultHorizontalSize,
+                  vertical: Dimensions.verticalSize * 2,
+                ),
+                title: "Next",
+                onPressed: () =>
+                    Get.find<ProfileCreationController>().nextStep(),
+              ),
+      ),
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         backgroundColor: CustomColors.blackColor,
         toolbarHeight: 200,
         flexibleSpace: SafeArea(
@@ -51,7 +65,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
           transitionBuilder: (Widget child, Animation<double> animation) {
             return SlideTransition(
               position: Tween<Offset>(
-                begin: Offset(-1.0, 0.0),
+                begin: Offset(1.0, 0.0),
                 end: Offset.zero,
               ).animate(animation),
               child: child,

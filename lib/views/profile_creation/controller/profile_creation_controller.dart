@@ -2,9 +2,10 @@ import '../../../core/utils/basic_import.dart';
 class ProfileCreationController extends GetxController {
   RxInt currentStep = 0.obs;
   RxString gender = ''.obs;
-  RxInt age = 0.obs;
-  RxDouble weight = 0.0.obs;
+  RxDouble weight = 50.0.obs;
   RxDouble height = 0.0.obs;
+  var selectedAge = 13.obs;
+
 
   // Total number of steps
   final int totalSteps = 4;
@@ -27,7 +28,7 @@ class ProfileCreationController extends GetxController {
   }
 
   void setAge(int newAge) {
-    age.value = newAge;
+    selectedAge.value = newAge;
   }
 
   void setWeight(double newWeight) {

@@ -1,5 +1,6 @@
+import 'package:flutter/cupertino.dart';
+
 import '../../../core/utils/basic_import.dart';
-import '../../../widgets/auth_app_bar.dart';
 import '../controller/profile_creation_controller.dart';
 import '../widget/pogress_widget.dart';
 
