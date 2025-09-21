@@ -10,7 +10,7 @@ class HeightSelectorWidget extends GetView<ProfileCreationController> {
     return Column(
       children: [
         TextWidget(
-          'How Do You Identify Yourself ?',
+          'How Tall Are You ?',
           fontSize: Dimensions.titleLarge,
           fontWeight: FontWeight.bold,
         ),

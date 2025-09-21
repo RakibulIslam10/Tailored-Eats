@@ -9,13 +9,13 @@ class AgeViewWidget extends GetView<ProfileCreationController> {
       child: Column(
         children: [
           TextWidget(
-            'How Do You Identify Yourself ?',
+            'How Old Are You?',
             fontSize: Dimensions.titleLarge,
             fontWeight: FontWeight.bold,
           ),
-          Space.height.v10,
+          Space.height.v20,
           SizedBox(
-            height: 300.h,
+            height: 400.h,
             child: CupertinoPicker(
               looping: false,
               itemExtent: 50,

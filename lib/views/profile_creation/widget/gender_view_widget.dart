@@ -11,7 +11,8 @@ class GenderViewWidget extends GetView<ProfileCreationController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextWidget(
-            'How Do You Identify Yourself ?',
+            'How Do You \nIdentify Yourself ?',
+            textAlign: TextAlign.center,
             fontSize: Dimensions.titleLarge,
             fontWeight: FontWeight.bold,
           ),
