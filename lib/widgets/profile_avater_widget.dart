@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../core/themes/token.dart';
 
@@ -15,7 +16,7 @@ class ProfileAvatarWidget extends StatelessWidget {
   const ProfileAvatarWidget({
     super.key,
     required this.imageUrl,
-    this.size = 50,
+    this.size = 48,
     this.hasBorder = false,
     this.borderColor = CustomColors.primary,
     this.borderWidth = 2,
@@ -24,8 +25,8 @@ class ProfileAvatarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size,
-      height: size,
+      width: size.w,
+      height: size.h,
       padding: hasBorder ? EdgeInsets.all(borderWidth) : EdgeInsets.zero,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -56,7 +57,7 @@ class ProfileAvatarWidget extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey.shade300,
             ),
-            child: const Icon(Icons.error, color: Colors.red, size: 20),
+            child: Icon(Icons.error, color: Colors.red, size: 20.h),
           ),
         ),
       ),

@@ -37,41 +37,45 @@ class ActivityLevelWidget extends GetView<ProfileCreationController> {
           fontWeight: FontWeight.bold,
         ),
         Space.height.v100,
-        ...List.generate(activityList.length, (index) {
-          final activity = activityList[index];
-          return Obx(() {
-            final isSelected =
-                controller.selectedLevel.value == activity["title"];
-            return InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () {
-                controller.selectedLevel.value = activity["title"]!;
-                print(controller.selectedLevel.value);
-              },
-              child: Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: Dimensions.defaultHorizontalSize,
-                  vertical: Dimensions.verticalSize * 0.3,
-                ),
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? CustomColors.primary.withOpacity(0.2)
-                      : Colors.transparent,
-                  border: isSelected
-                      ? Border.all(color: CustomColors.primary, width: 1.5)
-                      : null, // No border when not selected
-                  borderRadius: BorderRadius.circular(Dimensions.radius),
-                ),
-                child: ActivityCard(
-                  title: activity["title"]!,
-                  subtitle: activity["subtitle"]!,
-                  iconPath: activity["iconPath"]!,
-                ),
-              ),
-            );
-          });
-        }),
+        Expanded(
+          child: ListView.builder(
+            itemCount: activityList.length,
+            itemBuilder: (context, index) {
+              final activity = activityList[index];
+              return Obx(() {
+                final isSelected =
+                    controller.selectedLevel.value == activity["title"];
+                return InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () {
+                    controller.selectedLevel.value = activity["title"]!;
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: Dimensions.defaultHorizontalSize,
+                      vertical: Dimensions.verticalSize * 0.3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? CustomColors.primary.withOpacity(0.2)
+                          : Colors.transparent,
+                      border: isSelected
+                          ? Border.all(color: CustomColors.primary, width: 1.5)
+                          : null,
+                      borderRadius: BorderRadius.circular(Dimensions.radius),
+                    ),
+                    child: ActivityCard(
+                      title: activity["title"]!,
+                      subtitle: activity["subtitle"]!,
+                      iconPath: activity["iconPath"]!,
+                    ),
+                  ),
+                );
+              });
+            },
+          ),
+        ),
       ],
     );
   }

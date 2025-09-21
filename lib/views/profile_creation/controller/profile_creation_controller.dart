@@ -1,9 +1,13 @@
+import 'package:tailored_eats/routes/routes.dart';
+
 import '../../../core/utils/basic_import.dart';
 
 class ProfileCreationController extends GetxController {
   RxInt currentStep = 0.obs;
 
   //Selected all value saved
+  RxInt currentSStep = 0.obs;
+  RxList<String> selectedLevels = <String>[].obs;
 
   RxString gender = ''.obs;
   RxDouble weight = 50.0.obs;
@@ -12,16 +16,16 @@ class ProfileCreationController extends GetxController {
   final double minHeight = 100.0;
   final double maxHeight = 250.0;
 
-  RxString selectedLevel =  ''.obs;
-
-
+  RxString selectedLevel = ''.obs;
 
   // Total number of steps
-  final int totalSteps = 10;
+  final int totalSteps = 5;
 
   void nextStep() {
     if (currentStep.value < totalSteps - 1) {
       currentStep.value++;
+    } else {
+      Get.offAllNamed(Routes.navigationScreen);
     }
   }
 
