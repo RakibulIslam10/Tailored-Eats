@@ -44,30 +44,33 @@ class FoodCardWidget extends StatelessWidget {
                   width: 100.w,
                   height: 85.h,
                   fit: BoxFit.cover,
-
-                  // 🟡 Shimmer while loading
                   placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: Colors.grey.shade100,
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
                     child: Container(
                       width: 100.w,
                       height: 85.h,
-                      color: Colors.grey.shade300,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                   ),
-
-                  // 🔴 Error fallback
                   errorWidget: (context, url, error) => Container(
                     width: 100.w,
                     height: 85.h,
-                    color: Colors.grey.shade600,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     child: Icon(
-                      Icons.image_not_supported,
-                      size: Dimensions.iconSizeLarge,
-                      color: Colors.grey.shade200,
+                      Icons.broken_image_outlined,
+                      color: Colors.grey[400],
+                      size: 24,
                     ),
                   ),
                 ),
+
               ),
 
               // Details
@@ -105,7 +108,7 @@ class FoodCardWidget extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              SvgPicture.asset(Assets.icons.calories),
+                              SvgPicture.asset(Assets.icons.calories,height: Dimensions.heightSize * 1.5,),
                               TextWidget(
                                 calories,
                                 fontSize: Dimensions.titleSmall * 0.8,
