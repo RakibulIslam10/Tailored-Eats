@@ -47,9 +47,9 @@ class GoalListWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final goal = goals[index];
 
-                  final isChecked = isSuggested
-                      ? goal.completed
-                      : goal.completed;
+                  // final isChecked = isSuggested
+                  //     ? goal.completed
+                  //     : goal.completed;
 
                   return ListTile(
                     contentPadding: EdgeInsets.symmetric(
@@ -143,6 +143,9 @@ class GoalListWidget extends StatelessWidget {
               ),
             ),
           ),
+
+
+
         ],
       ),
     );
