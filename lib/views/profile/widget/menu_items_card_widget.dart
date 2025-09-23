@@ -35,8 +35,54 @@ class MenuItemsCardWidget extends GetView<ProfileController> {
           icon: Icons.logout,
           title: 'Log Out',
           onTap: () {
-            // Handle settings tap
-          },
+            Get.dialog(
+              AlertDialog(
+                backgroundColor: CustomColors.blackColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
+                ),
+                title: TextWidget(
+                  ' Logout',
+                  fontSize: Dimensions.titleLarge,
+                  fontWeight: FontWeight.w500,
+                ),
+                content: const TextWidget('Are you sure you want to log out?'),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(
+                          Dimensions.radius * 0.8,
+                        ),
+                      ),
+                    ),
+                    child: TextWidget('No', color: CustomColors.whiteColor),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      AppStorage.clear();
+                      Get.offAllNamed(Routes.welcomeScreen);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomColors.whiteColor,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: CustomColors.rejected),
+                        borderRadius: BorderRadiusGeometry.circular(
+                          Dimensions.radius * 0.8,
+                        ),
+                      ),
+                    ),
+                    child: TextWidget('Yes', color: CustomColors.rejected),
+                  ),
+                ],
+              ),
+              barrierDismissible: true,
+            );          },
         ),
       ],
     );

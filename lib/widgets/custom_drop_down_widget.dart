@@ -51,7 +51,7 @@ class _DropdownWidgetState extends State<CustomDropDownWidget> {
         ),
         Container(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal * 0.5,
-          height: Dimensions.inputBoxHeight * 0.7,
+          height: Dimensions.inputBoxHeight * 0.85,
           decoration: BoxDecoration(
             border: Border.all(
               color: _selectedValue == null
@@ -59,7 +59,7 @@ class _DropdownWidgetState extends State<CustomDropDownWidget> {
                   : CustomColors.primary,
               width: 1.4,
             ),
-            borderRadius: BorderRadius.circular(Dimensions.radius),
+            borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
