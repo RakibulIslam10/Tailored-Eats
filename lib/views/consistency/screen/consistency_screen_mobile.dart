@@ -32,16 +32,11 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
             const FriendsProgressWidget(),
             Space.height.v10,
             const WeightChartWidget(),
-            // SizedBox(
-            //   height: 200,
-            //   child: ListView.builder(
-            //     shrinkWrap: true,
-            //     scrollDirection: Axis.horizontal,
-            //     itemBuilder: (context, index) {
-            //     return
-            //     Container(height: 200,color: Colors.white38,);
-            //   },),
-            // )
+            ReusableImageProgress(
+              title: 'Progress in Pictures',
+              items: controller.items,
+            ),
+            Space.height.v30,
           ],
         ),
       ),

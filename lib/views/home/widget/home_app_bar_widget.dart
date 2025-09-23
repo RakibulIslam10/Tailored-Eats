@@ -10,11 +10,16 @@ class HomeAppBarWidget extends GetView<HomeController> {
       backgroundColor: CustomColors.blackColor,
       leading: Image.asset(Assets.dummy.logo.path, height: 10.h, width: 10.w),
       actions: [
-        SvgPicture.asset(
-          Assets.icons.notification,
-          height: 20.h,
-          width: 20.w,
-        ),
+        InkWell(
+          borderRadius: BorderRadius.circular(Dimensions.radius * 0.2),
+          onTap: () => Get.toNamed(Routes.notificationScreen),
+          child: SvgPicture.asset(
+            Assets.icons.notification,
+            height: 22.h,
+            width: 22.w,
+          ),
+        )
+,
         InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,

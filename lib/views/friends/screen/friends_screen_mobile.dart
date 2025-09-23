@@ -44,7 +44,7 @@ class FriendsScreenMobile extends GetView<FriendsController> {
                                 color: Colors.white.withOpacity(0.6),
                               ),
                               contentPadding: EdgeInsetsGeometry.only(
-                                top: Dimensions.heightSize *  0.1,
+                                top: Dimensions.heightSize * 0.1,
                               ),
                             ),
                           ),
@@ -99,7 +99,7 @@ class FriendsScreenMobile extends GetView<FriendsController> {
                                 color: Colors.white.withOpacity(0.6),
                               ),
                               contentPadding: EdgeInsetsGeometry.only(
-                                top: Dimensions.heightSize *  0.1,
+                                top: Dimensions.heightSize * 0.1,
                               ),
                             ),
                           ),

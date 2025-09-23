@@ -26,6 +26,7 @@ class FriendsProgressWidget extends GetView<HomeController> {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.10,
           child: ListView.builder(
+            itemCount: 10,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),

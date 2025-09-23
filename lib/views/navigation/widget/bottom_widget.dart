@@ -24,9 +24,11 @@ class BottomBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      hoverColor: Colors.transparent,
+      // splashColor: Colors.transparent,
+      // highlightColor: Colors.transparent,
+      // hoverColor: Colors.transparent,
+      borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),  // radius
+
       onTap: () {
         if (index != null) controller.selectedIndex.value = index!;
       },

@@ -26,9 +26,7 @@ class MenuItemsCardWidget extends GetView<ProfileController> {
         _buildMenuItem(
           icon: Icons.settings_outlined,
           title: 'Settings',
-          onTap: () {
-            // Handle settings tap
-          },
+          onTap: () => Get.toNamed(Routes.settingScreen),
         ),
         Space.height.v100,
         Space.height.v100,

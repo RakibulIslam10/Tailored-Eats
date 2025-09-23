@@ -1,7 +1,6 @@
 import '../core/utils/basic_import.dart';
 import '../routes/routes.dart';
 
-
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isBack;
@@ -36,24 +35,28 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-
       backgroundColor: backgroundColor ?? Colors.transparent,
       automaticallyImplyLeading: false,
       scrolledUnderElevation: 0,
       centerTitle: true,
       leading: isBack
           ? InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios,
-          color: iconColor ??
-              (isPrimary ? CustomColors.primary : CustomColors.whiteColor),
-        ),
-      )
+              borderRadius: BorderRadius.circular(Dimensions.radius), // radius
+              onTap: () => Get.back(),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color:
+                    iconColor ??
+                    (isPrimary
+                        ? CustomColors.primary
+                        : CustomColors.whiteColor),
+              ),
+            )
           : null,
       title: TextWidget(
         title,
-        color: titleColor ??
+        color:
+            titleColor ??
             (isPrimary ? CustomColors.primary : CustomColors.whiteColor),
         fontSize: Dimensions.titleMedium * 1.2,
         fontWeight: FontWeight.w600,
@@ -67,7 +70,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               Get.offAllNamed(Routes.welcomeScreen);
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimensions.defaultHorizontalSize),
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.defaultHorizontalSize,
+              ),
               child: TextWidget(
                 'Skip',
                 color: CustomColors.primary,

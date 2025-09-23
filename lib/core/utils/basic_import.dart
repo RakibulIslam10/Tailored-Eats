@@ -19,3 +19,4 @@ export 'package:cached_network_image/cached_network_image.dart';
 export '../../../widgets/primary_button_widget.dart';
 export 'package:tailored_eats/core/utils/extensions.dart';
 
+

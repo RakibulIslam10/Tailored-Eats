@@ -11,74 +11,78 @@ class AllFriendsWidget extends GetView<FriendsController> {
       shrinkWrap: true,
       itemCount: 21,
       itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.5),
-          padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.defaultHorizontalSize,
-            vertical: Dimensions.verticalSize * 0.3,
-          ),
-          decoration: BoxDecoration(
-            color: CustomColors.whiteColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(Dimensions.radius),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: CustomColors.primary,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: CircleAvatar(
-                      radius: 20.r,
-                      backgroundImage: CachedNetworkImageProvider(
-                        'https://i.pravatar.cc/150?u=$index',
-                      ),
-                      backgroundColor: Colors.grey.shade200,
-                    ),
-                  ),
-                  SizedBox(width: Dimensions.widthSize),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextWidget('Friend $index', fontWeight: FontWeight.bold),
-                      TextWidget(
-                        'Loose weight',
-                        fontSize: Dimensions.titleSmall,
-                        color: CustomColors.grayShade,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 45.w,
-                height: 45.w,
-                child: Stack(
-                  alignment: Alignment.center,
+        return InkWell(
+          borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
+          onTap: () => Get.toNamed(Routes.preview_profileScreen),
+          child: Container(
+            margin: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.5),
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.defaultHorizontalSize,
+              vertical: Dimensions.verticalSize * 0.3,
+            ),
+            decoration: BoxDecoration(
+              color: CustomColors.whiteColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(Dimensions.radius),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
-                    CircularProgressIndicator(
-                      value: 0.92,
-                      backgroundColor: CustomColors.grayShade,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        CustomColors.primary,
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: CustomColors.primary,
+                          width: 1.5,
+                        ),
                       ),
-                      strokeWidth: 2.5,
+                      child: CircleAvatar(
+                        radius: 20.r,
+                        backgroundImage: CachedNetworkImageProvider(
+                          'https://i.pravatar.cc/150?u=$index',
+                        ),
+                        backgroundColor: Colors.grey.shade200,
+                      ),
                     ),
-                    TextWidget(
-                      '${(0.92 * 100).toInt()}%',
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(width: Dimensions.widthSize),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextWidget('Friend $index', fontWeight: FontWeight.bold),
+                        TextWidget(
+                          'Loose weight',
+                          fontSize: Dimensions.titleSmall,
+                          color: CustomColors.grayShade,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 45.w,
+                  height: 45.w,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        value: 0.92,
+                        backgroundColor: CustomColors.grayShade,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          CustomColors.primary,
+                        ),
+                        strokeWidth: 2.5,
+                      ),
+                      TextWidget(
+                        '${(0.92 * 100).toInt()}%',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
