@@ -5,6 +5,54 @@ import '../../../core/utils/basic_import.dart';
 class ProfileCreationController extends GetxController {
   RxInt currentStep = 0.obs;
 
+  final List<Map<String, String>> activityList = [
+    {
+      "title": "Sedentary",
+      "subtitle": "Less than 3000 steps daily",
+      "iconPath": "assets/icons/Group 1000004246.svg",
+    },
+    {
+      "title": "Lightly Active",
+      "subtitle": "3000-6000 steps daily",
+      "iconPath": "assets/icons/Group 1000004247.svg",
+    },
+    {
+      "title": "Active",
+      "subtitle": "More than 10000 steps daily",
+      "iconPath": "assets/icons/Group 1000004254.svg",
+    },
+    {
+      "title": "Very Active",
+      "subtitle": "More than 10000 steps daily",
+      "iconPath": "assets/icons/Group 1000004254.svg",
+    },
+  ];
+
+  final List<Map<String, String>> foodVibeList = [
+    {
+      "title": "Sedentary",
+      "subtitle": "Less than 3000 steps daily",
+      "iconPath": "assets/icons/Group 1000004246.svg",
+    },
+    {
+      "title": "Lightly Active",
+      "subtitle": "3000-6000 steps daily",
+      "iconPath": "assets/icons/Group 1000004247.svg",
+    },
+    {
+      "title": "Active",
+      "subtitle": "More than 10000 steps daily",
+      "iconPath": "assets/icons/Group 1000004254.svg",
+    },
+    {
+      "title": "Very Active",
+      "subtitle": "More than 10000 steps daily",
+      "iconPath": "assets/icons/Group 1000004254.svg",
+    },
+  ];
+
+
+
   //Selected all value saved
   RxInt currentSStep = 0.obs;
   RxList<String> selectedLevels = <String>[].obs;

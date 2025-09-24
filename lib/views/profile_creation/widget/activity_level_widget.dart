@@ -1,55 +1,39 @@
 part of '../screen/profile_creation_screen.dart';
 
-class ActivityLevelWidget extends GetView<ProfileCreationController> {
-  const ActivityLevelWidget({super.key});
+class SelectableListWidget extends GetView<ProfileCreationController> {
+  final String title;
+  final List<Map<String, String>> items;
+
+  const SelectableListWidget({
+    super.key,
+    required this.title,
+    required this.items,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> activityList = [
-      {
-        "title": "Sedentary",
-        "subtitle": "Less than 3000 steps daily",
-        "iconPath": "assets/icons/Group 1000004246.svg",
-      },
-      {
-        "title": "Lightly Active",
-        "subtitle": "3000-6000 steps daily",
-        "iconPath": "assets/icons/Group 1000004247.svg",
-      },
-      {
-        "title": "Active",
-        "subtitle": "More than 10000 steps daily",
-        "iconPath": "assets/icons/Group 1000004254.svg",
-      },
-      {
-        "title": "Very Active",
-        "subtitle": "More than 10000 steps daily",
-        "iconPath": "assets/icons/Group 1000004254.svg",
-      },
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         TextWidget(
-          'What’s Your Activity Level?',
+          title,
           fontSize: Dimensions.titleLarge,
           fontWeight: FontWeight.bold,
         ),
         Space.height.v100,
         Expanded(
           child: ListView.builder(
-            itemCount: activityList.length,
+            itemCount: items.length,
             itemBuilder: (context, index) {
-              final activity = activityList[index];
+              final item = items[index];
               return Obx(() {
                 final isSelected =
-                    controller.selectedLevel.value == activity["title"];
+                    controller.selectedLevel.value == item["title"];
                 return InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () {
-                    controller.selectedLevel.value = activity["title"]!;
+                    controller.selectedLevel.value = item["title"]!;
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(
@@ -66,9 +50,9 @@ class ActivityLevelWidget extends GetView<ProfileCreationController> {
                       borderRadius: BorderRadius.circular(Dimensions.radius),
                     ),
                     child: ActivityCard(
-                      title: activity["title"]!,
-                      subtitle: activity["subtitle"]!,
-                      iconPath: activity["iconPath"]!,
+                      title: item["title"]!,
+                      subtitle: item["subtitle"]!,
+                      iconPath: item["iconPath"]!,
                     ),
                   ),
                 );

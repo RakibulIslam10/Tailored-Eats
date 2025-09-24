@@ -8,7 +8,16 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
     AgeViewWidget(),
     WeightPicker(),
     HeightSelectorWidget(),
-    ActivityLevelWidget(),
+    SelectableListWidget(
+      title: "What’s Your Activity Level?",
+      items: controller.activityList,
+    ),   SelectableListWidget(
+      title: "Tell me your food vibe!",
+      items: controller.activityList,
+    ),
+
+
+
   ];
 
   @override
