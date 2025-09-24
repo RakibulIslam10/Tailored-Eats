@@ -8,7 +8,7 @@ class SplashScreenMobile extends GetView<SplashController> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(Dimensions.paddingSize * 2),
+          padding: EdgeInsets.all(Dimensions.paddingSize * 5),
           child: Image.asset(Assets.dummy.logo.path, fit: BoxFit.contain),
         ),
       ),
