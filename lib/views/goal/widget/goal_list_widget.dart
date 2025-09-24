@@ -4,6 +4,7 @@ class GoalListWidget extends StatelessWidget {
   final String title;
   final List<Goal> goals;
   final bool isSuggested;
+  final bool isWeekly;
   final GoalController controller;
 
   const GoalListWidget({
@@ -12,6 +13,7 @@ class GoalListWidget extends StatelessWidget {
     required this.goals,
     required this.controller,
     this.isSuggested = false,
+    this.isWeekly = false,
   });
 
   @override
@@ -21,7 +23,6 @@ class GoalListWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title
           Padding(
             padding: EdgeInsets.only(
               top: Dimensions.verticalSize * 0.5,
@@ -33,8 +34,6 @@ class GoalListWidget extends StatelessWidget {
               fontSize: 16.sp,
             ),
           ),
-
-          // Goals Container
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -46,11 +45,6 @@ class GoalListWidget extends StatelessWidget {
                 itemCount: goals.length,
                 itemBuilder: (context, index) {
                   final goal = goals[index];
-
-                  // final isChecked = isSuggested
-                  //     ? goal.completed
-                  //     : goal.completed;
-
                   return ListTile(
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: Dimensions.defaultHorizontalSize,
@@ -69,9 +63,9 @@ class GoalListWidget extends StatelessWidget {
                         activeColor: CustomColors.progressColor,
                         onChanged: (_) {
                           if (isSuggested) {
-                            controller.toggleSuggestedGoal(
-                              index,
-                            ); // Tick/untick logic
+                            controller.toggleSuggestedGoal(index);
+                          } else if (isWeekly) {
+                            controller.toggleWeeklyGoal(index);
                           } else {
                             controller.toggleGoal(index);
                           }
@@ -82,70 +76,80 @@ class GoalListWidget extends StatelessWidget {
                       goal.title,
                       fontSize: Dimensions.titleSmall,
                     ),
-                    trailing: !isSuggested
+                    trailing: (!isSuggested)
                         ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  color: CustomColors.progressColor,
-                                ),
-                                onPressed: () {
-                                  Get.defaultDialog(
-                                    contentPadding: REdgeInsets.all(
-                                      Dimensions.paddingSize * 0.5,
-                                    ),
-                                    backgroundColor: CustomColors.blackColor,
-                                    title: 'Edit Goal',
-                                    titleStyle: const TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                    content: PrimaryInputFieldWidget(
-                                      controller: controller.editGoalController,
-                                      hintText: goal.title,
-                                    ),
-                                    actions: [
-                                      PrimaryButtonWidget(
-                                        title: 'Save',
-                                        onPressed: () {
-                                          if (controller
-                                              .editGoalController
-                                              .text
-                                              .isNotEmpty) {
-                                            controller.editGoal(
-                                              index,
-                                              controller
-                                                  .editGoalController
-                                                  .text,
-                                            );
-                                          }
-                                          controller.updateProgress();
-                                          Get.back();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.edit,
+                            color: CustomColors.progressColor,
+                          ),
+                          onPressed: () {
+                            Get.defaultDialog(
+                              contentPadding: REdgeInsets.all(
+                                  Dimensions.paddingSize * 0.5),
+                              backgroundColor: CustomColors.blackColor,
+                              title: 'Edit Goal',
+                              titleStyle: const TextStyle(
+                                color: Colors.white,
                               ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.redAccent,
-                                ),
-                                onPressed: () => controller.deleteGoal(index),
+                              content: PrimaryInputFieldWidget(
+                                controller: controller.editGoalController,
+                                hintText: goal.title,
                               ),
-                            ],
-                          )
+                              actions: [
+                                PrimaryButtonWidget(
+                                  title: 'Save',
+                                  onPressed: () {
+                                    if (controller
+                                        .editGoalController.text
+                                        .isNotEmpty) {
+                                      if (isWeekly) {
+                                        controller.editWeeklyGoal(
+                                            index,
+                                            controller.editGoalController
+                                                .text);
+                                      } else {
+                                        controller.editGoal(
+                                            index,
+                                            controller.editGoalController
+                                                .text);
+                                      }
+                                    }
+                                    if (isWeekly) {
+                                      controller.updateWeeklyProgress();
+                                    } else {
+                                      controller.updateProgress();
+                                    }
+                                    Get.back();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.redAccent,
+                          ),
+                          onPressed: () {
+                            if (isWeekly) {
+                              controller.deleteWeeklyGoal(index);
+                            } else {
+                              controller.deleteGoal(index);
+                            }
+                          },
+                        ),
+                      ],
+                    )
                         : null,
                   );
                 },
               ),
             ),
           ),
-
-
-
         ],
       ),
     );
