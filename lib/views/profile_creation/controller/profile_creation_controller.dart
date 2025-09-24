@@ -30,28 +30,84 @@ class ProfileCreationController extends GetxController {
 
   final List<Map<String, String>> foodVibeList = [
     {
-      "title": "Sedentary",
-      "subtitle": "Less than 3000 steps daily",
-      "iconPath": "assets/icons/Group 1000004246.svg",
+      "title": "None",
+      "subtitle": "",
+      "iconPath": "assets/icons/Group 1000004258.svg",
     },
     {
-      "title": "Lightly Active",
-      "subtitle": "3000-6000 steps daily",
-      "iconPath": "assets/icons/Group 1000004247.svg",
+      "title": "Vegitarian",
+      "subtitle": "",
+      "iconPath": "assets/icons/Group 1000004255.svg",
     },
     {
-      "title": "Active",
-      "subtitle": "More than 10000 steps daily",
-      "iconPath": "assets/icons/Group 1000004254.svg",
+      "title": "Vegan",
+      "subtitle": "",
+      "iconPath": "assets/icons/Group 1000004256.svg",
     },
     {
-      "title": "Very Active",
-      "subtitle": "More than 10000 steps daily",
-      "iconPath": "assets/icons/Group 1000004254.svg",
+      "title": "Dairy Free",
+      "subtitle": "",
+      "iconPath": "assets/icons/Group 1000004257.svg",
     },
   ];
 
+  final List<Map<String, String>> mainGoalList = [
+    {
+      "title": "Loose Weight",
+      "subtitle": "",
+      "iconPath": "assets/icons/Gray.svg",
+    },
+    {
+      "title": "Gain Weight",
+      "subtitle": "",
+      "iconPath": "assets/icons/Group 1000004259.svg",
+    },
+    {
+      "title": "Body Recomp",
+      "subtitle": "Lose body fat whilst slowly gaining muscle",
+      "iconPath": "assets/icons/image 467 (traced).svg",
+    },
+  ];
+  final List<Map<String, String>> wantResultlList = [
+    {
+      "title": "Fast As Possible",
+      "subtitle": "",
+      "iconPath": "assets/icons/Group 1000004261.svg",
+    },
+    {
+      "title": "Slow But Sustainable",
+      "subtitle": "",
+      "iconPath": "assets/icons/image 469 (traced).svg",
+    },
+    {
+      "title": "Life Style Change",
+      "subtitle": "",
+      "iconPath": "assets/icons/image 470 (traced).svg",
+    },
+  ];
 
+  final List<Map<String, String>> trainList = [
+    {
+      "title": "1–2 sessions/week",
+      "subtitle": "Easy start, light commitment",
+      "iconPath": "assets/icons/Group 1000004266.svg",
+    },
+    {
+      "title": "2–3 sessions/week",
+      "subtitle": "Balanced & flexible",
+      "iconPath": "assets/icons/Group 1000004267.svg",
+    },
+    {
+      "title": "4–5 sessions/week",
+      "subtitle": "Serious progress ahead",
+      "iconPath": "assets/icons/Group 1000004268.svg",
+    },
+    {
+      "title": "5+ sessions/week",
+      "subtitle": "Full dedication mode",
+      "iconPath": "assets/icons/Group 1000004269.svg",
+    },
+  ];
 
   //Selected all value saved
   RxInt currentSStep = 0.obs;
@@ -67,11 +123,12 @@ class ProfileCreationController extends GetxController {
   RxString selectedLevel = ''.obs;
 
   // Total number of steps
-  final int totalSteps = 5;
+  final int totalSteps = 9;
 
   void nextStep() {
     if (currentStep.value < totalSteps - 1) {
       currentStep.value++;
+      print(currentStep.value);
     } else {
       Get.offAllNamed(Routes.navigationScreen);
     }

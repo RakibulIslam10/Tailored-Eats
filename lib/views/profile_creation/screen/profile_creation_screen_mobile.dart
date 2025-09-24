@@ -11,13 +11,23 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
     SelectableListWidget(
       title: "What’s Your Activity Level?",
       items: controller.activityList,
-    ),   SelectableListWidget(
-      title: "Tell me your food vibe!",
-      items: controller.activityList,
     ),
-
-
-
+    SelectableListWidget(
+      title: "Tell me your food vibe!",
+      items: controller.foodVibeList,
+    ),
+    SelectableListWidget(
+      title: "What’s your main goal?",
+      items: controller.mainGoalList,
+    ),
+    SelectableListWidget(
+      title: "How fast do you want results?",
+      items: controller.wantResultlList,
+    ),
+    SelectableListWidget(
+      title: "How often can you train?",
+      items: controller.trainList,
+    ),
   ];
 
   @override
@@ -31,7 +41,9 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
                   horizontal: Dimensions.defaultHorizontalSize,
                   vertical: Dimensions.verticalSize * 2,
                 ),
-                title: "Next",
+                title: controller.currentStep.value == 8
+                    ? 'Go To Home'
+                    : "Next",
                 onPressed: () =>
                     Get.find<ProfileCreationController>().nextStep(),
               ),
