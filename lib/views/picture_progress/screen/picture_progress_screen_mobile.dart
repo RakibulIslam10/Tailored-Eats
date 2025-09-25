@@ -10,11 +10,7 @@ class PictureProgressScreenMobile extends GetView<PictureProgressController> {
       appBar: CommonAppBar(title: "Progress In Picture"),
       body: ListView(
         padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-        children: [
-          BeforeAfterSectionWidget(),
-
-          StorySectionWidget()
-        ],
+        children: [BeforeAfterSectionWidget(), StorySectionWidget()],
       ),
     );
   }

@@ -18,7 +18,7 @@ class StorySectionWidget extends GetView<PictureProgressController> {
               color: Colors.white,
             ),
             InkWell(
-              // onTap: controller.showImageOptions,
+              onTap: controller.uploadImage,
               child: Container(
                 padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(

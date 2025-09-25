@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+
 import '../../../core/utils/basic_import.dart';
 
 class PictureProgressController extends GetxController {
@@ -46,4 +48,28 @@ class PictureProgressController extends GetxController {
       "date": "28 Jun 2025",
     },
   ];
+
+
+
+  final ImagePicker _imagePicker = ImagePicker();
+
+  // Reactive selected image
+  Rx<XFile?> selectedImg = Rx<XFile?>(null);
+
+  /// Pick image from camera
+  Future<void> uploadImage() async {
+    try {
+      final XFile? pickedImage = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+      );
+
+      if (pickedImage != null) {
+        selectedImg.value = pickedImage;
+      }
+    } catch (e) {
+      print("Error picking image: $e");
+    }
+  }
+
 }
