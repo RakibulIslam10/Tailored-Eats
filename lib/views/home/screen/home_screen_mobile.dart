@@ -66,14 +66,15 @@ class HomeScreenMobile extends GetView<HomeController> {
                     ),
                     RepaintBoundary(
                       child: Obx(
-                            () => AnimatedSwitcher(
+                        () => AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
                           transitionBuilder: (child, animation) =>
                               FadeTransition(opacity: animation, child: child),
                           child: FoodCardWidget(
                             key: ValueKey(controller.currentFood["title"]),
                             title: controller.currentFood["title"] ?? "",
-                            description: controller.currentFood["description"] ?? "",
+                            description:
+                                controller.currentFood["description"] ?? "",
                             calories: controller.currentFood["calories"] ?? "",
                             time: controller.currentFood["time"] ?? "",
                             imageUrl: controller.currentFood["imageUrl"] ?? "",
@@ -104,29 +105,14 @@ class HomeScreenMobile extends GetView<HomeController> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /// ✅ Enhanced scroll behavior with better performance
 class _CustomScrollBehavior extends ScrollBehavior {
   @override
   Widget buildOverscrollIndicator(
-      BuildContext context,
-      Widget child,
-      ScrollableDetails details,
-      ) {
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
     return child; // Remove overscroll glow
   }
 
@@ -156,4 +142,3 @@ class _OptimizedScrollPhysics extends ClampingScrollPhysics {
   @override
   double get frictionFactor => 0.015; // Default is 0.015, can adjust
 }
-

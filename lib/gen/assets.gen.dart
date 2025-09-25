@@ -14,6 +14,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsDummyGen {
   const $AssetsDummyGen();
 
+  /// File path: assets/dummy/blur.svg
+  String get blur => 'assets/dummy/blur.svg';
+
   /// File path: assets/dummy/circle.svg
   String get circle => 'assets/dummy/circle.svg';
 
@@ -24,7 +27,7 @@ class $AssetsDummyGen {
   String get welcom => 'assets/dummy/welcom.svg';
 
   /// List of all assets
-  List<dynamic> get values => [circle, logo, welcom];
+  List<dynamic> get values => [blur, circle, logo, welcom];
 }
 
 class $AssetsIconsGen {
@@ -41,6 +44,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/Frame.svg
   String get frame => 'assets/icons/Frame.svg';
+
+  /// File path: assets/icons/Gray.svg
+  String get gray => 'assets/icons/Gray.svg';
 
   /// File path: assets/icons/Group 1000004246.svg
   String get group1000004246 => 'assets/icons/Group 1000004246.svg';
@@ -123,6 +129,7 @@ class $AssetsIconsGen {
     component85,
     component86,
     frame,
+    gray,
     group1000004246,
     group1000004247,
     group1000004249,

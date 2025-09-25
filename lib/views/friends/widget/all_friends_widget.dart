@@ -49,7 +49,10 @@ class AllFriendsWidget extends GetView<FriendsController> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextWidget('Friend $index', fontWeight: FontWeight.bold),
+                        TextWidget(
+                          'Friend $index',
+                          fontWeight: FontWeight.bold,
+                        ),
                         TextWidget(
                           'Loose weight',
                           fontSize: Dimensions.titleSmall,

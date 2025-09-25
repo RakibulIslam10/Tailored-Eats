@@ -1,4 +1,5 @@
 import 'package:tailored_eats/core/utils/basic_import.dart';
+import 'package:tailored_eats/routes/routes.dart';
 
 class ReusableImageProgress extends StatelessWidget {
   final String title;
@@ -19,13 +20,21 @@ class ReusableImageProgress extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextWidget(
-          title,
-          fontSize: Dimensions.titleLarge * 0.8,
-          fontWeight: FontWeight.bold,
-          padding: EdgeInsets.symmetric(
-            vertical: Dimensions.verticalSize * 0.8,
-          ),
+        Row(
+          mainAxisAlignment: mainSpaceBet,
+          children: [
+            TextWidget(
+              title,
+              fontSize: Dimensions.titleLarge * 0.8,
+              fontWeight: FontWeight.bold,
+              padding: EdgeInsets.symmetric(
+                vertical: Dimensions.verticalSize * 0.8,
+              ),
+            ),
+            
+            TextWidget('View All ',color: CustomColors.primary,onTap: () => Get.toNamed(Routes.picture_progressScreen),)
+            
+          ],
         ),
         ConstrainedBox(
           constraints: BoxConstraints(
