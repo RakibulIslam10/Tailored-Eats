@@ -19,7 +19,7 @@ class FriendsProgressWidget extends GetView<HomeController> {
          ),
          TextWidget('View All',color: CustomColors.primary,
          
-         onTap: () => Get.toNamed(Routes.friends_consistencyScreen),
+         onTap: () => Get.toNamed(Routes.friendsConsistencyScreen),
 
          fontSize: Dimensions.titleSmall * 0.9,
          ),

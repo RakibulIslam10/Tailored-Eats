@@ -15,7 +15,7 @@ class SettingScreenMobile extends GetView<SettingController> {
             _buildMenuItem(
               icon: Icons.password,
               title: 'Change Password',
-              onTap: () => Get.toNamed(Routes.change_passwordScreen),
+              onTap: () => Get.toNamed(Routes.changePasswordScreen),
             ),
             _buildMenuItem(
               icon: Icons.support_agent,

@@ -32,7 +32,7 @@ class ReusableImageProgress extends StatelessWidget {
               ),
             ),
             
-            TextWidget('View All ',color: CustomColors.primary,onTap: () => Get.toNamed(Routes.picture_progressScreen),)
+            TextWidget('View All ',color: CustomColors.primary,onTap: () => Get.toNamed(Routes.pictureProgressScreen),)
             
           ],
         ),

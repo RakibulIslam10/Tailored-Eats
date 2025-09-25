@@ -46,7 +46,7 @@ class LoginScreenMobile extends GetView<LoginController> {
               mainAxisAlignment: mainEnd,
               children: [
                 TextWidget(
-                  onTap: () => Get.toNamed(Routes.forget_passwordScreen),
+                  onTap: () => Get.toNamed(Routes.forgetPasswordScreen),
                   "Forget Password",
                   color: CustomColors.primary,
                   fontWeight: FontWeight.w400,
@@ -59,7 +59,7 @@ class LoginScreenMobile extends GetView<LoginController> {
             /// Button
             PrimaryButtonWidget(
               title: 'Log In',
-              onPressed: () => Get.toNamed(Routes.two_faScreen),
+              onPressed: () => Get.toNamed(Routes.twoFaScreen),
             ),
 
             Space.height.v20,

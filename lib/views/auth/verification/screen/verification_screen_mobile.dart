@@ -84,7 +84,7 @@ class VerificationScreenMobile extends GetView<VerificationController> {
             Space.height.betweenInputBox,
             PrimaryButtonWidget(
               title: "Submit",
-              onPressed: () =>  Get.toNamed(Routes.reset_passwordScreen),
+              onPressed: () =>  Get.toNamed(Routes.resetPasswordScreen),
             )
           ],
         ),

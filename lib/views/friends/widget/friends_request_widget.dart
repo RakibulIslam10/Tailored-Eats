@@ -13,7 +13,7 @@ class FriendsRequestWidget extends GetView<FriendsController> {
       itemBuilder: (context, index) {
         return InkWell(
           borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
-          onTap: () => Get.toNamed(Routes.preview_profileScreen),
+          onTap: () => Get.toNamed(Routes.previewProfileScreen),
           child: Container(
             margin: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.5),
             padding: EdgeInsets.symmetric(

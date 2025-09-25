@@ -4,17 +4,17 @@ class RoutePageList {
   static var list = [
     //Page Route List
 GetPage(
-    name: Routes.picture_progressScreen,
+    name: Routes.pictureProgressScreen,
     page: () => const PictureProgressScreen(),
     binding: PictureProgressBinding(),
   ),
 GetPage(
-    name: Routes.friends_consistencyScreen,
+    name: Routes.friendsConsistencyScreen,
     page: () => const FriendsConsistencyScreen(),
     binding: FriendsConsistencyBinding(),
   ),
     GetPage(
-      name: Routes.preview_profileScreen,
+      name: Routes.previewProfileScreen,
       page: () => const PreviewProfileScreen(),
       binding: PreviewProfileBinding(),
     ),
@@ -44,7 +44,7 @@ GetPage(
       binding: SupportBinding(),
     ),
     GetPage(
-      name: Routes.change_passwordScreen,
+      name: Routes.changePasswordScreen,
       page: () => const ChangePasswordScreen(),
       binding: ChangePasswordBinding(),
     ),
@@ -69,7 +69,7 @@ GetPage(
       binding: ProfileBinding(),
     ),
     GetPage(
-      name: Routes.profile_creationScreen,
+      name: Routes.profileCreationScreen,
       page: () => const ProfileCreationScreen(),
       binding: ProfileCreationBinding(),
     ),
@@ -119,7 +119,7 @@ GetPage(
       binding: NavigationBinding(),
     ),
     GetPage(
-      name: Routes.two_faScreen,
+      name: Routes.twoFaScreen,
       page: () => const TwoFaScreen(),
       binding: TwoFaBinding(),
     ),
@@ -134,7 +134,7 @@ GetPage(
       binding: OtpBinding(),
     ),
     GetPage(
-      name: Routes.reset_passwordScreen,
+      name: Routes.resetPasswordScreen,
       page: () => const ResetPasswordScreen(),
       binding: ResetPasswordBinding(),
     ),
@@ -144,7 +144,7 @@ GetPage(
       binding: VerificationBinding(),
     ),
     GetPage(
-      name: Routes.forget_passwordScreen,
+      name: Routes.forgetPasswordScreen,
       page: () => const ForgetPasswordScreen(),
       binding: ForgetPasswordBinding(),
     ),
