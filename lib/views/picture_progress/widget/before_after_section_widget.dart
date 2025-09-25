@@ -9,7 +9,6 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
       margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
       child: Row(
         children: [
-          /// BEFORE CARD
           Expanded(
             child: ToggleImageCard(
               imageUrl:
@@ -23,8 +22,6 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
           ),
 
           Space.width.v10,
-
-          /// AFTER CARD
           Expanded(
             child: ToggleImageCard(
               imageUrl:
@@ -65,7 +62,6 @@ class ToggleImageCard extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
       child: Stack(
         children: [
-          /// Image
           ClipRRect(
             borderRadius: BorderRadius.circular(12.r),
             child: Image.network(
@@ -76,7 +72,6 @@ class ToggleImageCard extends StatelessWidget {
             ),
           ),
 
-          /// Toggle
           Positioned(
             top: 12.h,
             right: 12.w,

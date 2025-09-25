@@ -8,7 +8,6 @@ class StorySectionWidget extends GetView<PictureProgressController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// Section Header
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -34,7 +33,6 @@ class StorySectionWidget extends GetView<PictureProgressController> {
 
         SizedBox(height: 20.h),
 
-        /// Staggered Grid
         const ConsistentCardWidget(),
       ],
     );
@@ -48,7 +46,6 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
   Widget build(BuildContext context) {
     return MasonryGridView.count(
       crossAxisCount: 2,
-      // 2 কলাম
       mainAxisSpacing: 12,
       crossAxisSpacing: 12,
       shrinkWrap: true,
@@ -59,7 +56,7 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
         final image = controller.storyImages[index];
 
         return Container(
-          height: isBig ? 210.h : 120.h,
+          height: isBig ? 210.h : 100.h,
           decoration: BoxDecoration(
             color: const Color(0xFF1F2937),
             borderRadius: BorderRadius.circular(12.r),
@@ -76,7 +73,20 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                CachedNetworkImage(imageUrl: image["url"]!, fit: BoxFit.cover),
+                CachedNetworkImage(
+                  imageUrl: image["url"]!,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Container(
+                    color: Colors.grey.shade400,
+                    child: Icon(
+                      Icons.image_not_supported,
+                      size: Dimensions.iconSizeLarge * 2,
+                      color: CustomColors.grayShade,
+                    ),
+                  ),
+                  placeholder: (context, url) =>
+                      Container(color: Colors.grey.shade300),
+                ),
 
                 /// Date overlay
                 Positioned(
