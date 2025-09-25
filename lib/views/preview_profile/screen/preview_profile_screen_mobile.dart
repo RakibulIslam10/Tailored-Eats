@@ -10,6 +10,8 @@ class PreviewProfileScreenMobile extends GetView<PreviewProfileController> {
         title: "Profile",
         actions: [
           PopupMenuButton<String>(
+            borderRadius: BorderRadius.circular(Dimensions.radius * 2),
+            color: CustomColors.grayShade,
             icon: Icon(Icons.more_vert, color: Colors.white),
             onSelected: (value) {
               if (value == "unfriend") {
@@ -22,7 +24,7 @@ class PreviewProfileScreenMobile extends GetView<PreviewProfileController> {
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               const PopupMenuItem<String>(
                 value: "unfriend",
-                child: Text("Unfriend"),
+                child: TextWidget("Unfriend"),
               ),
             ],
           ),
