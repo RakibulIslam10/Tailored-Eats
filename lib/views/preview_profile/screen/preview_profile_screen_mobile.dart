@@ -5,11 +5,29 @@ class PreviewProfileScreenMobile extends GetView<PreviewProfileController> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
-      appBar: CommonAppBar(title: "Profile"),
+      appBar: CommonAppBar(
+        title: "Profile",
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.more_vert, color: Colors.white),
+            onSelected: (value) {
+              if (value == "unfriend") {
+                CustomSnackBar.success(
+                  title: 'unfriended',
+                  message: "User has been unfriended",
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: "unfriend",
+                child: Text("Unfriend"),
+              ),
+            ],
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
@@ -18,9 +36,10 @@ class PreviewProfileScreenMobile extends GetView<PreviewProfileController> {
               children: [
                 ProfileImageAndButton(),
                 ConsistencyBox(),
-                ReusableImageProgress(title: 'Progress in Pictures', items: controller.items)
-
-
+                ReusableImageProgress(
+                  title: 'Progress in Pictures',
+                  items: controller.items,
+                ),
               ],
             ),
           ),

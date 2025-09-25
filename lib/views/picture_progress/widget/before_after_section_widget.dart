@@ -57,108 +57,111 @@ class ToggleImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 240.h,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.r),
-            child: Image.network(
-              imageUrl,
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          Positioned(
-            top: 12.h,
-            right: 12.w,
-            child: InkWell(
-              onTap: onToggle,
+    return InkWell(
+      // onTap: () => Get.toNamed(Routes.),
+      child: Container(
+        height: 240.h,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
+        child: Stack(
+          children: [
+            ClipRRect(
               borderRadius: BorderRadius.circular(12.r),
-              child: Obx(
-                () => Container(
-                  width: 44.w,
-                  height: 24.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    color: toggleValue.value ? Colors.blue : Colors.grey,
-                  ),
-                  child: AnimatedAlign(
-                    duration: const Duration(milliseconds: 200),
-                    alignment: toggleValue.value
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                    child: Container(
-                      width: 20.w,
-                      height: 20.h,
-                      margin: EdgeInsets.all(2.w),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
+              child: Image.network(
+                imageUrl,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            Positioned(
+              top: 12.h,
+              right: 12.w,
+              child: InkWell(
+                onTap: onToggle,
+                borderRadius: BorderRadius.circular(12.r),
+                child: Obx(
+                  () => Container(
+                    width: 44.w,
+                    height: 24.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      color: toggleValue.value ? Colors.blue : Colors.grey,
+                    ),
+                    child: AnimatedAlign(
+                      duration: const Duration(milliseconds: 200),
+                      alignment: toggleValue.value
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Container(
+                        width: 20.w,
+                        height: 20.h,
+                        margin: EdgeInsets.all(2.w),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
 
-          /// Blur when ON
-          Obx(
-            () => toggleValue.value
-                ? Positioned(
-                    top: 35.h,
-                    right: 0,
-                    left: 0,
-                    child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.r),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                          child: Container(
-                            width: 100.w,
-                            height: 70.h,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+            /// Blur when ON
+            Obx(
+              () => toggleValue.value
+                  ? Positioned(
+                      top: 35.h,
+                      right: 0,
+                      left: 0,
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.r),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            child: Container(
+                              width: 100.w,
+                              height: 70.h,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ),
-
-          /// Label & Date
-          Positioned(
-            right: 0,
-            left: 0,
-            bottom: 12.h,
-            child: Column(
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.sp,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  date,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white70,
-                  ),
-                ),
-              ],
+                    )
+                  : const SizedBox.shrink(),
             ),
-          ),
-        ],
+
+            /// Label & Date
+            Positioned(
+              right: 0,
+              left: 0,
+              bottom: 12.h,
+              child: Column(
+                children: [
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    date,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

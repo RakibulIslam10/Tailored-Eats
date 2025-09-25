@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:tailored_eats/routes/routes.dart';
 
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
