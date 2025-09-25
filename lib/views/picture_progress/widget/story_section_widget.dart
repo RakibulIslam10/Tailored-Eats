@@ -47,15 +47,17 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
   @override
   Widget build(BuildContext context) {
     return MasonryGridView.count(
-      crossAxisCount: 2, // 2 কলাম
+      crossAxisCount: 2,
+      // 2 কলাম
       mainAxisSpacing: 12,
       crossAxisSpacing: 12,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: controller.storyImages.length,
       itemBuilder: (context, index) {
-        final bool isBig = index.isEven; // জোড় index বড়
+        final bool isBig = index.isEven;
         final image = controller.storyImages[index];
+
         return Container(
           height: isBig ? 210.h : 120.h,
           decoration: BoxDecoration(
@@ -74,16 +76,17 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                CachedNetworkImage(
-                  imageUrl: image["url"]!,
-                  fit: BoxFit.cover,
-                ),
+                CachedNetworkImage(imageUrl: image["url"]!, fit: BoxFit.cover),
+
                 /// Date overlay
                 Positioned(
                   bottom: 8.h,
                   left: 8.w,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 4.h,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.7),
                       borderRadius: BorderRadius.circular(6.r),
