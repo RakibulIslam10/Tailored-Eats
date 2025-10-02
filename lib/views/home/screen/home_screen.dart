@@ -4,6 +4,7 @@ import 'package:tailored_eats/routes/routes.dart';
 
 import '../../../core/utils/basic_import.dart';
 import '../controller/home_controller.dart';
+import '../widget/weight_widget.dart';
 
 part 'home_screen_mobile.dart';
 

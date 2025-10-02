@@ -27,7 +27,7 @@ class BottomBarWidget extends StatelessWidget {
       // splashColor: Colors.transparent,
       // highlightColor: Colors.transparent,
       // hoverColor: Colors.transparent,
-      borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),  // radius
+      borderRadius: BorderRadius.circular(Dimensions.radius * 0.8), // radius
 
       onTap: () {
         if (index != null) controller.selectedIndex.value = index!;

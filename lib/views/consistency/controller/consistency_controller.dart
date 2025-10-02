@@ -21,7 +21,6 @@ class ConsistencyController extends GetxController {
     WeightData(7, 71, '10-20', '+2kg'),
   ].obs;
 
-
   final List<String> items = [
     'https://picsum.photos/id/1011/600/800',
     'https://picsum.photos/id/1012/600/800',

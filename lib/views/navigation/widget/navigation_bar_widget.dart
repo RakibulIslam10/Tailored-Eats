@@ -13,15 +13,15 @@ class NavigationBarWidget extends StatelessWidget {
         // topRight: Radius.circular(25),
       ),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 40.0, sigmaY: 40.0), // 👈 Strong Blur
+        filter: ImageFilter.blur(sigmaX: 40.0, sigmaY: 40.0),
         child: Container(
           height: Dimensions.heightSize * 6.5,
           padding: EdgeInsets.zero,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.03), // 👈 Very transparent
+            color: Colors.white.withOpacity(0.03),
             border: Border(
               top: BorderSide(
-                color: Colors.white.withOpacity(0.15), // soft glass border
+                color: Colors.white.withOpacity(0.15),
                 width: 1.0,
               ),
             ),

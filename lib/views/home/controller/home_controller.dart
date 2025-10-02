@@ -81,7 +81,21 @@ class HomeController extends GetxController {
     },
   ].obs;
 
+  final TextEditingController weightController = TextEditingController(text: '100 kg');
 
+  void saveWeight() {
+    Get.snackbar(
+      'Success',
+      'Weight saved: ${weightController.text}',
+      snackPosition: SnackPosition.BOTTOM,
+    );
+  }
+
+  @override
+  void onClose() {
+    weightController.dispose();
+    super.onClose();
+  }
   @override
   void onInit() {
     super.onInit();

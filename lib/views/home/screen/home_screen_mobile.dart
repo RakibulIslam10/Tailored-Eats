@@ -93,6 +93,10 @@ class HomeScreenMobile extends GetView<HomeController> {
                       padding: Dimensions.heightSize.edgeVertical,
                     ),
                     RepaintBoundary(child: const TaskListWidget()),
+                    WeightWidget(
+                      homeController: controller,
+                      onSave: controller.saveWeight,
+                    ),
                     Space.height.v30,
                   ]),
                 ),
@@ -104,6 +108,7 @@ class HomeScreenMobile extends GetView<HomeController> {
     );
   }
 }
+
 
 /// ✅ Enhanced scroll behavior with better performance
 class _CustomScrollBehavior extends ScrollBehavior {
