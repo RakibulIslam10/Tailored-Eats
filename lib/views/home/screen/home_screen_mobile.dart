@@ -109,7 +109,6 @@ class HomeScreenMobile extends GetView<HomeController> {
   }
 }
 
-
 /// ✅ Enhanced scroll behavior with better performance
 class _CustomScrollBehavior extends ScrollBehavior {
   @override
@@ -118,7 +117,7 @@ class _CustomScrollBehavior extends ScrollBehavior {
     Widget child,
     ScrollableDetails details,
   ) {
-    return child; // Remove overscroll glow
+    return child;
   }
 
   @override

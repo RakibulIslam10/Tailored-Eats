@@ -81,7 +81,7 @@ class WeightWidget extends StatelessWidget {
                   onPressed: onSave,
                   style: OutlinedButton.styleFrom(
                     foregroundColor: CustomColors.primary,
-                    side:  BorderSide(color: CustomColors.primary, width: 1.5),
+                    side: BorderSide(color: CustomColors.primary, width: 1.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
