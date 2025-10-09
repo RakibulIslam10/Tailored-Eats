@@ -8,7 +8,7 @@ class ProfileCreationController extends GetxController {
   final List<Map<String, String>> activityList = [
     {
       "title": "Sedentary",
-      "subtitle": "Less than 3000 steps daily",
+      "subtitle": "Less then 3000 steps daily",
       "iconPath": "assets/icons/Group 1000004246.svg",
     },
     {
@@ -18,7 +18,7 @@ class ProfileCreationController extends GetxController {
     },
     {
       "title": "Active",
-      "subtitle": "More than 10000 steps daily",
+      "subtitle": "6000-10000 steps daily",
       "iconPath": "assets/icons/Group 1000004254.svg",
     },
     {
@@ -27,7 +27,6 @@ class ProfileCreationController extends GetxController {
       "iconPath": "assets/icons/Group 1000004254.svg",
     },
   ];
-
   final List<Map<String, String>> foodVibeList = [
     {
       "title": "None",
@@ -35,7 +34,7 @@ class ProfileCreationController extends GetxController {
       "iconPath": "assets/icons/Group 1000004258.svg",
     },
     {
-      "title": "Vegitarian",
+      "title": "Vegetarian",
       "subtitle": "",
       "iconPath": "assets/icons/Group 1000004255.svg",
     },
@@ -50,10 +49,9 @@ class ProfileCreationController extends GetxController {
       "iconPath": "assets/icons/Group 1000004257.svg",
     },
   ];
-
   final List<Map<String, String>> mainGoalList = [
     {
-      "title": "Loose Weight",
+      "title": "Lose Weight",
       "subtitle": "",
       "iconPath": "assets/icons/Gray.svg",
     },
@@ -70,40 +68,41 @@ class ProfileCreationController extends GetxController {
   ];
   final List<Map<String, String>> wantResultlList = [
     {
-      "title": "Fast As Possible",
-      "subtitle": "",
+      "title": "I want fast results!",
+      "subtitle":
+          "Achieve your goals as fast as possible using harsher methods!",
       "iconPath": "assets/icons/Group 1000004261.svg",
     },
+    // {
+    //   "title": "Slow But Sustainable",
+    //   "subtitle": "",
+    //   "iconPath": "assets/icons/image 469 (traced).svg",
+    // },
     {
-      "title": "Slow But Sustainable",
-      "subtitle": "",
-      "iconPath": "assets/icons/image 469 (traced).svg",
-    },
-    {
-      "title": "Life Style Change",
-      "subtitle": "",
+      "title": "Change my lifestyle",
+      "subtitle":
+          "Achieve your goals a little slower but with a much more sustainable approach.",
       "iconPath": "assets/icons/image 470 (traced).svg",
     },
   ];
-
   final List<Map<String, String>> trainList = [
     {
-      "title": "1–2 sessions/week",
+      "title": "1-2 sessions / week",
       "subtitle": "Easy start, light commitment",
       "iconPath": "assets/icons/Group 1000004266.svg",
     },
     {
-      "title": "2–3 sessions/week",
+      "title": "3 sessions / week",
       "subtitle": "Balanced & flexible",
       "iconPath": "assets/icons/Group 1000004267.svg",
     },
     {
-      "title": "4–5 sessions/week",
+      "title": "4 sessions / week",
       "subtitle": "Serious progress ahead",
       "iconPath": "assets/icons/Group 1000004268.svg",
     },
     {
-      "title": "5+ sessions/week",
+      "title": "5 sessions / week",
       "subtitle": "Full dedication mode",
       "iconPath": "assets/icons/Group 1000004269.svg",
     },
@@ -168,8 +167,6 @@ class ProfileCreationController extends GetxController {
   var heightInInches = 7.obs;
   var isHeightInCm = true.obs;
 
-
-
   // Set height in CM
   void setHeight(double cm) {
     heightInCm.value = cm;
@@ -187,5 +184,4 @@ class ProfileCreationController extends GetxController {
     heightInFeet.value = (totalInches / 12).floor();
     heightInInches.value = (totalInches % 12).round();
   }
-
 }
