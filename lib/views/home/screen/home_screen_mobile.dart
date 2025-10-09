@@ -136,13 +136,14 @@ class _OptimizedScrollPhysics extends ClampingScrollPhysics {
   }
 
   @override
-  double get minFlingVelocity => 100.0; // Slightly higher for smoother start
-  @override
-  double get maxFlingVelocity => 5000.0; // Reduced for better control
-  @override
-  double get dragStartDistanceMotionThreshold => 2.0; // More responsive
+  double get minFlingVelocity => 100.0;
 
-  // ✅ Better friction for smoother deceleration
   @override
-  double get frictionFactor => 0.015; // Default is 0.015, can adjust
+  double get maxFlingVelocity => 5000.0;
+
+  @override
+  double get dragStartDistanceMotionThreshold => 2.0;
+
+  @override
+  double get frictionFactor => 0.015;
 }

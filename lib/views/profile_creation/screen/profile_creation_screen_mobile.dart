@@ -49,6 +49,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
               ),
       ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         backgroundColor: CustomColors.blackColor,
         toolbarHeight: 100.h,

@@ -9,7 +9,9 @@ class GenderViewWidget extends GetView<ProfileCreationController> {
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: mainSpaceBet,
         children: [
+          Space.height.v10,
           TextWidget(
             'How Do You \nIdentify Yourself ?',
             textAlign: TextAlign.center,
@@ -19,43 +21,51 @@ class GenderViewWidget extends GetView<ProfileCreationController> {
 
           Space.height.v100,
 
-          InkWell(
-            onTap: () {
-              controller.setGender('Male');
-              controller.nextStep();
-            },
-            child: Container(
-              alignment: Alignment.center,
-              padding: Dimensions.verticalSize.edgeVertical * 0.6,
-              decoration: BoxDecoration(
-                color: Colors.white24,
-                borderRadius: BorderRadiusGeometry.circular(
-                  Dimensions.radius * 0.85,
+          Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  controller.setGender('Male');
+                  controller.nextStep();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: Dimensions.verticalSize.edgeVertical * 0.6,
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadiusGeometry.circular(
+                      Dimensions.radius * 0.85,
+                    ),
+                  ),
+
+                  child: TextWidget("Male", fontWeight: FontWeight.w500),
                 ),
               ),
+              Space.height.v20,
+              InkWell(
+                onTap: () {
+                  controller.setGender('Female');
+                  controller.nextStep();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: Dimensions.verticalSize.edgeVertical * 0.6,
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadiusGeometry.circular(
+                      Dimensions.radius * 0.85,
+                    ),
+                  ),
 
-              child: TextWidget("Male", fontWeight: FontWeight.w500),
-            ),
-          ),
-          Space.height.v20,
-          InkWell(
-            onTap: () {
-              controller.setGender('Female');
-              controller.nextStep();
-            },
-            child: Container(
-              alignment: Alignment.center,
-              padding: Dimensions.verticalSize.edgeVertical * 0.6,
-              decoration: BoxDecoration(
-                color: Colors.white24,
-                borderRadius: BorderRadiusGeometry.circular(
-                  Dimensions.radius * 0.85,
+                  child: TextWidget("Female", fontWeight: FontWeight.w500),
                 ),
               ),
-
-              child: TextWidget("Female", fontWeight: FontWeight.w500),
-            ),
+            ],
           ),
+          Space.height.v100,
+          Space.height.v100,
+
+          SizedBox(),
         ],
       ),
     );

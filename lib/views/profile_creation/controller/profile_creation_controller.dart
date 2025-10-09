@@ -120,6 +120,10 @@ class ProfileCreationController extends GetxController {
   final double minHeight = 100.0;
   final double maxHeight = 250.0;
 
+  var weightInKg = 0.0.obs;
+  var weightInLbs = 0.0.obs;
+  var weightUnit = 'KG'.obs;
+
   RxString selectedLevel = ''.obs;
 
   // Total number of steps
@@ -153,9 +157,35 @@ class ProfileCreationController extends GetxController {
     weight.value = newWeight;
   }
 
-  void setHeight(double newHeight) {
-    if (newHeight >= minHeight && newHeight <= maxHeight) {
-      height.value = newHeight;
-    }
+  // void setHeight(double newHeight) {
+  //   if (newHeight >= minHeight && newHeight <= maxHeight) {
+  //     height.value = newHeight;
+  //   }
+  // }
+
+  var heightInCm = 170.0.obs;
+  var heightInFeet = 5.obs;
+  var heightInInches = 7.obs;
+  var isHeightInCm = true.obs;
+
+
+
+  // Set height in CM
+  void setHeight(double cm) {
+    heightInCm.value = cm;
+    _convertCmToFeet(cm);
   }
+
+  // Toggle between CM and FT
+  void toggleHeightUnit() {
+    isHeightInCm.value = !isHeightInCm.value;
+  }
+
+  // Convert CM to Feet & Inches
+  void _convertCmToFeet(double cm) {
+    double totalInches = cm / 2.54;
+    heightInFeet.value = (totalInches / 12).floor();
+    heightInInches.value = (totalInches % 12).round();
+  }
+
 }

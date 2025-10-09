@@ -8,6 +8,7 @@ class AgeViewWidget extends GetView<ProfileCreationController> {
     return Center(
       child: Column(
         children: [
+          Space.height.v10,
           TextWidget(
             'How Old Are You?',
             fontSize: Dimensions.titleLarge,
@@ -19,8 +20,8 @@ class AgeViewWidget extends GetView<ProfileCreationController> {
             child: CupertinoPicker(
               looping: false,
               itemExtent: 50,
-              magnification: 0.9,
-              squeeze: 1.2,
+              magnification: 0.99,
+              squeeze: 1.1,
               useMagnifier: true,
               scrollController: FixedExtentScrollController(
                 initialItem: controller.selectedAge.value - 11,
@@ -39,8 +40,8 @@ class AgeViewWidget extends GetView<ProfileCreationController> {
                       style: TextStyle(
                         color: isSelected ? Colors.white : Colors.white54,
                         fontSize: isSelected
-                            ? Dimensions.displaySmall * 1.2
-                            : Dimensions.displaySmall * 0.8,
+                            ? Dimensions.displaySmall * 0.9
+                            : Dimensions.displaySmall * 0.7,
                         fontWeight: isSelected
                             ? FontWeight.bold
                             : FontWeight.normal,
