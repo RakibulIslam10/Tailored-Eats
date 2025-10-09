@@ -45,8 +45,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
                 title: controller.currentStep.value == 9
                     ? 'Go To Home'
                     : "Next",
-                onPressed: () =>
-                    Get.find<ProfileCreationController>().nextStep(),
+                onPressed: () => Get.find<ProfileCreationController>().nextStep(),
               ),
       ),
       appBar: AppBar(
