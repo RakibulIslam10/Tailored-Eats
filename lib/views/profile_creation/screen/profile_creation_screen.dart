@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/cupertino.dart';
 
 import '../../../core/utils/basic_import.dart';
@@ -11,6 +13,7 @@ part '../widget/weight_view_widget.dart';
 part '../widget/height_view_widget.dart';
 part '../widget/activity_level_widget.dart';
 part '../widget/gender_view_widget.dart';
+part '../widget/last_widget.dart';
 
 class ProfileCreationScreen extends GetView<ProfileCreationController> {
   const ProfileCreationScreen({super.key});

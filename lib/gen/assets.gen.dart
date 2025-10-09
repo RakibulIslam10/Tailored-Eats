@@ -17,6 +17,9 @@ class $AssetsDummyGen {
   /// File path: assets/dummy/blur.svg
   String get blur => 'assets/dummy/blur.svg';
 
+  /// File path: assets/dummy/boxx.svg
+  String get boxx => 'assets/dummy/boxx.svg';
+
   /// File path: assets/dummy/circle.svg
   String get circle => 'assets/dummy/circle.svg';
 
@@ -27,7 +30,7 @@ class $AssetsDummyGen {
   String get welcom => 'assets/dummy/welcom.svg';
 
   /// List of all assets
-  List<dynamic> get values => [blur, circle, logo, welcom];
+  List<dynamic> get values => [blur, boxx, circle, logo, welcom];
 }
 
 class $AssetsIconsGen {

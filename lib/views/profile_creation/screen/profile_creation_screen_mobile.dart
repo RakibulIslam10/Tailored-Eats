@@ -28,6 +28,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
       title: "How often can you train?",
       items: controller.trainList,
     ),
+    DailyCalorieIntake()
   ];
 
   @override
@@ -41,7 +42,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
                   horizontal: Dimensions.defaultHorizontalSize,
                   vertical: Dimensions.verticalSize * 2,
                 ),
-                title: controller.currentStep.value == 8
+                title: controller.currentStep.value == 9
                     ? 'Go To Home'
                     : "Next",
                 onPressed: () =>
