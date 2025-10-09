@@ -28,7 +28,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
       title: "How often can you train?",
       items: controller.trainList,
     ),
-    DailyCalorieIntake()
+    DailyCalorieIntake(),
   ];
 
   @override
@@ -38,16 +38,17 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
         () => controller.currentStep.value == 0
             ? SizedBox()
             : PrimaryButtonWidget(
+                buttonTextColor: CustomColors.blackColor,
+
                 padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.defaultHorizontalSize,
                   vertical: Dimensions.verticalSize * 2,
                 ),
-                title: controller.currentStep.value == 9
-                    ? 'Go To Home'
-                    : "Next",
-                onPressed: () => Get.find<ProfileCreationController>().nextStep(),
+                title: "Next",
+                onPressed: () => controller.nextStep(),
               ),
       ),
+
       appBar: AppBar(
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
