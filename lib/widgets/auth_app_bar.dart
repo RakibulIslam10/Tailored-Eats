@@ -4,6 +4,7 @@ import '../routes/routes.dart';
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isBack;
+  final bool fav;
 
   // Optional colors & styles
   final Color? backgroundColor;
@@ -26,6 +27,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleColor,
     this.iconColor,
     this.isSkip = false,
+    this.fav = false,
     this.actions,
   });
 
@@ -62,11 +64,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         fontWeight: FontWeight.w600,
       ),
       actions: [
-        // ✅ Show Skip if isSkip is true
         if (isSkip)
           InkWell(
             onTap: () {
-              // default skip action
               Get.offAllNamed(Routes.welcomeScreen);
             },
             child: Padding(
@@ -80,7 +80,22 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-
+        if (fav)
+          InkWell(
+            onTap: () {
+              // // Handle favorite tap action
+              // Get.snackbar('Favorite', 'Favorite tapped!');
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.defaultHorizontalSize,
+              ),
+              child: Icon(
+                Icons.favorite_border,
+                color: iconColor ?? CustomColors.whiteColor,
+              ),
+            ),
+          ),
         if (actions != null) ...actions!,
       ],
     );
