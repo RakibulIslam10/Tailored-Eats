@@ -13,6 +13,10 @@ class CaloriesRemainingWidget extends GetView<HomeController> {
           fontWeight: FontWeight.bold,
           padding: Dimensions.verticalSize.edgeVertical * 0.6,
         ),
+        // CalorieTrackerWidget(
+        //   calorieValue: '2500',
+        //   unit: 'Kcal',
+        // ),
         SizedBox(
           height: 100.h,
           child: ListView.builder(
@@ -100,7 +104,7 @@ class CaloriesCard extends StatelessWidget {
                       TextWidget(
                         padding: EdgeInsets.only(left: Dimensions.heightSize * 0.4),
                         title,
-                        fontSize: Dimensions.titleSmall * 0.9,
+                        fontSize: Dimensions.titleSmall * 0.85,
                         fontWeight: FontWeight.w500,
                         color: CustomColors.grayShade,
                       ),
@@ -163,3 +167,6 @@ class CaloriesCard extends StatelessWidget {
     );
   }
 }
+
+
+

@@ -144,6 +144,5 @@ class _OptimizedScrollPhysics extends ClampingScrollPhysics {
   @override
   double get dragStartDistanceMotionThreshold => 2.0;
 
-  @override
   double get frictionFactor => 0.015;
 }

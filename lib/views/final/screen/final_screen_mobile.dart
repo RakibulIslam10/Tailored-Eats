@@ -15,7 +15,6 @@ class FinalScreenMobile extends GetView<FinalController> {
         title: "Go to home",
         onPressed: () => Get.offAllNamed(Routes.navigationScreen),
       ),
-
       appBar: CommonAppBar(title: ""),
       body: SafeArea(
         child: ListView(

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:tailored_eats/widgets/profile_avater_widget.dart';
 
 import '../../../core/utils/basic_import.dart';
