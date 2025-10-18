@@ -132,19 +132,11 @@ class CalorieTrackerWidget extends StatelessWidget {
                           color: Colors.white.withOpacity(0.4),
                           width: 2,
                         ),
-                        // Subtle glow for icon
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.white.withOpacity(0.3),
-                            blurRadius: 8,
-                            spreadRadius: 1,
-                          ),
-                        ],
                       ),
-                      child: Icon(
-                        Icons.fire_extinguisher_sharp,
-                        color: Colors.white,
-                        size: Dimensions.iconSizeDefault,
+
+                      child: SvgPicture.asset(
+                        Assets.icons.calories,
+                        height: Dimensions.iconSizeDefault,
                       ),
                     ),
                     Column(
