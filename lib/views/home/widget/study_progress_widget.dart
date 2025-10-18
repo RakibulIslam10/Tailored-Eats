@@ -27,27 +27,25 @@ class StudyProgressWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.85),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+
+        mainAxisAlignment: mainCenter,
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.1,
-            height: MediaQuery.of(context).size.height * 0.05,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CircularProgressIndicator(
-                  value: percentage.clamp(0.0, 1.0),
-                  backgroundColor: backgroundColor,
-                  valueColor: AlwaysStoppedAnimation<Color>(progressColor),
-                  strokeWidth: 4,
-                ),
-                TextWidget(
-                  '${(percentage * 100).toInt()}%',
-                  fontSize: 10.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ],
-            ),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              CircularProgressIndicator(
+                value: percentage.clamp(0.0, 1.0),
+                backgroundColor: backgroundColor,
+                valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+                strokeWidth: 2,
+              ),
+              TextWidget(
+                '${(percentage * 100).toInt()}%',
+                fontSize: 10.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ],
           ),
           TextWidget(
             padding: Dimensions.heightSize.edgeTop * 0.6,

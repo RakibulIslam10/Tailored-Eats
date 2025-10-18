@@ -40,7 +40,7 @@ class HomeScreenMobile extends GetView<HomeController> {
                     ),
                     // Horizontal ListView
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.12,
+                      height: MediaQuery.of(context).size.height * 0.10,
                       child: RepaintBoundary(
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
