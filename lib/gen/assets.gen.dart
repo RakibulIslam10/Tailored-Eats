@@ -93,8 +93,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Group 1000004269.svg
   String get group1000004269 => 'assets/icons/Group 1000004269.svg';
 
+  /// File path: assets/icons/agun.png
+  AssetGenImage get agun => const AssetGenImage('assets/icons/agun.png');
+
+  /// File path: assets/icons/carb.png
+  AssetGenImage get carb => const AssetGenImage('assets/icons/carb.png');
+
+  /// File path: assets/icons/eatmeals.svg
+  String get eatmeals => 'assets/icons/eatmeals.svg';
+
   /// File path: assets/icons/empty.svg
   String get empty => 'assets/icons/empty.svg';
+
+  /// File path: assets/icons/exercise.svg
+  String get exercise => 'assets/icons/exercise.svg';
+
+  /// File path: assets/icons/fat.png
+  AssetGenImage get fat => const AssetGenImage('assets/icons/fat.png');
 
   /// File path: assets/icons/home-2.svg
   String get home2 => 'assets/icons/home-2.svg';
@@ -114,11 +129,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/notification.svg
   String get notification => 'assets/icons/notification.svg';
 
+  /// File path: assets/icons/pro.png
+  AssetGenImage get pro => const AssetGenImage('assets/icons/pro.png');
+
   /// File path: assets/icons/profile-add.svg
   String get profileAdd => 'assets/icons/profile-add.svg';
 
   /// File path: assets/icons/reject.svg
   String get reject => 'assets/icons/reject.svg';
+
+  /// File path: assets/icons/steps.svg
+  String get steps => 'assets/icons/steps.svg';
 
   /// File path: assets/icons/success.svg
   String get success => 'assets/icons/success.svg';
@@ -126,8 +147,11 @@ class $AssetsIconsGen {
   /// File path: assets/icons/wallet-minus.svg
   String get walletMinus => 'assets/icons/wallet-minus.svg';
 
+  /// File path: assets/icons/watter.svg
+  String get watter => 'assets/icons/watter.svg';
+
   /// List of all assets
-  List<String> get values => [
+  List<dynamic> get values => [
     calories,
     component85,
     component86,
@@ -147,17 +171,25 @@ class $AssetsIconsGen {
     group1000004267,
     group1000004268,
     group1000004269,
+    agun,
+    carb,
+    eatmeals,
     empty,
+    exercise,
+    fat,
     home2,
     image465Traced,
     image467Traced,
     image469Traced,
     image470Traced,
     notification,
+    pro,
     profileAdd,
     reject,
+    steps,
     success,
     walletMinus,
+    watter,
   ];
 }
 

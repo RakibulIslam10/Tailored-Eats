@@ -60,52 +60,61 @@ class CalorieProgressWidget extends GetView<HomeController> {
       final progress = controller.currentCalories.value / totalCalories;
       final displayValue = controller.currentCalories.value.toInt();
 
-      return SizedBox(
-        width: size.w,
-        height: size.h,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            CustomPaint(
-              size: Size(size, size),
-              painter: CalorieProgressPainter(
-                strokeWidth: 4.w,
-                progress: progress,
-                progressColor: Color(0xff7AD3FF),
-                backgroundColor: CustomColors.progressColor.withOpacity(0.15),
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      return Column(
+        mainAxisAlignment: mainCenter,
+        children: [
+          SizedBox(
+            width: size.w,
+            height: size.h,
+            child: Stack(
+              alignment: Alignment.center,
               children: [
-                Padding(
-                  padding: Dimensions.heightSize.edgeBottom * 0.5,
-                  child: Icon(
-                    Icons.local_fire_department,
-                    color: Colors.deepOrange,
-                    size: Dimensions.iconSizeLarge * 0.89,
+                CustomPaint(
+                  size: Size(size, size),
+                  painter: CalorieProgressPainter(
+                    strokeWidth: 5.w,
+                    progress: progress,
+                    progressColor: Color(0xff7AD3FF),
+                    backgroundColor: CustomColors.progressColor.withOpacity(
+                      0.15,
+                    ),
                   ),
                 ),
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.end,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextWidget(
-                      '$displayValue',
-                      fontSize: Dimensions.titleSmall * 0.8,
-                      fontWeight: FontWeight.bold,
-                      padding: Dimensions.widthSize.edgeRight * 0.2,
+                    Padding(
+                      padding: Dimensions.heightSize.edgeBottom * 0.25,
+                      child: Image.asset(Assets.icons.agun.path)
                     ),
-                    TextWidget(
-                      ' kcal',
-                      color: CustomColors.grayShade,
-                      fontSize: Dimensions.titleSmall * 0.65,
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.end,
+                      children: [
+                        TextWidget(
+                          '$displayValue',
+                          fontSize: Dimensions.titleSmall * 0.8,
+                          fontWeight: FontWeight.bold,
+                          padding: Dimensions.widthSize.edgeRight * 0.2,
+                        ),
+                        TextWidget(
+                          ' kcal',
+                          color: CustomColors.grayShade,
+                          fontSize: Dimensions.titleSmall * 0.65,
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          Space.height.v10,
+          TextWidget(
+            "250/2000",
+            fontWeight: FontWeight.bold,
+            fontSize: Dimensions.titleSmall,
+          ),
+        ],
       );
     });
   }

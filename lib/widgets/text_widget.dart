@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import '../core/utils/basic_import.dart';
 
 class TextWidget extends StatelessWidget {
@@ -47,11 +49,18 @@ class TextWidget extends StatelessWidget {
             maxLines: maxLines,
             style:
                 style ??
-                TextStyle(
+                GoogleFonts.openSans(
                   color: color ?? CustomColors.whiteColor,
-                  fontSize: fontSize ?? Dimensions.titleMedium, // already .sp
+                  fontSize: fontSize ?? Dimensions.titleMedium,
                   fontWeight: fontWeight,
                 ),
+
+            // style: style ??
+            //     TextStyle(
+            //       color: color ?? CustomColors.whiteColor,
+            //       fontSize: fontSize ?? Dimensions.titleMedium, // already .sp
+            //       fontWeight: fontWeight,
+            //     ),
           ),
         ),
       ),

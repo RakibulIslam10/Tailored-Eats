@@ -5,181 +5,129 @@ class MacrosWidget extends GetView<DetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Padding(
-      padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-      child: Column(
-        crossAxisAlignment: crossStart,
-        children: [
-          TextWidget(
-            'Macros per serving',
-            fontWeight: FontWeight.bold,
-            padding: Dimensions.verticalSize.edgeVertical * 0.6,
-          ),
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: screenHeight * 0.12,
-              minHeight: screenHeight * 0.10,
+    return SizedBox(
+      height: 100.h,
+      child: Padding(
+        padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+        child: Row(
+          crossAxisAlignment: crossCenter,
+          mainAxisAlignment: mainSpaceBet,
+          children: [
+            CalorieTrackerWidget(
+              path: Assets.icons.agun.path,
+              title: 'Fat',
+              value: '150',
             ),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                CalorieTrackerWidget(calorieValue: '2500', unit: 'Kcal'),
-                SizedBox(width: 12.w),
-                CalorieTrackerWidget(calorieValue: '45', unit: 'Kcal'),
-                SizedBox(width: 12.w),
-                CalorieTrackerWidget(calorieValue: '30', unit: 'Kcal'),
-                SizedBox(width: 12.w),
-                CalorieTrackerWidget(calorieValue: '15', unit: 'Kcal'),
-              ],
+            CalorieTrackerWidget(
+              path: Assets.icons.pro.path,
+              title: 'Protein',
+              value: '150',
             ),
-          ),
-        ],
+            CalorieTrackerWidget(
+              path: Assets.icons.carb.path,
+              title: 'Carbs',
+              value: '150',
+            ),
+            CalorieTrackerWidget(
+              path: Assets.icons.fat.path,
+              title: 'Fat',
+              value: '150',
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class CalorieTrackerWidget extends StatelessWidget {
-  final String calorieValue;
-  final String unit;
+class CalorieTrackerWidget extends GetView<DetailsController> {
+  final String path;
+  final String title;
+  final String value;
 
   const CalorieTrackerWidget({
     super.key,
-    this.calorieValue = '2500',
-    this.unit = 'Kcal',
+    required this.path,
+    required this.title,
+    required this.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final cardHeight = screenHeight * 0.11;
-    final cardWidth = cardHeight * 0.85;
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(cardHeight * 0.084),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-        child: Container(
-          width: cardWidth,
-          height: cardHeight,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                const Color(0xFFF826A4).withOpacity(0.4),
-                const Color(0xFF848484).withOpacity(0.2),
-                const Color(0xFF26F865).withOpacity(0.1),
-              ],
+    return RepaintBoundary(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
+          child: Container(
+            width: 88.w,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFFF826A4).withOpacity(0.2),
+                  Color(0xFF26C4F8).withOpacity(0.2),
+                  Color(0xFF26F865).withOpacity(0.2),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.2),
+                width: 1.5,
+              ),
+              borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
             ),
-            borderRadius: BorderRadius.circular(cardHeight * 0.084),
-            border: Border.all(
-              color: Colors.white.withOpacity(0.2),
-              width: 1.5,
-            ),
-            // Glass shine effect
-            boxShadow: [
-              BoxShadow(
+            child: Container(
+              decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(-5, -5),
+                borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
               ),
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(5, 5),
-              ),
-            ],
-          ),
-          child: Stack(
-            children: [
-              // Glass reflection effect
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                height: cardHeight * 0.5,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.white.withOpacity(0.15),
-                        Colors.white.withOpacity(0.0),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(cardHeight * 0.084),
-                      topRight: Radius.circular(cardHeight * 0.084),
-                    ),
-                  ),
-                ),
-              ),
-              // Content
-              Padding(
-                padding: EdgeInsets.all(cardHeight * 0.05),
+              child: Padding(
+                padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(Dimensions.paddingSize * 0.1),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.4),
-                          width: 2,
-                        ),
-                      ),
-
-                      child: SvgPicture.asset(
-                        Assets.icons.calories,
-                        height: Dimensions.iconSizeDefault,
-                      ),
-                    ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Space.height.v5,
-                        TextWidget(
-                          'Calories',
-                          fontSize: Dimensions.titleSmall,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white.withOpacity(0.95),
+                        Container(
+                          margin: EdgeInsets.only(right: 4, bottom: 6),
+                          padding: REdgeInsets.all(2.5),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.3),
+                              width: 1,
+                            ),
+                          ),
+                          child: Image.asset(path),
                         ),
-                        Space.height.v5,
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Flexible(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.centerLeft,
-                                child: TextWidget(
-                                  calorieValue,
-                                  fontSize: Dimensions.titleMedium * 1.2,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Space.width.v5,
-                            TextWidget(
-                              unit,
-                              fontSize: Dimensions.titleSmall * 0.8,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white.withOpacity(0.6),
-                            ),
-                          ],
+                        TextWidget(
+                          title,
+                          fontSize: Dimensions.titleSmall * 0.8,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ],
+                    ),
+                    Space.height.v5,
+                    Row(
+                      children: [
+                        TextWidget(
+                          value,
+                          fontSize: Dimensions.titleSmall * 0.9,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        Space.width.v5,
+                        TextWidget(
+                          padding: Dimensions.heightSize.edgeTop * 0.5,
+                          'gm',
+                          fontSize: Dimensions.titleSmall * 0.8,
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),

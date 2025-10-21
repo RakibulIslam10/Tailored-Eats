@@ -5,9 +5,21 @@ class HomeController extends GetxController {
   RxDouble progress = 0.45.obs;
   RxDouble percentage = 0.65.obs;
 
+  //Dally macros
+  var calories = 250.obs;
+  var maxCalories = 2000.obs;
+  var protein = 150.obs;
+  var maxProtein = 100.obs;
+  var carbs = 150.obs;
+  var maxCarbs = 100.obs;
+  var fat = 150.obs;
+  var maxFat = 100.obs;
+
+  double getPercentage(int current, int max) {
+    return (current / max).clamp(0.0, 1.0);
+  }
+
   var currentFood = <String, String>{}.obs;
-
-
   RxList nextBiteFoodsList = <Map<String, String>>[
     {
       "title": "Grilled Chicken",
@@ -101,6 +113,7 @@ class HomeController extends GetxController {
     super.onInit();
     shuffleList(); // initialize with a random food
   }
+
 
   void shuffleList() {
     if (nextBiteFoodsList.isEmpty) return;

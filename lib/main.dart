@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
         title: Strings.appName,
         theme: Themes.light,
         darkTheme: Themes.dark,
-
         getPages: Routes.list,
         defaultTransition: Transition.cupertino,
         transitionDuration: const Duration(milliseconds: 300),

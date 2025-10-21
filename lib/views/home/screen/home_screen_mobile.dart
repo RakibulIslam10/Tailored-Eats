@@ -28,6 +28,7 @@ class HomeScreenMobile extends GetView<HomeController> {
                       padding: Dimensions.heightSize.edgeBottom,
                     ),
                     RepaintBoundary(child: const NutrientCardWidget()),
+                    // RepaintBoundary(child:  NutritionWidget()),
                     RepaintBoundary(child: const CaloriesRemainingWidget()),
                     Space.height.v20,
                     RepaintBoundary(

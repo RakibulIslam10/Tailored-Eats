@@ -14,19 +14,15 @@ class CircularProgressWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF1F2937), Colors.black],
+          colors: [const Color(0xFF26C4F8), Colors.black],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: Colors.white.withOpacity(0.16)),
+        backgroundBlendMode: BlendMode.overlay,
       ),
+
       child: Row(
         mainAxisAlignment: mainSpaceBet,
         mainAxisSize: MainAxisSize.min,
@@ -86,13 +82,11 @@ class _CircularPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Background arc
     final backgroundPaint = Paint()
       ..color = CustomColors.progressColor.withOpacity(0.1)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 6.0;
 
-    // Progress arc
     final progressPaint = Paint()
       ..color = const Color(0xff7AD3FF)
       ..style = PaintingStyle.stroke
@@ -103,10 +97,8 @@ class _CircularPainter extends CustomPainter {
     final radius = size.width / 2;
     const startAngle = -3.14 / 2;
 
-    // Draw background arc
     canvas.drawCircle(center, radius, backgroundPaint);
 
-    // Draw progress arc
     final sweepAngle = 2 * 3.14 * percentage;
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),

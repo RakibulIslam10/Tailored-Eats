@@ -8,37 +8,35 @@ class NutrientCardWidget extends GetView<HomeController> {
     return Container(
       padding: EdgeInsetsGeometry.symmetric(
         horizontal: Dimensions.defaultHorizontalSize * 0.5,
-        vertical: Dimensions.verticalSize * 0.4,
+        vertical: Dimensions.verticalSize * 0.5,
       ),
       decoration: BoxDecoration(
         color: Colors.black,
-        border: Border.all(color: CustomColors.grayShade),
-
+        border: Border.all(color: CustomColors.grayShade.withOpacity(0.4)),
         borderRadius: BorderRadiusGeometry.circular(Dimensions.radius * 0.8),
       ),
-
       child: Row(
+        crossAxisAlignment: crossCenter,
         mainAxisAlignment: mainSpaceBet,
         children: [
-          const CalorieProgressWidget(totalCalories: 3000.0),
-
-          NutrientCard(
-            icon: Icons.rice_bowl,
-            title: 'Carbs',
-            value: '250',
-            unit: 'gm',
+          Padding(
+            padding: const EdgeInsets.only(top: 5.0),
+            child: const CalorieProgressWidget(totalCalories: 3000.0),
           ),
           NutrientCard(
-            icon: Icons.rice_bowl,
-            title: 'Carbs',
-            value: '250',
-            unit: 'gm',
+            path: Assets.icons.pro.path,
+            title: 'Protein',
+            value: '150/100G',
           ),
           NutrientCard(
-            icon: Icons.rice_bowl,
+            path: Assets.icons.carb.path,
             title: 'Carbs',
-            value: '250',
-            unit: 'gm',
+            value: '150/100G',
+          ),
+          NutrientCard(
+            path: Assets.icons.fat.path,
+            title: 'Fat',
+            value: '150/100G',
           ),
         ],
       ),
@@ -46,56 +44,40 @@ class NutrientCardWidget extends GetView<HomeController> {
   }
 }
 
-class NutrientCard extends StatelessWidget {
-  final IconData icon;
+class NutrientCard extends GetView<HomeController> {
+  final String path;
   final String title;
   final String value;
-  final String unit;
 
   const NutrientCard({
     super.key,
-    required this.icon,
+    required this.path,
     required this.title,
     required this.value,
-    required this.unit,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 86.w,
-      height: 95.h,
+      width: 88.w,
+      height: 90.h,
       decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withAlpha(852)),
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF5F0F40),
-            Color(0xFF1A4D62),
-            Color(0xFF1A5A2B),
-          ],
-        ),
+        color: Colors.black,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
-        child: Stack(
-          children: [
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-              child: Container(
-                color: Colors.white.withOpacity(0.08), // light frosted overlay
-              ),
-            ),
-
-            /// actual content
-            Padding(
-              padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Padding(
+          padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
                   Container(
-                    padding: REdgeInsets.all(1),
+                    margin: EdgeInsets.only(right: 4),
+                    padding: REdgeInsets.all(2.5),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -103,48 +85,47 @@ class NutrientCard extends StatelessWidget {
                         width: 1,
                       ),
                     ),
-                    child: Icon(
-                      icon,
-                      color: Colors.redAccent,
-                      size: Dimensions.iconSizeDefault, // now responsive
-                    ),
-
+                    child: Image.asset(path),
                   ),
-                  Space.height.v5,
-
                   TextWidget(
-                    padding: EdgeInsetsGeometry.only(
-                      bottom: Dimensions.heightSize * 0.2,
-                    ),
                     title,
-                    fontSize: Dimensions.titleSmall,
+                    fontSize: Dimensions.titleSmall * 0.8,
                     fontWeight: FontWeight.w500,
-                  ),
-
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      TextWidget(
-                        value,
-                        fontSize: Dimensions.titleSmall * 1.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      const SizedBox(width: 4),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 2.0),
-                        child: TextWidget(
-                          unit,
-                          fontSize: Dimensions.titleSmall * 0.7,
-                          fontWeight: FontWeight.w500,
-                          color: CustomColors.grayShade,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
-            ),
-          ],
+              Space.height.v5,
+              TextWidget(
+                value,
+                fontSize: Dimensions.titleSmall * 0.9,
+                fontWeight: FontWeight.bold,
+              ),
+              Obx(
+                () => Container(
+                  margin: Dimensions.verticalSize.edgeTop * 0.5,
+                  width: 80.w,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF383838).withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      width: 65.w * controller.progress.value,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF00BFFF), Color(0xFF1E90FF)],
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
