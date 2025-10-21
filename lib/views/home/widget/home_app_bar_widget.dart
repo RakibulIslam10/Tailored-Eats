@@ -18,8 +18,7 @@ class HomeAppBarWidget extends GetView<HomeController> {
             height: 22.h,
             width: 22.w,
           ),
-        )
-,
+        ),
         InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -37,8 +36,12 @@ class HomeAppBarWidget extends GetView<HomeController> {
                 fit: BoxFit.cover,
                 height: 32.h,
                 width: 32.w,
-                placeholder: (context, url) =>
-                    Container(color: Colors.grey.shade300),
+                errorWidget: (context, url, error) =>
+                    Container(color: Colors.grey.shade400),
+                placeholder: (context, url) => Container(
+                  color: Colors.grey.shade300,
+                  child: Icon(Icons.error, color: Colors.red),
+                ),
               ),
             ),
           ),
