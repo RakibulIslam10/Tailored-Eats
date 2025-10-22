@@ -35,6 +35,9 @@ class $AssetsDummyGen {
   /// File path: assets/dummy/boxx.svg
   String get boxx => 'assets/dummy/boxx.svg';
 
+  /// File path: assets/dummy/cc.png
+  AssetGenImage get cc => const AssetGenImage('assets/dummy/cc.png');
+
   /// File path: assets/dummy/circle.svg
   String get circle => 'assets/dummy/circle.svg';
 
@@ -63,6 +66,7 @@ class $AssetsDummyGen {
     walking,
     blur,
     boxx,
+    cc,
     circle,
     logo,
     milkBottle,

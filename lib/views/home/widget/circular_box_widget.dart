@@ -39,17 +39,24 @@ class CircularProgressWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              // const SizedBox(width: 32),
+              // Progress Circle with new gradient design
               SizedBox(
-                width: 80.w,
-                height: 80.w,
+                width: 85.w,
+                height: 85.w,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
+                    // New gradient circular progress
                     CustomPaint(
-                      painter: _CircularPainter(percentage: percentage),
-                      child: Container(),
+                      size: Size(85.w, 85.w),
+                      painter: CircularProgressClipper(
+                        progress: percentage,
+                        strokeWidth: 8,
+                      ),
                     ),
+                    // Center image
+                    Image.asset(Assets.dummy.cc.path, height: 56.h),
+                    // Text overlay
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -69,63 +76,79 @@ class CircularProgressWidget extends StatelessWidget {
         ),
       ],
     );
-
-    // SvgPicture.asset(Assets.dummy.frame1);
-
-    // Container(
-    // padding: EdgeInsets.symmetric(
-    //   horizontal: Dimensions.defaultHorizontalSize,
-    //   vertical: Dimensions.verticalSize,
-    // ),
-    // decoration: BoxDecoration(
-    //   gradient: LinearGradient(
-    //     colors: [const Color(0xFF26C4F8), Colors.black],
-    //     begin: Alignment.topLeft,
-    //     end: Alignment.bottomRight,
-    //   ),
-    //   borderRadius: BorderRadius.circular(12.r),
-    //   border: Border.all(color: Colors.white.withOpacity(0.16)),
-    //   backgroundBlendMode: BlendMode.overlay,
-    // ),
   }
 }
 
-class _CircularPainter extends CustomPainter {
-  final double percentage;
+// New Gradient Circular Progress Painter - Gap at bottom
+class CircularProgressClipper extends CustomPainter {
+  final double progress; // 0.0 to 1.0
+  final Color startColor;
+  final Color endColor;
+  final double strokeWidth;
 
-  _CircularPainter({required this.percentage});
+  CircularProgressClipper({
+    required this.progress,
+    this.startColor = const Color(0xFF7AD3FF),
+    this.endColor = const Color(0xFF26C4F8),
+    this.strokeWidth = 10.0,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final backgroundPaint = Paint()
-      ..color = CustomColors.progressColor.withOpacity(0.1)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 6.0;
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = math.min(size.width, size.height) / 2 - strokeWidth / 2;
 
-    final progressPaint = Paint()
-      ..color = const Color(0xff7AD3FF)
+    // Total arc is 270 degrees (3/4 of circle), gap is 90 degrees at bottom
+    final totalArcAngle = math.pi * 1.5; // 270 degrees
+
+    // Background circle with opacity 0.1 (shows remaining progress)
+    final backgroundPaint = Paint()
+      ..color = Color(0xFF7AD3FF).withOpacity(0.15)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 6.0
+      ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
 
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2;
-    const startAngle = -3.14 / 2;
+    // Start from bottom-left, draw 270 degrees leaving gap at bottom center
+    final bgStartAngle = math.pi * 0.75; // Start from bottom-left (135 degrees)
 
-    canvas.drawCircle(center, radius, backgroundPaint);
-
-    final sweepAngle = 2 * 3.14 * percentage;
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
-      startAngle,
-      sweepAngle,
+      bgStartAngle,
+      totalArcAngle,
+      false,
+      backgroundPaint,
+    );
+
+    // Create gradient for progress (cyan to blue)
+    final rect = Rect.fromCircle(center: center, radius: radius);
+    final gradient = LinearGradient(
+      colors: [startColor, endColor],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+
+    final progressPaint = Paint()
+      ..shader = gradient.createShader(rect)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    // Draw progress arc - rotates from start position based on percentage
+    // Progress fills the 270-degree arc (0% to 100% fills the available arc)
+    final progressStartAngle = math.pi * 0.75; // Start from bottom-left
+    final progressSweepAngle = totalArcAngle * progress; // Progress amount
+
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      progressStartAngle,
+      progressSweepAngle,
       false,
       progressPaint,
     );
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+  bool shouldRepaint(CircularProgressClipper oldDelegate) {
+    return oldDelegate.progress != progress;
   }
 }

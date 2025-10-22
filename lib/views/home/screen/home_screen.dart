@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui';
 import 'package:shimmer/shimmer.dart';
 import 'package:tailored_eats/routes/routes.dart';
