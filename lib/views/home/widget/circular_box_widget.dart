@@ -7,71 +7,86 @@ class CircularProgressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimensions.defaultHorizontalSize,
-        vertical: Dimensions.verticalSize,
-      ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [const Color(0xFF26C4F8), Colors.black],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.asset(
+          Assets.dummy.ssss.path,
+          fit: BoxFit.cover,
+          width: double.maxFinite,
         ),
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.white.withOpacity(0.16)),
-        backgroundBlendMode: BlendMode.overlay,
-      ),
-
-      child: Row(
-        mainAxisAlignment: mainSpaceBet,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextWidget(
-                padding: Dimensions.heightSize.edgeBottom * 0.25,
-                'Almost there',
-                fontSize: Dimensions.titleMedium * 1.25,
-                fontWeight: FontWeight.bold,
-              ),
-              TextWidget(
-                'Just a little more to go ',
-                color: CustomColors.grayShade,
-                fontSize: Dimensions.titleSmall * 0.95,
-              ),
-            ],
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.defaultHorizontalSize,
           ),
-          const SizedBox(width: 32),
-          SizedBox(
-            width: 80,
-            height: 80,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CustomPaint(
-                  painter: _CircularPainter(percentage: percentage),
-                  child: Container(),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            mainAxisAlignment: mainSpaceBet,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextWidget(
+                    padding: Dimensions.heightSize.edgeBottom * 0.25,
+                    'Almost there',
+                    fontSize: Dimensions.titleMedium * 1.25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  TextWidget(
+                    'Just a little more to go ',
+                    color: CustomColors.grayShade.withAlpha(893),
+                    fontSize: Dimensions.titleSmall * 0.95,
+                  ),
+                ],
+              ),
+              // const SizedBox(width: 32),
+              SizedBox(
+                width: 80.w,
+                height: 80.w,
+                child: Stack(
+                  alignment: Alignment.center,
                   children: [
-                    TextWidget('Today', fontSize: 10.sp),
-                    TextWidget(
-                      '${(percentage * 100).toInt()}%',
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
+                    CustomPaint(
+                      painter: _CircularPainter(percentage: percentage),
+                      child: Container(),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextWidget('Today', fontSize: 10.sp),
+                        TextWidget(
+                          '${(percentage * 100).toInt()}%',
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
+
+    // SvgPicture.asset(Assets.dummy.frame1);
+
+    // Container(
+    // padding: EdgeInsets.symmetric(
+    //   horizontal: Dimensions.defaultHorizontalSize,
+    //   vertical: Dimensions.verticalSize,
+    // ),
+    // decoration: BoxDecoration(
+    //   gradient: LinearGradient(
+    //     colors: [const Color(0xFF26C4F8), Colors.black],
+    //     begin: Alignment.topLeft,
+    //     end: Alignment.bottomRight,
+    //   ),
+    //   borderRadius: BorderRadius.circular(12.r),
+    //   border: Border.all(color: Colors.white.withOpacity(0.16)),
+    //   backgroundBlendMode: BlendMode.overlay,
+    // ),
   }
 }
 
