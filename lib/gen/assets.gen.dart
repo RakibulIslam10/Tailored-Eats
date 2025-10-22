@@ -14,6 +14,12 @@ import 'package:flutter/widgets.dart';
 class $AssetsDummyGen {
   const $AssetsDummyGen();
 
+  /// File path: assets/dummy/Meal.svg
+  String get meal => 'assets/dummy/Meal.svg';
+
+  /// File path: assets/dummy/Walking.svg
+  String get walking => 'assets/dummy/Walking.svg';
+
   /// File path: assets/dummy/blur.svg
   String get blur => 'assets/dummy/blur.svg';
 
@@ -26,11 +32,28 @@ class $AssetsDummyGen {
   /// File path: assets/dummy/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/dummy/logo.png');
 
+  /// File path: assets/dummy/milk-bottle.svg
+  String get milkBottle => 'assets/dummy/milk-bottle.svg';
+
   /// File path: assets/dummy/welcom.svg
   String get welcom => 'assets/dummy/welcom.svg';
 
+  /// File path: assets/dummy/workout_9992306 (traced).svg
+  String get workout9992306Traced =>
+      'assets/dummy/workout_9992306 (traced).svg';
+
   /// List of all assets
-  List<dynamic> get values => [blur, boxx, circle, logo, welcom];
+  List<dynamic> get values => [
+    meal,
+    walking,
+    blur,
+    boxx,
+    circle,
+    logo,
+    milkBottle,
+    welcom,
+    workout9992306Traced,
+  ];
 }
 
 class $AssetsIconsGen {

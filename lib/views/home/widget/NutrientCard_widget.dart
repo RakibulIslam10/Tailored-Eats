@@ -26,17 +26,17 @@ class NutrientCardWidget extends GetView<HomeController> {
           NutrientCard(
             path: Assets.icons.pro.path,
             title: 'Protein',
-            value: '150/100G',
+            value: '150/1000G',
           ),
           NutrientCard(
             path: Assets.icons.carb.path,
             title: 'Carbs',
-            value: '150/100G',
+            value: '150/1000G',
           ),
           NutrientCard(
             path: Assets.icons.fat.path,
             title: 'Fat',
-            value: '150/100G',
+            value: '150/1000G',
           ),
         ],
       ),
@@ -95,10 +95,13 @@ class NutrientCard extends GetView<HomeController> {
                 ],
               ),
               Space.height.v5,
-              TextWidget(
-                value,
-                fontSize: Dimensions.titleSmall * 0.9,
-                fontWeight: FontWeight.bold,
+              FittedBox(
+                child: TextWidget(
+                  value,
+                  fontSize: Dimensions.titleSmall * 0.9,
+                  fontWeight: FontWeight.bold,
+                  maxLines: 1,
+                ),
               ),
               Obx(
                 () => Container(

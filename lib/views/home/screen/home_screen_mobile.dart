@@ -93,7 +93,9 @@ class HomeScreenMobile extends GetView<HomeController> {
                       fontWeight: FontWeight.bold,
                       padding: Dimensions.heightSize.edgeVertical,
                     ),
-                    RepaintBoundary(child: const TaskListWidget()),
+                    RepaintBoundary(
+                      child: TaskListWidget()
+                    ),
                     WeightWidget(
                       homeController: controller,
                       onSave: controller.saveWeight,
