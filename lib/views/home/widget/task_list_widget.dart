@@ -415,25 +415,4 @@ class TaskCardPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-// Example usage:
-class CustomShapeWidget extends StatelessWidget {
-  const CustomShapeWidget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: CustomShapeClipper(),
-      child: Container(
-        width: 178,
-        height: 111,
-        color: Colors.red,
-        child: Center(
-          child: Text(
-            'Custom Shape',
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ),
-      ),
-    );
-  }
-}
