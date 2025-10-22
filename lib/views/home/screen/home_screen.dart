@@ -2,10 +2,8 @@ import 'dart:math' as math;
 import 'dart:ui';
 import 'package:shimmer/shimmer.dart';
 import 'package:tailored_eats/routes/routes.dart';
-
 import '../../../core/utils/basic_import.dart';
 import '../controller/home_controller.dart';
-import '../widget/macros_card_widget.dart';
 import '../widget/weight_widget.dart';
 
 part 'home_screen_mobile.dart';
@@ -18,7 +16,7 @@ part '../widget/top_text_header_widget.dart';
 
 part '../widget/study_progress_widget.dart';
 
-part '../widget/NutrientCard_widget.dart';
+part '../widget/nutrition_card_widget.dart';
 
 part '../widget/friends_progress_widget.dart';
 

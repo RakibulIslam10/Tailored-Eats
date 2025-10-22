@@ -79,7 +79,6 @@ class CircularProgressWidget extends StatelessWidget {
   }
 }
 
-// New Gradient Circular Progress Painter - Gap at bottom
 class CircularProgressClipper extends CustomPainter {
   final double progress; // 0.0 to 1.0
   final Color startColor;

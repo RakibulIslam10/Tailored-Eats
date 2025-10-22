@@ -13,10 +13,6 @@ class CaloriesRemainingWidget extends GetView<HomeController> {
           fontWeight: FontWeight.bold,
           padding: Dimensions.verticalSize.edgeVertical * 0.6,
         ),
-        // CalorieTrackerWidget(
-        //   calorieValue: '2500',
-        //   unit: 'Kcal',
-        // ),
         SizedBox(
           height: 100.h,
           child: Row(
