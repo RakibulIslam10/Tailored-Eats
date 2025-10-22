@@ -12,6 +12,7 @@ class HomeScreenMobile extends GetView<HomeController> {
       ),
       body: SafeArea(
         child: ListView(
+          physics: ClampingScrollPhysics(),
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
             TopTextHeaderWidget(),

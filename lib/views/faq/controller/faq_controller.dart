@@ -11,11 +11,6 @@ class FaqController extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    // fetchFaqs();
-  }
 
   RxBool isLoading = false.obs;
 

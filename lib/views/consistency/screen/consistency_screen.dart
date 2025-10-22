@@ -5,7 +5,6 @@ import '../../../widgets/auth_app_bar.dart';
 import '../../home/screen/home_screen.dart';
 import '../../preview_profile/widget/image_progress.dart';
 import '../controller/consistency_controller.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 part 'consistency_screen_mobile.dart';
 part '../widget/weight_chart_widget.dart';
