@@ -17,6 +17,9 @@ class $AssetsDummyGen {
   /// File path: assets/dummy/Ellipse 16 (2).svg
   String get ellipse162 => 'assets/dummy/Ellipse 16 (2).svg';
 
+  /// File path: assets/dummy/Ellipse 8.svg
+  String get ellipse8 => 'assets/dummy/Ellipse 8.svg';
+
   /// File path: assets/dummy/Frame (1).svg
   String get frame1 => 'assets/dummy/Frame (1).svg';
 
@@ -25,6 +28,11 @@ class $AssetsDummyGen {
 
   /// File path: assets/dummy/Meal.svg
   String get meal => 'assets/dummy/Meal.svg';
+
+  /// File path: assets/dummy/Screenshot from 2025-09-25 10-36-56.png
+  AssetGenImage get screenshotFrom20250925103656 => const AssetGenImage(
+    'assets/dummy/Screenshot from 2025-09-25 10-36-56.png',
+  );
 
   /// File path: assets/dummy/Walking.svg
   String get walking => 'assets/dummy/Walking.svg';
@@ -60,9 +68,11 @@ class $AssetsDummyGen {
   /// List of all assets
   List<dynamic> get values => [
     ellipse162,
+    ellipse8,
     frame1,
     frame,
     meal,
+    screenshotFrom20250925103656,
     walking,
     blur,
     boxx,

@@ -30,7 +30,7 @@ class FoodCardWidget extends StatelessWidget {
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(Dimensions.radius * 0.85),
           ),
           child: Row(

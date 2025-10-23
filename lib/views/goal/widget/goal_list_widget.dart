@@ -45,7 +45,7 @@ class GoalListWidget extends StatelessWidget {
                 itemCount: goals.length,
                 itemBuilder: (context, index) {
                   final goal = goals[index];
-                  return ListTile(
+                  return  ListTile(
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: Dimensions.defaultHorizontalSize,
                     ),

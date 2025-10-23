@@ -57,75 +57,72 @@ class CalorieTrackerWidget extends GetView<DetailsController> {
     return RepaintBoundary(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
+        child: Container(
+          width: 88.w,
+          decoration: BoxDecoration(
+            // gradient: LinearGradient(
+            //   colors: [
+            //     Color(0xFFF826A4).withOpacity(0.2),
+            //     Color(0xFF26C4F8).withOpacity(0.2),
+            //     Color(0xFF26F865).withOpacity(0.2),
+            //   ],
+            //   begin: Alignment.topLeft,
+            //   end: Alignment.bottomRight,
+            // ),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.2),
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
+          ),
           child: Container(
-            width: 88.w,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0xFFF826A4).withOpacity(0.2),
-                  Color(0xFF26C4F8).withOpacity(0.2),
-                  Color(0xFF26F865).withOpacity(0.2),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.2),
-                width: 1.5,
-              ),
+              color: Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(Dimensions.radius * 0.95),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 4, bottom: 6),
-                          padding: REdgeInsets.all(2.5),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.3),
-                              width: 1,
-                            ),
+            child: Padding(
+              padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 4, bottom: 6),
+                        padding: REdgeInsets.all(2.5),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
+                            width: 1,
                           ),
-                          child: Image.asset(path),
                         ),
-                        TextWidget(
-                          title,
-                          fontSize: Dimensions.titleSmall * 0.8,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ],
-                    ),
-                    Space.height.v5,
-                    Row(
-                      children: [
-                        TextWidget(
-                          value,
-                          fontSize: Dimensions.titleSmall * 0.9,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        Space.width.v5,
-                        TextWidget(
-                          padding: Dimensions.heightSize.edgeTop * 0.5,
-                          'gm',
-                          fontSize: Dimensions.titleSmall * 0.8,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                        child: Image.asset(path),
+                      ),
+                      TextWidget(
+                        title,
+                        fontSize: Dimensions.titleSmall * 0.8,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ],
+                  ),
+                  Space.height.v5,
+                  Row(
+                    children: [
+                      TextWidget(
+                        value,
+                        fontSize: Dimensions.titleSmall * 0.9,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      Space.width.v5,
+                      TextWidget(
+                        padding: Dimensions.heightSize.edgeTop * 0.5,
+                        'gm',
+                        fontSize: Dimensions.titleSmall * 0.8,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

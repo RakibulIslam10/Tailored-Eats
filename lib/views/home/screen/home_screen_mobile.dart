@@ -22,7 +22,6 @@ class HomeScreenMobile extends GetView<HomeController> {
               padding: Dimensions.heightSize.edgeBottom,
             ),
             const NutrientCardWidget(),
-            const CaloriesRemainingWidget(),
             Space.height.v20,
             const CircularProgressWidget(percentage: 0.65),
             TextWidget(
@@ -81,10 +80,10 @@ class HomeScreenMobile extends GetView<HomeController> {
             TextWidget(
               "Don't Forget Your Daily Goal",
               fontWeight: FontWeight.bold,
-
               padding: Dimensions.heightSize.edgeVertical * 1.5,
             ),
             TaskListWidget(),
+            // Space.height.v20,
             WeightWidget(
               homeController: controller,
               onSave: controller.saveWeight,

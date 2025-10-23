@@ -6,7 +6,7 @@ class SplashController extends GetxController {
   void onReady() {
     super.onReady();
     Future.delayed(Duration(seconds: 2), () {
-      Get.offAllNamed(Routes.navigationScreen,);
+      Get.offAllNamed(Routes.welcomeScreen);
     });
   }
 }
