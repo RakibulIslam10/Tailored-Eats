@@ -13,7 +13,7 @@ class GenderViewWidget extends GetView<ProfileCreationController> {
         children: [
           Space.height.v10,
           TextWidget(
-            'How Do You \nIdentify Yourself ?',
+            'What’s your gender ?',
             textAlign: TextAlign.center,
             fontSize: Dimensions.titleLarge,
             fontWeight: FontWeight.bold,

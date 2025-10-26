@@ -12,7 +12,6 @@ class DailyCalorieIntake extends StatelessWidget {
           child: Column(
             children: [
               Space.height.v10,
-
               TextWidget(
                 'Your Daily Calorie Intake',
                 fontSize: Dimensions.titleLarge,

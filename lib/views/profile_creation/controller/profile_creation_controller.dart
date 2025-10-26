@@ -61,7 +61,7 @@ class ProfileCreationController extends GetxController {
       "iconPath": "assets/icons/Group 1000004259.svg",
     },
     {
-      "title": "Body Recomp",
+      "title": "Body Re-comp (Maintain weight)",
       "subtitle": "Lose body fat whilst slowly gaining muscle",
       "iconPath": "assets/icons/image 467 (traced).svg",
     },
@@ -131,7 +131,7 @@ class ProfileCreationController extends GetxController {
     if (currentStep.value < totalSteps - 1) {
       currentStep.value++;
     } else {
-      Get.toNamed(Routes.finalScreen);
+      Get.toNamed(Routes.navigationScreen);
     }
   }
 

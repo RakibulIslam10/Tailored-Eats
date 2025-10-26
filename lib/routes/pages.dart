@@ -4,11 +4,6 @@ class RoutePageList {
   static var list = [
     //Page Route List
     GetPage(
-      name: Routes.finalScreen,
-      page: () => const FinalScreen(),
-      binding: FinalBinding(),
-    ),
-    GetPage(
       name: Routes.pictureProgressScreen,
       page: () => const PictureProgressScreen(),
       binding: PictureProgressBinding(),

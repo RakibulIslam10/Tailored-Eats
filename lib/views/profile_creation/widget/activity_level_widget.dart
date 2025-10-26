@@ -17,8 +17,11 @@ class SelectableListWidget extends GetView<ProfileCreationController> {
       children: [
         TextWidget(
           title,
+          textAlign: TextAlign.center,
           fontSize: Dimensions.titleLarge,
           fontWeight: FontWeight.bold,
+          padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+          maxLines: 2,
         ),
         Space.height.v100,
         Expanded(

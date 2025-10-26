@@ -43,6 +43,7 @@ class ActivityCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
                 TextWidget(
                   title,
                   fontWeight: FontWeight.w600,
@@ -57,7 +58,7 @@ class ActivityCard extends StatelessWidget {
                   fontSize: Dimensions.titleSmall,
                   color: CustomColors.grayShade,
                   fontWeight: FontWeight.w400,
-                  maxLines: 1,
+                  maxLines: 2,
                   textOverflow: TextOverflow.ellipsis,
                 ),
               ],

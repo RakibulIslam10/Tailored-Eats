@@ -10,7 +10,7 @@ class SwapScreenMobile extends GetView<SwapController> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: CommonAppBar(
-        title: "Swap Your Meal",
+        title: "Breakfast Your Meal",
         actions: [
           InkWell(
             onTap: () {

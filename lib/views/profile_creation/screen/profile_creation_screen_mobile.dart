@@ -13,7 +13,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
       items: controller.activityList,
     ),
     SelectableListWidget(
-      title: "Tell me your food vibe!",
+      title: "What are your dietary requirements",
       items: controller.foodVibeList,
     ),
     SelectableListWidget(
@@ -44,8 +44,8 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
                   horizontal: Dimensions.defaultHorizontalSize,
                   vertical: Dimensions.verticalSize * 2,
                 ),
-                title: "Next",
-                onPressed: () => controller.nextStep(),
+                title: "Go to home",
+                onPressed: () => Get.offAllNamed(Routes.navigationScreen),
               ),
       ),
 
