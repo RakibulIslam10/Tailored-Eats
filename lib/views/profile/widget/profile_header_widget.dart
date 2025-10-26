@@ -32,7 +32,7 @@ class ProfileHeaderWidget extends GetView<ProfileController> {
                 ),
                 Space.height.v5,
                 TextWidget(
-                  'Loose Weight',
+                  'Lose weight',
                   fontSize: Dimensions.titleSmall,
                   color: CustomColors.secondaryDarkText,
                 ),

@@ -125,15 +125,9 @@ class ProfileCreationController extends GetxController {
 
   RxString selectedLevel = ''.obs;
 
-  final int totalSteps = 10;
+  final int totalSteps = 9;
 
-  void nextStep() {
-    if (currentStep.value < totalSteps - 1) {
-      currentStep.value++;
-    } else {
-      Get.toNamed(Routes.navigationScreen);
-    }
-  }
+
 
   void previousStep() {
     if (currentStep.value > 0) {

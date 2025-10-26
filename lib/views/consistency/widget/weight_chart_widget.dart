@@ -10,22 +10,22 @@ class WeightChartWidget extends GetView<ConsistencyController> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.black87,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(15.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Weight Control",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            Space.height.v15,
             SizedBox(
-              height: 250,
+              height: 240.h,
               child: LineChart(
                 LineChartData(
                   backgroundColor: Colors.transparent,
@@ -38,17 +38,20 @@ class WeightChartWidget extends GetView<ConsistencyController> {
                           final index = value.toInt();
                           if (index >= 0 &&
                               index < controller.weightList.length) {
-                            return Text(
-                              controller.weightList[index].label,
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
+                            return Padding(
+                              padding:  EdgeInsets.only(top: 8.0.h),
+                              child: Text(
+                                controller.weightList[index].label,
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 11.sp,
+                                ),
                               ),
                             );
                           }
                           return const Text('');
                         },
-                        reservedSize: 30,
+                        reservedSize: 25,
                       ),
                     ),
                     leftTitles: AxisTitles(
@@ -58,13 +61,13 @@ class WeightChartWidget extends GetView<ConsistencyController> {
                         getTitlesWidget: (value, _) {
                           return Text(
                             '${value.toInt()}kg',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white70,
-                              fontSize: 12,
+                              fontSize: 11.sp,
                             ),
                           );
                         },
-                        reservedSize: 40,
+                        reservedSize: 40.w,
                       ),
                     ),
                     rightTitles: AxisTitles(
@@ -107,20 +110,23 @@ class WeightChartWidget extends GetView<ConsistencyController> {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 12,
-              children: controller.weightList.map((e) {
-                return Text(
-                  e.change,
-                  style: TextStyle(
-                    color: e.change.startsWith('+')
-                        ? Colors.greenAccent
-                        : Colors.redAccent,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              }).toList(),
+            SizedBox(height: 12.h),
+            Center(
+              child: Wrap(
+                spacing: 12.w,
+                children: controller.weightList.map((e) {
+                  return Text(
+                    e.change,
+                    style: TextStyle(
+                      fontSize: Dimensions.titleSmall * 0.9,
+                      color: e.change.startsWith('+')
+                          ? Colors.greenAccent
+                          : Colors.redAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
           ],
         ),

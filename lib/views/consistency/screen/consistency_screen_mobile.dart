@@ -6,19 +6,21 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: "Consistency", isBack: false),
+      appBar: CommonAppBar(title: "Progression", isBack: false),
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
-            const CircularProgressWidget(percentage: 0.65),
             TextWidget(
-              'How Steady Have You Been?',
+              'Consistency',
               fontWeight: FontWeight.bold,
               padding: Dimensions.heightSize.edgeVertical,
             ),
+            const CircularProgressWidget(percentage: 0.65),
+            Space.height.v10,
+
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.12,
+              height: MediaQuery.of(context).size.height * 0.10,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 physics: BouncingScrollPhysics(),
@@ -31,6 +33,11 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
             ),
             const FriendsProgressWidget(),
             Space.height.v10,
+            TextWidget(
+              'Monitor your weight',
+              fontWeight: FontWeight.bold,
+              padding: Dimensions.heightSize.edgeVertical,
+            ),
             const WeightChartWidget(),
             ReusableImageProgress(
               title: 'Progress in Pictures',

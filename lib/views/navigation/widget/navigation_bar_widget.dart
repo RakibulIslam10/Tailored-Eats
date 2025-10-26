@@ -62,7 +62,7 @@ class NavigationBarWidget extends StatelessWidget {
               Expanded(
                 child: BottomBarWidget(
                   path: Assets.icons.component86,
-                  label: 'Consistency',
+                  label: 'Progression',
                   index: 3,
                 ),
               ),

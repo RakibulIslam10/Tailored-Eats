@@ -54,7 +54,7 @@ class AllFriendsWidget extends GetView<FriendsController> {
                           fontWeight: FontWeight.bold,
                         ),
                         TextWidget(
-                          'Loose weight',
+                          'Lose weight',
                           fontSize: Dimensions.titleSmall,
                           color: CustomColors.grayShade,
                         ),

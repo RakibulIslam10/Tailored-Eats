@@ -26,7 +26,12 @@ class GenderViewWidget extends GetView<ProfileCreationController> {
               InkWell(
                 onTap: () {
                   controller.setGender('Male');
-                  controller.nextStep();
+                  if (controller.currentStep.value <
+                      controller.totalSteps - 1) {
+                    controller.currentStep.value++;
+                  } else {
+                    Get.toNamed(Routes.navigationScreen);
+                  }
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -45,7 +50,12 @@ class GenderViewWidget extends GetView<ProfileCreationController> {
               InkWell(
                 onTap: () {
                   controller.setGender('Female');
-                  controller.nextStep();
+                  if (controller.currentStep.value <
+                      controller.totalSteps - 1) {
+                    controller.currentStep.value++;
+                  } else {
+                    Get.toNamed(Routes.navigationScreen);
+                  }
                 },
                 child: Container(
                   alignment: Alignment.center,

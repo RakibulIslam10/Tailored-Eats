@@ -54,7 +54,7 @@ class FriendsRequestWidget extends GetView<FriendsController> {
                           fontWeight: FontWeight.bold,
                         ),
                         TextWidget(
-                          'Loose weight',
+                          'Lose weight',
                           fontWeight: FontWeight.w500,
 
                           fontSize: Dimensions.titleSmall,

@@ -64,6 +64,7 @@ class DailyCalorieIntake extends StatelessWidget {
                 ],
               ),
 
+              TextWidget("You are now ready to view your fully customised plan"),
               Space.height.v100,
             ],
           ),

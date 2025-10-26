@@ -44,8 +44,14 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
                   horizontal: Dimensions.defaultHorizontalSize,
                   vertical: Dimensions.verticalSize * 2,
                 ),
-                title: "Go to home",
-                onPressed: () => Get.offAllNamed(Routes.navigationScreen),
+                title: controller.currentStep.value != 9 ? "Next" : "Go to home",
+                onPressed: () {
+                  if (controller.currentStep.value < controller.totalSteps - 1) {
+                    controller.currentStep.value++;
+                  } else {
+                    Get.toNamed(Routes.navigationScreen);
+                  }
+                },
               ),
       ),
 

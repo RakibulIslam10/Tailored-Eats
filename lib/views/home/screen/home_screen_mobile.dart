@@ -22,13 +22,15 @@ class HomeScreenMobile extends GetView<HomeController> {
               padding: Dimensions.heightSize.edgeBottom,
             ),
             const NutrientCardWidget(),
-            Space.height.v20,
-            const CircularProgressWidget(percentage: 0.65),
+            Space.height.v10,
             TextWidget(
-              'How Steady Have You Been?',
+              'How consistent are you?',
               fontWeight: FontWeight.bold,
               padding: Dimensions.heightSize.edgeVertical,
             ),
+            const CircularProgressWidget(percentage: 0.65),
+            Space.height.v10,
+
             // Horizontal ListView
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.10,
