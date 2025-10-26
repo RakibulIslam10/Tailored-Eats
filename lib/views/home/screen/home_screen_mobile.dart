@@ -22,7 +22,6 @@ class HomeScreenMobile extends GetView<HomeController> {
               padding: Dimensions.heightSize.edgeBottom,
             ),
             const NutrientCardWidget(),
-            Space.height.v10,
             TextWidget(
               'How consistent are you?',
               fontWeight: FontWeight.bold,
