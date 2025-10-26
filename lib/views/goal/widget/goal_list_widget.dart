@@ -45,7 +45,7 @@ class GoalListWidget extends StatelessWidget {
                 itemCount: goals.length,
                 itemBuilder: (context, index) {
                   final goal = goals[index];
-                  return  ListTile(
+                  return ListTile(
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: Dimensions.defaultHorizontalSize,
                     ),
@@ -78,72 +78,78 @@ class GoalListWidget extends StatelessWidget {
                     ),
                     trailing: (!isSuggested)
                         ? Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                            color: CustomColors.progressColor,
-                          ),
-                          onPressed: () {
-                            Get.defaultDialog(
-                              contentPadding: REdgeInsets.all(
-                                  Dimensions.paddingSize * 0.5),
-                              backgroundColor: CustomColors.blackColor,
-                              title: 'Edit Goal',
-                              titleStyle: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              content: PrimaryInputFieldWidget(
-                                controller: controller.editGoalController,
-                                hintText: goal.title,
-                              ),
-                              actions: [
-                                PrimaryButtonWidget(
-                                  title: 'Save',
-                                  onPressed: () {
-                                    if (controller
-                                        .editGoalController.text
-                                        .isNotEmpty) {
-                                      if (isWeekly) {
-                                        controller.editWeeklyGoal(
-                                            index,
-                                            controller.editGoalController
-                                                .text);
-                                      } else {
-                                        controller.editGoal(
-                                            index,
-                                            controller.editGoalController
-                                                .text);
-                                      }
-                                    }
-                                    if (isWeekly) {
-                                      controller.updateWeeklyProgress();
-                                    } else {
-                                      controller.updateProgress();
-                                    }
-                                    Get.back();
-                                  },
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.edit,
+                                  color: CustomColors.progressColor,
                                 ),
-                              ],
-                            );
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.redAccent,
-                          ),
-                          onPressed: () {
-                            if (isWeekly) {
-                              controller.deleteWeeklyGoal(index);
-                            } else {
-                              controller.deleteGoal(index);
-                            }
-                          },
-                        ),
-                      ],
-                    )
+                                onPressed: () {
+                                  Get.defaultDialog(
+                                    contentPadding: REdgeInsets.all(
+                                      Dimensions.paddingSize * 0.5,
+                                    ),
+                                    backgroundColor: CustomColors.blackColor,
+                                    title: 'Edit Goal',
+                                    titleStyle: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    content: PrimaryInputFieldWidget(
+                                      controller: controller.editGoalController,
+                                      hintText: goal.title,
+                                    ),
+                                    actions: [
+                                      PrimaryButtonWidget(
+                                        title: 'Save',
+                                        onPressed: () {
+                                          if (controller
+                                              .editGoalController
+                                              .text
+                                              .isNotEmpty) {
+                                            if (isWeekly) {
+                                              controller.editWeeklyGoal(
+                                                index,
+                                                controller
+                                                    .editGoalController
+                                                    .text,
+                                              );
+                                            } else {
+                                              controller.editGoal(
+                                                index,
+                                                controller
+                                                    .editGoalController
+                                                    .text,
+                                              );
+                                            }
+                                          }
+                                          if (isWeekly) {
+                                            controller.updateWeeklyProgress();
+                                          } else {
+                                            controller.updateProgress();
+                                          }
+                                          Get.back();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.redAccent,
+                                ),
+                                onPressed: () {
+                                  if (isWeekly) {
+                                    controller.deleteWeeklyGoal(index);
+                                  } else {
+                                    controller.deleteGoal(index);
+                                  }
+                                },
+                              ),
+                            ],
+                          )
                         : null,
                   );
                 },

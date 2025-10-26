@@ -49,6 +49,11 @@ class RoutePageList {
       binding: SettingBinding(),
     ),
     GetPage(
+      name: Routes.pictureProgressScreen,
+      page: () => const PictureProgressScreen(),
+      binding: PictureProgressBinding(),
+    ),
+    GetPage(
       name: Routes.notificationScreen,
       page: () => const NotificationScreen(),
       binding: NotificationBinding(),

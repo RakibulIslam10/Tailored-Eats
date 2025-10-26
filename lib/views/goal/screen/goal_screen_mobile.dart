@@ -11,32 +11,34 @@ class GoalScreenMobile extends GetView<GoalController> {
         isBack: false,
         actions: [GoalAddPopWidget()],
       ),
-      body: Padding(
-        padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-        child: Column(
-          children: [
-            Space.height.v10,
-            TopProgressWidget(value: controller.progress.value),
-            GoalListWidget(
-              title: "Daily Goals",
-              goals: controller.dailyGoals,
-              controller: controller,
-            ),
-            Space.height.v20,
-            TopProgressWidget(value: controller.weeklyProgress.value),
-            GoalListWidget(
-              title: "Weekly Goals",
-              goals: controller.weeklyGoals,
-              controller: controller,
-              isWeekly: true, // Weekly flag
-            ),
-            GoalListWidget(
-              title: "Suggested Goals for You",
-              goals: controller.suggestedGoals,
-              controller: controller,
-              isSuggested: true,
-            ),
-          ],
+      body: Obx(
+        () => Padding(
+          padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+          child: Column(
+            children: [
+              Space.height.v10,
+              TopProgressWidget(value: controller.progress.value),
+              GoalListWidget(
+                title: "Daily Goals",
+                goals: controller.dailyGoals,
+                controller: controller,
+              ),
+              Space.height.v20,
+              TopProgressWidget(value: controller.weeklyProgress.value),
+              GoalListWidget(
+                title: "Weekly Goals",
+                goals: controller.weeklyGoals,
+                controller: controller,
+                isWeekly: true, // Weekly flag
+              ),
+              GoalListWidget(
+                title: "Suggested Goals for You",
+                goals: controller.suggestedGoals,
+                controller: controller,
+                isSuggested: true,
+              ),
+            ],
+          ),
         ),
       ),
     );

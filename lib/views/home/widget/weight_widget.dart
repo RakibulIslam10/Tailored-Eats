@@ -1,3 +1,5 @@
+import 'package:shadify/shadify.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../controller/home_controller.dart';
 
@@ -38,7 +40,7 @@ class WeightWidget extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(20),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Column height adjusts to content
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
@@ -53,7 +55,6 @@ class WeightWidget extends StatelessWidget {
             const SizedBox(height: 16),
             Row(
               children: [
-                // TextField takes remaining space
                 Expanded(
                   child: Container(
                     height: 40,
@@ -90,9 +91,12 @@ class WeightWidget extends StatelessWidget {
                       vertical: 5,
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Save',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],

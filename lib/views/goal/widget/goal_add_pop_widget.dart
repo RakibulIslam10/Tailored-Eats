@@ -5,7 +5,7 @@ class GoalAddPopWidget extends GetView<GoalController> {
 
   @override
   Widget build(BuildContext context) {
-    return   IconButton(
+    return  IconButton(
       onPressed: () {
         Get.defaultDialog(
           contentPadding: REdgeInsets.all(Dimensions.paddingSize * 0.5),
