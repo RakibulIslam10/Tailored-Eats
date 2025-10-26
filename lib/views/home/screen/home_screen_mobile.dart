@@ -28,7 +28,7 @@ class HomeScreenMobile extends GetView<HomeController> {
               padding: Dimensions.heightSize.edgeVertical,
             ),
             const CircularProgressWidget(percentage: 0.65),
-            Space.height.v10,
+            Space.height.v15,
 
             // Horizontal ListView
             SizedBox(
