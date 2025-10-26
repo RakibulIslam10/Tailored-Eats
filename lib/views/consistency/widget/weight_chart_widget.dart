@@ -39,7 +39,7 @@ class WeightChartWidget extends GetView<ConsistencyController> {
                           if (index >= 0 &&
                               index < controller.weightList.length) {
                             return Padding(
-                              padding:  EdgeInsets.only(top: 8.0.h),
+                              padding: EdgeInsets.only(top: 8.0.h),
                               child: Text(
                                 controller.weightList[index].label,
                                 style: TextStyle(

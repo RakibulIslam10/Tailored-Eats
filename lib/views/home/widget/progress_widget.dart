@@ -32,29 +32,22 @@ class CalorieProgressWidget extends GetView<HomeController> {
                     strokeWidth: 7,
                   ),
                 ),
+                Image.asset(Assets.dummy.cc.path, height: 50.h),
 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: Dimensions.heightSize.edgeBottom * 0.25,
-                      child: Image.asset(Assets.icons.agun.path),
+                    TextWidget(
+                      '$displayValue',
+                      fontSize: Dimensions.titleSmall * 0.8,
+                      fontWeight: FontWeight.bold,
+                      padding: Dimensions.widthSize.edgeRight * 0.2,
                     ),
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.end,
-                      children: [
-                        TextWidget(
-                          '$displayValue',
-                          fontSize: Dimensions.titleSmall * 0.8,
-                          fontWeight: FontWeight.bold,
-                          padding: Dimensions.widthSize.edgeRight * 0.2,
-                        ),
-                        TextWidget(
-                          ' kcal',
-                          color: CustomColors.grayShade,
-                          fontSize: Dimensions.titleSmall * 0.65,
-                        ),
-                      ],
+                    TextWidget(
+                      'CLLEFT',
+                      fontSize: Dimensions.titleSmall * 0.8,
+                      fontWeight: FontWeight.bold,
+                      padding: Dimensions.widthSize.edgeRight * 0.2,
                     ),
                   ],
                 ),
@@ -64,7 +57,12 @@ class CalorieProgressWidget extends GetView<HomeController> {
           TextWidget(
             "250/2000",
             fontWeight: FontWeight.bold,
-            fontSize: Dimensions.titleSmall,
+            fontSize: Dimensions.titleSmall * 0.8,
+          ),
+          TextWidget(
+            "CALORIES",
+            fontWeight: FontWeight.bold,
+            fontSize: Dimensions.titleSmall * 0.8,
           ),
         ],
       );

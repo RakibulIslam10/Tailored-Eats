@@ -19,10 +19,7 @@ class NutrientCardWidget extends GetView<HomeController> {
         crossAxisAlignment: crossCenter,
         mainAxisAlignment: mainSpaceBet,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: const CalorieProgressWidget(totalCalories: 3000.0),
-          ),
+          const CalorieProgressWidget(totalCalories: 3000.0),
           NutrientCard(
             path: Assets.icons.pro.path,
             title: 'Protein',
