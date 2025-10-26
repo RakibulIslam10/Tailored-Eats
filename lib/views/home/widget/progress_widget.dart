@@ -33,7 +33,6 @@ class CalorieProgressWidget extends GetView<HomeController> {
                   ),
                 ),
                 Image.asset(Assets.dummy.cc.path, height: 50.h),
-
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -55,7 +54,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
             ),
           ),
           TextWidget(
-            "250/2000",
+            "250/1000",
             fontWeight: FontWeight.bold,
             fontSize: Dimensions.titleSmall * 0.8,
           ),

@@ -39,14 +39,12 @@ class CircularProgressWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              // Progress Circle with new gradient design
               SizedBox(
                 width: 85.w,
                 height: 85.w,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    // New gradient circular progress
                     CustomPaint(
                       size: Size(85.w, 85.w),
                       painter: CircularProgressClipper(
@@ -54,9 +52,7 @@ class CircularProgressWidget extends StatelessWidget {
                         strokeWidth: 8,
                       ),
                     ),
-                    // Center image
                     Image.asset(Assets.dummy.cc.path, height: 56.h),
-                    // Text overlay
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -80,7 +76,7 @@ class CircularProgressWidget extends StatelessWidget {
 }
 
 class CircularProgressClipper extends CustomPainter {
-  final double progress; // 0.0 to 1.0
+  final double progress;
   final Color startColor;
   final Color endColor;
   final double strokeWidth;
@@ -97,18 +93,15 @@ class CircularProgressClipper extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = math.min(size.width, size.height) / 2 - strokeWidth / 2;
 
-    // Total arc is 270 degrees (3/4 of circle), gap is 90 degrees at bottom
-    final totalArcAngle = math.pi * 1.5; // 270 degrees
+    final totalArcAngle = math.pi * 1.5;
 
-    // Background circle with opacity 0.1 (shows remaining progress)
     final backgroundPaint = Paint()
       ..color = Color(0xFF7AD3FF).withOpacity(0.15)
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
 
-    // Start from bottom-left, draw 270 degrees leaving gap at bottom center
-    final bgStartAngle = math.pi * 0.75; // Start from bottom-left (135 degrees)
+    final bgStartAngle = math.pi * 0.75;
 
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
@@ -118,7 +111,6 @@ class CircularProgressClipper extends CustomPainter {
       backgroundPaint,
     );
 
-    // Create gradient for progress (cyan to blue)
     final rect = Rect.fromCircle(center: center, radius: radius);
     final gradient = LinearGradient(
       colors: [startColor, endColor],
@@ -132,10 +124,8 @@ class CircularProgressClipper extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
 
-    // Draw progress arc - rotates from start position based on percentage
-    // Progress fills the 270-degree arc (0% to 100% fills the available arc)
-    final progressStartAngle = math.pi * 0.75; // Start from bottom-left
-    final progressSweepAngle = totalArcAngle * progress; // Progress amount
+    final progressStartAngle = math.pi * 0.75;
+    final progressSweepAngle = totalArcAngle * progress;
 
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),

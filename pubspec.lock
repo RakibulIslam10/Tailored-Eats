@@ -976,6 +976,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  shadify:
+    dependency: "direct main"
+    description:
+      name: shadify
+      sha256: "6f9d5bc35eee1f358ff30ff99ff7b3138283c08655d780898c07842dd969bb70"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   shelf:
     dependency: transitive
     description:

@@ -39,7 +39,7 @@ class PrimaryInputFieldWidget extends StatefulWidget {
     required this.hintText,
     this.confirmWith,
     this.requiredField = true,
-    this.showBorder = false, // default true
+    this.showBorder = false,
   });
 
   @override
@@ -134,9 +134,7 @@ class _PrimaryInputFieldWidgetState extends State<PrimaryInputFieldWidget> {
             ),
           ),
         TextFormField(
-          style: const TextStyle(
-            color: Colors.white, // এখানে টেক্সট কালার সেট হবে
-          ),
+          style: const TextStyle(color: Colors.white),
           controller: widget.controller,
           focusNode: widget.focusNode,
           obscureText: widget.isPassword ? _obscureText : false,

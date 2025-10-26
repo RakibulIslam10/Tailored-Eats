@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'dart:ui';
+import 'package:shadify/shadify.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tailored_eats/routes/routes.dart';
 import '../../../core/utils/basic_import.dart';

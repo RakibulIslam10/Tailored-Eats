@@ -34,7 +34,7 @@ class NutrientCardWidget extends GetView<HomeController> {
             path: Assets.icons.fat.path,
             title: 'Fat',
             value: '150/1000G',
-          ),
+          )
         ],
       ),
     );

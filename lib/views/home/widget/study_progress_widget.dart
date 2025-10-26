@@ -28,7 +28,6 @@ class StudyProgressWidget extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-
         mainAxisAlignment: mainCenter,
         children: [
           Stack(

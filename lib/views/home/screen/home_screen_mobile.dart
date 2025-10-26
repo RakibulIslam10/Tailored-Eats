@@ -12,7 +12,6 @@ class HomeScreenMobile extends GetView<HomeController> {
       ),
       body: SafeArea(
         child: ListView(
-          physics: ClampingScrollPhysics(),
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
             TopTextHeaderWidget(),
@@ -29,8 +28,6 @@ class HomeScreenMobile extends GetView<HomeController> {
             ),
             const CircularProgressWidget(percentage: 0.65),
             Space.height.v15,
-
-            // Horizontal ListView
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.10,
               child: RepaintBoundary(
@@ -85,12 +82,7 @@ class HomeScreenMobile extends GetView<HomeController> {
             ),
             TaskListWidget(),
             Space.height.v10,
-            WeightWidget(
-              homeController: controller,
-              onSave: () {
-
-              },
-            ),
+            WeightWidget(homeController: controller, onSave: () {}),
             Space.height.v30,
           ],
         ),
