@@ -1,23 +1,11 @@
 import '../../../core/utils/basic_import.dart';
 
 class HomeController extends GetxController {
-  RxDouble currentCalories = 1.750.obs;
+  final TextEditingController weightController = TextEditingController(text: '100 kg');
+
+  RxDouble currentCalories = 870.0.obs;
   RxDouble progress = 0.45.obs;
   RxDouble percentage = 0.65.obs;
-
-  //Dally macros
-  var calories = 250.obs;
-  var maxCalories = 2000.obs;
-  var protein = 150.obs;
-  var maxProtein = 100.obs;
-  var carbs = 150.obs;
-  var maxCarbs = 100.obs;
-  var fat = 150.obs;
-  var maxFat = 100.obs;
-
-  double getPercentage(int current, int max) {
-    return (current / max).clamp(0.0, 1.0);
-  }
 
   var currentFood = <String, String>{}.obs;
   RxList nextBiteFoodsList = <Map<String, String>>[
@@ -92,27 +80,6 @@ class HomeController extends GetxController {
       "imageUrl": "https://picsum.photos/200/240"
     },
   ].obs;
-
-  final TextEditingController weightController = TextEditingController(text: '100 kg');
-
-  void saveWeight() {
-    Get.snackbar(
-      'Success',
-      'Weight saved: ${weightController.text}',
-      snackPosition: SnackPosition.BOTTOM,
-    );
-  }
-
-  @override
-  void onClose() {
-    weightController.dispose();
-    super.onClose();
-  }
-  @override
-  void onInit() {
-    super.onInit();
-    shuffleList(); // initialize with a random food
-  }
 
 
   void shuffleList() {

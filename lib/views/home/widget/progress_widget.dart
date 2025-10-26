@@ -14,7 +14,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       final progress = controller.currentCalories.value / totalCalories;
-      final displayValue = controller.currentCalories.value.toInt();
+      final displayValue = controller.currentCalories.value;
 
       return Column(
         mainAxisAlignment: mainCenter,
@@ -44,8 +44,8 @@ class CalorieProgressWidget extends GetView<HomeController> {
                       padding: Dimensions.widthSize.edgeRight * 0.2,
                     ),
                     TextWidget(
-                      'CLLEFT',
-                      fontSize: Dimensions.titleSmall * 0.8,
+                      'CALLEFT',
+                      fontSize: Dimensions.titleSmall * 0.7,
                       fontWeight: FontWeight.bold,
                       padding: Dimensions.widthSize.edgeRight * 0.2,
                     ),

@@ -87,7 +87,9 @@ class HomeScreenMobile extends GetView<HomeController> {
             Space.height.v10,
             WeightWidget(
               homeController: controller,
-              onSave: controller.saveWeight,
+              onSave: () {
+
+              },
             ),
             Space.height.v30,
           ],
