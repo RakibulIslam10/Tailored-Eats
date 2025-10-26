@@ -4,6 +4,22 @@ import '../../../core/utils/basic_import.dart';
 
 class ProfileCreationController extends GetxController {
   RxInt currentStep = 0.obs;
+  RxInt currentSStep = 0.obs;
+  RxList<String> selectedLevels = <String>[].obs;
+
+  RxString gender = ''.obs;
+  RxDouble weight = 50.0.obs;
+  RxInt selectedAge = 13.obs;
+  RxDouble height = 170.0.obs;
+  final double minHeight = 100.0;
+  final double maxHeight = 250.0;
+
+  var weightInKg = 0.0.obs;
+  var weightInLbs = 0.0.obs;
+  var weightUnit = 'KG'.obs;
+
+  RxString selectedLevel = ''.obs;
+  final int totalSteps = 10;
 
   final List<Map<String, String>> activityList = [
     {
@@ -66,7 +82,7 @@ class ProfileCreationController extends GetxController {
       "iconPath": "assets/icons/image 467 (traced).svg",
     },
   ];
-  final List<Map<String, String>> wantResultlList = [
+  final List<Map<String, String>> wantResultList = [
     {
       "title": "I want fast results!",
       "subtitle":
@@ -108,36 +124,24 @@ class ProfileCreationController extends GetxController {
     },
   ];
 
-  //Selected all value saved
-  RxInt currentSStep = 0.obs;
-  RxList<String> selectedLevels = <String>[].obs;
-
-  RxString gender = ''.obs;
-  RxDouble weight = 50.0.obs;
-  RxInt selectedAge = 13.obs;
-  RxDouble height = 170.0.obs;
-  final double minHeight = 100.0;
-  final double maxHeight = 250.0;
-
-  var weightInKg = 0.0.obs;
-  var weightInLbs = 0.0.obs;
-  var weightUnit = 'KG'.obs;
-
-  RxString selectedLevel = ''.obs;
-
-  final int totalSteps = 9;
-
-
-
   void previousStep() {
     if (currentStep.value > 0) {
       currentStep.value--;
     }
   }
 
-  // Methods to update specific user data
   void setGender(String newGender) {
     gender.value = newGender;
+    nextStep();
+  }
+
+  void nextStep() {
+    if (currentStep.value < totalSteps - 1) {
+      currentStep.value++;
+      print(currentStep.value);
+    } else {
+      Get.toNamed(Routes.navigationScreen);
+    }
   }
 
   void setAge(int newAge) {
@@ -147,12 +151,6 @@ class ProfileCreationController extends GetxController {
   void setWeight(double newWeight) {
     weight.value = newWeight;
   }
-
-  // void setHeight(double newHeight) {
-  //   if (newHeight >= minHeight && newHeight <= maxHeight) {
-  //     height.value = newHeight;
-  //   }
-  // }
 
   var heightInCm = 170.0.obs;
   var heightInFeet = 5.obs;

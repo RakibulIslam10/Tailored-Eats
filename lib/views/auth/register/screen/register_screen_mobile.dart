@@ -26,7 +26,6 @@ class RegisterScreenMobile extends GetView<RegisterController> {
             ),
             RegisterFields()
 
-
           ],
         ),
       ),

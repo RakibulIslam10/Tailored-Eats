@@ -63,9 +63,15 @@ class DailyCalorieIntake extends StatelessWidget {
                   ),
                 ],
               ),
+              Space.height.v20,
 
-              TextWidget("You are now ready to view your fully customised plan"),
-              Space.height.v100,
+              TextWidget(
+                padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+                textAlign: TextAlign.center,
+                "You are now ready to view your fully customised plan",
+                maxLines: 2,
+                color: Colors.white60,
+              ),
             ],
           ),
         ),

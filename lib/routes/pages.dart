@@ -2,12 +2,7 @@ part of 'routes.dart';
 
 class RoutePageList {
   static var list = [
-    //Page Route List
-    GetPage(
-      name: Routes.pictureProgressScreen,
-      page: () => const PictureProgressScreen(),
-      binding: PictureProgressBinding(),
-    ),
+    //Page Route List,
     GetPage(
       name: Routes.friendsConsistencyScreen,
       page: () => const FriendsConsistencyScreen(),

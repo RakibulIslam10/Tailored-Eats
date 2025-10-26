@@ -22,7 +22,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
     ),
     SelectableListWidget(
       title: "How fast do you want results?",
-      items: controller.wantResultlList,
+      items: controller.wantResultList,
     ),
     SelectableListWidget(
       title: "How often can you train?",
@@ -39,19 +39,14 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
             ? SizedBox()
             : PrimaryButtonWidget(
                 buttonTextColor: CustomColors.blackColor,
-
                 padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.defaultHorizontalSize,
                   vertical: Dimensions.verticalSize * 2,
                 ),
-                title: controller.currentStep.value != 9 ? "Next" : "Go to home",
-                onPressed: () {
-                  if (controller.currentStep.value < controller.totalSteps - 1) {
-                    controller.currentStep.value++;
-                  } else {
-                    Get.toNamed(Routes.navigationScreen);
-                  }
-                },
+                title: controller.currentStep.value == 9
+                    ? "Go to home"
+                    : "Next",
+                onPressed: () => controller.nextStep(),
               ),
       ),
 
@@ -60,32 +55,7 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
         scrolledUnderElevation: 0,
         backgroundColor: CustomColors.blackColor,
         toolbarHeight: 100.h,
-        flexibleSpace: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.defaultHorizontalSize,
-            ),
-            child: Column(
-              crossAxisAlignment: crossStart,
-              children: [
-                InkWell(
-                  onTap: () => controller.previousStep(),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: CustomColors.whiteColor,
-                  ),
-                ),
-                Space.height.v20,
-                Obx(() {
-                  return ProgressBar(
-                    currentStep: controller.currentStep.value,
-                    totalSteps: controller.totalSteps,
-                  );
-                }),
-              ],
-            ),
-          ),
-        ),
+        flexibleSpace: ProgressAppBarWidget(),
       ),
       body: Obx(() {
         return AnimatedSwitcher(
