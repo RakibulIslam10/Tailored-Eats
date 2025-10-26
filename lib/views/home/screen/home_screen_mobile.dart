@@ -84,7 +84,7 @@ class HomeScreenMobile extends GetView<HomeController> {
               padding: Dimensions.heightSize.edgeVertical * 1.5,
             ),
             TaskListWidget(),
-            // Space.height.v20,
+            Space.height.v10,
             WeightWidget(
               homeController: controller,
               onSave: controller.saveWeight,
