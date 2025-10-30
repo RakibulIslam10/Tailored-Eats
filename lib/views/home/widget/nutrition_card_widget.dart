@@ -5,38 +5,60 @@ class NutrientCardWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsetsGeometry.symmetric(
-        horizontal: Dimensions.defaultHorizontalSize * 0.5,
-        vertical: Dimensions.verticalSize * 0.5,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border.all(color: CustomColors.grayShade.withOpacity(0.4)),
-        borderRadius: BorderRadiusGeometry.circular(Dimensions.radius * 0.8),
-      ),
-      child: Row(
-        crossAxisAlignment: crossCenter,
-        mainAxisAlignment: mainSpaceBet,
-        children: [
-          const CalorieProgressWidget(totalCalories: 1000.0),
-          NutrientCard(
-            path: Assets.icons.pro.path,
-            title: 'Protein',
-            value: '150/1000G',
+    return Stack(
+      alignment: AlignmentGeometry.center,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.withOpacity(0.25)),
+
+            borderRadius: BorderRadius.circular(Dimensions.radius * 0.9),
           ),
-          NutrientCard(
-            path: Assets.icons.carb.path,
-            title: 'Carbs',
-            value: '150/1000G',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(Dimensions.radius * 0.9),
+            child: SizedBox(
+              height: 150.h,
+              child: Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.rotationY(math.pi),
+                child: Image.asset(
+                  Assets.dummy.ssss.path,
+                  fit: BoxFit.cover,
+                  width: double.maxFinite,
+                ),
+              ),
+            ),
           ),
-          NutrientCard(
-            path: Assets.icons.fat.path,
-            title: 'Fat',
-            value: '150/1000G',
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.defaultHorizontalSize * 0.6,
+            vertical: Dimensions.verticalSize * 0.5,
           ),
-        ],
-      ),
+          child: Row(
+            crossAxisAlignment: crossStart,
+            mainAxisAlignment: mainSpaceBet,
+            children: [
+              const CalorieProgressWidget(totalCalories: 1000.0),
+              NutrientCard(
+                path: Assets.icons.pro.path,
+                title: 'Protein',
+                value: '20/100G',
+              ),
+              NutrientCard(
+                path: Assets.icons.carb.path,
+                title: 'Carbs',
+                value: '20/100G',
+              ),
+              NutrientCard(
+                path: Assets.icons.fat.path,
+                title: 'Fat',
+                value: '20/100G',
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
