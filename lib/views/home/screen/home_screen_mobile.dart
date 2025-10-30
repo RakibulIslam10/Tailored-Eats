@@ -90,3 +90,8 @@ class HomeScreenMobile extends GetView<HomeController> {
     );
   }
 }
+
+// final RxString selectedAddress = "".obs;
+//
+// "latitude": selectedLatLng.value?.latitude.toString() ?? "",
+// "longitude": selectedLatLng.value?.longitude.toString() ?? "",

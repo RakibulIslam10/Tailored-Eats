@@ -7,7 +7,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
   const CalorieProgressWidget({
     super.key,
     required this.totalCalories,
-    this.size = 76.0,
+    this.size = 80.0,
   });
 
   @override
@@ -32,7 +32,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
                     strokeWidth: 7,
                   ),
                 ),
-                Image.asset(Assets.dummy.cc.path, height: 50.h),
+                Image.asset(Assets.dummy.cc.path, height: 55.h),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
