@@ -11,7 +11,6 @@ class NutrientCardWidget extends GetView<HomeController> {
         Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey.withOpacity(0.25)),
-
             borderRadius: BorderRadius.circular(Dimensions.radius * 0.9),
           ),
           child: ClipRRect(
@@ -32,14 +31,15 @@ class NutrientCardWidget extends GetView<HomeController> {
         ),
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.defaultHorizontalSize * 0.6,
+            horizontal: Dimensions.defaultHorizontalSize * 0.5,
             vertical: Dimensions.verticalSize * 0.5,
           ),
           child: Row(
-            crossAxisAlignment: crossStart,
+            crossAxisAlignment: crossCenter,
             mainAxisAlignment: mainSpaceBet,
             children: [
               const CalorieProgressWidget(totalCalories: 1000.0),
+              // Space.width.v10,
               NutrientCard(
                 path: Assets.icons.pro.path,
                 title: 'Protein',
@@ -78,7 +78,7 @@ class NutrientCard extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 88.w,
+      width: 85.w,
       height: 90.h,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withAlpha(852)),
@@ -95,8 +95,8 @@ class NutrientCard extends GetView<HomeController> {
               Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(right: 4),
-                    padding: REdgeInsets.all(2.5),
+                    margin: EdgeInsets.only(right: 4.w),
+                    padding: REdgeInsets.all(2),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -104,11 +104,11 @@ class NutrientCard extends GetView<HomeController> {
                         width: 1,
                       ),
                     ),
-                    child: Image.asset(path),
+                    child: Image.asset(path, height: 12.h),
                   ),
                   TextWidget(
                     title,
-                    fontSize: Dimensions.titleSmall * 0.8,
+                    fontSize: Dimensions.titleSmall * 0.65,
                     fontWeight: FontWeight.w500,
                   ),
                 ],
@@ -117,7 +117,7 @@ class NutrientCard extends GetView<HomeController> {
               FittedBox(
                 child: TextWidget(
                   value,
-                  fontSize: Dimensions.titleSmall * 0.9,
+                  fontSize: Dimensions.titleSmall * 0.8,
                   fontWeight: FontWeight.bold,
                   maxLines: 1,
                 ),
@@ -125,7 +125,6 @@ class NutrientCard extends GetView<HomeController> {
               Obx(
                 () => Container(
                   margin: Dimensions.verticalSize.edgeTop * 0.5,
-                  width: 80.w,
                   height: 6.h,
                   decoration: BoxDecoration(
                     color: const Color(0xFF383838).withOpacity(0.8),
