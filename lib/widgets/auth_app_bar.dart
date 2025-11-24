@@ -44,7 +44,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: isBack
           ? InkWell(
               borderRadius: BorderRadius.circular(Dimensions.radius), // radius
-              onTap: () => Get.back(),
+              onTap: () => Get.close(1),
               child: Icon(
                 Icons.arrow_back_ios,
                 color:
