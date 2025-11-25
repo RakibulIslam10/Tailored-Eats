@@ -1,3 +1,4 @@
+import '../../../../core/api/services/auth_services.dart';
 import '../../../../core/utils/basic_import.dart';
 
 class LoginController extends GetxController {
@@ -20,6 +21,18 @@ class LoginController extends GetxController {
     super.onInit();
     emailController.text = 'rakib10.devs@gmail.com';
     passwordController.text = '1232456';
+  }
+
+
+  //Login api
+  RxBool isLoading = false.obs;
+
+  loginProcess() async {
+    return await AuthService.loginService(
+      isLoading: isLoading,
+      email: emailController.text,
+      password: passwordController.text,
+    );
   }
 
   /// Dispose
