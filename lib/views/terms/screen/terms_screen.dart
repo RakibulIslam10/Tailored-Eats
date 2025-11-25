@@ -1,3 +1,6 @@
+import 'package:tailored_eats/widgets/empty_data_widget.dart';
+import 'package:tailored_eats/widgets/loading_widget.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
 import '../controller/terms_controller.dart';

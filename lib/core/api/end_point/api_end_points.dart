@@ -8,13 +8,13 @@ class ApiEndPoints {
   static const verifyOtp = 'auth/forget-password-check-otp';
   static const resetPassword = 'auth/reset-password';
   static const forgotPassword = 'auth/forget-password';
-  static const changePassword = 'users/password';
+  static const changePassword = 'settings/change-password';
 
   //home
   static const macros = 'user/user-detail';
   static const category = 'categories';
   static const privacy = 'manage/get-privacy-policy';
-  static const terms = 'manage/get-terms-conditions';
+  static const terms = 'settings/get-terms';
   static const oldCrisisProduct = 'products/oldcrisis';
   static const getAllBookCategory = 'book-categories/get';
   static const favourites = 'favourites';
@@ -34,7 +34,7 @@ class ApiEndPoints {
   static const termsPolicy = 'policies';
   static const completeProfile = 'user/complete-profile';
   static const userProfile = 'auth/me';
-  static const deleteProfile = 'users';
+  static const deleteProfile = 'settings/delete-account';
 
   //Builder Fit
   static const getAllFolders = 'builder/folders';

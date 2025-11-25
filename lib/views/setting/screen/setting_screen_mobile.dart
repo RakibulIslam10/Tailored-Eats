@@ -81,8 +81,7 @@ class SettingScreenMobile extends GetView<SettingController> {
                       ElevatedButton(
                         onPressed: () {
                           AppStorage.clear();
-                          Get.offAllNamed(Routes.welcomeScreen);
-                        },
+                          controller.deleteAccountProcess();                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: CustomColors.whiteColor,
                           shape: RoundedRectangleBorder(

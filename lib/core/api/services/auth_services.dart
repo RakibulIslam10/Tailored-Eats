@@ -113,8 +113,9 @@ class AuthService {
     required String newPassword,
   }) async {
     Map<String, dynamic> inputBody = {
-      'previousPassword': oldPassword,
+      'currentPassword': oldPassword,
       'newPassword': newPassword,
+      'confirmPassword': newPassword,
     };
     return await ApiRequest.patch(
       fromJson: BasicSuccessModel.fromJson,
