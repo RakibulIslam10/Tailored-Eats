@@ -127,7 +127,7 @@ class CaloriesCard extends GetView<HomeController> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
-                        width: 65.w * controller.progress.value,
+                        width: 65.w * 0.46,
                         height: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(

@@ -5,6 +5,19 @@ class NutrientCardWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    double parseDouble(dynamic value) {
+      if (value == null) return 0.0;
+      if (value is double) return value;
+      if (value is int) return value.toDouble();
+      if (value is String) return double.tryParse(value) ?? 0.0;
+      return 0.0;
+    }
+
+    var data = controller.macrosModel?.data.calorie;
+    var proteinP =
+        parseDouble(data?.consumedProtein) / parseDouble(data?.proteinGoal);
+    var carbP = parseDouble(data?.consumedCarb) / parseDouble(data?.carbGoal);
+    var fatP = parseDouble(data?.consumedFat) / parseDouble(data?.fatGoal);
     return Stack(
       alignment: AlignmentGeometry.center,
       children: [
@@ -43,20 +56,22 @@ class NutrientCardWidget extends GetView<HomeController> {
               NutrientCard(
                 path: Assets.icons.pro.path,
                 title: 'Protein',
-                value:
-                    '${controller.macrosModel?.data.calorie.consumedProtein}/${controller.macrosModel?.data.calorie.proteinGoal}G',
+                value: '${data?.consumedProtein}/${data?.proteinGoal}G',
+                percent: proteinP,
               ),
               NutrientCard(
                 path: Assets.icons.carb.path,
                 title: 'Carbs',
                 value:
                     '${controller.macrosModel?.data.calorie.consumedCarb}/${controller.macrosModel?.data.calorie.carbGoal}G',
+                percent: carbP,
               ),
               NutrientCard(
                 path: Assets.icons.fat.path,
                 title: 'Fat',
                 value:
                     '${controller.macrosModel?.data.calorie.consumedFat}/${controller.macrosModel?.data.calorie.fatGoal}G',
+                percent: fatP,
               ),
             ],
           ),
@@ -70,16 +85,35 @@ class NutrientCard extends GetView<HomeController> {
   final String path;
   final String title;
   final String value;
+  final double percent;
 
   const NutrientCard({
     super.key,
     required this.path,
     required this.title,
     required this.value,
+    required this.percent,
   });
 
   @override
   Widget build(BuildContext context) {
+    double parseDouble(dynamic value) {
+      if (value == null) return 0.0;
+      if (value is double) return value;
+      if (value is int) return value.toDouble();
+      if (value is String) return double.tryParse(value) ?? 0.0;
+      return 0.0;
+    }
+
+    double totalCal = parseDouble(
+      controller.macrosModel?.data.calorie.calorieGoal,
+    );
+    double currentCal = parseDouble(
+      controller.macrosModel?.data.calorie.consumedCalorie,
+    );
+
+    final progress = currentCal / totalCal;
+
     return Container(
       width: 85.w,
       height: 90.h,
@@ -136,7 +170,7 @@ class NutrientCard extends GetView<HomeController> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      width: 65.w * controller.progress.value,
+                      width: 65.w * percent,
                       height: double.infinity,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(

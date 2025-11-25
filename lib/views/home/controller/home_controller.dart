@@ -91,9 +91,6 @@ class HomeController extends GetxController {
     },
   ].obs;
 
-  RxDouble currentCalories = 870.0.obs;
-  RxDouble progress = 0.45.obs;
-  RxDouble percentage = 0.65.obs;
   var currentFood = <String, String>{}.obs;
 
   @override
