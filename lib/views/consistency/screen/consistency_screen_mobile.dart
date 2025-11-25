@@ -16,7 +16,13 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
               fontWeight: FontWeight.bold,
               padding: Dimensions.heightSize.edgeVertical,
             ),
-            const CircularProgressWidget(percentage: 0.65),
+            CircularProgressWidget(
+              percentage:
+                  double.tryParse(
+                    "${Get.find<HomeController>().consistencyModel?.data.todayCompleted.percentage}",
+                  ) ??
+                  0.0,
+            ),
             Space.height.v10,
 
             SizedBox(
@@ -25,9 +31,20 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
                 scrollDirection: Axis.horizontal,
                 physics: BouncingScrollPhysics(),
                 children: List.generate(
-                  10,
-                  (index) =>
-                      StudyProgressWidget(percentage: 0.92, date: '27 July'),
+                  math.min(6,  Get.find<HomeController>().friendsProgressList.length),
+                  (index) => StudyProgress(
+                    percentage: Helpers.parseDouble(
+                      Get.find<HomeController>()
+                          .friendsProgressList[index]
+                          .completed,
+                    ),
+                    date: Helpers.formatDate(
+                      Get.find<HomeController>()
+                          .friendsProgressList[index]
+                          .createdAt
+                          .toString(),
+                    ),
+                  ),
                 ),
               ),
             ),

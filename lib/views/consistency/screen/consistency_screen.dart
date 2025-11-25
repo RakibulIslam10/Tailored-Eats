@@ -1,5 +1,9 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'dart:math' as math;
 
+import 'package:fl_chart/fl_chart.dart';
+import 'package:tailored_eats/views/home/controller/home_controller.dart';
+
+import '../../../core/api/helpers/helpers.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
 import '../../home/screen/home_screen.dart';
