@@ -19,7 +19,7 @@ class ApiEndPoints {
   static const getAllBookCategory = 'book-categories/get';
   static const favourites = 'favourites';
   static const news = 'news';
-  static const notifications = 'notifications';
+  static const notifications = 'notification/get-all-notification';
 
   //category
   static const byCategory = 'products/by-category';
