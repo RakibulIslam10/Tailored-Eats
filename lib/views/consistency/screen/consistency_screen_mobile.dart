@@ -31,7 +31,10 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
                 scrollDirection: Axis.horizontal,
                 physics: BouncingScrollPhysics(),
                 children: List.generate(
-                  math.min(6,  Get.find<HomeController>().friendsProgressList.length),
+                  math.min(
+                    6,
+                    Get.find<HomeController>().friendsProgressList.length,
+                  ),
                   (index) => StudyProgress(
                     percentage: Helpers.parseDouble(
                       Get.find<HomeController>()

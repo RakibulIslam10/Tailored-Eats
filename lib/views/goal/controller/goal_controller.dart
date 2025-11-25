@@ -1,112 +1,172 @@
+import '../../../core/api/end_point/api_end_points.dart';
+import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
 import '../model/goalModel.dart';
 
 class GoalController extends GetxController {
   final addGoalController = TextEditingController();
   final editGoalController = TextEditingController();
-  RxDouble progress = 0.0.obs;
+
+  RxDouble dailyProgress = 0.0.obs;
   RxDouble weeklyProgress = 0.0.obs;
 
   RxList<Goal> dailyGoals = <Goal>[].obs;
   RxList<Goal> weeklyGoals = <Goal>[].obs;
   RxList<Goal> suggestedGoals = <Goal>[].obs;
 
+  RxBool isGoalLoading = false.obs;
+
   @override
   void onInit() {
     super.onInit();
-    dailyGoals.addAll([
-      Goal(title: 'Drink 2L water'),
-      Goal(title: 'Morning walk 30 min'),
-      Goal(title: 'Meditation 10 min'),
-    ]);
+    _initializeData();
+  }
 
-    weeklyGoals.addAll([
-      Goal(title: 'Drink 10L water'),
-      Goal(title: 'Morning walk 100 min'),
-      Goal(title: 'Meditation 100 min'),
-    ]);
+  @override
+  void onClose() {
+    addGoalController.dispose();
+    editGoalController.dispose();
+    super.onClose();
+  }
 
-    suggestedGoals.addAll([
+  // Initialize data from API
+  Future<void> _initializeData() async {
+    await getAllGoals();
+    _initializeSuggestedGoals();
+  }
+
+  // Fetch all goals from API and separate by type
+  Future<void> getAllGoals() async {
+    await ApiRequest.get(
+      fromJson: HomeGoalModel.fromJson,
+      endPoint: ApiEndPoints.getALlGoal,
+      isLoading: isGoalLoading,
+      onSuccess: (HomeGoalModel result) {
+        // Clear existing goals
+        dailyGoals.clear();
+        weeklyGoals.clear();
+
+        // Separate goals by type
+        for (var apiGoal in result.data ?? []) {
+          final goal = Goal(
+            id: apiGoal.id,
+            title: apiGoal.title ?? '',
+            completed: apiGoal.isCompleted ?? false,
+          );
+
+          if (apiGoal.type?.toLowerCase() == 'daily') {
+            dailyGoals.add(goal);
+          } else if (apiGoal.type?.toLowerCase() == 'weekly') {
+            weeklyGoals.add(goal);
+          }
+        }
+
+        // Update progress for both lists
+        _updateProgress(dailyGoals, dailyProgress);
+        _updateProgress(weeklyGoals, weeklyProgress);
+      },
+    );
+  }
+
+  void _initializeSuggestedGoals() {
+    suggestedGoals.value = [
       Goal(title: 'Read 50 pages'),
       Goal(title: 'Sleep by 11 PM'),
       Goal(title: 'Avoid sugar'),
-    ]);
-
-    updateProgress();
-    updateWeeklyProgress();
+      Goal(title: 'Drink 2L water'),
+      Goal(title: 'Exercise 30 minutes'),
+    ];
   }
 
-  /// Daily Goal logic
-  void toggleGoal(int index) {
-    dailyGoals[index].completed = !dailyGoals[index].completed;
-    dailyGoals.refresh();
-    updateProgress();
-    update();
-  }
+  // Generic toggle method
+  void toggleGoal(
+    int index, {
+    bool isWeekly = false,
+    bool isSuggested = false,
+  }) {
+    if (isSuggested) {
+      _handleSuggestedToggle(index);
+    } else {
+      final goalList = isWeekly ? weeklyGoals : dailyGoals;
+      final progressVar = isWeekly ? weeklyProgress : dailyProgress;
 
-  void editGoal(int index, String newTitle) {
-    dailyGoals[index].title = newTitle;
-    dailyGoals.refresh();
-    update();
-  }
+      goalList[index].completed = !goalList[index].completed;
+      goalList.refresh();
+      _updateProgress(goalList, progressVar);
 
-  void deleteGoal(int index) {
-    dailyGoals.removeAt(index);
-    updateProgress();
-    update();
-  }
-
-  void updateProgress() {
-    if (dailyGoals.isEmpty) {
-      progress.value = 0.0;
-      return;
+      // TODO: Add API call to update goal completion status
+      // updateGoalStatus(goalList[index].id, goalList[index].completed);
     }
-    int completedCount = dailyGoals.where((g) => g.completed).length;
-    progress.value = completedCount / dailyGoals.length;
   }
 
-  /// Suggested Goal logic
-  void toggleSuggestedGoal(int index) {
+  void _handleSuggestedToggle(int index) {
     final goal = suggestedGoals[index];
     goal.completed = !goal.completed;
 
     if (goal.completed) {
       if (!dailyGoals.any((g) => g.title == goal.title)) {
         dailyGoals.add(Goal(title: goal.title, completed: true));
+        // TODO: Add API call to create new goal
       }
     } else {
       dailyGoals.removeWhere((g) => g.title == goal.title);
+      // TODO: Add API call to delete goal
     }
 
     suggestedGoals.refresh();
     dailyGoals.refresh();
-    updateProgress();
+    _updateProgress(dailyGoals, dailyProgress);
   }
 
-  /// Weekly Goal logic
-  void toggleWeeklyGoal(int index) {
-    weeklyGoals[index].completed = !weeklyGoals[index].completed;
-    weeklyGoals.refresh();
-    updateWeeklyProgress();
+  // Generic edit method
+  void editGoal(int index, String newTitle, {bool isWeekly = false}) {
+    final goalList = isWeekly ? weeklyGoals : dailyGoals;
+    goalList[index].title = newTitle;
+    goalList.refresh();
+
+    // TODO: Add API call to update goal title
+    // updateGoalTitle(goalList[index].id, newTitle);
   }
 
-  void editWeeklyGoal(int index, String newTitle) {
-    weeklyGoals[index].title = newTitle;
-    weeklyGoals.refresh();
-    updateWeeklyProgress();
+  // Generic delete method
+  void deleteGoal(int index, {bool isWeekly = false}) {
+    final goalList = isWeekly ? weeklyGoals : dailyGoals;
+    final progressVar = isWeekly ? weeklyProgress : dailyProgress;
+
+    // TODO: Add API call to delete goal
+    // deleteGoalFromAPI(goalList[index].id);
+
+    goalList.removeAt(index);
+    _updateProgress(goalList, progressVar);
   }
 
-  void deleteWeeklyGoal(int index) {
-    weeklyGoals.removeAt(index);
-    updateWeeklyProgress();
+  // Generic add method
+  void addGoal(String title, {bool isWeekly = false}) {
+    if (title.isEmpty) return;
+
+    final goalList = isWeekly ? weeklyGoals : dailyGoals;
+    final progressVar = isWeekly ? weeklyProgress : dailyProgress;
+
+    goalList.add(Goal(title: title));
+    _updateProgress(goalList, progressVar);
+    addGoalController.clear();
+
+    // TODO: Add API call to create new goal
+    // createGoalInAPI(title, isWeekly ? 'Weekly' : 'Daily');
   }
 
-  void updateWeeklyProgress() {
-    if (weeklyGoals.isEmpty) {
-      weeklyProgress.value = 0.0;
+  // Generic progress calculation
+  void _updateProgress(RxList<Goal> goalList, Rx<double> progressVar) {
+    if (goalList.isEmpty) {
+      progressVar.value = 0.0;
       return;
     }
-    int completedCount = weeklyGoals.where((g) => g.completed).length;
-    weeklyProgress.value = completedCount / weeklyGoals.length;
+    int completedCount = goalList.where((g) => g.completed).length;
+    progressVar.value = completedCount / goalList.length;
+  }
+
+  // Refresh goals from API
+  Future<void> refreshGoals() async {
+    await getAllGoals();
   }
 }

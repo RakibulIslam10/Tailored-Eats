@@ -5,34 +5,33 @@ class GoalAddPopWidget extends GetView<GoalController> {
 
   @override
   Widget build(BuildContext context) {
-    return  IconButton(
-      onPressed: () {
-        Get.defaultDialog(
-          contentPadding: REdgeInsets.all(Dimensions.paddingSize * 0.5),
-          backgroundColor: CustomColors.blackColor,
-          title: 'Add New Goal',
-          titleStyle: TextStyle(color: CustomColors.whiteColor),
-          content: PrimaryInputFieldWidget(
-            controller: controller.addGoalController,
-            hintText: 'Enter goal',
-          ),
-          actions: [
-            PrimaryButtonWidget(
-              title: 'Add',
-              onPressed: () {
-                if (controller.addGoalController.text.isNotEmpty) {
-                  controller.dailyGoals.add(
-                    Goal(title: controller.addGoalController.text),
-                  );
-                }
-                controller.updateProgress();
-                Get.back();
-              },
-            ),
-          ],
-        );
-      },
+    return IconButton(
+      onPressed: _showAddDialog,
       icon: Icon(Icons.add, color: CustomColors.whiteColor),
+    );
+  }
+
+  void _showAddDialog() {
+    controller.addGoalController.clear();
+
+    Get.defaultDialog(
+      contentPadding: REdgeInsets.all(Dimensions.paddingSize * 0.5),
+      backgroundColor: CustomColors.blackColor,
+      title: 'Add New Goal',
+      titleStyle: TextStyle(color: CustomColors.whiteColor),
+      content: PrimaryInputFieldWidget(
+        controller: controller.addGoalController,
+        hintText: 'Enter goal',
+      ),
+      actions: [
+        PrimaryButtonWidget(
+          title: 'Add',
+          onPressed: () {
+            controller.addGoal(controller.addGoalController.text);
+            Get.back();
+          },
+        ),
+      ],
     );
   }
 }

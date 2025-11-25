@@ -17,7 +17,7 @@ class GoalScreenMobile extends GetView<GoalController> {
           child: Column(
             children: [
               Space.height.v10,
-              TopProgressWidget(value: controller.progress.value),
+              TopProgressWidget(value: controller.dailyProgress.value),
               GoalListWidget(
                 title: "Daily Goals",
                 goals: controller.dailyGoals,

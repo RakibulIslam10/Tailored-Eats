@@ -25,8 +25,8 @@ class FaqScreenMobile extends GetView<FaqController> {
                         return Column(
                           children: [
                             _buildFaqItem(
-                              title: 'faq.question',
-                              content: 'faq.description',
+                              title: faq.question,
+                              content: faq.answer,
                               isExpanded:
                                   controller.expandedIndex.value == index,
                               onTap: () => controller.toggleExpand(index),

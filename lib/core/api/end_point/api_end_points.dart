@@ -19,6 +19,7 @@ class ApiEndPoints {
   static const category = 'categories';
   static const privacy = 'manage/get-privacy-policy';
   static const terms = 'settings/get-terms';
+  static const privacyPolicy = 'settings/get-privacy';
   static const oldCrisisProduct = 'products/oldcrisis';
   static const getAllBookCategory = 'book-categories/get';
   static const favourites = 'favourites';
@@ -33,6 +34,8 @@ class ApiEndPoints {
   //profile
   static const updateAddress = 'users/add-address';
   static const uploadAvatar = 'users/avatar';
+  static const faq = 'faq/get-all-faq';
+  static const support = 'settings/send-admin-email';
   static const updateProfileInfo = 'users';
   static const updateProfile = 'user/update-profile';
   static const termsPolicy = 'policies';

@@ -62,13 +62,13 @@ class GoalListWidget extends StatelessWidget {
                         value: goal.completed,
                         activeColor: CustomColors.progressColor,
                         onChanged: (_) {
-                          if (isSuggested) {
-                            controller.toggleSuggestedGoal(index);
-                          } else if (isWeekly) {
-                            controller.toggleWeeklyGoal(index);
-                          } else {
-                            controller.toggleGoal(index);
-                          }
+                          // if (isSuggested) {
+                          //   controller.toggleSuggestedGoal(index);
+                          // } else if (isWeekly) {
+                          //   controller.toggleWeeklyGoal(index);
+                          // } else {
+                          //   controller.toggleGoal(index);
+                          // }
                         },
                       ),
                     ),
@@ -103,32 +103,32 @@ class GoalListWidget extends StatelessWidget {
                                       PrimaryButtonWidget(
                                         title: 'Save',
                                         onPressed: () {
-                                          if (controller
-                                              .editGoalController
-                                              .text
-                                              .isNotEmpty) {
-                                            if (isWeekly) {
-                                              controller.editWeeklyGoal(
-                                                index,
-                                                controller
-                                                    .editGoalController
-                                                    .text,
-                                              );
-                                            } else {
-                                              controller.editGoal(
-                                                index,
-                                                controller
-                                                    .editGoalController
-                                                    .text,
-                                              );
-                                            }
-                                          }
-                                          if (isWeekly) {
-                                            controller.updateWeeklyProgress();
-                                          } else {
-                                            controller.updateProgress();
-                                          }
-                                          Get.back();
+                                          // if (controller
+                                          //     .editGoalController
+                                          //     .text
+                                          //     .isNotEmpty) {
+                                          //   if (isWeekly) {
+                                          //     controller.editWeeklyGoal(
+                                          //       index,
+                                          //       controller
+                                          //           .editGoalController
+                                          //           .text,
+                                          //     );
+                                          //   } else {
+                                          //     controller.editGoal(
+                                          //       index,
+                                          //       controller
+                                          //           .editGoalController
+                                          //           .text,
+                                          //     );
+                                          //   }
+                                          // }
+                                          // if (isWeekly) {
+                                          //   controller.updateWeeklyProgress();
+                                          // } else {
+                                          //   controller.updateProgress();
+                                          // }
+                                          // Get.back();
                                         },
                                       ),
                                     ],
@@ -142,7 +142,7 @@ class GoalListWidget extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   if (isWeekly) {
-                                    controller.deleteWeeklyGoal(index);
+                                    // controller.deleteWeeklyGoal(index);
                                   } else {
                                     controller.deleteGoal(index);
                                   }

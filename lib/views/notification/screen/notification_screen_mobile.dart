@@ -5,7 +5,7 @@ class NotificationScreenMobile extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime _toBDTime(String timestamp) {
+    DateTime toBDTime(String timestamp) {
       final utcTime = DateTime.parse(timestamp).toUtc();
       return utcTime.add(const Duration(hours: 6)); // BD is UTC+6
     }
@@ -16,7 +16,7 @@ class NotificationScreenMobile extends GetView<NotificationController> {
       }
 
       try {
-        final bdTime = _toBDTime(timestamp); // converted BD time
+        final bdTime = toBDTime(timestamp); // converted BD time
 
         final now = DateTime.now().add(const Duration(hours: 6));
         final today = DateTime(now.year, now.month, now.day);
@@ -88,33 +88,38 @@ class NotificationScreenMobile extends GetView<NotificationController> {
                               ),
                             ),
                             child: Row(
+                              crossAxisAlignment: crossCenter,
                               mainAxisAlignment: mainSpaceBet,
                               children: [
-                                Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  children: [
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black,
+                                Expanded(
+                                  child: Wrap(
+                                    alignment: WrapAlignment.start,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.black,
+                                        ),
+                                        padding: EdgeInsets.all(
+                                          Dimensions.paddingSize * 0.26,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          Assets.icons.notification,
+                                          height: 23.h,
+                                          width: 23.w,
+                                        ),
                                       ),
-                                      padding: EdgeInsets.all(
-                                        Dimensions.paddingSize * 0.26,
+                                      TextWidget(
+                                        controller
+                                            .allNotificationList[index]
+                                            .message,
+                                        maxLines: 1,
+                                        padding: Dimensions.widthSize.edgeLeft,
                                       ),
-                                      child: SvgPicture.asset(
-                                        Assets.icons.notification,
-                                        height: 23.h,
-                                        width: 23.w,
-                                      ),
-                                    ),
-                                    TextWidget(
-                                      controller
-                                          .allNotificationList[index]
-                                          .message,
-                                      maxLines: 1,
-                                      padding: Dimensions.widthSize.edgeLeft,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 TextWidget(
                                   formatTimestamp(

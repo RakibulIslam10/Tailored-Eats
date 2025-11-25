@@ -1,6 +1,10 @@
+import '../../../core/api/end_point/api_end_points.dart';
+import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
+import '../model/faq_model.dart';
+
 class FaqController extends GetxController {
-  var faqList = <String>[].obs;
+  RxList<FaqData> faqList = <FaqData>[].obs;
   var expandedIndex = (-1).obs;
 
   void toggleExpand(int index) {
@@ -11,18 +15,22 @@ class FaqController extends GetxController {
     }
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchFaqs();
+  }
 
   RxBool isLoading = false.obs;
 
-// Future<FaqModel> fetchFaqs() async {
-//   return await ApiRequest.get(
-//     endPoint: ApiEndPoints.faqGet,
-//     fromJson: FaqModel.fromJson,
-//     onSuccess: (result) {
-//       // result.data -> List<Datum>
-//       faqList.assignAll(result.data);
-//     },
-//     isLoading: isLoading,
-//   );
-// }
+  Future<FaqModel> fetchFaqs() async {
+    return await ApiRequest.get(
+      endPoint: ApiEndPoints.faq,
+      fromJson: FaqModel.fromJson,
+      onSuccess: (result) {
+        faqList.assignAll(result.data);
+      },
+      isLoading: isLoading,
+    );
+  }
 }
