@@ -10,6 +10,10 @@ class WeightData {
 }
 
 class ConsistencyController extends GetxController {
+
+
+
+
   var weightList = <WeightData>[
     WeightData(0, 60, '05-10', '+0kg'),
     WeightData(1, 62, '10-17', '+2kg'),
@@ -20,6 +24,14 @@ class ConsistencyController extends GetxController {
     WeightData(6, 69, '01-10', '-3kg'),
     WeightData(7, 71, '10-20', '+2kg'),
   ].obs;
+
+
+
+
+
+
+
+
 
   final List<String> items = [
     'https://picsum.photos/id/1011/600/800',

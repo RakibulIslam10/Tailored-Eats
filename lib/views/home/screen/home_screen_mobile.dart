@@ -45,7 +45,8 @@ class HomeScreenMobile extends GetView<HomeController> {
                       ),
                       Space.height.v15,
 
-                      if (controller.friendsProgressList.isNotEmpty) SizedBox(
+                      if (controller.friendsProgressList.isNotEmpty)
+                        SizedBox(
                           height: MediaQuery.of(context).size.height * 0.10,
                           child: RepaintBoundary(
                             child: ListView.builder(
@@ -61,7 +62,9 @@ class HomeScreenMobile extends GetView<HomeController> {
                               itemBuilder: (context, index) => RepaintBoundary(
                                 child: StudyProgress(
                                   percentage: Helpers.parseDouble(
-                                2,
+                                    controller
+                                        .friendsProgressList[index]
+                                        .completed,
                                   ),
                                   date: Helpers.formatDate(
                                     controller
@@ -74,7 +77,8 @@ class HomeScreenMobile extends GetView<HomeController> {
                             ),
                           ),
                         ),
-                      if (controller.friendsProgressList.isNotEmpty) RepaintBoundary(child: const FriendsProgressWidget()),
+                      if (controller.friendsProgressList.isNotEmpty)
+                        RepaintBoundary(child: const FriendsProgressWidget()),
 
                       TextWidget(
                         'Your Next Bite',
