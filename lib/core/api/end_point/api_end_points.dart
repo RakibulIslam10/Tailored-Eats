@@ -30,6 +30,7 @@ class ApiEndPoints {
   static const updateAddress = 'users/add-address';
   static const uploadAvatar = 'users/avatar';
   static const updateProfileInfo = 'users';
+  static const updateProfile = 'user/update-profile';
   static const termsPolicy = 'policies';
   static const completeProfile = 'user/complete-profile';
   static const userProfile = 'auth/me';

@@ -12,14 +12,12 @@ class HomeConsistencyModel {
   final int statusCode;
   final bool success;
   final String message;
-  final dynamic meta;
   final Data data;
 
   HomeConsistencyModel({
     required this.statusCode,
     required this.success,
     required this.message,
-    required this.meta,
     required this.data,
   });
 
@@ -27,7 +25,6 @@ class HomeConsistencyModel {
     statusCode: json["statusCode"],
     success: json["success"],
     message: json["message"],
-    meta: json["meta"],
     data: Data.fromJson(json["data"]),
   );
 
@@ -35,7 +32,6 @@ class HomeConsistencyModel {
     "statusCode": statusCode,
     "success": success,
     "message": message,
-    "meta": meta,
     "data": data.toJson(),
   };
 }
@@ -52,9 +48,15 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    todayCompleted: TodayCompleted.fromJson(json["todayCompleted"]),
-    consistency: List<Consistency>.from(json["consistency"].map((x) => Consistency.fromJson(x))),
-    friendsData: List<dynamic>.from(json["friendsData"].map((x) => x)),
+    todayCompleted: TodayCompleted.fromJson(json["todayCompleted"] ?? {}),
+    consistency: json["consistency"] != null
+        ? List<Consistency>.from(
+      json["consistency"].map((x) => Consistency.fromJson(x)),
+    )
+        : [],
+    friendsData: json["friendsData"] != null && json["friendsData"] is List
+        ? List<dynamic>.from(json["friendsData"].map((x) => x))
+        : [],
   );
 
   Map<String, dynamic> toJson() => {
@@ -98,8 +100,8 @@ class TodayCompleted {
   });
 
   factory TodayCompleted.fromJson(Map<String, dynamic> json) => TodayCompleted(
-    id: json["_id"],
-    percentage: json["percentage"],
+    id: json["_id"] ?? '',
+    percentage: json["percentage"] ?? 0,
   );
 
   Map<String, dynamic> toJson() => {

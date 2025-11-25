@@ -11,98 +11,106 @@ class HomeScreenMobile extends GetView<HomeController> {
         child: HomeAppBarWidget(),
       ),
       body: SafeArea(
-        child: ListView(
-          padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-          children: [
-            TopTextHeaderWidget(),
-            TextWidget(
-              'Your Total Daily macros',
-              fontWeight: FontWeight.bold,
-              padding: Dimensions.heightSize.edgeBottom,
-            ),
-            Obx(
-              () => controller.isLoading.value
-                  ? ShimmerHome()
-                  : NutrientCardWidget(),
-            ),
-            TextWidget(
-              'How consistent are you?',
-              fontWeight: FontWeight.bold,
-              padding: Dimensions.heightSize.edgeVertical,
-            ),
-            CircularProgressWidget(
-              percentage:
-                  double.tryParse(
-                    "${controller.consistencyModel?.data.todayCompleted.percentage}",
-                  ) ??
-                  0.0,
-            ),
-            Space.height.v15,
+        child: RefreshIndicator(
+          backgroundColor: Colors.black,
+          color: CustomColors.primary,
 
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.10,
-              child: RepaintBoundary(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 10,
-                  cacheExtent: 300,
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: true,
-                  itemBuilder: (context, index) => RepaintBoundary(
-                    child: StudyProgressWidget(
-                      percentage: 0.92,
-                      date: '27 July',
-                    ),
+          onRefresh: () async {
+            controller.loadInitialData();
+          },
+          child: Obx(
+            () => controller.isLoading.value
+                ? LoadingWidget()
+                : ListView(
+                    padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+                    children: [
+                      TopTextHeaderWidget(),
+                      TextWidget(
+                        'Your Total Daily macros',
+                        fontWeight: FontWeight.bold,
+                        padding: Dimensions.heightSize.edgeBottom,
+                      ),
+                      NutrientCardWidget(),
+                      TextWidget(
+                        'How consistent are you?',
+                        fontWeight: FontWeight.bold,
+                        padding: Dimensions.heightSize.edgeVertical,
+                      ),
+                      CircularProgressWidget(
+                        percentage: double.tryParse(
+                              "${controller.consistencyModel?.data.todayCompleted.percentage}",
+                            ) ??
+                            0.0,
+                      ),
+                      Space.height.v15,
+
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.10,
+                        child: RepaintBoundary(
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: 10,
+                            cacheExtent: 300,
+                            addAutomaticKeepAlives: false,
+                            addRepaintBoundaries: true,
+                            itemBuilder: (context, index) => RepaintBoundary(
+                              child: StudyProgressWidget(
+                                percentage: 0.92,
+                                date: '27 July',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      RepaintBoundary(child: const FriendsProgressWidget()),
+                      TextWidget(
+                        'Your Next Bite',
+                        fontWeight: FontWeight.bold,
+                        padding: Dimensions.heightSize.edgeVertical,
+                      ),
+                      RepaintBoundary(
+                        child: Obx(
+                          () => AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) =>
+                                FadeTransition(
+                                  opacity: animation,
+                                  child: child,
+                                ),
+                            child: FoodCardWidget(
+                              key: ValueKey(controller.currentFood["title"]),
+                              title: controller.currentFood["title"] ?? "",
+                              description:
+                                  controller.currentFood["description"] ?? "",
+                              calories:
+                                  controller.currentFood["calories"] ?? "",
+                              time: controller.currentFood["time"] ?? "",
+                              imageUrl:
+                                  controller.currentFood["imageUrl"] ?? "",
+                              isShuffle: true,
+                              onShuffle: controller.shuffleList,
+                              onTap: () {
+                                Get.toNamed(Routes.detailsScreen);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextWidget(
+                        "Don't Forget Your Daily Goal",
+                        fontWeight: FontWeight.bold,
+                        padding: Dimensions.heightSize.edgeVertical * 1.5,
+                      ),
+                      TaskListWidget(),
+                      Space.height.v10,
+                      WeightWidget(homeController: controller, onSave: () {}),
+                      Space.height.v30,
+                    ],
                   ),
-                ),
-              ),
-            ),
-            RepaintBoundary(child: const FriendsProgressWidget()),
-            TextWidget(
-              'Your Next Bite',
-              fontWeight: FontWeight.bold,
-              padding: Dimensions.heightSize.edgeVertical,
-            ),
-            RepaintBoundary(
-              child: Obx(
-                () => AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) =>
-                      FadeTransition(opacity: animation, child: child),
-                  child: FoodCardWidget(
-                    key: ValueKey(controller.currentFood["title"]),
-                    title: controller.currentFood["title"] ?? "",
-                    description: controller.currentFood["description"] ?? "",
-                    calories: controller.currentFood["calories"] ?? "",
-                    time: controller.currentFood["time"] ?? "",
-                    imageUrl: controller.currentFood["imageUrl"] ?? "",
-                    isShuffle: true,
-                    onShuffle: controller.shuffleList,
-                    onTap: () {
-                      Get.toNamed(Routes.detailsScreen);
-                    },
-                  ),
-                ),
-              ),
-            ),
-            TextWidget(
-              "Don't Forget Your Daily Goal",
-              fontWeight: FontWeight.bold,
-              padding: Dimensions.heightSize.edgeVertical * 1.5,
-            ),
-            TaskListWidget(),
-            Space.height.v10,
-            WeightWidget(homeController: controller, onSave: () {}),
-            Space.height.v30,
-          ],
+          ),
         ),
       ),
     );
   }
 }
-
-// final RxString selectedAddress = "".obs;
-//
-// "latitude": selectedLatLng.value?.latitude.toString() ?? "",
-// "longitude": selectedLatLng.value?.longitude.toString() ?? "",

@@ -159,25 +159,23 @@ class NutrientCard extends GetView<HomeController> {
                   maxLines: 1,
                 ),
               ),
-              Obx(
-                () => Container(
-                  margin: Dimensions.verticalSize.edgeTop * 0.5,
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF383838).withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      width: 65.w * percent,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF00BFFF), Color(0xFF1E90FF)],
-                        ),
-                        borderRadius: BorderRadius.circular(5),
+              Container(
+                margin: Dimensions.verticalSize.edgeTop * 0.5,
+                height: 6.h,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF383838).withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: 65.w * percent,
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF00BFFF), Color(0xFF1E90FF)],
                       ),
+                      borderRadius: BorderRadius.circular(5),
                     ),
                   ),
                 ),

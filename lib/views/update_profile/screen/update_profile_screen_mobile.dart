@@ -60,10 +60,15 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
               Space.height.v40,
 
               // Save Changes Button
-              PrimaryButtonWidget(
-                title: 'Save Change',
-                onPressed: () {},
-                buttonTextColor: Colors.black,
+              Obx(
+                () => PrimaryButtonWidget(
+                  title: 'Save Change',
+                  isLoading: controller.isLoadingUpdate.value,
+                  onPressed: () {
+                    controller.updateProfileInfo();
+                  },
+                  buttonTextColor: Colors.black,
+                ),
               ),
 
               Space.height.v30,
