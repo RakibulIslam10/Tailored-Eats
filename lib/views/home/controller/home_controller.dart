@@ -1,4 +1,5 @@
 import 'package:tailored_eats/core/api/model/basic_success_model.dart';
+import 'package:tailored_eats/views/home/model/home_goal_model.dart';
 
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
@@ -106,7 +107,11 @@ class HomeController extends GetxController {
   Future<void> loadInitialData() async {
     try {
       isLoading.value = true;
-      await Future.wait([getMacrosApiProcess(), getConsistencyApiProcess()]);
+      await Future.wait([
+        getMacrosApiProcess(),
+        getConsistencyApiProcess(),
+        getDailyGoal(),
+      ]);
     } finally {
       isLoading.value = false;
     }
@@ -159,6 +164,25 @@ class HomeController extends GetxController {
       isLoading: isLoadingAddWeight,
       body: {'weight': weightController.text},
       showSuccessSnackBar: true,
+    );
+  }
+
+  // goal
+
+  List<DailyGoal> goalList = [];
+  RxBool isGoalLoading = false.obs;
+
+  Future<HomeGoalModel> getDailyGoal() async {
+    return await ApiRequest.get(
+      fromJson: HomeGoalModel.fromJson,
+      endPoint: ApiEndPoints.getALlGoal,
+      isLoading: isGoalLoading,
+      onSuccess: (result) {
+        goalList.clear();
+        goalList.addAll(result.dailyGoal);
+        print(goalList.length);
+        print(goalList);
+      },
     );
   }
 

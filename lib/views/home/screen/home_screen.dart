@@ -9,6 +9,7 @@ import 'package:tailored_eats/widgets/loading_widget.dart';
 import 'package:tailored_eats/widgets/profile_avater_widget.dart';
 import '../../../core/utils/basic_import.dart';
 import '../controller/home_controller.dart';
+import '../model/home_goal_model.dart';
 import '../widget/weight_widget.dart';
 
 part 'home_screen_mobile.dart';

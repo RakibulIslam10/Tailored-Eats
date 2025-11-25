@@ -1,32 +1,19 @@
 part of '../screen/home_screen.dart';
 
-class TaskListWidget extends StatelessWidget {
+class TaskListWidget extends GetView<HomeController> {
   const TaskListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Sample task data
     final tasks = [
-      {
-        'icon': Assets.dummy.milkBottle,
-        'title': 'Drink Water',
-        'subtitle': '2L',
-      },
-      {
-        'icon': Assets.dummy.workout9992306Traced,
-        'title': 'Exercise',
-        'subtitle': '20 min',
-      },
-      {
-        'icon': Assets.dummy.walking,
-        'title': 'Daily Steps',
-        'subtitle': '3000',
-      },
-      {'icon': Assets.dummy.meal, 'title': 'Eat meals', 'subtitle': '3'},
+      {'icon': Assets.dummy.milkBottle},
+      {'icon': Assets.dummy.workout9992306Traced},
+      {'icon': Assets.dummy.walking},
+      {'icon': Assets.dummy.meal},
     ];
-
     return SizedBox(
-      height: 260.h, // Increased height for bigger cards
+      height: 260.h,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
@@ -36,32 +23,27 @@ class TaskListWidget extends StatelessWidget {
           crossAxisSpacing: 16,
           childAspectRatio: 1.6, // Adjusted for bigger cards
         ),
-        itemCount: tasks.length,
+        itemCount: math.min(4, controller.goalList.length),
         itemBuilder: (context, index) => TaskItemWidget(
           icon: tasks[index]['icon'] as String,
-          title: tasks[index]['title'] as String,
-          subtitle: tasks[index]['subtitle'] as String,
+          title: controller.goalList[index].title,
+          goal: controller.goalList[index],
         ),
       ),
     );
   }
 }
 
-class TaskItemWidget extends StatelessWidget {
+class TaskItemWidget extends GetView<HomeController> {
   final String icon;
   final String title;
-  final String subtitle;
+  final DailyGoal goal; // pass the model directly
 
-  const TaskItemWidget({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-  });
+  const TaskItemWidget({super.key, required this.icon, required this.title,required this.goal});
 
   @override
   Widget build(BuildContext context) {
-    final RxBool isChecked = false.obs;
+    final RxBool isChecked = goal.isCompleted.obs;
 
     return ClipPath(
       clipper: CustomShapeClipper(),
@@ -104,20 +86,10 @@ class TaskItemWidget extends StatelessWidget {
                     children: [
                       TextWidget(
                         title,
-
                         fontWeight: FontWeight.w600,
                         fontSize: Dimensions.titleSmall,
                         color: Colors.white,
-                        maxLines: 1,
-                      ),
-                      SizedBox(height: 4.h),
-                      Center(
-                        child: TextWidget(
-                          subtitle,
-                          color: Colors.white.withOpacity(0.8),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.sp,
-                        ),
+                        maxLines: 2,
                       ),
                     ],
                   ),
@@ -131,6 +103,7 @@ class TaskItemWidget extends StatelessWidget {
                 () => GestureDetector(
                   onTap: () {
                     isChecked.value = !isChecked.value;
+                    // controller.updateGoalStatus(goal.id, isChecked.value);
                   },
                   child: Container(
                     width: 28.w,
@@ -414,5 +387,3 @@ class TaskCardPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-
-
