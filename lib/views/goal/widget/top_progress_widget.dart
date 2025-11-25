@@ -19,23 +19,31 @@ class TopProgressWidget extends StatelessWidget {
         Stack(
           alignment: Alignment.centerLeft,
           children: [
+            // Background bar
             Container(
               height: minHeight,
-              decoration: BoxDecoration(color: Colors.grey[850]),
+              decoration: BoxDecoration(
+                color: Colors.grey[850],
+                borderRadius: BorderRadius.circular(minHeight / 2),
+              ),
             ),
 
+            // Progress bar
             LayoutBuilder(
               builder: (context, constraints) {
                 final width = constraints.maxWidth * value.clamp(0.0, 1.0);
                 return Container(
                   width: width < minHeight ? minHeight : width,
-                  // ensures radius doesn't break
                   height: minHeight,
-                  decoration: BoxDecoration(color: CustomColors.progressColor),
+                  decoration: BoxDecoration(
+                    color: CustomColors.progressColor,
+                    borderRadius: BorderRadius.circular(minHeight / 2),
+                  ),
                 );
               },
             ),
 
+            // Milestone markers
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -50,6 +58,7 @@ class TopProgressWidget extends StatelessWidget {
 
         SizedBox(height: 6.h),
 
+        // Percentage labels
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,31 +72,39 @@ class TopProgressWidget extends StatelessWidget {
     );
   }
 
-  _buildMarker(bool isActive) {
+  Widget _buildMarker(bool isActive) {
     return Container(
       width: 16.w,
       height: 16.w,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: CustomColors.progressColor, width: 1.5),
-      ),
-      child: Center(
-        child: Container(
-          width: 10.w,
-          height: 10.w,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: CustomColors.progressColor,
-          ),
+        color: isActive
+            ? CustomColors.progressColor
+            : Colors.grey[850],
+        border: Border.all(
+          color: CustomColors.progressColor,
+          width: 2,
         ),
       ),
+      child: isActive
+          ? Center(
+        child: Container(
+          width: 8.w,
+          height: 8.w,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: CustomColors.blackColor,
+          ),
+        ),
+      )
+          : null,
     );
   }
 
   Widget _buildTextLabel(String text, bool isActive) {
     return TextWidget(
       text,
-      fontSize: Dimensions.titleSmall * 0.9,
+      fontSize: 11.sp,
       fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
       color: isActive ? CustomColors.progressColor : Colors.grey.shade500,
     );

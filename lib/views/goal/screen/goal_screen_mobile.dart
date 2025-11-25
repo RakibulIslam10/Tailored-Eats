@@ -17,25 +17,30 @@ class GoalScreenMobile extends GetView<GoalController> {
           child: Column(
             children: [
               Space.height.v10,
+// Daily Goals
               TopProgressWidget(value: controller.dailyProgress.value),
               GoalListWidget(
                 title: "Daily Goals",
                 goals: controller.dailyGoals,
                 controller: controller,
+                type: GoalType.daily, // Clean type definition
               ),
-              Space.height.v20,
+
+// Weekly Goals
               TopProgressWidget(value: controller.weeklyProgress.value),
               GoalListWidget(
                 title: "Weekly Goals",
                 goals: controller.weeklyGoals,
                 controller: controller,
-                isWeekly: true, // Weekly flag
+                type: GoalType.weekly,
               ),
+
+// Suggested Goals
               GoalListWidget(
                 title: "Suggested Goals for You",
                 goals: controller.suggestedGoals,
                 controller: controller,
-                isSuggested: true,
+                type: GoalType.suggested,
               ),
             ],
           ),
