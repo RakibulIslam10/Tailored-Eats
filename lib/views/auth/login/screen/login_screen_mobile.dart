@@ -11,7 +11,6 @@ class LoginScreenMobile extends GetView<LoginController> {
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
-
             Padding(
               padding: Dimensions.verticalSize.edgeVertical * 1.5,
               child: Image.asset(
@@ -20,7 +19,6 @@ class LoginScreenMobile extends GetView<LoginController> {
                 width: 100.w,
               ),
             ),
-
             PrimaryInputFieldWidget(
               label: "Email",
               isEmail: true,
@@ -30,13 +28,11 @@ class LoginScreenMobile extends GetView<LoginController> {
               hintText: "Enter your email",
               fillColor: CustomColors.whiteColor.withAlpha(45),
             ),
-
             Space.height.betweenInputBox,
             PrimaryInputFieldWidget(
               hintText: "Enter your password",
               label: "Password",
               isPassword: true,
-
               controller: controller.passwordController,
               focusNode: controller.passwordFocus,
               nextFocusNode: null,
@@ -59,11 +55,13 @@ class LoginScreenMobile extends GetView<LoginController> {
             ),
 
             Space.height.v20,
-            PrimaryButtonWidget(
-              title: 'Log In',
-              onPressed: () => Get.toNamed(Routes.twoFaScreen),
+            Obx(
+              () => PrimaryButtonWidget(
+                title: 'Log In',
+                isLoading: controller.isLoading.value,
+                onPressed: () => controller.loginProcess(),
+              ),
             ),
-
             Space.height.v20,
             Center(
               child: Wrap(

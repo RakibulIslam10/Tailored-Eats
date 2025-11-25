@@ -1,5 +1,5 @@
 class ApiEndPoints {
-  static final mainDomain = 'http://10.10.20.44:3333';
+  static final mainDomain = 'http://10.10.20.57:8002';
   static final baseUrl = '$mainDomain/api/v1/';
 
   // Auth

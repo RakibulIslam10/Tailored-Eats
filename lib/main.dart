@@ -35,17 +35,27 @@ class MyApp extends StatelessWidget {
         darkTheme: Themes.dark,
         getPages: Routes.list,
         defaultTransition: Transition.cupertino,
-        transitionDuration: const Duration(milliseconds: 300),
+        transitionDuration: const Duration(milliseconds: 400),
         themeMode: ThemeMode.light,
         initialBinding: BindingsBuilder(() {
           Get.lazyPut(() => SplashController());
         }),
+
+        // ✅ FIXED BUILDER
         builder: (context, widget) {
-          return Directionality(
-            textDirection: Get.locale?.languageCode == 'ar'
-                ? TextDirection.rtl
-                : TextDirection.ltr,
-            child: widget!,
+          return Overlay(
+            initialEntries: [
+              OverlayEntry(
+                builder: (ctx) {
+                  return Directionality(
+                    textDirection: Get.locale?.languageCode == 'ar'
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    child: widget!,
+                  );
+                },
+              ),
+            ],
           );
         },
       ),
