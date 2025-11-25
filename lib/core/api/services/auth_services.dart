@@ -1,4 +1,5 @@
 import '../../../routes/routes.dart';
+import '../../../views/auth/register/model/register_model.dart';
 import '../../../views/login/model/login_model.dart';
 import '../../utils/app_storage.dart';
 import '../../utils/basic_import.dart';
@@ -20,65 +21,63 @@ class AuthService {
       isLoading: isLoading,
       body: inputBody,
       onSuccess: (result) {
-        AppStorage.save(token: result.data.accessToken, isLoggedIn: true,);
+        AppStorage.save(token: result.data.accessToken, isLoggedIn: true);
         Get.offAllNamed(Routes.navigationScreen);
       },
     );
   }
 
   /// =============================================== ✅ Register  ================================================== ///
-  // static Future<RegisterModel> registerService({
-  //   required RxBool isLoading,
-  //   required String firstName,
-  //   required String lastName,
-  //   required String email,
-  //   required String phone,
-  //   required String password,
-  // }) async {
-  //   Map<String, dynamic> inputBody = {
-  //     'firstName': firstName,
-  //     'lastName': lastName,
-  //     'email': email,
-  //     'password': password,
-  //   };
-  //
-  //   return await ApiRequest.post(
-  //     fromJson: RegisterModel.fromJson,
-  //     endPoint: ApiEndPoints.register,
-  //     isLoading: isLoading,
-  //     body: inputBody,
-  //     onSuccess: (result) => Get.toNamed(Routes.profileCreationScreen),
-  //   );
-  // }
-  //
+  static Future<RegisterModel> registerService({
+    required RxBool isLoading,
+    required String fullName,
+    required String email,
+    required String password,
+  }) async {
+    Map<String, dynamic> inputBody = {
+      'name': fullName,
+      'email': email,
+      'password': password,
+    };
+
+    return await ApiRequest.post(
+      fromJson: RegisterModel.fromJson,
+      endPoint: ApiEndPoints.register,
+      isLoading: isLoading,
+      body: inputBody,
+      onSuccess: (result) {
+        AppStorage.save(token: result.data.accessToken);
+        Get.toNamed(Routes.profileCreationScreen);
+      }
+    );
+  }
+
   // /// =============================================== ✅ Forget Password ================================================== ///
-  // static Future<ForgetPasswordModel> forgotPasswordService({
-  //   required RxBool isLoading,
-  //   required String email,
-  // }) async {
-  //   Map<String, dynamic> inputBody = {'email': email};
-  //   return await ApiRequest.post(
-  //     fromJson: ForgetPasswordModel.fromJson,
-  //     endPoint: ApiEndPoints.forgotPassword,
-  //     isLoading: isLoading,
-  //     body: inputBody,
-  //     onSuccess: (result) {
-  //       AppStorage.save(temporaryToken: result.data.token);
-  //       Get.toNamed(Routes.otpScreen);
-  //     },
-  //   );
-  // }
+  static Future<BasicSuccessModel> forgotPasswordService({
+    required RxBool isLoading,
+    required String email,
+  }) async {
+    Map<String, dynamic> inputBody = {'email': email};
+    return await ApiRequest.post(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: ApiEndPoints.forgotPassword,
+      isLoading: isLoading,
+      body: inputBody,
+      onSuccess: (result) {
+        // AppStorage.save(temporaryToken: result.data.token);
+        Get.toNamed(Routes.verificationScreen);
+      },
+    );
+  }
 
   /// =============================================== ✅ Email Otp Verify  ================================================== ///
 
   static Future<BasicSuccessModel> forgetOtpVerifyService({
     required RxBool isLoading,
     required String code,
+    required String email,
   }) async {
-    Map<String, dynamic> inputBody = {
-      'token': AppStorage.temporaryToken,
-      'code': code,
-    };
+    Map<String, dynamic> inputBody = {'email': email, 'code': code};
     return await ApiRequest.post(
       fromJson: BasicSuccessModel.fromJson,
       endPoint: ApiEndPoints.verifyOtp,
@@ -93,11 +92,9 @@ class AuthService {
   static Future<BasicSuccessModel> resetPasswordService({
     required RxBool isLoading,
     required String password,
+    required String email,
   }) async {
-    Map<String, dynamic> inputBody = {
-      'token': AppStorage.temporaryToken,
-      'newPassword': password,
-    };
+    Map<String, dynamic> inputBody = {'email': email, 'newPassword': password};
     return await ApiRequest.post(
       fromJson: BasicSuccessModel.fromJson,
       endPoint: ApiEndPoints.resetPassword,

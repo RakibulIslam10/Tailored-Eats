@@ -10,32 +10,47 @@ class ResetPasswordScreenMobile extends GetView<ResetPasswordController> {
       body: SafeArea(
         child: Padding(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-          child: ListView(
-            children: [
-              Padding(
-                padding: Dimensions.verticalSize.edgeVertical * 1.5,
-                child: Image.asset(
+          child: Form(
+            key: controller.formKey,
+            child: ListView(
+              children: [
+                Space.height.v30,
+                Image.asset(
                   Assets.dummy.logo.path,
                   height: 100.h,
                   width: 100.w,
                 ),
-              ),
 
-              Space.height.v30,
-              PrimaryInputFieldWidget(
-                hintText: "Enter your password",
-                label: "Create Password",
-                isPassword: true,
-                controller: controller.passwordController,
-                // focusNode: controller.passwordFocus,
-                nextFocusNode: null,
-              ),
-              Space.height.v30,
-              PrimaryButtonWidget(
-                title: 'Confirm',
-                onPressed: () => Get.offAllNamed(Routes.loginScreen),
-              ),
-            ],
+                Space.height.v30,
+                PrimaryInputFieldWidget(
+                  hintText: "Enter your password",
+                  label: "Password",
+                  isPassword: true,
+                  controller: controller.passwordController,
+                  focusNode: controller.passwordFocus,
+                  nextFocusNode: controller.confirmPasswordFocus,
+                ),
+                Space.height.betweenInputBox,
+                PrimaryInputFieldWidget(
+                  hintText: "Confirm your password",
+                  label: "Confirm Password",
+                  isPassword: true,
+                  controller: controller.passConfirmController,
+                  focusNode: controller.confirmPasswordFocus,
+                  nextFocusNode: null,
+                  confirmWith: controller.passwordController,
+                ),
+                Space.height.v30,
+                Space.height.v30,
+                Obx(
+                  () => PrimaryButtonWidget(
+                    title: 'Confirm',
+                    onPressed: () => controller.resetPasswordProcess(),
+                    isLoading: controller.isLoading.value,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

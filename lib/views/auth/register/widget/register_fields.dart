@@ -40,13 +40,16 @@ class RegisterFields extends GetView<RegisterController> {
           Space.height.betweenInputBox,
           Space.height.betweenInputBox,
 
-          PrimaryButtonWidget(
-            title: "Next",
-            onPressed: () {
-              if (controller.fromKey.currentState!.validate()) {
-                // Get.toNamed(Routes.profileCreationScreen);
-              }
-            },
+          Obx(
+            () => PrimaryButtonWidget(
+              title: "Next",
+              isLoading: controller.isLoading.value,
+              onPressed: () {
+                if (controller.fromKey.currentState!.validate()) {
+                  controller.registerProcess();
+                }
+              },
+            ),
           ),
           Space.height.v10,
           Wrap(

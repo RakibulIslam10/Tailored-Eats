@@ -49,7 +49,7 @@ class DailyCalorieIntake extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextWidget(
-                        '1500',
+                        Get.find<ProfileCreationController>().totalCalories.value,
                         fontSize: 48.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,

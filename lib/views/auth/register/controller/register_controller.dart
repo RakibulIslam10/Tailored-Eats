@@ -1,3 +1,4 @@
+import '../../../../core/api/services/auth_services.dart';
 import '../../../../core/utils/basic_import.dart';
 
 class RegisterController extends GetxController {
@@ -6,6 +7,7 @@ class RegisterController extends GetxController {
   final nameController = TextEditingController();
   final passController = TextEditingController();
   final passConfirmController = TextEditingController();
+
   // final confirmPasswordFocus = FocusNode();
 
   // email
@@ -19,6 +21,17 @@ class RegisterController extends GetxController {
   final isPasswordValid = false.obs;
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
-
   final isCheck = false.obs;
+
+  //Register api
+  RxBool isLoading = false.obs;
+
+  registerProcess() async {
+    return await AuthService.registerService(
+      isLoading: isLoading,
+      fullName: nameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
 }

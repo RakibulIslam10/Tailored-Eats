@@ -5,9 +5,9 @@ class ApiEndPoints {
   // Auth
   static const login = 'auth/login';
   static const register = 'auth/register';
-  static const verifyOtp = 'users/verify-otp';
+  static const verifyOtp = 'auth/forget-password-check-otp';
   static const resetPassword = 'users/reset-password';
-  static const forgotPassword = 'users/forget-password';
+  static const forgotPassword = 'auth/forget-password';
   static const changePassword = 'users/password';
 
   //home
@@ -31,6 +31,7 @@ class ApiEndPoints {
   static const uploadAvatar = 'users/avatar';
   static const updateProfileInfo = 'users';
   static const termsPolicy = 'policies';
+  static const completeProfile = 'user/complete-profile';
   static const userProfile = 'auth/me';
   static const deleteProfile = 'users';
 

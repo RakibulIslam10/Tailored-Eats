@@ -10,7 +10,7 @@ class VerificationScreenMobile extends GetView<VerificationController> {
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-          children:  [
+          children: [
             Padding(
               padding: Dimensions.verticalSize.edgeVertical * 1.5,
               child: Image.asset(
@@ -39,7 +39,7 @@ class VerificationScreenMobile extends GetView<VerificationController> {
             ),
 
             PinCodeTextField(
-              length: 6,
+              length: 4,
               appContext: context,
               keyboardType: TextInputType.number,
               animationType: AnimationType.fade,
@@ -80,12 +80,14 @@ class VerificationScreenMobile extends GetView<VerificationController> {
             //   mainAxisAlignment: mainCenter,
             //   children: [TimerWidget(onResendCode: () {})],
             // ),
-
             Space.height.betweenInputBox,
-            PrimaryButtonWidget(
-              title: "Submit",
-              onPressed: () =>  Get.toNamed(Routes.resetPasswordScreen),
-            )
+            Obx(
+              () => PrimaryButtonWidget(
+                isLoading: controller.isLoading.value,
+                title: "Submit",
+                onPressed: () => controller.otpVerifyProcess(),
+              ),
+            ),
           ],
         ),
       ),
