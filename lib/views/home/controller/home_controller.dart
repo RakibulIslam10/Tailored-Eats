@@ -1,3 +1,5 @@
+import 'package:tailored_eats/core/api/model/basic_success_model.dart';
+
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
@@ -6,9 +8,7 @@ import '../model/home_consistency_model.dart';
 import '../model/macros_model.dart';
 
 class HomeController extends GetxController {
-  final TextEditingController weightController = TextEditingController(
-    text: '100 kg',
-  );
+  final TextEditingController weightController = TextEditingController();
   RxList nextBiteFoodsList = <Map<String, String>>[
     {
       "title": "Grilled Chicken",
@@ -146,6 +146,19 @@ class HomeController extends GetxController {
         friendsProgressList.addAll(result.data.consistency);
         friendsDoingPercentList.addAll(result.data.friendsData);
       },
+    );
+  }
+
+  // add weight
+  RxBool isLoadingAddWeight = false.obs;
+
+  Future<BasicSuccessModel> saveWeight() async {
+    return await ApiRequest.post(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: ApiEndPoints.addWeight,
+      isLoading: isLoadingAddWeight,
+      body: {'weight': weightController.text},
+      showSuccessSnackBar: true,
     );
   }
 

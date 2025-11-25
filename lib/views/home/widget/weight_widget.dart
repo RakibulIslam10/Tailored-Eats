@@ -57,7 +57,7 @@ class WeightWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    height: 40,
+                    height: 40.h,
                     decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(6),
@@ -65,11 +65,10 @@ class WeightWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: TextField(
                       controller: homeController.weightController,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 14.sp),
                       decoration: const InputDecoration(
+                        hintText: "100 KG",
+                        hintStyle: TextStyle(color: CustomColors.grayShade),
                         border: InputBorder.none,
                         isDense: true,
                         contentPadding: EdgeInsets.symmetric(vertical: 12),
@@ -78,26 +77,33 @@ class WeightWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                OutlinedButton(
-                  onPressed: onSave,
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: CustomColors.primary,
-                    side: BorderSide(color: CustomColors.primary, width: 1.5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 5,
-                    ),
-                  ),
-                  child: Text(
-                    'Save',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                Obx(
+                  () => homeController.isLoadingAddWeight.value
+                      ? CircularProgressIndicator(color: CustomColors.primary)
+                      : OutlinedButton(
+                          onPressed: onSave,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: CustomColors.primary,
+                            side: BorderSide(
+                              color: CustomColors.primary,
+                              width: 1.5,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 5,
+                            ),
+                          ),
+                          child: Text(
+                            'Save',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                 ),
               ],
             ),
