@@ -1,15 +1,13 @@
+import '../../../core/api/end_point/api_end_points.dart';
+import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
+import '../../profile_creation/model/profile_creation_model.dart';
+import '../model/macros_model.dart';
 
 class HomeController extends GetxController {
   final TextEditingController weightController = TextEditingController(
     text: '100 kg',
   );
-
-  RxDouble currentCalories = 870.0.obs;
-  RxDouble progress = 0.45.obs;
-  RxDouble percentage = 0.65.obs;
-
-  var currentFood = <String, String>{}.obs;
   RxList nextBiteFoodsList = <Map<String, String>>[
     {
       "title": "Grilled Chicken",
@@ -93,10 +91,42 @@ class HomeController extends GetxController {
     },
   ].obs;
 
+  RxDouble currentCalories = 870.0.obs;
+  RxDouble progress = 0.45.obs;
+  RxDouble percentage = 0.65.obs;
+  var currentFood = <String, String>{}.obs;
+
   @override
   void onInit() {
     shuffleList();
+    loadInitialData();
     super.onInit();
+  }
+
+  RxBool isLoading = false.obs;
+
+  Future<void> loadInitialData() async {
+    try {
+      isLoading.value = true;
+      await Future.wait([getMacrosApiProcess()]);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  RxBool getMacrosLoading = false.obs;
+
+  MacrosModel? macrosModel;
+
+  Future<MacrosModel> getMacrosApiProcess() async {
+    return await ApiRequest.get(
+      fromJson: MacrosModel.fromJson,
+      endPoint: ApiEndPoints.macros,
+      isLoading: getMacrosLoading,
+      onSuccess: (result) {
+        macrosModel = result;
+      },
+    );
   }
 
   void shuffleList() {

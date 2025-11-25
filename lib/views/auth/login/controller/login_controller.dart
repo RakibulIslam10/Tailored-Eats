@@ -19,10 +19,9 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    emailController.text = 'rakib10.devs@gmail.com';
-    passwordController.text = '1232456';
+    emailController.text = 'gdscvf@yopmail.com';
+    passwordController.text = '112233';
   }
-
 
   //Login api
   RxBool isLoading = false.obs;
@@ -33,15 +32,5 @@ class LoginController extends GetxController {
       email: emailController.text,
       password: passwordController.text,
     );
-  }
-
-  /// Dispose
-  @override
-  void onClose() {
-    emailController.dispose();
-    emailFocus.dispose();
-    passwordController.dispose();
-    passwordFocus.dispose();
-    super.onClose();
   }
 }

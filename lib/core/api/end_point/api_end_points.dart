@@ -6,12 +6,12 @@ class ApiEndPoints {
   static const login = 'auth/login';
   static const register = 'auth/register';
   static const verifyOtp = 'auth/forget-password-check-otp';
-  static const resetPassword = 'users/reset-password';
+  static const resetPassword = 'auth/reset-password';
   static const forgotPassword = 'auth/forget-password';
   static const changePassword = 'users/password';
 
   //home
-  static const homePageData = 'products/homepage';
+  static const macros = 'user/user-detail';
   static const category = 'categories';
   static const privacy = 'manage/get-privacy-policy';
   static const terms = 'manage/get-terms-conditions';

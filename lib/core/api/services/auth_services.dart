@@ -48,7 +48,7 @@ class AuthService {
       onSuccess: (result) {
         AppStorage.save(token: result.data.accessToken);
         Get.toNamed(Routes.profileCreationScreen);
-      }
+      },
     );
   }
 
@@ -95,7 +95,7 @@ class AuthService {
     required String email,
   }) async {
     Map<String, dynamic> inputBody = {'email': email, 'newPassword': password};
-    return await ApiRequest.post(
+    return await ApiRequest.patch(
       fromJson: BasicSuccessModel.fromJson,
       endPoint: ApiEndPoints.resetPassword,
       isLoading: isLoading,

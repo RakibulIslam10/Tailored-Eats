@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:shadify/shadify.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tailored_eats/routes/routes.dart';
+import 'package:tailored_eats/views/home/widget/shimmer_home.dart';
 import '../../../core/utils/basic_import.dart';
 import '../controller/home_controller.dart';
 import '../widget/weight_widget.dart';

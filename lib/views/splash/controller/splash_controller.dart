@@ -1,3 +1,4 @@
+import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../../routes/routes.dart';
 
@@ -6,7 +7,11 @@ class SplashController extends GetxController {
   void onReady() {
     super.onReady();
     Future.delayed(Duration(seconds: 2), () {
-      Get.offAllNamed(Routes.welcomeScreen);
+      if (AppStorage.isLoggedIn) {
+        Get.offAllNamed(Routes.navigationScreen);
+      } else {
+        Get.offAllNamed(Routes.welcomeScreen);
+      }
     });
   }
 }

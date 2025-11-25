@@ -20,7 +20,11 @@ class HomeScreenMobile extends GetView<HomeController> {
               fontWeight: FontWeight.bold,
               padding: Dimensions.heightSize.edgeBottom,
             ),
-            const NutrientCardWidget(),
+            Obx(
+              () => controller.isLoading.value
+                  ? ShimmerHome()
+                  : NutrientCardWidget(),
+            ),
             TextWidget(
               'How consistent are you?',
               fontWeight: FontWeight.bold,
@@ -28,6 +32,7 @@ class HomeScreenMobile extends GetView<HomeController> {
             ),
             const CircularProgressWidget(percentage: 0.65),
             Space.height.v15,
+
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.10,
               child: RepaintBoundary(

@@ -81,9 +81,24 @@ class CalorieProgressWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    double parseDouble(dynamic value) {
+      if (value == null) return 0.0;
+      if (value is double) return value;
+      if (value is int) return value.toDouble();
+      if (value is String) return double.tryParse(value) ?? 0.0;
+      return 0.0;
+    }
+
     return Obx(() {
-      final progress = controller.currentCalories.value / totalCalories;
-      final displayValue = controller.currentCalories.value;
+      double totalCal = parseDouble(
+        controller.macrosModel?.data.calorie.calorieGoal,
+      );
+      double currentCal = parseDouble(
+        controller.macrosModel?.data.calorie.consumedCalorie,
+      );
+
+      final progress = currentCal / totalCal;
+
       final responsiveSize = size.r;
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -107,8 +122,10 @@ class CalorieProgressWidget extends GetView<HomeController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextWidget(
-                        padding: EdgeInsetsGeometry.only(bottom: Dimensions.heightSize * 0.2),
-                        '$displayValue',
+                        padding: EdgeInsetsGeometry.only(
+                          bottom: Dimensions.heightSize * 0.2,
+                        ),
+                        '${controller.macrosModel?.data.calorie.calorieGoal}',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -124,7 +141,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
             ),
           ),
           TextWidget(
-            "250/1000",
+            "${controller.macrosModel?.data.calorie.consumedCalorie}/${controller.macrosModel?.data.calorie.calorieGoal}",
             fontWeight: FontWeight.bold,
             fontSize: Dimensions.titleSmall * 0.8,
           ),

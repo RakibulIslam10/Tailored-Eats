@@ -43,17 +43,20 @@ class NutrientCardWidget extends GetView<HomeController> {
               NutrientCard(
                 path: Assets.icons.pro.path,
                 title: 'Protein',
-                value: '20/100G',
+                value:
+                    '${controller.macrosModel?.data.calorie.consumedProtein}/${controller.macrosModel?.data.calorie.proteinGoal}G',
               ),
               NutrientCard(
                 path: Assets.icons.carb.path,
                 title: 'Carbs',
-                value: '20/100G',
+                value:
+                    '${controller.macrosModel?.data.calorie.consumedCarb}/${controller.macrosModel?.data.calorie.carbGoal}G',
               ),
               NutrientCard(
                 path: Assets.icons.fat.path,
                 title: 'Fat',
-                value: '20/100G',
+                value:
+                    '${controller.macrosModel?.data.calorie.consumedFat}/${controller.macrosModel?.data.calorie.fatGoal}G',
               ),
             ],
           ),

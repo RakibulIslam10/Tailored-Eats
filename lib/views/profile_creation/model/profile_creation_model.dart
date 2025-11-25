@@ -31,14 +31,14 @@ class ProfileCreationModel {
 }
 
 class Data {
-  final int totalCalorie;
+  final dynamic totalCalorie;
 
   Data({
     required this.totalCalorie,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    totalCalorie: json["totalCalorie"],
+    totalCalorie: json["totalCalorie"] ?? '',
   );
 
   Map<String, dynamic> toJson() => {
