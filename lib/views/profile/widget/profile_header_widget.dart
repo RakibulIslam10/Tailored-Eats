@@ -26,13 +26,13 @@ class ProfileHeaderWidget extends GetView<ProfileController> {
               crossAxisAlignment: crossStart,
               children: [
                 TextWidget(
-                  'Md Tarek',
+                  Get.find<HomeController>().macrosModel?.data.name ?? '',
                   fontWeight: FontWeight.bold,
                   color: CustomColors.whiteColor,
                 ),
                 Space.height.v5,
                 TextWidget(
-                  'Lose weight',
+                  Get.find<HomeController>().macrosModel?.data.goal ?? '',
                   fontSize: Dimensions.titleSmall,
                   color: CustomColors.secondaryDarkText,
                 ),

@@ -2,6 +2,7 @@ import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../profile_creation/model/profile_creation_model.dart';
+import '../model/home_consistency_model.dart';
 import '../model/macros_model.dart';
 
 class HomeController extends GetxController {
@@ -105,7 +106,7 @@ class HomeController extends GetxController {
   Future<void> loadInitialData() async {
     try {
       isLoading.value = true;
-      await Future.wait([getMacrosApiProcess()]);
+      await Future.wait([getMacrosApiProcess(), getConsistencyApiProcess()]);
     } finally {
       isLoading.value = false;
     }
@@ -122,6 +123,21 @@ class HomeController extends GetxController {
       isLoading: getMacrosLoading,
       onSuccess: (result) {
         macrosModel = result;
+      },
+    );
+  }
+
+  RxBool getConsistencyLoading = false.obs;
+
+  HomeConsistencyModel? consistencyModel;
+
+  Future<HomeConsistencyModel> getConsistencyApiProcess() async {
+    return await ApiRequest.get(
+      fromJson: HomeConsistencyModel.fromJson,
+      endPoint: ApiEndPoints.macros,
+      isLoading: getConsistencyLoading,
+      onSuccess: (result) {
+        consistencyModel = result;
       },
     );
   }

@@ -30,7 +30,13 @@ class HomeScreenMobile extends GetView<HomeController> {
               fontWeight: FontWeight.bold,
               padding: Dimensions.heightSize.edgeVertical,
             ),
-            const CircularProgressWidget(percentage: 0.65),
+            CircularProgressWidget(
+              percentage:
+                  double.tryParse(
+                    "${controller.consistencyModel?.data.todayCompleted.percentage}",
+                  ) ??
+                  0.0,
+            ),
             Space.height.v15,
 
             SizedBox(

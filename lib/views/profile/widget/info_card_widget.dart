@@ -5,15 +5,16 @@ class InfoCardWidget extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    final data = Get.find<HomeController>().macrosModel?.data;
     return Row(
       children: [
-        _buildStatCard('175 cm', 'Height'),
+        _buildStatCard('${data?.height} cm', 'Height'),
         Space.width.v10,
-        _buildStatCard('85 kg', 'Weight'),
+        _buildStatCard('${data?.weight.first.weightKg} kg', 'Weight'),
         Space.width.v10,
-        _buildStatCard('Male', 'Sex'),
+        _buildStatCard('${data?.gender}', 'Sex'),
         Space.width.v10,
-        _buildStatCard('2500 cal', 'Calorie Intake'),
+        _buildStatCard('${data?.calorie.calorieGoal} cal', 'Calorie Intake'),
       ],
     );
   }
