@@ -142,7 +142,7 @@ class HomeController extends GetxController {
   Future<HomeConsistencyModel> getConsistencyApiProcess() async {
     return await ApiRequest.get(
       fromJson: HomeConsistencyModel.fromJson,
-      endPoint: ApiEndPoints.consistency,
+      endPoint: ApiEndPoints.consistencyGet,
       isLoading: getConsistencyLoading,
       onSuccess: (result) {
         consistencyModel = result;
@@ -168,7 +168,6 @@ class HomeController extends GetxController {
   }
 
   // goal
-
   List<DailyGoal> goalList = [];
   RxBool isGoalLoading = false.obs;
 
@@ -183,6 +182,17 @@ class HomeController extends GetxController {
         print(goalList.length);
         print(goalList);
       },
+    );
+  }
+
+  // mark goal
+  Future<BasicSuccessModel> goalMark(String id) async {
+    return await ApiRequest.patch(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: ApiEndPoints.goalMark,
+      isLoading: false.obs,
+      body: {'goalId': id},
+      showSuccessSnackBar: true,
     );
   }
 

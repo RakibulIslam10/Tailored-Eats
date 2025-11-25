@@ -39,7 +39,12 @@ class TaskItemWidget extends GetView<HomeController> {
   final String title;
   final DailyGoal goal; // pass the model directly
 
-  const TaskItemWidget({super.key, required this.icon, required this.title,required this.goal});
+  const TaskItemWidget({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.goal,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +108,7 @@ class TaskItemWidget extends GetView<HomeController> {
                 () => GestureDetector(
                   onTap: () {
                     isChecked.value = !isChecked.value;
-                    // controller.updateGoalStatus(goal.id, isChecked.value);
+                    controller.goalMark(goal.id);
                   },
                   child: Container(
                     width: 28.w,
