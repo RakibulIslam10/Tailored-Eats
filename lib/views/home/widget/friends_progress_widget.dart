@@ -8,27 +8,33 @@ class FriendsProgressWidget extends GetView<HomeController> {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-     Padding(
-       padding:  EdgeInsets.only(bottom: Dimensions.heightSize,top: Dimensions.heightSize * 1.2),
-       child: Row(
-         mainAxisAlignment: mainSpaceBet,
-         children: [
-         TextWidget(
-           'How Your Friends Are Doing',
-           fontWeight: FontWeight.bold,
-         ),
-         TextWidget('View All',color: CustomColors.primary,
-         
-         onTap: () => Get.toNamed(Routes.friendsConsistencyScreen),
+        Padding(
+          padding: EdgeInsets.only(
+            bottom: Dimensions.heightSize,
+            top: Dimensions.heightSize * 1.2,
+          ),
+          child: Row(
+            mainAxisAlignment: mainSpaceBet,
+            children: [
+              TextWidget(
+                'How Your Friends Are Doing',
+                fontWeight: FontWeight.bold,
+              ),
+              TextWidget(
+                'View All',
+                color: CustomColors.primary,
 
-         fontSize: Dimensions.titleSmall * 0.9,
-         ),
-       ],),
-     ),
+                onTap: () => Get.toNamed(Routes.friendsConsistencyScreen),
+
+                fontSize: Dimensions.titleSmall * 0.9,
+              ),
+            ],
+          ),
+        ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.09,
           child: ListView.builder(
-            itemCount: 10,
+            itemCount: math.min(6, controller.friendsDoingPercentList.length),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
@@ -51,14 +57,21 @@ class FriendsProgressWidget extends GetView<HomeController> {
                     crossAxisAlignment: crossStart,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextWidget("50%", fontWeight: FontWeight.bold),
+                      TextWidget(
+                        "${controller.friendsDoingPercentList[index].percentage}%",
+                        fontWeight: FontWeight.bold,
+                      ),
                       Space.height.v5,
                       Row(
                         children: [
-                          SvgPicture.asset(Assets.icons.calories),
+                          ProfileAvatarWidget(
+                            imageUrl:
+                                controller.friendsDoingPercentList[index].image,
+                            size: 20.r,
+                          ),
                           TextWidget(
                             padding: Dimensions.widthSize.edgeLeft,
-                            'Arif Istiaque',
+                            controller.friendsDoingPercentList[index].name,
                             color: CustomColors.grayShade,
                             fontSize: Dimensions.titleSmall * 0.8,
                           ),

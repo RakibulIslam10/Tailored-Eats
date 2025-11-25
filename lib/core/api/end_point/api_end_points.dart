@@ -12,6 +12,7 @@ class ApiEndPoints {
 
   //home
   static const macros = 'user/user-detail';
+  static const consistency = 'consistency/user-consistency-details';
   static const category = 'categories';
   static const privacy = 'manage/get-privacy-policy';
   static const terms = 'settings/get-terms';

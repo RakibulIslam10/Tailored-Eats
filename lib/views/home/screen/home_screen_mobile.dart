@@ -37,33 +37,45 @@ class HomeScreenMobile extends GetView<HomeController> {
                         padding: Dimensions.heightSize.edgeVertical,
                       ),
                       CircularProgressWidget(
-                        percentage: double.tryParse(
+                        percentage:
+                            double.tryParse(
                               "${controller.consistencyModel?.data.todayCompleted.percentage}",
                             ) ??
                             0.0,
                       ),
                       Space.height.v15,
 
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.10,
-                        child: RepaintBoundary(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: 10,
-                            cacheExtent: 300,
-                            addAutomaticKeepAlives: false,
-                            addRepaintBoundaries: true,
-                            itemBuilder: (context, index) => RepaintBoundary(
-                              child: StudyProgressWidget(
-                                percentage: 0.92,
-                                date: '27 July',
+                      if (controller.friendsProgressList.isNotEmpty) SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.10,
+                          child: RepaintBoundary(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: math.min(
+                                6,
+                                controller.friendsProgressList.length,
+                              ),
+                              cacheExtent: 300,
+                              addAutomaticKeepAlives: false,
+                              addRepaintBoundaries: true,
+                              itemBuilder: (context, index) => RepaintBoundary(
+                                child: StudyProgress(
+                                  percentage: Helpers.parseDouble(
+                                2,
+                                  ),
+                                  date: Helpers.formatDate(
+                                    controller
+                                        .friendsProgressList[index]
+                                        .createdAt
+                                        .toString(),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      RepaintBoundary(child: const FriendsProgressWidget()),
+                      if (controller.friendsProgressList.isNotEmpty) RepaintBoundary(child: const FriendsProgressWidget()),
+
                       TextWidget(
                         'Your Next Bite',
                         fontWeight: FontWeight.bold,

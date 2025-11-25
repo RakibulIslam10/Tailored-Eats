@@ -131,13 +131,20 @@ class HomeController extends GetxController {
 
   HomeConsistencyModel? consistencyModel;
 
+  List<Consistency> friendsProgressList = [];
+  List<FriendData> friendsDoingPercentList = [];
+
   Future<HomeConsistencyModel> getConsistencyApiProcess() async {
     return await ApiRequest.get(
       fromJson: HomeConsistencyModel.fromJson,
-      endPoint: ApiEndPoints.macros,
+      endPoint: ApiEndPoints.consistency,
       isLoading: getConsistencyLoading,
       onSuccess: (result) {
         consistencyModel = result;
+        friendsProgressList.clear();
+        friendsDoingPercentList.clear();
+        friendsProgressList.addAll(result.data.consistency);
+        friendsDoingPercentList.addAll(result.data.friendsData);
       },
     );
   }

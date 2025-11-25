@@ -50,11 +50,13 @@ class Data {
     todayCompleted: TodayCompleted.fromJson(json?["todayCompleted"]),
     consistency: (json?["consistency"] != null && json!["consistency"] is List)
         ? List<Consistency>.from(
-        json["consistency"].map((x) => Consistency.fromJson(x)))
+            json["consistency"].map((x) => Consistency.fromJson(x)),
+          )
         : [],
     friendsData: (json?["friendsData"] != null && json!["friendsData"] is List)
         ? List<FriendData>.from(
-        json["friendsData"].map((x) => FriendData.fromJson(x)))
+            json["friendsData"].map((x) => FriendData.fromJson(x)),
+          )
         : [],
   );
 
@@ -101,26 +103,20 @@ class TodayCompleted {
   final String id;
   final double percentage;
 
-  TodayCompleted({
-    required this.id,
-    required this.percentage,
-  });
+  TodayCompleted({required this.id, required this.percentage});
 
   factory TodayCompleted.fromJson(Map<String, dynamic>? json) => TodayCompleted(
     id: json?["_id"] ?? '',
     percentage: json?["percentage"] != null
         ? (json!["percentage"] is int
-        ? (json["percentage"] as int).toDouble()
-        : (json["percentage"] is double
-        ? json["percentage"] as double
-        : double.tryParse(json["percentage"].toString()) ?? 0.0))
+              ? (json["percentage"] as int).toDouble()
+              : (json["percentage"] is double
+                    ? json["percentage"] as double
+                    : double.tryParse(json["percentage"].toString()) ?? 0.0))
         : 0.0,
   );
 
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "percentage": percentage,
-  };
+  Map<String, dynamic> toJson() => {"_id": id, "percentage": percentage};
 
   factory TodayCompleted.empty() => TodayCompleted(id: '', percentage: 0.0);
 }
@@ -128,12 +124,14 @@ class TodayCompleted {
 class FriendData {
   final String userId;
   final String name;
+  final String image;
   final String mainGoal;
   final double percentage;
 
   FriendData({
     required this.userId,
     required this.name,
+    required this.image,
     required this.mainGoal,
     required this.percentage,
   });
@@ -141,13 +139,14 @@ class FriendData {
   factory FriendData.fromJson(Map<String, dynamic>? json) => FriendData(
     userId: json?["userId"] ?? '',
     name: json?["name"] ?? '',
+    image: json?["image"] ?? '',
     mainGoal: json?["mainGoal"] ?? '',
     percentage: json?["percentage"] != null
         ? (json!["percentage"] is int
-        ? (json["percentage"] as int).toDouble()
-        : (json["percentage"] is double
-        ? json["percentage"] as double
-        : double.tryParse(json["percentage"].toString()) ?? 0.0))
+              ? (json["percentage"] as int).toDouble()
+              : (json["percentage"] is double
+                    ? json["percentage"] as double
+                    : double.tryParse(json["percentage"].toString()) ?? 0.0))
         : 0.0,
   );
 
