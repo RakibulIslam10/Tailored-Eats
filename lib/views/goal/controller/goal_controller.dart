@@ -142,7 +142,6 @@ class GoalController extends GetxController {
     );
   }
 
-
   // Edit Goal
   RxBool isEditGoalLoading = false.obs;
 
@@ -160,6 +159,7 @@ class GoalController extends GetxController {
       },
     );
   }
+
   // Delete Goal
   RxBool isDeleteGoalLoading = false.obs;
 
@@ -176,5 +176,4 @@ class GoalController extends GetxController {
       },
     );
   }
-
 }

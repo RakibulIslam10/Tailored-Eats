@@ -13,7 +13,7 @@ class TaskListWidget extends GetView<HomeController> {
       {'icon': Assets.dummy.meal},
     ];
     return SizedBox(
-      height: 260.h,
+      height: controller.goalList.length <= 3 ? 120.h : 260.h,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
