@@ -1,5 +1,6 @@
 class AppStorageModel {
   final String token;
+  final String userId;
   final String temporaryToken;
   final String mobileCode;
   final bool onboardSave;
@@ -12,6 +13,7 @@ class AppStorageModel {
 
   AppStorageModel(
     this.token,
+    this.userId,
     this.onboardSave,
     this.waitTime,
     this.isLoggedIn,

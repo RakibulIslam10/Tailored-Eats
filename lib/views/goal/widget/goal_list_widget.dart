@@ -68,7 +68,6 @@ class GoalListWidget extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final goal = goals[index];
                     final bool showActions = !isSuggested;
-
                     return ListTile(
                       contentPadding: EdgeInsets.symmetric(
                         horizontal: 16.w,
@@ -123,7 +122,9 @@ class GoalListWidget extends StatelessWidget {
                                     color: CustomColors.progressColor,
                                     size: 20.sp,
                                   ),
-                                  onPressed: () => _editDialog(index, isWeekly),
+                                  onPressed: () {
+                                    _editDialog(index, isWeekly,context,);
+                                  },
                                   padding: EdgeInsets.all(8.w),
                                   constraints: const BoxConstraints(),
                                 ),
@@ -134,8 +135,9 @@ class GoalListWidget extends StatelessWidget {
                                     color: Colors.redAccent,
                                     size: 20.sp,
                                   ),
-                                  onPressed: () =>
-                                      _deleteDialog(index, isWeekly),
+                                  onPressed: () {
+                                    _deleteDialog(index, isWeekly,context);
+                                  },
                                   padding: EdgeInsets.all(8.w),
                                   constraints: const BoxConstraints(),
                                 ),
@@ -181,52 +183,38 @@ class GoalListWidget extends StatelessWidget {
     ),
   );
 
-  // --- Helper: Edit Dialog ---
-  void _editDialog(int index, bool isWeekly) {
+  void _editDialog(int index, bool isWeekly,context,) {
     controller.editGoalController.text = goals[index].title;
-    Get.defaultDialog(
-      title: "Edit Goal",
-      content: Column(
-        children: [
-          PrimaryInputFieldWidget(
-            controller: controller.editGoalController,
-            hintText: goals[index].title,
-          ),
-          SizedBox(height: 16.h),
-        ],
+
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => BottomSheetDialogWidget(
+        isLoading: controller.isEditGoalLoading,
+        inputController: controller.editGoalController,
+        title: "Edit Goal",
+        buttonTex: "Update",
+        isInputField: true,
+        subTitle: "Edit your Goal",
+        action: (){controller.editGoal(goals[index].id.toString());},
+        buttonColor: CustomColors.primary,
+        hintText: goals[index].title,
       ),
-      actions: [
-        PrimaryButtonWidget(
-          title: 'Save',
-          onPressed: () {
-            if (controller.editGoalController.text.isNotEmpty) {
-              controller.editGoal(
-                index,
-                controller.editGoalController.text,
-                isWeekly: isWeekly,
-              );
-            }
-            Get.back();
-          },
-        ),
-      ],
     );
   }
 
-  // --- Helper: Delete Dialog ---
-  void _deleteDialog(int index, bool isWeekly) {
-    Get.defaultDialog(
-      title: "Delete Goal",
-      middleText: "Are you sure?",
-      actions: [
-        ElevatedButton(
-          onPressed: () {
-            controller.deleteGoal(index, isWeekly: isWeekly);
-            Get.back();
-          },
-          child: TextWidget("Delete"),
-        ),
-      ],
+  void _deleteDialog(int index, bool isWeekly,context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => BottomSheetDialogWidget(
+        isLoading: controller.isEditGoalLoading,
+        // inputController: controller.editGoalController,
+        // title: "Edit Goal",
+        // buttonTex: "Update",
+        // isInputField: true,
+        subTitle: "Delete your Goal",
+        action: (){controller.deleteGoal(goals[index].id.toString());},
+        hintText: goals[index].title, title: 'Delete your goal',
+      ),
     );
   }
 }

@@ -21,7 +21,7 @@ class AuthService {
       isLoading: isLoading,
       body: inputBody,
       onSuccess: (result) {
-        AppStorage.save(token: result.data.accessToken, isLoggedIn: true);
+        AppStorage.save(token: result.data.accessToken, isLoggedIn: true,userId: result.data.user.userId);
         Get.offAllNamed(Routes.navigationScreen);
       },
     );

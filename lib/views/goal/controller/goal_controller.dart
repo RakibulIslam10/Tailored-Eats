@@ -1,3 +1,6 @@
+import 'package:tailored_eats/core/api/model/basic_success_model.dart';
+import 'package:tailored_eats/core/utils/app_storage.dart';
+
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
@@ -19,18 +22,11 @@ class GoalController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _initializeData();
-  }
-
-  @override
-  void onClose() {
-    addGoalController.dispose();
-    editGoalController.dispose();
-    super.onClose();
+    initializeData();
   }
 
   // Initialize data from API
-  Future<void> _initializeData() async {
+  Future<void> initializeData() async {
     await getAllGoals();
     _initializeSuggestedGoals();
   }
@@ -42,7 +38,6 @@ class GoalController extends GetxController {
       endPoint: ApiEndPoints.getALlGoal,
       isLoading: isGoalLoading,
       onSuccess: (HomeGoalModel result) {
-        // Clear existing goals
         dailyGoals.clear();
         weeklyGoals.clear();
 
@@ -93,9 +88,6 @@ class GoalController extends GetxController {
       goalList[index].completed = !goalList[index].completed;
       goalList.refresh();
       _updateProgress(goalList, progressVar);
-
-      // TODO: Add API call to update goal completion status
-      // updateGoalStatus(goalList[index].id, goalList[index].completed);
     }
   }
 
@@ -118,44 +110,6 @@ class GoalController extends GetxController {
     _updateProgress(dailyGoals, dailyProgress);
   }
 
-  // Generic edit method
-  void editGoal(int index, String newTitle, {bool isWeekly = false}) {
-    final goalList = isWeekly ? weeklyGoals : dailyGoals;
-    goalList[index].title = newTitle;
-    goalList.refresh();
-
-    // TODO: Add API call to update goal title
-    // updateGoalTitle(goalList[index].id, newTitle);
-  }
-
-  // Generic delete method
-  void deleteGoal(int index, {bool isWeekly = false}) {
-    final goalList = isWeekly ? weeklyGoals : dailyGoals;
-    final progressVar = isWeekly ? weeklyProgress : dailyProgress;
-
-    // TODO: Add API call to delete goal
-    // deleteGoalFromAPI(goalList[index].id);
-
-    goalList.removeAt(index);
-    _updateProgress(goalList, progressVar);
-  }
-
-  // Generic add method
-  void addGoal(String title, {bool isWeekly = false}) {
-    if (title.isEmpty) return;
-
-    final goalList = isWeekly ? weeklyGoals : dailyGoals;
-    final progressVar = isWeekly ? weeklyProgress : dailyProgress;
-
-    goalList.add(Goal(title: title));
-    _updateProgress(goalList, progressVar);
-    addGoalController.clear();
-
-    // TODO: Add API call to create new goal
-    // createGoalInAPI(title, isWeekly ? 'Weekly' : 'Daily');
-  }
-
-  // Generic progress calculation
   void _updateProgress(RxList<Goal> goalList, Rx<double> progressVar) {
     if (goalList.isEmpty) {
       progressVar.value = 0.0;
@@ -169,4 +123,58 @@ class GoalController extends GetxController {
   Future<void> refreshGoals() async {
     await getAllGoals();
   }
+
+  // add goal process api
+  RxBool isAddGoalLoading = false.obs;
+
+  Future<BasicSuccessModel> addNewGoal() async {
+    return await ApiRequest.post(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: ApiEndPoints.createGoal,
+      isLoading: isAddGoalLoading,
+      body: {'userId': AppStorage.userId, 'title': addGoalController.text},
+      showSuccessSnackBar: true,
+      onSuccess: (result) {
+        Get.close(1);
+        addGoalController.clear();
+        refreshGoals();
+      },
+    );
+  }
+
+
+  // Edit Goal
+  RxBool isEditGoalLoading = false.obs;
+
+  Future<BasicSuccessModel> editGoal(String id) async {
+    return await ApiRequest.patch(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: ApiEndPoints.updateGoal,
+      isLoading: isEditGoalLoading,
+      body: {'goalId': id, 'title': editGoalController.text},
+      showSuccessSnackBar: true,
+      onSuccess: (result) {
+        Get.close(1);
+        editGoalController.clear();
+        refreshGoals();
+      },
+    );
+  }
+  // Delete Goal
+  RxBool isDeleteGoalLoading = false.obs;
+
+  Future<BasicSuccessModel> deleteGoal(String id) async {
+    return await ApiRequest.delete(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: ApiEndPoints.deleteGoal,
+      id: id,
+      isLoading: isDeleteGoalLoading,
+      showSuccessSnackBar: true,
+      onSuccess: (result) {
+        Get.close(1);
+        refreshGoals();
+      },
+    );
+  }
+
 }

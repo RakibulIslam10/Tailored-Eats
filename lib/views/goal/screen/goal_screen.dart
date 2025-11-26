@@ -1,5 +1,8 @@
+import 'package:tailored_eats/widgets/loading_widget.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
+import '../../../widgets/bottom_sheet_dialog.dart';
 import '../controller/goal_controller.dart';
 import '../model/goalModel.dart';
 
