@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:tailored_eats/views/home/controller/home_controller.dart';
+import 'package:tailored_eats/widgets/loading_widget.dart';
 
 import '../../../core/api/helpers/helpers.dart';
 import '../../../core/utils/basic_import.dart';

@@ -28,6 +28,7 @@ class ApiEndPoints {
 
   // progression
   static const getWeightControl = 'consistency/get-user-weight';
+  static const userImagesProgress = 'consistency/get-user-image';
 
 
   static const addWeight = 'consistency/add-user-weight';

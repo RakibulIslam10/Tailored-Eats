@@ -8,7 +8,8 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
     return Scaffold(
       appBar: CommonAppBar(title: "Progression", isBack: false),
       body: SafeArea(
-        child: ListView(
+        child: Obx(() =>
+        controller.isLoading.value ? LoadingWidget() : ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
             TextWidget(
@@ -18,36 +19,50 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
             ),
             CircularProgressWidget(
               percentage:
-                  double.tryParse(
-                    "${Get.find<HomeController>().consistencyModel?.data.todayCompleted.percentage}",
-                  ) ??
+              double.tryParse(
+                "${Get
+                    .find<HomeController>()
+                    .consistencyModel
+                    ?.data
+                    .todayCompleted
+                    .percentage}",
+              ) ??
                   0.0,
             ),
             Space.height.v10,
 
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.10,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.10,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 physics: BouncingScrollPhysics(),
                 children: List.generate(
                   math.min(
                     6,
-                    Get.find<HomeController>().friendsProgressList.length,
+                    Get
+                        .find<HomeController>()
+                        .friendsProgressList
+                        .length,
                   ),
-                  (index) => StudyProgress(
-                    percentage: Helpers.parseDouble(
-                      Get.find<HomeController>()
-                          .friendsProgressList[index]
-                          .completed,
-                    ),
-                    date: Helpers.formatDate(
-                      Get.find<HomeController>()
-                          .friendsProgressList[index]
-                          .createdAt
-                          .toString(),
-                    ),
-                  ),
+                      (index) =>
+                      StudyProgress(
+                        percentage: Helpers.parseDouble(
+                          Get
+                              .find<HomeController>()
+                              .friendsProgressList[index]
+                              .completed,
+                        ),
+                        date: Helpers.formatDate(
+                          Get
+                              .find<HomeController>()
+                              .friendsProgressList[index]
+                              .createdAt
+                              .toString(),
+                        ),
+                      ),
                 ),
               ),
             ),
@@ -65,7 +80,7 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
             ),
             Space.height.v30,
           ],
-        ),
+        ),)
       ),
     );
   }

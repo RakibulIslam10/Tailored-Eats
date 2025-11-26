@@ -16,19 +16,15 @@ class WeightChartWidget extends GetView<ConsistencyController> {
             borderRadius: BorderRadius.circular(15.r),
           ),
           child: const Center(
-            child: CircularProgressIndicator(
-              color: CustomColors.progressColor,
-            ),
+            child: CircularProgressIndicator(color: CustomColors.progressColor),
           ),
         );
       }
 
-      // Show empty state - NO DATA
       if (controller.weightList.isEmpty) {
-        return const SizedBox.shrink(); // Returns null/nothing
+        return const SizedBox.shrink();
       }
 
-      // Show chart with data
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -52,7 +48,7 @@ class WeightChartWidget extends GetView<ConsistencyController> {
               child: LineChart(
                 LineChartData(
                   backgroundColor: Colors.transparent,
-                  gridData: FlGridData(show: false),
+                  // gridData: FlGridData(show: false),
                   titlesData: FlTitlesData(
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
@@ -80,7 +76,7 @@ class WeightChartWidget extends GetView<ConsistencyController> {
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        interval: 5,
+                        interval: 20,
                         getTitlesWidget: (value, _) {
                           return Text(
                             '${value.toInt()}kg',

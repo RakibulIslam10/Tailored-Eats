@@ -1,7 +1,9 @@
 import 'package:tailored_eats/core/api/end_point/api_end_points.dart';
 import 'package:tailored_eats/core/api/services/api_request.dart';
 import 'package:intl/intl.dart';
+import 'package:tailored_eats/views/home/controller/home_controller.dart';
 import '../../../core/utils/basic_import.dart';
+import '../model/user_progress_image_model.dart';
 import '../model/weight_controler_model.dart';
 
 class WeightData {
@@ -14,19 +16,28 @@ class WeightData {
 }
 
 class ConsistencyController extends GetxController {
-  // Observable list for dynamic weight data
   RxList<WeightData> weightList = <WeightData>[].obs;
-
-  // Raw API data
   RxList<WeightDatas> weightDataList = <WeightDatas>[].obs;
-
-  // Loading state
   RxBool isLoadingWeight = false.obs;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    getWeightControlData();
+    loadInitialData();
+  }
+
+  Future<void> loadInitialData() async {
+    try {
+      isLoading.value = true;
+      await Future.wait([
+        getWeightControlData(),
+        getUsersImageProgress(),
+        Get.find<HomeController>().loadInitialData(),
+      ]);
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   Future<WeightControlModel> getWeightControlData() async {
@@ -43,14 +54,12 @@ class ConsistencyController extends GetxController {
     );
   }
 
-  // Process API data to chart format
   void _processWeightData() {
     if (weightDataList.isEmpty) {
       weightList.clear();
       return;
     }
 
-    // Sort by date (oldest first)
     final sortedData = weightDataList.toList()
       ..sort((a, b) => a.createdAt.compareTo(b.createdAt));
 
@@ -59,10 +68,8 @@ class ConsistencyController extends GetxController {
     for (int i = 0; i < sortedData.length; i++) {
       final current = sortedData[i];
 
-      // Format date label (e.g., "05-10" for Oct 5)
       final label = DateFormat('dd-MM').format(current.createdAt);
 
-      // Calculate weight change
       String change = '+0kg';
       if (i > 0) {
         final previous = sortedData[i - 1];
@@ -71,7 +78,7 @@ class ConsistencyController extends GetxController {
         if (diff > 0) {
           change = '+${diff}kg';
         } else if (diff < 0) {
-          change = '${diff}kg'; // Already has negative sign
+          change = '${diff}kg';
         } else {
           change = '0kg';
         }
@@ -85,17 +92,16 @@ class ConsistencyController extends GetxController {
     weightList.value = processedData;
   }
 
-  // Get min and max Y values for chart bounds
   double get minWeight {
     if (weightList.isEmpty) return 50;
     final min = weightList.map((e) => e.y).reduce((a, b) => a < b ? a : b);
-    return (min - 5).floorToDouble(); // Add some padding
+    return (min - 5).floorToDouble();
   }
 
   double get maxWeight {
     if (weightList.isEmpty) return 80;
     final max = weightList.map((e) => e.y).reduce((a, b) => a > b ? a : b);
-    return (max + 5).ceilToDouble(); // Add some padding
+    return (max + 5).ceilToDouble();
   }
 
   // Latest weight info
@@ -127,4 +133,16 @@ class ConsistencyController extends GetxController {
     'https://picsum.photos/id/1014/600/800',
     'https://picsum.photos/id/1015/600/800',
   ];
+
+  RxBool isGetImageLoading = false.obs;
+  RxList<DatumData> imageProgressList = <DatumData>[].obs;
+
+  Future<UserProgressImageModel> getUsersImageProgress() async {
+    return await ApiRequest.get(
+      fromJson: UserProgressImageModel.fromJson,
+      endPoint: ApiEndPoints.userImagesProgress,
+      isLoading: isGetImageLoading,
+      onSuccess: (result) => imageProgressList.addAll(result.data),
+    );
+  }
 }
