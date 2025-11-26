@@ -11,15 +11,14 @@ class ReportScreenMobile extends GetView<ReportController> {
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
-
             Space.height.betweenInputBox,
-
-           CustomDropDownWidget(
-
-             hint: 'Problem Type',
-             items: [], onChanged: (value) {
-
-           },),
+            CustomDropDownWidget(
+              hint: 'Problem Type',
+              items: controller.problemList,
+              onChanged: (value) {
+                controller.selectedIssue.value = value;
+              },
+            ),
 
             Space.height.betweenInputBox,
             PrimaryInputFieldWidget(

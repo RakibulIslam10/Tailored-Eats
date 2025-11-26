@@ -9,7 +9,7 @@ class FriendsRequestWidget extends GetView<FriendsController> {
       physics: NeverScrollableScrollPhysics(),
       cacheExtent: 800,
       shrinkWrap: true,
-      itemCount: 21,
+      itemCount: controller.allFriendRequestsList.length,
       itemBuilder: (context, index) {
         return InkWell(
           borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
@@ -40,7 +40,8 @@ class FriendsRequestWidget extends GetView<FriendsController> {
                       child: CircleAvatar(
                         radius: 25.r,
                         backgroundImage: CachedNetworkImageProvider(
-                          'https://i.pravatar.cc/150?u=$index',
+                          controller.allFriendRequestsList[index].image ??
+                              'https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg',
                         ),
                         backgroundColor: Colors.grey.shade200,
                       ),
@@ -50,11 +51,11 @@ class FriendsRequestWidget extends GetView<FriendsController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextWidget(
-                          'Friend $index',
+                          controller.allFriendRequestsList[index].name,
                           fontWeight: FontWeight.bold,
                         ),
                         TextWidget(
-                          'Lose weight',
+                          controller.allFriendRequestsList[index].mainGoal,
                           fontWeight: FontWeight.w500,
 
                           fontSize: Dimensions.titleSmall,

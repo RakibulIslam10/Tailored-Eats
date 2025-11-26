@@ -19,8 +19,13 @@ class ApiEndPoints {
   static const createGoal = 'goal/create-new-goal';
   static const deleteGoal = 'goal/delete-goal';
   static const updateGoal = 'goal/update-goal';
-
   static const goalMark = 'goal/mark-goal-completed';
+
+
+  // Friends
+  static const getAllFriends = 'friend/get-all-friend';
+  static const getAllFriendRequest = 'friend/get-all-friend-request';
+
 
   static const addWeight = 'consistency/add-user-weight';
   static const category = 'categories';

@@ -32,7 +32,8 @@ class HomeAppBarWidget extends GetView<HomeController> {
             ),
             child: ClipOval(
               child: CachedNetworkImage(
-                imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+                imageUrl:
+                    "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
                 fit: BoxFit.cover,
                 height: 32.h,
                 width: 32.w,

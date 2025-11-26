@@ -40,6 +40,11 @@ class FriendsProgressWidget extends GetView<HomeController> {
             physics: BouncingScrollPhysics(),
             cacheExtent: 500,
             itemBuilder: (context, index) {
+              final imageUrl =
+                  (controller.friendsDoingPercentList[index].image.isNotEmpty ??
+                      false)
+                  ? controller.friendsDoingPercentList[index].image
+                  : "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg";
               return RepaintBoundary(
                 child: Container(
                   margin: EdgeInsetsGeometry.only(right: Dimensions.widthSize),
@@ -64,11 +69,7 @@ class FriendsProgressWidget extends GetView<HomeController> {
                       Space.height.v5,
                       Row(
                         children: [
-                          ProfileAvatarWidget(
-                            imageUrl:
-                                controller.friendsDoingPercentList[index].image,
-                            size: 20.r,
-                          ),
+                          ProfileAvatarWidget(imageUrl: imageUrl, size: 20.r),
                           TextWidget(
                             padding: Dimensions.widthSize.edgeLeft,
                             controller.friendsDoingPercentList[index].name,

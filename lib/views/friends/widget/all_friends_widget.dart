@@ -9,7 +9,7 @@ class AllFriendsWidget extends GetView<FriendsController> {
       physics: NeverScrollableScrollPhysics(),
       cacheExtent: 800,
       shrinkWrap: true,
-      itemCount: 21,
+      itemCount: controller.allFriendsList.length,
       itemBuilder: (context, index) {
         return InkWell(
           borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
@@ -40,7 +40,8 @@ class AllFriendsWidget extends GetView<FriendsController> {
                       child: CircleAvatar(
                         radius: 20.r,
                         backgroundImage: CachedNetworkImageProvider(
-                          'https://i.pravatar.cc/150?u=$index',
+                          controller.allFriendsList[index].image ??
+                              'https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg',
                         ),
                         backgroundColor: Colors.grey.shade200,
                       ),
@@ -50,11 +51,11 @@ class AllFriendsWidget extends GetView<FriendsController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextWidget(
-                          'Friend $index',
+                          controller.allFriendsList[index].name,
                           fontWeight: FontWeight.bold,
                         ),
                         TextWidget(
-                          'Lose weight',
+                          controller.allFriendsList[index].mainGoal,
                           fontSize: Dimensions.titleSmall,
                           color: CustomColors.grayShade,
                         ),
@@ -69,7 +70,9 @@ class AllFriendsWidget extends GetView<FriendsController> {
                     alignment: Alignment.center,
                     children: [
                       CircularProgressIndicator(
-                        value: 0.92,
+                        value:
+                            (controller.allFriendsList[index].percentage / 100)
+                                .clamp(0.0, 1.0),
                         backgroundColor: CustomColors.grayShade,
                         valueColor: AlwaysStoppedAnimation<Color>(
                           CustomColors.primary,
@@ -77,7 +80,7 @@ class AllFriendsWidget extends GetView<FriendsController> {
                         strokeWidth: 2.5,
                       ),
                       TextWidget(
-                        '${(0.92 * 100).toInt()}%',
+                        '${controller.allFriendsList[index].percentage.toString()}%',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
                       ),

@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:tailored_eats/core/api/helpers/helpers.dart';
 import 'package:tailored_eats/routes/routes.dart';
+import 'package:tailored_eats/widgets/empty_data_widget.dart';
+import 'package:tailored_eats/widgets/loading_widget.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
 import '../controller/friends_controller.dart';
