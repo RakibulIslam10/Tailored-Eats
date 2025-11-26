@@ -1,3 +1,4 @@
+import 'package:tailored_eats/views/consistency/controller/consistency_controller.dart';
 import 'package:tailored_eats/views/preview_profile/widget/consistency_box.dart';
 import 'package:tailored_eats/views/preview_profile/widget/image_progress.dart';
 import 'package:tailored_eats/views/preview_profile/widget/profile_image_and_button.dart';

@@ -42,6 +42,7 @@ class FriendsController extends GetxController {
       fromJson: FriendsModel.fromJson,
       endPoint: ApiEndPoints.getAllFriends,
       isLoading: isLoading,
+
       onSuccess: (result) {
         allFriendsList.addAll(result.friends);
       },
@@ -77,7 +78,7 @@ class FriendsController extends GetxController {
     if (searchQuery.isEmpty) return allFriendsList;
     return allFriendsList
         .where((friend) =>
-    friend.name?.toLowerCase().contains(searchQuery.value.toLowerCase()) ?? false)
+    friend.name.toLowerCase().contains(searchQuery.value.toLowerCase()) ?? false)
         .toList();
   }
 
@@ -85,7 +86,7 @@ class FriendsController extends GetxController {
     if (searchQuery.isEmpty) return allFriendRequestsList;
     return allFriendRequestsList
         .where((friend) =>
-    friend.name?.toLowerCase().contains(searchQuery.value.toLowerCase()) ?? false)
+    friend.name.toLowerCase().contains(searchQuery.value.toLowerCase()) ?? false)
         .toList();
   }
 

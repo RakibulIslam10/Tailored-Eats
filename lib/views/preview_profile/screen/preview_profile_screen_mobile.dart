@@ -40,7 +40,7 @@ class PreviewProfileScreenMobile extends GetView<PreviewProfileController> {
                 ConsistencyBox(),
                 ReusableImageProgress(
                   title: 'Progress in Pictures',
-                  items: controller.items,
+                  items: Get.find<ConsistencyController>().imageProgressList,
                 ),
               ],
             ),
