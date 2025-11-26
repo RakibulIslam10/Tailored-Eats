@@ -113,13 +113,16 @@ class HomeScreenMobile extends GetView<HomeController> {
                           ),
                         ),
                       ),
-                      TextWidget(
-                        "Don't Forget Your Daily Goal",
-                        fontWeight: FontWeight.bold,
-                        padding: Dimensions.heightSize.edgeVertical * 1.5,
-                      ),
-                      TaskListWidget(),
-                      Space.height.v10,
+                      if (controller.goalList.isNotEmpty) ...[
+                        TextWidget(
+                          "Don't Forget Your Daily Goal",
+                          fontWeight: FontWeight.bold,
+                          padding: Dimensions.heightSize.edgeVertical * 1.5,
+                        ),
+                        TaskListWidget(),
+                      ],
+                      Space.height.v20,
+
                       WeightWidget(
                         homeController: controller,
                         onSave: () => controller.saveWeight(),

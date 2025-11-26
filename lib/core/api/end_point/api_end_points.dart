@@ -13,8 +13,15 @@ class ApiEndPoints {
   //home
   static const macros = 'user/user-detail';
   static const consistencyGet = 'consistency/user-consistency-details';
+
+  // goal
   static const getALlGoal = 'goal/get-all-goal';
+  static const createGoal = 'goal/create-new-goal';
+  static const deleteGoal = 'goal/delete-goal';
+  static const updateGoal = 'goal/update-goal';
+
   static const goalMark = 'goal/mark-goal-completed';
+
   static const addWeight = 'consistency/add-user-weight';
   static const category = 'categories';
   static const privacy = 'manage/get-privacy-policy';

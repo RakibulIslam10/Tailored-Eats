@@ -32,11 +32,7 @@ class GoalListWidget extends StatelessWidget {
     if (type == GoalType.suggested) {
       return Row(
         children: [
-          Icon(
-            Icons.lightbulb_outline,
-            color: Colors.amberAccent,
-            size: 20.sp,
-          ),
+          Icon(Icons.lightbulb_outline, color: Colors.amberAccent, size: 20.sp),
           SizedBox(width: 8.w),
           TextWidget(
             title,
@@ -68,20 +64,20 @@ class GoalListWidget extends StatelessWidget {
       child: goals.isEmpty
           ? _buildEmptyState()
           : ListView.separated(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
-        shrinkWrap: true,
-        itemCount: goals.length,
-        separatorBuilder: (_, __) => Divider(
-          height: 1,
-          color: CustomColors.grayShade.withOpacity(0.2),
-          indent: 16.w,
-          endIndent: 16.w,
-        ),
-        itemBuilder: (context, index) {
-          final goal = goals[index];
-          return _buildGoalItem(goal, index);
-        },
-      ),
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              shrinkWrap: true,
+              itemCount: goals.length,
+              separatorBuilder: (_, __) => Divider(
+                height: 1,
+                color: CustomColors.grayShade.withOpacity(0.2),
+                indent: 16.w,
+                endIndent: 16.w,
+              ),
+              itemBuilder: (context, index) {
+                final goal = goals[index];
+                return _buildGoalItem(goal, index);
+              },
+            ),
     );
   }
 
@@ -89,10 +85,7 @@ class GoalListWidget extends StatelessWidget {
     final bool showActions = type != GoalType.suggested;
 
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 4.h,
-      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
       leading: _buildCheckbox(goal, index),
       title: Text(
         goal.title,
@@ -116,13 +109,8 @@ class GoalListWidget extends StatelessWidget {
       height: 20.w,
       width: 20.w,
       child: Checkbox(
-        side: BorderSide(
-          color: CustomColors.grayShade,
-          width: 1.5,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4.r),
-        ),
+        side: BorderSide(color: CustomColors.grayShade, width: 1.5),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.r)),
         value: goal.completed,
         activeColor: CustomColors.progressColor,
         checkColor: CustomColors.blackColor,
@@ -203,10 +191,7 @@ class GoalListWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                 ),
-                child: TextWidget(
-                  'Cancel',
-                  color: CustomColors.whiteColor,
-                ),
+                child: TextWidget('Cancel', color: CustomColors.whiteColor),
               ),
             ),
             SizedBox(width: 12.w),
@@ -259,10 +244,7 @@ class GoalListWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                 ),
-                child: TextWidget(
-                  'Cancel',
-                  color: CustomColors.whiteColor,
-                ),
+                child: TextWidget('Cancel', color: CustomColors.whiteColor),
               ),
             ),
             SizedBox(width: 12.w),
@@ -282,10 +264,7 @@ class GoalListWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                 ),
-                child: TextWidget(
-                  'Delete',
-                  color: Colors.white,
-                ),
+                child: TextWidget('Delete', color: Colors.white),
               ),
             ),
           ],

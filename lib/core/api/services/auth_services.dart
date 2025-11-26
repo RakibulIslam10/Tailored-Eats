@@ -52,7 +52,16 @@ class AuthService {
     );
   }
 
-  // /// =============================================== ✅ Forget Password ================================================== ///
+
+
+
+
+
+
+
+
+
+  /// =============================================== ✅ Forget Password ================================================== ///
   static Future<BasicSuccessModel> forgotPasswordService({
     required RxBool isLoading,
     required String email,
