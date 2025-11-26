@@ -26,6 +26,9 @@ class ApiEndPoints {
   static const getAllFriends = 'friend/get-all-friend';
   static const getAllFriendRequest = 'friend/get-all-friend-request';
 
+  // progression
+  static const getWeightControl = 'consistency/get-user-weight';
+
 
   static const addWeight = 'consistency/add-user-weight';
   static const category = 'categories';

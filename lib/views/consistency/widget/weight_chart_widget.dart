@@ -6,6 +6,29 @@ class WeightChartWidget extends GetView<ConsistencyController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      // Show loading state
+      if (controller.isLoadingWeight.value) {
+        return Container(
+          height: 320.h,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.black87,
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          child: const Center(
+            child: CircularProgressIndicator(
+              color: CustomColors.progressColor,
+            ),
+          ),
+        );
+      }
+
+      // Show empty state - NO DATA
+      if (controller.weightList.isEmpty) {
+        return const SizedBox.shrink(); // Returns null/nothing
+      }
+
+      // Show chart with data
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -82,9 +105,9 @@ class WeightChartWidget extends GetView<ConsistencyController> {
                     border: Border.all(color: Colors.white24),
                   ),
                   minX: 0,
-                  maxX: controller.weightList.length - 1.toDouble(),
-                  minY: 55,
-                  maxY: 80,
+                  maxX: (controller.weightList.length - 1).toDouble(),
+                  minY: controller.minWeight,
+                  maxY: controller.maxWeight,
                   lineBarsData: [
                     LineChartBarData(
                       spots: controller.weightList
