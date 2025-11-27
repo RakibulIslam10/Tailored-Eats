@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:tailored_eats/views/consistency/controller/consistency_controller.dart';
 
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/model/basic_success_model.dart';
@@ -78,6 +79,7 @@ class PictureProgressController extends GetxController {
       body: {},
       files: selectedFile,
       fromJson: BasicSuccessModel.fromJson,
+      onSuccess: (result) => Get.find<ConsistencyController>().getUsersImageProgress(),
     );
   }
 }

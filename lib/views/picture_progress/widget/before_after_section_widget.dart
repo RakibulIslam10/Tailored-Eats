@@ -7,6 +7,49 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
   Widget build(BuildContext context) {
     final controllers = Get.find<ConsistencyController>();
 
+    // ✅ Empty check করুন
+    if (controllers.imageProgressList.isEmpty) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
+        padding: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Center(
+          child: Column(
+            children: [
+              Icon(Icons.image_not_supported, size: 48.sp, color: Colors.grey),
+              SizedBox(height: 10.h),
+              Text(
+                'No progress images yet',
+                style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // ✅ শুধুমাত্র 1টা image থাকলে
+    if (controllers.imageProgressList.length == 1) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
+        child: ToggleImageCard(
+          imageUrl:
+              '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.first.url}',
+          label: "Current",
+          date: Helpers.formatDate(
+            controllers.imageProgressList.first.createdAt.toString(),
+          ),
+          toggleValue: controller.beforeToggle,
+          onToggle: () =>
+              controller.beforeToggle.value = !controller.beforeToggle.value,
+        ),
+      );
+    }
+
+    // ✅ 2টা বা তার বেশি image থাকলে Before/After দেখান
     return Container(
       margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
       child: Row(
@@ -17,22 +60,21 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
                   '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.first.url}',
               label: "Before",
               date: Helpers.formatDate(
-                controllers.imageProgressList.last.createdAt.toString(),
+                controllers.imageProgressList.first.createdAt.toString(),
               ),
               toggleValue: controller.beforeToggle,
               onToggle: () => controller.beforeToggle.value =
                   !controller.beforeToggle.value,
             ),
           ),
-
           Space.width.v10,
           Expanded(
             child: ToggleImageCard(
               imageUrl:
                   '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.last.url}',
-              label: "Before",
+              label: "After",
               date: Helpers.formatDate(
-                controllers.imageProgressList.first.createdAt.toString(),
+                controllers.imageProgressList.last.createdAt.toString(),
               ),
               toggleValue: controller.afterToggle,
               onToggle: () =>
@@ -45,6 +87,7 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
   }
 }
 
+// ToggleImageCard same থাকবে...
 class ToggleImageCard extends StatelessWidget {
   final String imageUrl;
   final String label;
