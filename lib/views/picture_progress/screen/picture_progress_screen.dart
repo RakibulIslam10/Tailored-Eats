@@ -1,6 +1,10 @@
 import 'dart:ui';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:tailored_eats/core/api/helpers/helpers.dart';
 import 'package:tailored_eats/routes/routes.dart';
+import 'package:tailored_eats/views/consistency/controller/consistency_controller.dart';
+import 'package:tailored_eats/widgets/loading_widget.dart';
+import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
 import '../controller/picture_progress_controller.dart';

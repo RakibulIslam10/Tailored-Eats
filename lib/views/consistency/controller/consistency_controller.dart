@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:tailored_eats/core/api/end_point/api_end_points.dart';
+import 'package:tailored_eats/core/api/model/basic_success_model.dart';
 import 'package:tailored_eats/core/api/services/api_request.dart';
 import 'package:intl/intl.dart';
 import 'package:tailored_eats/views/home/controller/home_controller.dart';
@@ -138,6 +142,7 @@ class ConsistencyController extends GetxController {
   RxList<DatumData> imageProgressList = <DatumData>[].obs;
 
   Future<UserProgressImageModel> getUsersImageProgress() async {
+    imageProgressList.clear();
     return await ApiRequest.get(
       fromJson: UserProgressImageModel.fromJson,
       endPoint: ApiEndPoints.userImagesProgress,

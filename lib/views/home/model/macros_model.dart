@@ -1,13 +1,3 @@
-// To parse this JSON data, do
-//
-//     final macrosModel = macrosModelFromJson(jsonString);
-
-import 'dart:convert';
-
-MacrosModel macrosModelFromJson(String str) => MacrosModel.fromJson(json.decode(str));
-
-String macrosModelToJson(MacrosModel data) => json.encode(data.toJson());
-
 class MacrosModel {
   final int statusCode;
   final bool success;
@@ -27,13 +17,6 @@ class MacrosModel {
     message: json["message"],
     data: Data.fromJson(json["data"]),
   );
-
-  Map<String, dynamic> toJson() => {
-    "statusCode": statusCode,
-    "success": success,
-    "message": message,
-    "data": data.toJson(),
-  };
 }
 
 class Data {
@@ -64,16 +47,6 @@ class Data {
     weight: List<Weight>.from(json["weight"].map((x) => Weight.fromJson(x))),
     calorie: Calorie.fromJson(json["calorie"]),
   );
-
-  Map<String, dynamic> toJson() => {
-    "name": name,
-    "email": email,
-    "gender": gender,
-    "height": height,
-    "goal": goal,
-    "weight": List<dynamic>.from(weight.map((x) => x.toJson())),
-    "calorie": calorie.toJson(),
-  };
 }
 
 class Calorie {
@@ -128,24 +101,6 @@ class Calorie {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
   );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "user": user,
-    "consumedCalorie": consumedCalorie,
-    "calorieGoal": calorieGoal,
-    "percentage": percentage,
-    "proteinGoal": proteinGoal,
-    "fatGoal": fatGoal,
-    "carbGoal": carbGoal,
-    "consumedCarb": consumedCarb,
-    "consumedFat": consumedFat,
-    "consumedProtein": consumedProtein,
-    "completedGoal": completedGoal,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-    "__v": v,
-  };
 }
 
 class Weight {
@@ -173,13 +128,4 @@ class Weight {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
   );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "user": user,
-    "weightKg": weightKg,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-    "__v": v,
-  };
 }

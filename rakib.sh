@@ -2,7 +2,32 @@
 
 case "$1" in
 
-"make-my-structure")
+# -------------------------------------------------------------
+#                🚀 Project Setup
+# -------------------------------------------------------------
+
+# 1️⃣  run => chmod +x rakib.sh       (only first time do this)
+
+# 2️⃣   run => ./rakib.sh make-my-temp
+
+# 3️⃣  Add widgets dir in /lib
+
+# 4️⃣  Replace all import with project name
+#     (Ctrl + Shift + R)
+
+# 5️⃣   run => ./rakib.sh make-views   (name with splash + route import)
+
+# 6️⃣  run => dart run build_runner build
+
+# 7️⃣  run => ./rakib.sh gen-clean-yaml   (name with rakib_temp)
+
+#     flutter clean
+#     flutter pub get
+#     flutter run
+
+
+
+"make-str")
     echo "🛠️ Creating Flutter project folder structure..."
     curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/cs.sh | bash
     curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/cu.sh | bash
@@ -11,9 +36,9 @@ case "$1" in
 "make-views")
     # shellcheck disable=SC2162
     read -p "📥 Enter View Names (space-separated): " viewNames
-    curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/vv.sh | bash -s $viewNames
+    curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/vv.sh | bash -s "$viewNames"
     ;;
-"gen-clean-yaml")
+"clean-yaml")
     # 📥 Ask user for project name and description
     # shellcheck disable=SC2162
     read -p "📥 Enter Project Name: " projectName
@@ -24,10 +49,19 @@ case "$1" in
     ;;
 "auto-model")
     echo "📥 Downloading Auto-Model Script..."
-    curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/mA.sh -o mA.sh
-    chmod +x mA.sh
-    echo "🚀 Running Auto-Model Script..."
-    bash ./mA.sh
+    tmpScript=$(mktemp /tmp/auto_model_XXXXXX.sh)
+
+    if curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/mA.sh -o "$tmpScript" 2>/dev/null; then
+        chmod +x "$tmpScript"
+        echo "🚀 Running Auto-Model Script..."
+        bash "$tmpScript"
+        rm -f "$tmpScript"
+    else
+        echo "❌ Failed to  script !"
+        echo "💡 Check your internet connection"
+        rm -f "$tmpScript"
+        exit 1
+    fi
     ;;
 "make-widget")
     # shellcheck disable=SC2162
@@ -37,7 +71,7 @@ case "$1" in
     IFS=' ' read -r -a widgetArray <<< "$widgetNames"
     curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/widt.sh | bash -s "$viewName" "${widgetArray[@]}"
     ;;
-"write-api-method")
+"api-method")
     echo "🛠️ Creating Api Method..."
     curl -sSL https://raw.githubusercontent.com/RakibulIslam10/Flutter-Automation/refs/heads/main/am.sh | bash
     ;;

@@ -5,6 +5,8 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
 
   @override
   Widget build(BuildContext context) {
+    final controllers = Get.find<ConsistencyController>();
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
       child: Row(
@@ -12,9 +14,11 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
           Expanded(
             child: ToggleImageCard(
               imageUrl:
-                  'https://images.stockcake.com/public/f/6/1/f6162e66-9b24-4cfb-aca1-5f9589dda882_large/focused-gym-workout-stockcake.jpg',
+                  '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.first.url}',
               label: "Before",
-              date: "25 July 2025",
+              date: Helpers.formatDate(
+                controllers.imageProgressList.last.createdAt.toString(),
+              ),
               toggleValue: controller.beforeToggle,
               onToggle: () => controller.beforeToggle.value =
                   !controller.beforeToggle.value,
@@ -25,9 +29,11 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
           Expanded(
             child: ToggleImageCard(
               imageUrl:
-                  'https://images.stockcake.com/public/f/6/1/f6162e66-9b24-4cfb-aca1-5f9589dda882_large/focused-gym-workout-stockcake.jpg',
+                  '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.last.url}',
               label: "Before",
-              date: "25 July 2025",
+              date: Helpers.formatDate(
+                controllers.imageProgressList.first.createdAt.toString(),
+              ),
               toggleValue: controller.afterToggle,
               onToggle: () =>
                   controller.afterToggle.value = !controller.afterToggle.value,

@@ -18,7 +18,7 @@ class StorySectionWidget extends GetView<PictureProgressController> {
               color: Colors.white,
             ),
             InkWell(
-              onTap: controller.uploadImage,
+              onTap: () => controller.pickImg(),
               child: Container(
                 padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
@@ -44,17 +44,17 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
 
   @override
   Widget build(BuildContext context) {
+    final controllers = Get.find<ConsistencyController>();
+
     return MasonryGridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 12,
       crossAxisSpacing: 12,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: controller.storyImages.length,
+      itemCount: controllers.imageProgressList.length,
       itemBuilder: (context, index) {
         final bool isBig = index.isEven;
-        final image = controller.storyImages[index];
-
         return Container(
           height: isBig ? 210.h : 100.h,
           decoration: BoxDecoration(
@@ -74,7 +74,8 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
               fit: StackFit.expand,
               children: [
                 CachedNetworkImage(
-                  imageUrl: image["url"]!,
+                  imageUrl:
+                      '${ApiEndPoints.mainDomain}/${controllers.imageProgressList[index].url}',
                   fit: BoxFit.cover,
                   errorWidget: (context, url, error) => Container(
                     color: Colors.grey.shade400,
@@ -102,7 +103,10 @@ class ConsistentCardWidget extends GetView<PictureProgressController> {
                       borderRadius: BorderRadius.circular(6.r),
                     ),
                     child: Text(
-                      image["date"]!,
+                      Helpers.formatDate(
+                        controllers.imageProgressList[index].createdAt
+                            .toString(),
+                      ),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12.sp,
