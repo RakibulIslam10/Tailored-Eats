@@ -7,7 +7,6 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
   Widget build(BuildContext context) {
     final controllers = Get.find<ConsistencyController>();
 
-    // ✅ Empty check করুন
     if (controllers.imageProgressList.isEmpty) {
       return Container(
         margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
