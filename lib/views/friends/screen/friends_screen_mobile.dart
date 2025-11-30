@@ -8,38 +8,24 @@ class FriendsScreenMobile extends GetView<FriendsController> {
     return Scaffold(
       appBar: CommonAppBar(title: "Friends", isBack: false),
       body: SafeArea(
-        child: RefreshIndicator(
-          backgroundColor: Colors.black,
-          color: CustomColors.primary,
-          onRefresh: () async {
-            controller.getAllFriendRequest();
-            controller.getAllFriends();
-          },
-          child: Column(
-            children: [
-              // Tab Widget at the top
-              Padding(
-                padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-                child: TabWidget(),
-              ),
-              Space.height.v10,
-
-              // Content area with scroll
-              Expanded(
-                child: Obx(
-                  () => controller.selectedIndex.value == 0
-                      ? _buildAllFriendsTab()
-                      : _buildFriendRequestsTab(),
-                ),
-              ),
-            ],
+        child: Obx(
+              () => RefreshIndicator(
+            backgroundColor: Colors.black,
+            color: CustomColors.primary,
+            onRefresh: () async {
+              await controller.getAllFriendRequest();
+              await controller.getAllFriends();
+            },
+            child: controller.selectedIndex.value == 0
+                ? _buildAllFriendsTab()
+                : _buildFriendRequestsTab(),
           ),
         ),
       ),
     );
   }
 
-  // All Friends Tab
+  /// ========================= All Friends Tab =========================
   Widget _buildAllFriendsTab() {
     if (controller.isLoading.value) {
       return const Center(child: LoadingWidget());
@@ -51,19 +37,20 @@ class FriendsScreenMobile extends GetView<FriendsController> {
 
     return ListView(
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-      physics: const BouncingScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       children: [
-        _buildSearchBox(),
+        _buildTabWidget(),
+        Space.height.v10,
+        // _buildSearchBox(),
         Space.height.v15,
         _buildSectionHeader('All Friends', controller.allFriendsList.length),
         Space.height.v10,
-
-        // Friends
         AllFriendsWidget(),
       ],
     );
   }
 
+  /// ========================= Requests Tab =========================
   Widget _buildFriendRequestsTab() {
     if (controller.isLoadingF.value) {
       return const Center(child: LoadingWidget());
@@ -75,9 +62,11 @@ class FriendsScreenMobile extends GetView<FriendsController> {
 
     return ListView(
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-      physics: const BouncingScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       children: [
-        _buildSearchBox(),
+        _buildTabWidget(),
+        Space.height.v10,
+        // _buildSearchBox(),
         Space.height.v15,
         _buildSectionHeader(
           'Friend Requests',
@@ -89,6 +78,12 @@ class FriendsScreenMobile extends GetView<FriendsController> {
     );
   }
 
+  /// ========================= Tab Widget =========================
+  Widget _buildTabWidget() {
+    return TabWidget();
+  }
+
+  /// ========================= Search Box =========================
   Widget _buildSearchBox() {
     return GestureDetector(
       onTap: () => Get.toNamed(Routes.find_frinedScreen),
@@ -99,6 +94,7 @@ class FriendsScreenMobile extends GetView<FriendsController> {
           borderRadius: BorderRadius.circular(Dimensions.radius),
         ),
         child: TextFormField(
+          readOnly: true,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -117,6 +113,7 @@ class FriendsScreenMobile extends GetView<FriendsController> {
     );
   }
 
+  /// ========================= Section Header =========================
   Widget _buildSectionHeader(String title, int count) {
     return Row(
       children: [
