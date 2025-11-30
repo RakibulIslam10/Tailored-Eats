@@ -15,7 +15,7 @@ class ProfileImageAndButton extends GetView<PreviewProfileController> {
           child: ProfileAvatarWidget(
             size: 100.r,
             imageUrl: controller.progressImageList.isNotEmpty
-                ? "${ApiEndPoints.baseUrl}/${controller.progressImageList.first.url}"
+                ? "${ApiEndPoints.mainDomain}/${controller.progressImageList.first.url}"
                 : 'https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg',
           ),
         ),
@@ -68,7 +68,7 @@ class ProfileImageAndButton extends GetView<PreviewProfileController> {
                   onTap: () => controller.acceptRequest(),
                   child: Obx(
                     () => controller.isLoadingAccept.value
-                        ? CircularProgressIndicator()
+                        ? CircularProgressIndicator(color: CustomColors.primary,)
                         : Container(
                             margin: Dimensions.heightSize.edgeTop * 0.5,
                             padding: EdgeInsetsGeometry.symmetric(

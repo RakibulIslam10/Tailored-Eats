@@ -79,7 +79,6 @@ class HomeScreenMobile extends GetView<HomeController> {
                         ),
                       if (controller.friendsDoingPercentList.isNotEmpty)
                         RepaintBoundary(child: const FriendsProgressWidget()),
-
                       TextWidget(
                         'Your Next Bite',
                         fontWeight: FontWeight.bold,
@@ -122,7 +121,6 @@ class HomeScreenMobile extends GetView<HomeController> {
                         TaskListWidget(),
                       ],
                       Space.height.v20,
-
                       WeightWidget(
                         homeController: controller,
                         onSave: () => controller.saveWeight(),

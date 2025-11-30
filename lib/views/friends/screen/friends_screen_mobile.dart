@@ -11,7 +11,6 @@ class FriendsScreenMobile extends GetView<FriendsController> {
         child: RefreshIndicator(
           backgroundColor: Colors.black,
           color: CustomColors.primary,
-
           onRefresh: () async {
             controller.getAllFriendRequest();
             controller.getAllFriends();
@@ -80,7 +79,6 @@ class FriendsScreenMobile extends GetView<FriendsController> {
       children: [
         _buildSearchBox(),
         Space.height.v15,
-
         _buildSectionHeader(
           'Friend Requests',
           controller.allFriendRequestsList.length,

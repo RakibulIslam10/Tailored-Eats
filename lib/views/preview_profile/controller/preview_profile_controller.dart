@@ -1,6 +1,7 @@
 import 'package:tailored_eats/core/api/end_point/api_end_points.dart';
 import 'package:tailored_eats/core/api/model/basic_success_model.dart';
 import 'package:tailored_eats/core/api/services/api_request.dart';
+import 'package:tailored_eats/core/utils/app_storage.dart';
 import 'package:tailored_eats/views/friends/controller/friends_controller.dart';
 import 'package:tailored_eats/views/preview_profile/model/friend_details_model.dart';
 import '../../../core/utils/basic_import.dart';
@@ -70,7 +71,7 @@ class PreviewProfileController extends GetxController {
       endPoint: ApiEndPoints.acceptRequest,
       showSuccessSnackBar: true,
       isLoading: isLoadingDelete,
-      body: {"friendId": friendId},
+      body: {"friendId": AppStorage.userId},
       onSuccess: (result) {
         Get.find<FriendsController>().getAllFriendRequest();
         Get.close(1);

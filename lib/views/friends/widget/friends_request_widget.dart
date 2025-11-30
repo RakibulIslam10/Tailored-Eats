@@ -43,7 +43,7 @@ class FriendsRequestWidget extends GetView<FriendsController> {
                       child: CircleAvatar(
                         radius: 25.r,
                         backgroundImage: CachedNetworkImageProvider(
-                          controller.allFriendRequestsList[index].image ??
+                          '${ApiEndPoints.mainDomain}/${controller.allFriendRequestsList[index].image}' ??
                               'https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg',
                         ),
                         backgroundColor: Colors.grey.shade200,
@@ -75,7 +75,6 @@ class FriendsRequestWidget extends GetView<FriendsController> {
                                     Dimensions.defaultHorizontalSize * 1.5,
                                 vertical: Dimensions.verticalSize * 0.1,
                               ),
-
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadiusGeometry.circular(
                                   Dimensions.radius * 0.8,

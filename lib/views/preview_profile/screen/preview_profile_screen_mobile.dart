@@ -76,8 +76,7 @@ class PreviewProfileScreenMobile extends GetView<PreviewProfileController> {
                                       Dimensions.radius,
                                     ),
                                     child: CachedNetworkImage(
-                                      imageUrl:
-                                          '${ApiEndPoints.mainDomain}/${items[index].url}',
+                                      imageUrl: '${ApiEndPoints.mainDomain}/${items[index].url}',
                                       fit: BoxFit.cover,
                                       width: 175.w,
                                     ),
