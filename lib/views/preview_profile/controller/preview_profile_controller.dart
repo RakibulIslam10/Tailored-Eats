@@ -71,7 +71,7 @@ class PreviewProfileController extends GetxController {
       endPoint: ApiEndPoints.acceptRequest,
       showSuccessSnackBar: true,
       isLoading: isLoadingDelete,
-      body: {"friendId": AppStorage.userId},
+      body: {"friendId": friendId},
       onSuccess: (result) {
         Get.find<FriendsController>().getAllFriendRequest();
         Get.close(1);
