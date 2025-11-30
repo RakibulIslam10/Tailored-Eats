@@ -2,12 +2,16 @@ import 'package:tailored_eats/core/api/end_point/api_end_points.dart';
 import 'package:tailored_eats/core/api/services/api_request.dart';
 import 'package:tailored_eats/views/friends/model/friends_model.dart';
 import '../../../core/utils/basic_import.dart';
+import '../model/friends_request_model.dart';
 
 class FriendsController extends GetxController {
   final selectedIndex = 0.obs;
+  RxBool isRequest = false.obs;
 
   void changeTab(int index) {
     selectedIndex.value = index;
+    isRequest.value = selectedIndex.value == 1;
+    print(isRequest.value);
   }
 
   @override
@@ -42,7 +46,6 @@ class FriendsController extends GetxController {
       fromJson: FriendsModel.fromJson,
       endPoint: ApiEndPoints.getAllFriends,
       isLoading: isLoading,
-
       onSuccess: (result) {
         allFriendsList.addAll(result.friends);
       },
@@ -51,48 +54,18 @@ class FriendsController extends GetxController {
 
   // Get all friend requests
   RxBool isLoadingF = false.obs;
-  RxList<Friends> allFriendRequestsList = <Friends>[].obs;
+  RxList<Requests> allFriendRequestsList = <Requests>[].obs;
 
-  Future<FriendsModel> getAllFriendRequest() async {
-    allFriendRequestsList.clear(); // Clear before loading new data
+  Future<FriendsRequestModel> getAllFriendRequest() async {
+    allFriendRequestsList.clear();
 
     return await ApiRequest.get(
-      fromJson: FriendsModel.fromJson,
+      fromJson: FriendsRequestModel.fromJson,
       endPoint: ApiEndPoints.getAllFriendRequest,
       isLoading: isLoadingF,
       onSuccess: (result) {
-        allFriendRequestsList.addAll(result.friends);
+        allFriendRequestsList.addAll(result.requests);
       },
     );
-  }
-
-  // Search functionality (optional - implement if needed)
-  final searchController = TextEditingController();
-  RxString searchQuery = ''.obs;
-
-  void onSearchChanged(String query) {
-    searchQuery.value = query;
-  }
-
-  List<Friends> get filteredFriends {
-    if (searchQuery.isEmpty) return allFriendsList;
-    return allFriendsList
-        .where((friend) =>
-    friend.name.toLowerCase().contains(searchQuery.value.toLowerCase()) ?? false)
-        .toList();
-  }
-
-  List<Friends> get filteredRequests {
-    if (searchQuery.isEmpty) return allFriendRequestsList;
-    return allFriendRequestsList
-        .where((friend) =>
-    friend.name.toLowerCase().contains(searchQuery.value.toLowerCase()) ?? false)
-        .toList();
-  }
-
-  @override
-  void onClose() {
-    searchController.dispose();
-    super.onClose();
   }
 }

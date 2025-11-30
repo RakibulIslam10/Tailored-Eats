@@ -8,24 +8,33 @@ class FriendsScreenMobile extends GetView<FriendsController> {
     return Scaffold(
       appBar: CommonAppBar(title: "Friends", isBack: false),
       body: SafeArea(
-        child: Column(
-          children: [
-            // Tab Widget at the top
-            Padding(
-              padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-              child: TabWidget(),
-            ),
-            Space.height.v10,
+        child: RefreshIndicator(
+          backgroundColor: Colors.black,
+          color: CustomColors.primary,
 
-            // Content area with scroll
-            Expanded(
-              child: Obx(
-                () => controller.selectedIndex.value == 0
-                    ? _buildAllFriendsTab()
-                    : _buildFriendRequestsTab(),
+          onRefresh: () async {
+            controller.getAllFriendRequest();
+            controller.getAllFriends();
+          },
+          child: Column(
+            children: [
+              // Tab Widget at the top
+              Padding(
+                padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+                child: TabWidget(),
               ),
-            ),
-          ],
+              Space.height.v10,
+
+              // Content area with scroll
+              Expanded(
+                child: Obx(
+                  () => controller.selectedIndex.value == 0
+                      ? _buildAllFriendsTab()
+                      : _buildFriendRequestsTab(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -45,21 +54,17 @@ class FriendsScreenMobile extends GetView<FriendsController> {
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
       physics: const BouncingScrollPhysics(),
       children: [
-        // Search Box
         _buildSearchBox(),
         Space.height.v15,
-
-        // Header with count
         _buildSectionHeader('All Friends', controller.allFriendsList.length),
         Space.height.v10,
 
-        // Friends List
+        // Friends
         AllFriendsWidget(),
       ],
     );
   }
 
-  // Friend Requests Tab
   Widget _buildFriendRequestsTab() {
     if (controller.isLoadingF.value) {
       return const Center(child: LoadingWidget());
@@ -73,50 +78,47 @@ class FriendsScreenMobile extends GetView<FriendsController> {
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
       physics: const BouncingScrollPhysics(),
       children: [
-        // Search Box
         _buildSearchBox(),
         Space.height.v15,
 
-        // Header with count
         _buildSectionHeader(
           'Friend Requests',
           controller.allFriendRequestsList.length,
         ),
         Space.height.v10,
-
-        // Friend Requests List
         FriendsRequestWidget(),
       ],
     );
   }
 
-  // Reusable Search Box Widget
   Widget _buildSearchBox() {
-    return Container(
-      height: Dimensions.inputBoxHeight * 0.7,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(Dimensions.radius),
-      ),
-      child: TextFormField(
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          prefixIcon: const Icon(CupertinoIcons.search, color: Colors.white),
-          hintText: 'Search...',
-          hintStyle: TextStyle(
-            fontSize: Dimensions.titleSmall * 1.1,
-            color: Colors.white.withOpacity(0.6),
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            vertical: Dimensions.heightSize * 0.5,
+    return GestureDetector(
+      onTap: () => Get.toNamed(Routes.find_frinedScreen),
+      child: Container(
+        height: Dimensions.inputBoxHeight * 0.7,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(Dimensions.radius),
+        ),
+        child: TextFormField(
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            prefixIcon: const Icon(CupertinoIcons.search, color: Colors.white),
+            hintText: 'Search...',
+            hintStyle: TextStyle(
+              fontSize: Dimensions.titleSmall * 1.1,
+              color: Colors.white.withOpacity(0.6),
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              vertical: Dimensions.heightSize * 0.5,
+            ),
           ),
         ),
       ),
     );
   }
 
-  // Reusable Section Header Widget
   Widget _buildSectionHeader(String title, int count) {
     return Row(
       children: [

@@ -37,17 +37,17 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
       bottomNavigationBar: Obx(
         () => controller.currentStep.value == 0
             ? SizedBox()
-            : PrimaryButtonWidget(
-                buttonTextColor: CustomColors.blackColor,
-                padding: EdgeInsets.symmetric(
-                  horizontal: Dimensions.defaultHorizontalSize,
-                  vertical: Dimensions.verticalSize * 2,
-                ),
-                title: controller.currentStep.value == 9
-                    ? "Go to home"
-                    : "Next",
-                onPressed: () => controller.nextStep(),
-              ),
+            : controller.isLoading.value ? LoadingWidget() : PrimaryButtonWidget(
+          buttonTextColor: CustomColors.blackColor,
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.defaultHorizontalSize,
+            vertical: Dimensions.verticalSize * 2,
+          ),
+          title: controller.currentStep.value == 9
+              ? "Go to home"
+              : "Next",
+          onPressed: () => controller.nextStep(),
+        ),
       ),
 
       appBar: AppBar(

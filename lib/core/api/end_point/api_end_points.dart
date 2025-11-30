@@ -1,5 +1,5 @@
 class ApiEndPoints {
-  static final mainDomain = 'http://10.10.20.57:8002';
+  static final mainDomain = 'https://p2zltbm7-8002.inc1.devtunnels.ms';
   static final baseUrl = '$mainDomain/api/v1/';
 
   // Auth
@@ -21,16 +21,18 @@ class ApiEndPoints {
   static const updateGoal = 'goal/update-goal';
   static const goalMark = 'goal/mark-goal-completed';
 
-
   // Friends
   static const getAllFriends = 'friend/get-all-friend';
   static const getAllFriendRequest = 'friend/get-all-friend-request';
+  static const friendDetails = 'friend/friend-detail';
+  static const acceptRequest = 'friend/accept-request';
+  static const rejectRequest = 'friend/reject-request';
+  static const unfriedRequest = 'friend/make-unfriend';
 
   // progression
   static const getWeightControl = 'consistency/get-user-weight';
   static const userImagesProgress = 'consistency/get-user-image';
   static const addImagesProgress = 'consistency/add-user-image';
-
 
   static const addWeight = 'consistency/add-user-weight';
   static const category = 'categories';

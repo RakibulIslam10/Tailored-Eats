@@ -1,4 +1,6 @@
 import 'package:tailored_eats/core/api/model/basic_success_model.dart';
+import 'package:tailored_eats/views/home/controller/home_controller.dart';
+import 'package:tailored_eats/views/profile/controller/profile_controller.dart';
 
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
@@ -25,6 +27,18 @@ class UpdateProfileController extends GetxController {
   // Observable variables
   final RxString selectedGender = ''.obs;
   final RxBool isLoading = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    firstNameController.text =
+        Get.find<HomeController>().macrosModel?.data.name ?? '';
+    // lastNameController.text =   Get.find<HomeController>().macrosModel?.data.name ?? '';
+    emailController.text =
+        Get.find<HomeController>().macrosModel?.data.email ?? '';
+    // ageController.text =   Get.find<HomeController>().macrosModel?.data.name ?? '';
+    passwordController.text = '*********';
+  }
 
   // Gender options
   final List<String> genderOptions = ['Male', 'Female', 'Other'];

@@ -77,7 +77,7 @@ class HomeScreenMobile extends GetView<HomeController> {
                             ),
                           ),
                         ),
-                      if (controller.friendsProgressList.isNotEmpty)
+                      if (controller.friendsDoingPercentList.isNotEmpty)
                         RepaintBoundary(child: const FriendsProgressWidget()),
 
                       TextWidget(

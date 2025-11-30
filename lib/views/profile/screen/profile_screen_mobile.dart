@@ -15,7 +15,6 @@ class ProfileScreenMobile extends GetView<ProfileController> {
             ProfileHeaderWidget(),
             Space.height.v20,
             InfoCardWidget(),
-
             Space.height.v40,
             MenuItemsCardWidget(),
           ],

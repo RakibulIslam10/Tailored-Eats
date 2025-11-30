@@ -21,6 +21,7 @@ class MacrosModel {
 
 class Data {
   final String name;
+  final String image;
   final String email;
   final String gender;
   final int height;
@@ -30,6 +31,7 @@ class Data {
 
   Data({
     required this.name,
+    required this.image,
     required this.email,
     required this.gender,
     required this.height,
@@ -40,6 +42,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     name: json["name"],
+    image: json["image"] ?? "",
     email: json["email"],
     gender: json["gender"],
     height: json["height"],

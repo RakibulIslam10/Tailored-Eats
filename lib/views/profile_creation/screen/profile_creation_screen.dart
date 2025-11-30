@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:tailored_eats/routes/routes.dart';
+import 'package:tailored_eats/widgets/loading_widget.dart';
 
 import '../../../core/utils/basic_import.dart';
 import '../controller/profile_creation_controller.dart';

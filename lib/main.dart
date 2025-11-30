@@ -6,7 +6,6 @@ import 'views/splash/controller/splash_controller.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initial.init();
-
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.white,
@@ -14,7 +13,6 @@ void main() async {
       statusBarBrightness: Brightness.light,
     ),
   );
-
   runApp(const MyApp());
 }
 

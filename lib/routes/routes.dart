@@ -4,6 +4,7 @@ import '../bind/change_password_binding.dart';
 import '../bind/consistency_binding.dart';
 import '../bind/details_binding.dart';
 import '../bind/faq_binding.dart';
+import '../bind/find_frined_binding.dart';
 import '../bind/forget_password_binding.dart';
 import '../bind/friends_binding.dart';
 import '../bind/friends_consistency_binding.dart';
@@ -42,6 +43,7 @@ import '../views/change_password/screen/change_password_screen.dart';
 import '../views/consistency/screen/consistency_screen.dart';
 import '../views/details/screen/details_screen.dart';
 import '../views/faq/screen/faq_screen.dart';
+import '../views/find_frined/screen/find_frined_screen.dart';
 import '../views/friends/screen/friends_screen.dart';
 import '../views/friends_consistency/screen/friends_consistency_screen.dart';
 import '../views/goal/screen/goal_screen.dart';
@@ -68,6 +70,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const find_frinedScreen = '/find_frinedScreen';
   static const pictureProgressScreen = '/picture_progressScreen';
   static const friendsConsistencyScreen = '/friends_consistencyScreen';
   static const previewProfileScreen = '/preview_profileScreen';

@@ -1,7 +1,9 @@
 import 'package:tailored_eats/core/utils/basic_import.dart';
+import 'package:tailored_eats/views/preview_profile/controller/preview_profile_controller.dart';
+import '../../../core/api/helpers/helpers.dart';
 import '../../home/screen/home_screen.dart';
 
-class ConsistencyBox extends StatelessWidget {
+class ConsistencyBox extends GetView<PreviewProfileController> {
   const ConsistencyBox({super.key});
 
   @override
@@ -23,8 +25,15 @@ class ConsistencyBox extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
             children: List.generate(
-              10,
-              (index) => StudyProgressWidget(percentage: 0.92, date: '27 July'),
+              controller.consistencyList.length,
+              (index) => StudyProgress(
+                percentage: Helpers.parseDouble(
+                  controller.consistencyList[index].completed,
+                ),
+                date: Helpers.formatDate(
+                  controller.consistencyList[index].createdAt.toString(),
+                ),
+              ),
             ),
           ),
         ),

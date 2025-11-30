@@ -14,14 +14,14 @@ class MenuItemsCardWidget extends GetView<ProfileController> {
             // Handle subscription tap
           },
         ),
-        Space.height.v20,
-        _buildMenuItem(
-          icon: Icons.restaurant_outlined,
-          title: 'Nutrition & Goals',
-          onTap: () {
-            // Handle nutrition tap
-          },
-        ),
+        // Space.height.v20,
+        // _buildMenuItem(
+        //   icon: Icons.restaurant_outlined,
+        //   title: 'Nutrition & Goals',
+        //   onTap: () {
+        //     // Handle nutrition tap
+        //   },
+        // ),
         Space.height.v20,
         _buildMenuItem(
           icon: Icons.settings_outlined,

@@ -4,6 +4,11 @@ class RoutePageList {
   static var list = [
     //Page Route List,
     GetPage(
+      name: Routes.find_frinedScreen,
+      page: () => const FindFrinedScreen(),
+      binding: FindFrinedBinding(),
+    ),
+    GetPage(
       name: Routes.friendsConsistencyScreen,
       page: () => const FriendsConsistencyScreen(),
       binding: FriendsConsistencyBinding(),

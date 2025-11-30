@@ -14,7 +14,9 @@ class ProfileHeaderWidget extends GetView<ProfileController> {
       child: Row(
         children: [
           ProfileAvatarWidget(
-            imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+            imageUrl:
+                Get.find<HomeController>().macrosModel?.data.image ??
+                'https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg',
             size: 60,
             hasBorder: true,
           ),

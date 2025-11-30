@@ -5,6 +5,8 @@ class HomeAppBarWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final image = controller.macrosModel?.data.image;
+    final validImage = image != null && image.isNotEmpty;
     return AppBar(
       scrolledUnderElevation: 0,
       backgroundColor: CustomColors.blackColor,
@@ -31,20 +33,17 @@ class HomeAppBarWidget extends GetView<HomeController> {
               border: Border.all(color: CustomColors.primary, width: 2),
             ),
             child: ClipOval(
-              child: CachedNetworkImage(
-                imageUrl:
-                    "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
+              child: validImage
+                  ? CachedNetworkImage(
+                imageUrl: '${ApiEndPoints.mainDomain}/$image',
                 fit: BoxFit.cover,
                 height: 32.h,
                 width: 32.w,
-                errorWidget: (context, url, error) =>
-                    Container(color: Colors.grey.shade400),
-                placeholder: (context, url) => Container(
-                  color: Colors.grey.shade300,
-                  child: Icon(Icons.error, color: Colors.red),
-                ),
-              ),
-            ),
+                errorWidget: (_, __, ___) => Icon(Icons.person, size: 28.sp),
+                placeholder: (_, __) => Icon(Icons.person, size: 28.sp),
+              )
+                  : Icon(Icons.person, size: 28.sp),
+            )
           ),
         ),
       ],

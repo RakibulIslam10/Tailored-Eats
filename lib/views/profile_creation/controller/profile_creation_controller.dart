@@ -201,7 +201,7 @@ class ProfileCreationController extends GetxController {
 
     // now at step 8 → call process
     if (currentStep.value == 8) {
-      await profileCompleteProcess(); // wait for process
+      await profileCompleteProcess();
       currentStep.value = 9; // go to step 9 after
       print("COMPLETED & MOVED TO STEP 9");
       return;
