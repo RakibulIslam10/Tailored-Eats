@@ -164,6 +164,7 @@ class HomeController extends GetxController {
       isLoading: isLoadingAddWeight,
       body: {'weight': weightController.text},
       showSuccessSnackBar: true,
+      onSuccess: (result) => weightController.clear(),
     );
   }
 

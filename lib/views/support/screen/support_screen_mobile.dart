@@ -14,19 +14,25 @@ class SupportScreenMobile extends GetView<SupportController> {
             Space.height.betweenInputBox,
 
             PrimaryInputFieldWidget(
-              controller: TextEditingController(),
+              controller: controller.subjectController,
               hintText: 'Title',
             ),
 
             Space.height.betweenInputBox,
             PrimaryInputFieldWidget(
-              controller: TextEditingController(),
+              controller: controller.bodyController,
               hintText: "description",
               maxLines: 5,
             ),
             Space.height.betweenInputBox,
             Space.height.betweenInputBox,
-            PrimaryButtonWidget(title: "Submit", onPressed: () {}),
+            Obx(
+              () => PrimaryButtonWidget(
+                isLoading: controller.isLoading.value,
+                title: "Submit",
+                onPressed: () => controller.sendSupport,
+              ),
+            ),
           ],
         ),
       ),

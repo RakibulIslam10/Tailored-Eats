@@ -66,7 +66,7 @@ class ConsistencyScreenMobile extends GetView<ConsistencyController> {
                           ),
                         ),
                       if (Get.find<HomeController>()
-                          .friendsProgressList
+                          .friendsDoingPercentList
                           .isNotEmpty)
                         const FriendsProgressWidget(),
                       Space.height.v10,
