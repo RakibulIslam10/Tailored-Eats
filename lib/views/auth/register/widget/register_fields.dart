@@ -46,7 +46,10 @@ class RegisterFields extends GetView<RegisterController> {
               isLoading: controller.isLoading.value,
               onPressed: () {
                 if (controller.fromKey.currentState!.validate()) {
-                  controller.registerProcess();
+                  // controller.registerProcess();
+                  Get.toNamed(Routes.profileCreationScreen);
+
+
                 }
               },
             ),

@@ -1,11 +1,12 @@
 import 'package:tailored_eats/routes/routes.dart';
+import 'package:tailored_eats/views/auth/register/controller/register_controller.dart';
 
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/api/services/auth_services.dart';
+import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
 import '../model/profile_creation_model.dart';
-
 
 class ProfileCreationController extends GetxController {
   RxInt currentStep = 0.obs;
@@ -109,14 +110,14 @@ class ProfileCreationController extends GetxController {
     {
       "title": "I want fast results!",
       "subtitle":
-      "Achieve your goals as fast as possible using harsher methods!",
+          "Achieve your goals as fast as possible using harsher methods!",
       "iconPath": "assets/icons/Group 1000004261.svg",
       "sendBacked": "Fast_As_Possible",
     },
     {
       "title": "Change my lifestyle",
       "subtitle":
-      "Achieve your goals a little slower but with a much more sustainable approach.",
+          "Achieve your goals a little slower but with a much more sustainable approach.",
       "iconPath": "assets/icons/image 470 (traced).svg",
       "sendBacked": "Life_Style_Change",
     },
@@ -162,7 +163,7 @@ class ProfileCreationController extends GetxController {
   // Helper method to get sendBacked value from title
   String getSendBackedValue(List<Map<String, String>> list, String title) {
     final item = list.firstWhere(
-          (item) => item["title"] == title,
+      (item) => item["title"] == title,
       orElse: () => {"sendBacked": ""},
     );
     return item["sendBacked"] ?? "";
@@ -172,24 +173,34 @@ class ProfileCreationController extends GetxController {
     // Save selected values based on current step
     if (currentStep.value == 4) {
       // Activity Level step
-      selectedActivityLevel.value =
-          getSendBackedValue(activityList, selectedLevel.value);
+      selectedActivityLevel.value = getSendBackedValue(
+        activityList,
+        selectedLevel.value,
+      );
     } else if (currentStep.value == 5) {
       // Food Vibe step
-      selectedFoodVibe.value =
-          getSendBackedValue(foodVibeList, selectedLevel.value);
+      selectedFoodVibe.value = getSendBackedValue(
+        foodVibeList,
+        selectedLevel.value,
+      );
     } else if (currentStep.value == 6) {
       // Main Goal step
-      selectedMainGoal.value =
-          getSendBackedValue(mainGoalList, selectedLevel.value);
+      selectedMainGoal.value = getSendBackedValue(
+        mainGoalList,
+        selectedLevel.value,
+      );
     } else if (currentStep.value == 7) {
       // Result step
-      selectedResult.value =
-          getSendBackedValue(wantResultList, selectedLevel.value);
+      selectedResult.value = getSendBackedValue(
+        wantResultList,
+        selectedLevel.value,
+      );
     } else if (currentStep.value == 8) {
       // Training step
-      selectedTraining.value =
-          getSendBackedValue(trainList, selectedLevel.value);
+      selectedTraining.value = getSendBackedValue(
+        trainList,
+        selectedLevel.value,
+      );
     }
 
     // if still within normal steps (0–7)
@@ -227,6 +238,10 @@ class ProfileCreationController extends GetxController {
       "mainGoal": selectedMainGoal.value,
       "result": selectedResult.value,
       "training": selectedTraining.value,
+
+      "name": Get.find<RegisterController>().nameController.text,
+      "email": Get.find<RegisterController>().emailController.text,
+      "password": Get.find<RegisterController>().passwordController.text,
     };
 
     return await ApiRequest.patch(
@@ -234,7 +249,11 @@ class ProfileCreationController extends GetxController {
       endPoint: ApiEndPoints.completeProfile,
       isLoading: isLoading,
       body: inputBody,
-      onSuccess: (result) =>totalCalories.value = result.data.totalCalorie.toString(),
+      onSuccess: (result) {
+        // AppStorage.save(token: result.data.accessToken);
+
+        totalCalories.value = result.data.totalCalorie.toString();
+      },
     );
   }
 
