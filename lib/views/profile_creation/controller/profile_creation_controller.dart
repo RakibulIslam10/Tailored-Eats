@@ -169,38 +169,135 @@ class ProfileCreationController extends GetxController {
     return item["sendBacked"] ?? "";
   }
 
+  // void nextStep() async {
+  //   // Save selected values based on current step
+  //   if (currentStep.value == 4) {
+  //     // Activity Level step
+  //     selectedActivityLevel.value = getSendBackedValue(
+  //       activityList,
+  //       selectedLevel.value,
+  //     );
+  //   } else if (currentStep.value == 5) {
+  //     // Food Vibe step
+  //     selectedFoodVibe.value = getSendBackedValue(
+  //       foodVibeList,
+  //       selectedLevel.value,
+  //     );
+  //   } else if (currentStep.value == 6) {
+  //     // Main Goal step
+  //     selectedMainGoal.value = getSendBackedValue(
+  //       mainGoalList,
+  //       selectedLevel.value,
+  //     );
+  //   } else if (currentStep.value == 7) {
+  //     // Result step
+  //     selectedResult.value = getSendBackedValue(
+  //       wantResultList,
+  //       selectedLevel.value,
+  //     );
+  //   } else if (currentStep.value == 8) {
+  //     // Training step
+  //     selectedTraining.value = getSendBackedValue(
+  //       trainList,
+  //       selectedLevel.value,
+  //     );
+  //   }
+  //
+  //   // if still within normal steps (0–7)
+  //   if (currentStep.value < 8) {
+  //     currentStep.value++;
+  //     print("STEP: ${currentStep.value}");
+  //     return;
+  //   }
+  //
+  //   // now at step 8 → call process
+  //   if (currentStep.value == 8) {
+  //     await profileCompleteProcess();
+  //     currentStep.value = 9; // go to step 9 after
+  //     print("COMPLETED & MOVED TO STEP 9");
+  //     return;
+  //   }
+  //
+  //   // if beyond profile step
+  //   if (currentStep.value >= 9) {
+  //     Get.toNamed(Routes.navigationScreen);
+  //   }
+  // }
+
+  // Add this method in ProfileCreationController
+  bool isCurrentStepValid() {
+    switch (currentStep.value) {
+      case 0: // Gender step
+        return gender.value.isNotEmpty;
+
+      case 1: // Age step
+        return selectedAge.value >= 13;
+
+      case 2: // Weight step
+        return weight.value > 0;
+
+      case 3: // Height step
+        return height.value > 0;
+
+      case 4: // Activity Level
+        return selectedLevel.value.isNotEmpty;
+
+      case 5: // Food Vibe
+        return selectedLevel.value.isNotEmpty;
+
+      case 6: // Main Goal
+        return selectedLevel.value.isNotEmpty;
+
+      case 7: // Result
+        return selectedLevel.value.isNotEmpty;
+
+      case 8: // Training
+        return selectedLevel.value.isNotEmpty;
+
+      case 9: // Profile complete
+        return true;
+
+      default:
+        return true;
+    }
+  }
   void nextStep() async {
+    // Validate before proceeding
+    if (!isCurrentStepValid()) {
+      return; // Don't proceed if validation fails
+    }
+
     // Save selected values based on current step
     if (currentStep.value == 4) {
-      // Activity Level step
       selectedActivityLevel.value = getSendBackedValue(
         activityList,
         selectedLevel.value,
       );
+      selectedLevel.value = ''; // Reset for next step
     } else if (currentStep.value == 5) {
-      // Food Vibe step
       selectedFoodVibe.value = getSendBackedValue(
         foodVibeList,
         selectedLevel.value,
       );
+      selectedLevel.value = ''; // Reset for next step
     } else if (currentStep.value == 6) {
-      // Main Goal step
       selectedMainGoal.value = getSendBackedValue(
         mainGoalList,
         selectedLevel.value,
       );
+      selectedLevel.value = ''; // Reset for next step
     } else if (currentStep.value == 7) {
-      // Result step
       selectedResult.value = getSendBackedValue(
         wantResultList,
         selectedLevel.value,
       );
+      selectedLevel.value = ''; // Reset for next step
     } else if (currentStep.value == 8) {
-      // Training step
       selectedTraining.value = getSendBackedValue(
         trainList,
         selectedLevel.value,
       );
+      selectedLevel.value = ''; // Reset for next step
     }
 
     // if still within normal steps (0–7)
@@ -213,7 +310,7 @@ class ProfileCreationController extends GetxController {
     // now at step 8 → call process
     if (currentStep.value == 8) {
       await profileCompleteProcess();
-      currentStep.value = 9; // go to step 9 after
+      currentStep.value = 9;
       print("COMPLETED & MOVED TO STEP 9");
       return;
     }
@@ -223,7 +320,6 @@ class ProfileCreationController extends GetxController {
       Get.toNamed(Routes.navigationScreen);
     }
   }
-
   RxBool isLoading = false.obs;
   RxString totalCalories = ''.obs;
 
