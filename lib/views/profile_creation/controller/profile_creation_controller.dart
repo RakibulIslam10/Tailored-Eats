@@ -261,6 +261,7 @@ class ProfileCreationController extends GetxController {
         return true;
     }
   }
+
   void nextStep() async {
     // Validate before proceeding
     if (!isCurrentStepValid()) {
@@ -320,6 +321,7 @@ class ProfileCreationController extends GetxController {
       Get.toNamed(Routes.navigationScreen);
     }
   }
+
   RxBool isLoading = false.obs;
   RxString totalCalories = ''.obs;
 
@@ -346,8 +348,7 @@ class ProfileCreationController extends GetxController {
       isLoading: isLoading,
       body: inputBody,
       onSuccess: (result) {
-        // AppStorage.save(token: result.data.accessToken);
-
+        AppStorage.save(token: result.data.accessToken);
         totalCalories.value = result.data.totalCalorie.toString();
       },
     );

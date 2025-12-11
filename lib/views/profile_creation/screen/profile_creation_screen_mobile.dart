@@ -35,26 +35,26 @@ class ProfileCreationScreenMobile extends GetView<ProfileCreationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Obx(
-            () => controller.currentStep.value == 0
+        () => controller.currentStep.value == 0
             ? SizedBox()
             : controller.isLoading.value
             ? LoadingWidget()
             : PrimaryButtonWidget(
-          buttonTextColor: CustomColors.blackColor,
-          buttonColor: controller.isCurrentStepValid()
-              ? CustomColors.primary
-              : CustomColors.disableColor,
-          padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.defaultHorizontalSize,
-            vertical: Dimensions.verticalSize * 2,
-          ),
-          title: controller.currentStep.value == 9
-              ? "Go to home"
-              : "Next",
-          onPressed: () {
-            controller.nextStep(); // nextStep() নিজেই validation check করবে
-          },
-        ),
+                buttonTextColor: CustomColors.blackColor,
+                buttonColor: controller.isCurrentStepValid()
+                    ? CustomColors.primary
+                    : CustomColors.disableColor,
+                padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.defaultHorizontalSize,
+                  vertical: Dimensions.verticalSize * 2,
+                ),
+                title: controller.currentStep.value == 9
+                    ? "Go to home"
+                    : "Next",
+                onPressed: () {
+                  controller.nextStep();
+                },
+              ),
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
