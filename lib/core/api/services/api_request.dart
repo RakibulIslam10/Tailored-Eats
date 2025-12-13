@@ -9,7 +9,6 @@ import '../../utils/basic_import.dart';
 import '../end_point/api_end_points.dart';
 
 class ApiRequest {
-
   /// ✅ Header Generator
   static Future<Map<String, String>> _bearerHeaderInfo([String? token]) async {
     final authToken = token ?? AppStorage.token;
@@ -20,21 +19,26 @@ class ApiRequest {
         HttpHeaders.authorizationHeader: "Bearer $authToken",
     };
   }
+
   static void printBody(Map<String, dynamic> body) {
     body.forEach((key, value) {
       log("🔹 '$key': '$value'");
     });
-    log('╚════════════════════════════════════════════════════════════════════════════════════════════╚═══');
+    log(
+      '╚════════════════════════════════════════════════════════════════════════════════════════════╚═══',
+    );
   }
+
   static void printUrl(String url) {
-    log('╔════════════════════════════════════════════════════════════════════════════════════════════');
+    log(
+      '╔════════════════════════════════════════════════════════════════════════════════════════════',
+    );
     log("📍 'End Point': '$url'");
   }
 
   // log('╔════════════════════════════════════════════════════════════════════════════════════════════╗');
   // log('✨🚀 Successfully generated view: \'$viewName\' 🎉🧩📱🔗');
   // log('╚════════════════════════════════════════════════════════════════════════════════════════════╝');
-
 
   /// =========================================================== ✅ POST REQUEST =========================================================== ///
   static Future<R> post<R>({
@@ -45,18 +49,20 @@ class ApiRequest {
     Map<String, dynamic>? queryParams,
     bool showSuccessSnackBar = false,
     Function(R result)? onSuccess,
-
   }) async {
     try {
       isLoading.value = true;
       log('|📤|---------[ 📦 POST REQUEST STARTED ]---------|📤|');
 
-      final uri = Uri.parse('${ApiEndPoints.baseUrl}$endPoint').replace(queryParameters: queryParams);
+      final uri = Uri.parse(
+        '${ApiEndPoints.baseUrl}$endPoint',
+      ).replace(queryParameters: queryParams);
       printUrl(uri.toString());
       printBody(body);
 
-      final response = await http.post(uri, headers: await _bearerHeaderInfo(),
-          body: jsonEncode(body)).timeout(const Duration(seconds: 120));
+      final response = await http
+          .post(uri, headers: await _bearerHeaderInfo(), body: jsonEncode(body))
+          .timeout(const Duration(seconds: 120));
 
       log('|✅|---------[ ✅ POST REQUEST COMPLETED ]---------|✅|');
 
@@ -64,11 +70,15 @@ class ApiRequest {
         final Map<String, dynamic> json = jsonDecode(response.body);
         final result = fromJson(json);
 
-        final successMessage = json['message'] ?? Strings.requestCompletedSuccessfully;
-        if (showSuccessSnackBar) CustomSnackBar.success(title: Strings.success, message: successMessage);
+        final successMessage =
+            json['message'] ?? Strings.requestCompletedSuccessfully;
+        if (showSuccessSnackBar)
+          CustomSnackBar.success(
+            title: Strings.success,
+            message: successMessage,
+          );
         if (onSuccess != null) onSuccess(result);
         return result;
-
       } else {
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
@@ -76,7 +86,6 @@ class ApiRequest {
         CustomSnackBar.error(errorMessage);
         throw Exception(errorMessage);
       }
-
     } catch (e) {
       log('🐞🐞🐞 ERROR: ${e.toString()}');
       throw Exception(e.toString());
@@ -95,21 +104,30 @@ class ApiRequest {
     bool showSuccessSnackBar = false,
     bool showResponse = false,
     Function(R result)? onSuccess,
-
   }) async {
     try {
       isLoading.value = true;
       log('|📥|---------[ 🌐 GET REQUEST STARTED ]---------|📥|');
 
       String fullUrl = '${ApiEndPoints.baseUrl}$endPoint';
-      if (id != null && id.isNotEmpty) {fullUrl += '/$id';}
-      final uri = Uri.parse(fullUrl).replace(queryParameters: queryParams?.map((key, value) => MapEntry(key, value.toString())));
+      if (id != null && id.isNotEmpty) {
+        fullUrl += '/$id';
+      }
+      final uri = Uri.parse(fullUrl).replace(
+        queryParameters: queryParams?.map(
+          (key, value) => MapEntry(key, value.toString()),
+        ),
+      );
       printUrl(uri.toString());
 
-      final response = await http.get(uri, headers: await _bearerHeaderInfo()).timeout(const Duration(seconds: 120));
+      final response = await http
+          .get(uri, headers: await _bearerHeaderInfo())
+          .timeout(const Duration(seconds: 120));
       if (showResponse) {
         try {
-          final prettyJson = const JsonEncoder.withIndent('  ').convert(jsonDecode(response.body));
+          final prettyJson = const JsonEncoder.withIndent(
+            '  ',
+          ).convert(jsonDecode(response.body));
           log('|📤|---------[ RESPONSE BODY ]---------|📤|');
           log(prettyJson);
           log('|📤|---------------------------------|📤|');
@@ -119,17 +137,24 @@ class ApiRequest {
       }
 
       log('|✅|---------[ ✅ GET REQUEST COMPLETED ]---------|✅|');
-      log('╚════════════════════════════════════════════════════════════════════════════════════════════');
+      log(
+        '╚════════════════════════════════════════════════════════════════════════════════════════════',
+      );
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> json = jsonDecode(response.body);
         final result = fromJson(json);
 
-        final successMessage = json['message'] ?? Strings.requestCompletedSuccessfully;
-        if (showSuccessSnackBar) {CustomSnackBar.success(title: Strings.success, message: successMessage);}
+        final successMessage =
+            json['message'] ?? Strings.requestCompletedSuccessfully;
+        if (showSuccessSnackBar) {
+          CustomSnackBar.success(
+            title: Strings.success,
+            message: successMessage,
+          );
+        }
         if (onSuccess != null) onSuccess(result);
         return result;
-
       } else {
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
@@ -145,19 +170,7 @@ class ApiRequest {
     }
   }
 
-
-
-
-
   // others
-
-
-
-
-
-
-
-
 
   /// =========================================================== ✅ PATCH REQUEST =========================================================== ///
   static Future<R> patch<R>({
@@ -187,10 +200,10 @@ class ApiRequest {
 
       final response = await http
           .patch(
-        uri,
-        headers: await _bearerHeaderInfo(),
-        body: jsonEncode(body),
-      )
+            uri,
+            headers: await _bearerHeaderInfo(),
+            body: jsonEncode(body),
+          )
           .timeout(const Duration(seconds: 120));
 
       log('|✅|---------[ ✅ PATCH REQUEST COMPLETED ]---------|✅|');
@@ -224,7 +237,6 @@ class ApiRequest {
       isLoading.value = false;
     }
   }
-
 
   /// =========================================================== ✅ PUT REQUEST =========================================================== ///
   static Future<R> put<R>({
@@ -312,10 +324,10 @@ class ApiRequest {
 
       final response = await http
           .delete(
-        uri,
-        headers: await _bearerHeaderInfo(),
-        body: body != null ? jsonEncode(body) : null,
-      )
+            uri,
+            headers: await _bearerHeaderInfo(),
+            body: body != null ? jsonEncode(body) : null,
+          )
           .timeout(const Duration(seconds: 120));
 
       log('|✅|---------[ ✅ DELETE REQUEST COMPLETED ]---------|✅|');
@@ -369,7 +381,6 @@ class ApiRequest {
     bool showSuccessSnackBar = false,
     Function(R result)? onSuccess,
     String? token,
-
   }) async {
     try {
       isLoading.value = true;
@@ -428,7 +439,12 @@ class ApiRequest {
               lookupMimeType(file.path) ?? 'application/octet-stream';
           log('🖼️ Adding image: ${file.path} | MIME: $mimeType');
 
-          request.files.add(await http.MultipartFile.fromPath('images',file.path,contentType: MediaType.parse(mimeType),),
+          request.files.add(
+            await http.MultipartFile.fromPath(
+              'images',
+              file.path,
+              contentType: MediaType.parse(mimeType),
+            ),
           );
         }
       }
@@ -446,7 +462,8 @@ class ApiRequest {
         final result = fromJson(json);
 
         if (showSuccessSnackBar) {
-          final successMessage = json['message'] ?? 'Request completed successfully';
+          final successMessage =
+              json['message'] ?? 'Request completed successfully';
           CustomSnackBar.success(title: 'Success', message: successMessage);
         }
 
@@ -467,8 +484,6 @@ class ApiRequest {
     }
   }
 
-
-
   /// Reusable favorite toggle method for any project
   /// Usage Example:
 
@@ -479,7 +494,7 @@ class ApiRequest {
   ///   itemKey: 'product',
   ///   showSuccessSnackBar: true,
 
-  static Future<bool> toggleFavorite({
+  static Future<bool> quickToggle({
     required dynamic itemId,
     required RxBool isFavorite,
     required String endPoint,
@@ -496,22 +511,33 @@ class ApiRequest {
     try {
       isFavorite.value = !oldValue;
 
-      final uri = Uri.parse('${ApiEndPoints.baseUrl}$endPoint').replace(queryParameters: queryParams);
+      final uri = Uri.parse(
+        '${ApiEndPoints.baseUrl}$endPoint',
+      ).replace(queryParameters: queryParams);
       final body = customBody ?? {itemKey: itemId};
 
-      final response = await http.post(uri, headers: await _bearerHeaderInfo(), body: jsonEncode(body)).timeout(const Duration(seconds: 120));
+      final response = await http
+          .post(uri, headers: await _bearerHeaderInfo(), body: jsonEncode(body))
+          .timeout(const Duration(seconds: 120));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> json = jsonDecode(response.body);
         final isSuccess = json['success'] ?? true;
 
-        if (isSuccess) {onSuccess?.call();
-        if (showSuccessSnackBar) {
-          final successMessage = customSuccessMessage ?? json['message'] ??
-              (isFavorite.value ? 'Added to favorites' : 'Removed from favorites');
-          CustomSnackBar.success(title: Strings.success, message: successMessage);
-        }
-        return true;
-
+        if (isSuccess) {
+          onSuccess?.call();
+          if (showSuccessSnackBar) {
+            final successMessage =
+                customSuccessMessage ??
+                json['message'] ??
+                (isFavorite.value
+                    ? 'Added to favorites'
+                    : 'Removed from favorites');
+            CustomSnackBar.success(
+              title: Strings.success,
+              message: successMessage,
+            );
+          }
+          return true;
         } else {
           isFavorite.value = oldValue;
           final errorMessage = json['message'] ?? 'Favorite update failed';
@@ -536,5 +562,4 @@ class ApiRequest {
       return false;
     }
   }
-
 }
