@@ -53,7 +53,6 @@ class ApiRequest {
     try {
       isLoading.value = true;
       log('|📤|---------[ 📦 POST REQUEST STARTED ]---------|📤|');
-
       final uri = Uri.parse(
         '${ApiEndPoints.baseUrl}$endPoint',
       ).replace(queryParameters: queryParams);

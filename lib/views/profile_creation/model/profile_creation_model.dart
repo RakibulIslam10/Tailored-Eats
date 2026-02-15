@@ -31,20 +31,49 @@ class ProfileCreationModel {
 }
 
 class Data {
-  final dynamic totalCalorie;
+  final User user;
+  final int totalCalorie;
   final String accessToken;
 
   Data({
+    required this.user,
     required this.totalCalorie,
     required this.accessToken,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    totalCalorie: json["totalCalorie"] ?? '',
-    accessToken: json["accessToken"] ?? '',
+    user: User.fromJson(json["user"]),
+    totalCalorie: json["totalCalorie"],
+    accessToken: json["accessToken"],
   );
 
   Map<String, dynamic> toJson() => {
+    "user": user.toJson(),
     "totalCalorie": totalCalorie,
+    "accessToken": accessToken,
+  };
+}
+
+class User {
+  final String id;
+  final String name;
+  final String email;
+
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    id: json["_id"],
+    name: json["name"],
+    email: json["email"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "_id": id,
+    "name": name,
+    "email": email,
   };
 }

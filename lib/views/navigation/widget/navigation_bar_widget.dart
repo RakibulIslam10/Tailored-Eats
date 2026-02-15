@@ -48,7 +48,7 @@ class NavigationBarWidget extends StatelessWidget {
               Expanded(
                 child: BottomBarWidget(
                   path: Assets.icons.component85,
-                  label: 'Nutrition',
+                  label: 'Meals',
                   index: 1,
                 ),
               ),

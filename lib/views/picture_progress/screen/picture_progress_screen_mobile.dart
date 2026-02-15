@@ -12,17 +12,27 @@ class PictureProgressScreenMobile extends GetView<PictureProgressController> {
         backgroundColor: Colors.black,
         color: CustomColors.primary,
         onRefresh: () async {
-          Get.find<ConsistencyController>().getUsersImageProgress();
+          await Get.find<ConsistencyController>().getUsersImageProgress();
         },
         child: Obx(
-          () =>
-              Get.find<ConsistencyController>().isGetImageLoading.value &&
-                  controller.isLoadingAddImag.value
-              ? LoadingWidget()
-              : ListView(
-                  padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
-                  children: [BeforeAfterSectionWidget(), StorySectionWidget()],
-                ),
+              () {
+            final consistencyController = Get.find<ConsistencyController>();
+
+            // ✅ যেকোনো একটা loading থাকলে full screen loading দেখাবে
+            if (consistencyController.isGetImageLoading.value ||
+                controller.isLoadingAddImag.value) {
+              return const Center(child: LoadingWidget());
+            }
+
+            // ✅ Loading শেষ হলে data দেখাবে
+            return ListView(
+              padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+              children: const [
+                BeforeAfterSectionWidget(),
+                StorySectionWidget(),
+              ],
+            );
+          },
         ),
       ),
     );

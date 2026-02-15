@@ -7,82 +7,88 @@ class BeforeAfterSectionWidget extends GetView<PictureProgressController> {
   Widget build(BuildContext context) {
     final controllers = Get.find<ConsistencyController>();
 
-    if (controllers.imageProgressList.isEmpty) {
-      return Container(
-        margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
-        padding: EdgeInsets.all(20.w),
-        decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Center(
-          child: Column(
-            children: [
-              Icon(Icons.image_not_supported, size: 48.sp, color: Colors.grey),
-              SizedBox(height: 10.h),
-              Text(
-                'No progress images yet',
-                style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-              ),
-            ],
+    return Obx(() {
+      if (controllers.imageProgressList.isEmpty) {
+        return Container(
+          margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
+          padding: EdgeInsets.all(20.w),
+          decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12.r),
           ),
-        ),
-      );
-    }
-
-    // ✅ শুধুমাত্র 1টা image থাকলে
-    if (controllers.imageProgressList.length == 1) {
-      return Container(
-        margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
-        child: ToggleImageCard(
-          imageUrl:
-              '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.first.url}',
-          label: "Current",
-          date: Helpers.formatDate(
-            controllers.imageProgressList.first.createdAt.toString(),
-          ),
-          toggleValue: controller.beforeToggle,
-          onToggle: () =>
-              controller.beforeToggle.value = !controller.beforeToggle.value,
-        ),
-      );
-    }
-
-    // ✅ 2টা বা তার বেশি image থাকলে Before/After দেখান
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
-      child: Row(
-        children: [
-          Expanded(
-            child: ToggleImageCard(
-              imageUrl:
-                  '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.first.url}',
-              label: "Before",
-              date: Helpers.formatDate(
-                controllers.imageProgressList.first.createdAt.toString(),
-              ),
-              toggleValue: controller.beforeToggle,
-              onToggle: () => controller.beforeToggle.value =
-                  !controller.beforeToggle.value,
+          child: Center(
+            child: Column(
+              children: [
+                Icon(Icons.image_not_supported, size: 48.sp, color: Colors.grey),
+                SizedBox(height: 10.h),
+                Text(
+                  'No progress images yet',
+                  style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+                ),
+              ],
             ),
           ),
-          Space.width.v10,
-          Expanded(
-            child: ToggleImageCard(
-              imageUrl:
-                  '${ApiEndPoints.mainDomain}/${controllers.imageProgressList.last.url}',
-              label: "After",
-              date: Helpers.formatDate(
-                controllers.imageProgressList.last.createdAt.toString(),
-              ),
-              toggleValue: controller.afterToggle,
-              onToggle: () =>
-                  controller.afterToggle.value = !controller.afterToggle.value,
+        );
+      }
+
+      // ✅ সবার আগে list টাকে date অনুযায়ী sort করুন (oldest first)
+      final sortedList = controllers.imageProgressList.toList()
+        ..sort((a, b) => a.createdAt.compareTo(b.createdAt));
+
+      // ✅ শুধুমাত্র 1টা image থাকলে
+      if (sortedList.length == 1) {
+        return Container(
+          margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
+          child: ToggleImageCard(
+            imageUrl:
+            '${ApiEndPoints.mainDomain}/${sortedList.first.url}',
+            label: "Current",
+            date: Helpers.formatDate(
+              sortedList.first.createdAt.toString(),
             ),
+            toggleValue: controller.beforeToggle,
+            onToggle: () =>
+            controller.beforeToggle.value = !controller.beforeToggle.value,
           ),
-        ],
-      ),
-    );
+        );
+      }
+
+      // ✅ 2টা বা তার বেশি image থাকলে Before/After দেখান
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
+        child: Row(
+          children: [
+            Expanded(
+              child: ToggleImageCard(
+                imageUrl:
+                '${ApiEndPoints.mainDomain}/${sortedList.first.url}',
+                label: "Before",
+                date: Helpers.formatDate(
+                  sortedList.first.createdAt.toString(),
+                ),
+                toggleValue: controller.beforeToggle,
+                onToggle: () => controller.beforeToggle.value =
+                !controller.beforeToggle.value,
+              ),
+            ),
+            Space.width.v10,
+            Expanded(
+              child: ToggleImageCard(
+                imageUrl:
+                '${ApiEndPoints.mainDomain}/${sortedList.last.url}',
+                label: "After",
+                date: Helpers.formatDate(
+                  sortedList.last.createdAt.toString(),
+                ),
+                toggleValue: controller.afterToggle,
+                onToggle: () =>
+                controller.afterToggle.value = !controller.afterToggle.value,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -129,7 +135,7 @@ class ToggleImageCard extends StatelessWidget {
                 onTap: onToggle,
                 borderRadius: BorderRadius.circular(12.r),
                 child: Obx(
-                  () => Container(
+                      () => Container(
                     width: 44.w,
                     height: 24.h,
                     decoration: BoxDecoration(
@@ -158,27 +164,27 @@ class ToggleImageCard extends StatelessWidget {
 
             /// Blur when ON
             Obx(
-              () => toggleValue.value
+                  () => toggleValue.value
                   ? Positioned(
-                      top: 35.h,
-                      right: 0,
-                      left: 0,
-                      child: Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.r),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              width: 100.w,
-                              height: 70.h,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
-                              ),
-                            ),
-                          ),
+                top: 35.h,
+                right: 0,
+                left: 0,
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.r),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      child: Container(
+                        width: 100.w,
+                        height: 70.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
                         ),
                       ),
-                    )
+                    ),
+                  ),
+                ),
+              )
                   : const SizedBox.shrink(),
             ),
 
