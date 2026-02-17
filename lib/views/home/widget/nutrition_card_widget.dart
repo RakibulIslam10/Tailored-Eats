@@ -13,7 +13,7 @@ class NutrientCardWidget extends GetView<HomeController> {
       return 0.0;
     }
 
-    var data = controller.macrosModel?.data.calorie;
+    var data = controller.macrosModel.value?.data.calorie;
     var proteinP =
         parseDouble(data?.consumedProtein) / parseDouble(data?.proteinGoal);
     var carbP = parseDouble(data?.consumedCarb) / parseDouble(data?.carbGoal);
@@ -62,15 +62,14 @@ class NutrientCardWidget extends GetView<HomeController> {
               NutrientCard(
                 path: Assets.icons.carb.path,
                 title: 'Carbs',
-                value:
-                    '${controller.macrosModel?.data.calorie.consumedCarb}/${controller.macrosModel?.data.calorie.carbGoal}G',
+                value: '${controller.macrosModel.value?.data.calorie.consumedCarb}/${controller.macrosModel.value?.data.calorie.carbGoal}G',
                 percent: carbP,
               ),
               NutrientCard(
                 path: Assets.icons.fat.path,
                 title: 'Fat',
                 value:
-                    '${controller.macrosModel?.data.calorie.consumedFat}/${controller.macrosModel?.data.calorie.fatGoal}G',
+                    '${controller.macrosModel.value?.data.calorie.consumedFat}/${controller.macrosModel.value?.data.calorie.fatGoal}G',
                 percent: fatP,
               ),
             ],
@@ -106,10 +105,10 @@ class NutrientCard extends GetView<HomeController> {
     }
 
     double totalCal = parseDouble(
-      controller.macrosModel?.data.calorie.calorieGoal,
+      controller.macrosModel.value?.data.calorie.calorieGoal,
     );
     double currentCal = parseDouble(
-      controller.macrosModel?.data.calorie.consumedCalorie,
+      controller.macrosModel.value?.data.calorie.consumedCalorie,
     );
 
     final progress = currentCal / totalCal;

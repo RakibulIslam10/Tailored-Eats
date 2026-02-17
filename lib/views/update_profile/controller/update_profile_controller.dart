@@ -32,10 +32,10 @@ class UpdateProfileController extends GetxController {
   void onInit() {
     super.onInit();
     firstNameController.text =
-        Get.find<HomeController>().macrosModel?.data.name ?? '';
+        Get.find<HomeController>().macrosModel.value?.data.name ?? '';
     // lastNameController.text =   Get.find<HomeController>().macrosModel?.data.name ?? '';
     emailController.text =
-        Get.find<HomeController>().macrosModel?.data.email ?? '';
+        Get.find<HomeController>().macrosModel.value?.data.email ?? '';
     // ageController.text =   Get.find<HomeController>().macrosModel?.data.name ?? '';
     passwordController.text = '*********';
   }

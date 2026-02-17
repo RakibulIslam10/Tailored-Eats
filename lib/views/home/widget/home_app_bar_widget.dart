@@ -5,8 +5,6 @@ class HomeAppBarWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final image = controller.macrosModel?.data.image;
-    final validImage = image != null && image.isNotEmpty;
     return AppBar(
       scrolledUnderElevation: 0,
       backgroundColor: CustomColors.blackColor,
@@ -21,31 +19,35 @@ class HomeAppBarWidget extends GetView<HomeController> {
             width: 22.w,
           ),
         ),
-        InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onTap: () => Get.toNamed(Routes.profileScreen),
-          child: Container(
-            margin: Dimensions.defaultHorizontalSize.edgeHorizontal,
-            // padding: EdgeInsets.all(Dimensions.paddingSize * 0.1),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: CustomColors.primary, width: 2),
+        Obx(() {
+          final image = controller.macrosModel.value?.data.image;
+          final validImage = image != null && image.isNotEmpty;
+
+          return InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () => Get.toNamed(Routes.profileScreen),
+            child: Container(
+              margin: Dimensions.defaultHorizontalSize.edgeHorizontal,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: CustomColors.primary, width: 2),
+              ),
+              child: ClipOval(
+                child: validImage
+                    ? CachedNetworkImage(
+                  imageUrl: '${ApiEndPoints.mainDomain}/$image',
+                  fit: BoxFit.cover,
+                  height: 32.h,
+                  width: 32.w,
+                  errorWidget: (_, __, ___) => Icon(Icons.person, size: 28.sp),
+                  placeholder: (_, __) => Icon(Icons.person, size: 28.sp),
+                )
+                    : Icon(Icons.person, size: 28.sp),
+              ),
             ),
-            child: ClipOval(
-              child: validImage
-                  ? CachedNetworkImage(
-                imageUrl: '${ApiEndPoints.mainDomain}/$image',
-                fit: BoxFit.cover,
-                height: 32.h,
-                width: 32.w,
-                errorWidget: (_, __, ___) => Icon(Icons.person, size: 28.sp),
-                placeholder: (_, __) => Icon(Icons.person, size: 28.sp),
-              )
-                  : Icon(Icons.person, size: 28.sp),
-            )
-          ),
-        ),
+          );
+        }),
       ],
     );
   }

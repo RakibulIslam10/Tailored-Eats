@@ -5,61 +5,63 @@ class ProfileHeaderWidget extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: REdgeInsets.all(Dimensions.paddingSize * 0.5),
-      decoration: BoxDecoration(
-        color: Colors.white10,
-        borderRadius: BorderRadius.circular(Dimensions.radius),
-      ),
-      child: Row(
-        children: [
-          ProfileAvatarWidget(
-            imageUrl:
-                Get.find<HomeController>().macrosModel?.data.image ??
-                'https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg',
-            size: 60,
-            hasBorder: true,
-          ),
-          Space.width.v20,
+    return Obx(() {
+      final homeController = Get.find<HomeController>();
+      final image = homeController.macrosModel.value?.data.image;
+      final validImage = image != null && image.isNotEmpty;
 
-          // Profile Info
-          Expanded(
-            child: Column(
-              crossAxisAlignment: crossStart,
-              children: [
-                TextWidget(
-                  Get.find<HomeController>().macrosModel?.data.name ?? '',
-                  fontWeight: FontWeight.bold,
+      return Container(
+        padding: REdgeInsets.all(Dimensions.paddingSize * 0.5),
+        decoration: BoxDecoration(
+          color: Colors.white10,
+          borderRadius: BorderRadius.circular(Dimensions.radius),
+        ),
+        child: Row(
+          children: [
+            ProfileAvatarWidget(
+              imageUrl: validImage ? '${ApiEndPoints.mainDomain}/$image' : '',
+              size: 60,
+              hasBorder: true,
+            ),
+            Space.width.v20,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: crossStart,
+                children: [
+                  TextWidget(
+                    homeController.macrosModel.value?.data.name ?? '',
+                    fontWeight: FontWeight.bold,
+                    color: CustomColors.whiteColor,
+                  ),
+                  Space.height.v5,
+                  TextWidget(
+                    homeController.macrosModel.value?.data.goal ?? '',
+                    fontSize: Dimensions.titleSmall,
+                    color: CustomColors.secondaryDarkText,
+                  ),
+                ],
+              ),
+            ),
+
+            // Edit Button
+            InkWell(
+              onTap: () => Get.toNamed(Routes.updateProfileScreen),
+              child: Container(
+                padding: EdgeInsets.all(Dimensions.paddingSize * 0.25),
+                decoration: BoxDecoration(
+                  color: CustomColors.blackColor,
+                  borderRadius: BorderRadius.circular(Dimensions.radius),
+                ),
+                child: Icon(
+                  Icons.edit_outlined,
                   color: CustomColors.whiteColor,
+                  size: Dimensions.iconSizeLarge,
                 ),
-                Space.height.v5,
-                TextWidget(
-                  Get.find<HomeController>().macrosModel?.data.goal ?? '',
-                  fontSize: Dimensions.titleSmall,
-                  color: CustomColors.secondaryDarkText,
-                ),
-              ],
-            ),
-          ),
-
-          // Edit Button
-          InkWell(
-            onTap: () => Get.toNamed(Routes.updateProfileScreen),
-            child: Container(
-              padding: EdgeInsets.all(Dimensions.paddingSize * 0.25),
-              decoration: BoxDecoration(
-                color: CustomColors.blackColor,
-                borderRadius: BorderRadius.circular(Dimensions.radius),
-              ),
-              child: Icon(
-                Icons.edit_outlined,
-                color: CustomColors.whiteColor,
-                size: Dimensions.iconSizeLarge,
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }

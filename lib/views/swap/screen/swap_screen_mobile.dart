@@ -10,7 +10,7 @@ class SwapScreenMobile extends GetView<SwapController> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: CommonAppBar(
-        title: "Breakfast Your Meal",
+        title: controller.mealType,
         actions: [
           InkWell(
             onTap: () {
@@ -29,53 +29,117 @@ class SwapScreenMobile extends GetView<SwapController> {
       endDrawer: _buildFilterDrawer(),
       body: SafeArea(
         child: Obx(
-          () => ListView.builder(
-            padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.defaultHorizontalSize,
-            ),
-            itemCount: controller.foods.length,
-            itemBuilder: (context, index) {
-              final food = controller.foods[index];
-              return Padding(
-                padding: EdgeInsets.only(bottom: Dimensions.heightSize),
-                child: FoodCardWidget(
-                  title: food["title"]!,
-                  description: food["description"]!,
-                  calories: food["calories"]!,
-                  time: food["time"]!,
-                  imageUrl: food["imageUrl"]!,
-                  isShuffle: false,
-                  onTap: () {
-                    Get.toNamed(Routes.detailsScreen);
-                  },
+              () {
+            final meals = controller.filteredMealList;
+
+            if (Get.find<NutritionController>().loadAllData.value) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: CustomColors.primary,
                 ),
               );
-            },
-          ),
+            }
+
+            if (meals.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.restaurant_menu,
+                      size: 80.h,
+                      color: Colors.grey,
+                    ),
+                    Space.height.v20,
+                    TextWidget(
+                      'No meals found',
+                      fontSize: Dimensions.titleMedium,
+                      color: Colors.grey,
+                    ),
+                    Space.height.v10,
+                    TextWidget(
+                      'Try adjusting your filters',
+                      fontSize: Dimensions.bodyMedium,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            return ListView.builder(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.defaultHorizontalSize,
+              ),
+              itemCount: meals.length,
+              itemBuilder: (context, index) {
+                final meal = meals[index];
+                final nutritionController = Get.find<NutritionController>();
+
+                return Padding(
+                  padding: EdgeInsets.only(bottom: Dimensions.heightSize),
+                  child: FoodCardWidget(
+                    title: meal.mealName,
+                    description: meal.description,
+                    calories: "${meal.caloriesKcal} kcal",
+                    time: "${meal.totalTimeMinutes} min",
+                    imageUrl: nutritionController.getRandomImage(),
+                    isShuffle: false,
+                    meal: meal, // ✅ Meal object pass করুন
+                    onTap: () {
+                      Get.toNamed(Routes.detailsScreen, arguments: meal);
+                    },
+                  ),
+                );
+              },
+            );          },
         ),
       ),
     );
   }
 
-  _buildFilterDrawer() {
+  Widget _buildFilterDrawer() {
     return Drawer(
-      backgroundColor: CustomColors.blackColor,
+      backgroundColor: CustomColors.blackColor, // ✅ White background recommended
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(Dimensions.paddingSize * 0.6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SortByWidget(),
-              SizedBox(height: Dimensions.heightSize * 2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextWidget(
+                    'Filters',
+                    fontSize: Dimensions.titleLarge,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: Icon(Icons.close),
+                  ),
+                ],
+              ),
+              Space.height.v20,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SortByWidget(),
+                      Space.height.v20,
+                      PriceFilterWidget(),
+                      Space.height.v20,
 
-              PriceFilterWidget(),
-              SizedBox(height: Dimensions.heightSize * 2),
+                      PrepTimeWidget(),
+                      Space.height.v20,
 
-              PrepTimeWidget(),
-              SizedBox(height: Dimensions.heightSize * 2),
-
-              MacrosSectionWidget(),
+                      MacrosSectionWidget(),
+                    ],
+                  ),
+                ),
+              ),
               ButtonSectionWidget(),
             ],
           ),

@@ -22,11 +22,11 @@ class SettingScreenMobile extends GetView<SettingController> {
               title: 'Contact Support',
               onTap: () => Get.toNamed(Routes.supportScreen),
             ),
-            _buildMenuItem(
-              icon: Icons.report_gmailerrorred,
-              title: 'Report Problem',
-              onTap: () => Get.toNamed(Routes.reportScreen),
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.report_gmailerrorred,
+            //   title: 'Report Problem',
+            //   onTap: () => Get.toNamed(Routes.reportScreen),
+            // ),
             _buildMenuItem(
               icon: Icons.question_mark_rounded,
               title: 'FAQ',

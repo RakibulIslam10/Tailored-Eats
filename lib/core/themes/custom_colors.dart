@@ -22,5 +22,7 @@ class CustomColors {
 
   // Status Color
   static Color rejected = Color(0xffDC3A3A);
+  static const Color success = Colors.green;
+
 }
 

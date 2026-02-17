@@ -9,6 +9,8 @@ import 'package:tailored_eats/views/home/widget/shimmer_home.dart';
 import 'package:tailored_eats/widgets/loading_widget.dart';
 import 'package:tailored_eats/widgets/profile_avater_widget.dart';
 import '../../../core/utils/basic_import.dart';
+import '../../nutrition/controller/nutrition_controller.dart';
+import '../../nutrition/model/meals_model.dart';
 import '../controller/home_controller.dart';
 import '../model/home_goal_model.dart';
 import '../widget/weight_widget.dart';

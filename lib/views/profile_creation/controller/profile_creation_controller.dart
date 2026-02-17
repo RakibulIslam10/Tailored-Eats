@@ -348,9 +348,12 @@ class ProfileCreationController extends GetxController {
       isLoading: isLoading,
       body: inputBody,
       onSuccess: (result) {
-        AppStorage.save(token: result.data.accessToken);
-        AppStorage.save(userId: result.data.user.id);
-        AppStorage.save(isLoggedIn: true);
+        AppStorage.save(
+          token: result.data.accessToken,
+          userId: result.data.user.id,
+          userEmail: result.data.user.email,
+          isLoggedIn: true,
+        );
         totalCalories.value = result.data.totalCalorie.toString();
       },
     );

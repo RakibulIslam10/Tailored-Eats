@@ -1,3 +1,5 @@
+import 'package:tailored_eats/views/nutrition/controller/nutrition_controller.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../../../routes/routes.dart';
 import '../../../widgets/auth_app_bar.dart';

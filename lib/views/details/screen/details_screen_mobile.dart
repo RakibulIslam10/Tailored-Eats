@@ -22,7 +22,7 @@ class DetailsScreenMobile extends GetView<DetailsController> {
         ),
         extendBodyBehindAppBar: true,
         extendBody: true,
-        appBar: CommonAppBar(title: "Menu Details", fav: true),
+        appBar: CommonAppBar(title: "Menu Details", fav: controller.mealDetails.value?.isFavorite ?? false),
         body: ListView(
           padding: EdgeInsets.zero,
           children: [

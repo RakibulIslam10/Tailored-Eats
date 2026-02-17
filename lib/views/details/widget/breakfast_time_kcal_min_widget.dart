@@ -5,100 +5,113 @@ class BreakfastTimeKcalMinWidget extends GetView<DetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: crossCenter,
-      children: [
-        Container(
-          margin: EdgeInsetsGeometry.symmetric(
-            vertical: Dimensions.verticalSize * 0.8,
-          ),
-          padding: REdgeInsets.symmetric(
-            horizontal: Dimensions.paddingSize * 0.4,
+    return Obx(() {
+      final meal = controller.mealDetails.value;
 
-            vertical: Dimensions.verticalSize * 0.15,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadiusGeometry.circular(Dimensions.radius),
+      if (meal == null) {
+        return Center(child: CircularProgressIndicator());
+      }
 
-            color: Colors.white12,
+      return Column(
+        crossAxisAlignment: crossCenter,
+        children: [
+          Container(
+            margin: EdgeInsetsGeometry.symmetric(
+              vertical: Dimensions.verticalSize * 0.8,
+            ),
+            padding: REdgeInsets.symmetric(
+              horizontal: Dimensions.paddingSize * 0.4,
+              vertical: Dimensions.verticalSize * 0.15,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadiusGeometry.circular(Dimensions.radius),
+              color: Colors.white12,
+            ),
+            child: TextWidget(meal.mealType.capitalize ?? 'Meal'),
           ),
-          child: TextWidget('Breakfast'),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.defaultHorizontalSize * 2,
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.defaultHorizontalSize * 2,
+            ),
+            child: Row(
+              mainAxisAlignment: mainSpaceBet,
+              crossAxisAlignment: crossCenter,
+              children: [
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      Assets.icons.calories,
+                      color: CustomColors.grayShade,
+                      height: 18.h,
+                    ),
+                    TextWidget(
+                      '${meal.caloriesKcal} Kcal',
+                      fontSize: Dimensions.titleSmall * 0.9,
+                      color: CustomColors.grayShade,
+                      padding: Dimensions.widthSize.edgeLeft * 0.5,
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 18.h,
+                  color: CustomColors.grayShade,
+                  width: 1,
+                ),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.access_time_rounded,
+                      size: Dimensions.iconSizeLarge * 0.8,
+                      color: CustomColors.grayShade,
+                    ),
+                    TextWidget(
+                      '${meal.totalTimeMinutes} min',
+                      fontSize: Dimensions.titleSmall * 0.9,
+                      color: CustomColors.grayShade,
+                      padding: Dimensions.widthSize.edgeLeft * 0.5,
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 18.h,
+                  color: CustomColors.grayShade,
+                  width: 1,
+                ),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.wallet,
+                      size: Dimensions.iconSizeLarge * 0.8,
+                      color: CustomColors.grayShade,
+                    ),
+                    TextWidget(
+                      '\$${meal.costGbp.toStringAsFixed(2)}',
+                      fontSize: Dimensions.titleSmall * 0.9,
+                      color: CustomColors.grayShade,
+                      padding: Dimensions.widthSize.edgeLeft * 0.5,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: mainSpaceBet,
-            crossAxisAlignment: crossCenter,
-            children: [
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-
-                children: [
-                  SvgPicture.asset(
-                    Assets.icons.calories,
-                    color: CustomColors.grayShade,
-                    height: 18.h,
-                  ),
-                  TextWidget(
-                    '271 Kcal',
-                    fontSize: Dimensions.titleSmall * 0.9,
-                    color: CustomColors.grayShade,
-                    padding: Dimensions.widthSize.edgeLeft * 0.5,
-                  ),
-                ],
-              ),
-              Container(height: 18.h, color: CustomColors.grayShade, width: 1),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-
-                children: [
-                  Icon(
-                    Icons.access_time_rounded,
-                    size: Dimensions.iconSizeLarge * 0.8,
-                    color: CustomColors.grayShade,
-                  ),
-                  TextWidget(
-                    '15 min',
-                    fontSize: Dimensions.titleSmall * 0.9,
-                    color: CustomColors.grayShade,
-                    padding: Dimensions.widthSize.edgeLeft * 0.5,
-                  ),
-                ],
-              ),
-              Container(height: 18.h, color: CustomColors.grayShade, width: 1),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Icon(
-                    Icons.wallet,
-                    size: Dimensions.iconSizeLarge * 0.8,
-                    color: CustomColors.grayShade,
-                  ),
-                  TextWidget(
-                    '\$125',
-                    fontSize: Dimensions.titleSmall * 0.9,
-                    color: CustomColors.grayShade,
-                    padding: Dimensions.widthSize.edgeLeft * 0.5,
-                  ),
-                ],
-              ),
-            ],
+          TextWidget(
+            padding: EdgeInsetsGeometry.symmetric(
+              vertical: Dimensions.verticalSize * 0.5,
+              horizontal: Dimensions.defaultHorizontalSize,
+            ),
+            meal.description,
+            color: CustomColors.grayShade,
+            textAlign: TextAlign.center,
+            fontSize: Dimensions.titleSmall * 0.9,
+            maxLines: 3,
+            textOverflow: TextOverflow.ellipsis,
           ),
-        ),
-        TextWidget(
-          padding: EdgeInsetsGeometry.symmetric(
-            vertical: Dimensions.verticalSize * 0.5,
-            horizontal: Dimensions.defaultHorizontalSize,
-          ),
-          'This classic French dish features lobster meat cooked in a creamy, wine-based sauce and returned to its shell to be broiled with a cheesy topping.',
-          color: CustomColors.grayShade,
-          textAlign: TextAlign.center,
-          fontSize: Dimensions.titleSmall * 0.9,
-          maxLines: 3,
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

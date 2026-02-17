@@ -48,14 +48,18 @@ class ApiRequest {
     required Map<String, dynamic> body,
     Map<String, dynamic>? queryParams,
     bool showSuccessSnackBar = false,
+    bool useAiBaseUrl = false, // ✅ নতুন parameter
     Function(R result)? onSuccess,
   }) async {
     try {
       isLoading.value = true;
       log('|📤|---------[ 📦 POST REQUEST STARTED ]---------|📤|');
-      final uri = Uri.parse(
-        '${ApiEndPoints.baseUrl}$endPoint',
-      ).replace(queryParameters: queryParams);
+
+      // ✅ Base URL select করুন
+      final baseUrl = useAiBaseUrl ? ApiEndPoints.aiBaseUrl : ApiEndPoints.baseUrl;
+
+      final uri = Uri.parse('$baseUrl$endPoint').replace(queryParameters: queryParams);
+
       printUrl(uri.toString());
       printBody(body);
 
@@ -80,7 +84,7 @@ class ApiRequest {
         return result;
       } else {
         final error = jsonDecode(response.body);
-        final errorMessage = error['message'] ?? 'Something went wrong!';
+        final errorMessage = error['message'] ?? error['detail'] ?? 'Something went wrong!';
         log('❌ Error: $errorMessage');
         CustomSnackBar.error(errorMessage);
         throw Exception(errorMessage);
@@ -102,19 +106,22 @@ class ApiRequest {
     Map<String, dynamic>? queryParams,
     bool showSuccessSnackBar = false,
     bool showResponse = false,
+    bool useAiBaseUrl = false,
     Function(R result)? onSuccess,
   }) async {
     try {
       isLoading.value = true;
       log('|📥|---------[ 🌐 GET REQUEST STARTED ]---------|📥|');
 
-      String fullUrl = '${ApiEndPoints.baseUrl}$endPoint';
+      final baseUrl = useAiBaseUrl ? ApiEndPoints.aiBaseUrl : ApiEndPoints.baseUrl;
+
+      String fullUrl = '$baseUrl$endPoint';
       if (id != null && id.isNotEmpty) {
         fullUrl += '/$id';
       }
       final uri = Uri.parse(fullUrl).replace(
         queryParameters: queryParams?.map(
-          (key, value) => MapEntry(key, value.toString()),
+              (key, value) => MapEntry(key, value.toString()),
         ),
       );
       printUrl(uri.toString());
@@ -122,47 +129,77 @@ class ApiRequest {
       final response = await http
           .get(uri, headers: await _bearerHeaderInfo())
           .timeout(const Duration(seconds: 120));
+
+      // ✅ Response body সবসময় দেখান
+      log('📬 STATUS CODE: ${response.statusCode}');
+      log('📦 RESPONSE BODY: ${response.body}');
+
       if (showResponse) {
         try {
-          final prettyJson = const JsonEncoder.withIndent(
-            '  ',
-          ).convert(jsonDecode(response.body));
+          final prettyJson = const JsonEncoder.withIndent('  ').convert(jsonDecode(response.body));
           log('|📤|---------[ RESPONSE BODY ]---------|📤|');
           log(prettyJson);
           log('|📤|---------------------------------|📤|');
-        } catch (_) {
+        } catch (e) {
           log('|📤| RESPONSE (raw) |📤|: ${response.body}');
         }
       }
 
       log('|✅|---------[ ✅ GET REQUEST COMPLETED ]---------|✅|');
-      log(
-        '╚════════════════════════════════════════════════════════════════════════════════════════════',
-      );
+      log('╚════════════════════════════════════════════════════════════════════════════════════════════');
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> json = jsonDecode(response.body);
-        final result = fromJson(json);
-
-        final successMessage =
-            json['message'] ?? Strings.requestCompletedSuccessfully;
-        if (showSuccessSnackBar) {
-          CustomSnackBar.success(
-            title: Strings.success,
-            message: successMessage,
-          );
+        // ✅ Response body empty check করুন
+        if (response.body.isEmpty) {
+          log('⚠️ Warning: Response body is empty');
+          throw Exception('Empty response from server');
         }
-        if (onSuccess != null) onSuccess(result);
-        return result;
+
+        final Map<String, dynamic> json = jsonDecode(response.body);
+
+        // ✅ Model parsing error handling
+        try {
+          final result = fromJson(json);
+
+          final successMessage = json['message'] ?? Strings.requestCompletedSuccessfully;
+          if (showSuccessSnackBar) {
+            CustomSnackBar.success(
+              title: Strings.success,
+              message: successMessage,
+            );
+          }
+          if (onSuccess != null) onSuccess(result);
+          return result;
+        } catch (parseError) {
+          log('🐞 MODEL PARSING ERROR: $parseError');
+          log('📦 JSON DATA: $json');
+          throw Exception('Failed to parse response: $parseError');
+        }
       } else {
-        final error = jsonDecode(response.body);
-        final errorMessage = error['message'] ?? 'Something went wrong!';
-        log('❌ Error: $errorMessage');
-        CustomSnackBar.error(errorMessage);
-        throw Exception(errorMessage);
+        // ✅ Error response handle করুন
+        try {
+          final error = jsonDecode(response.body);
+          final errorMessage = error['message'] ?? error['error'] ?? 'Something went wrong!';
+          log('❌ Error: $errorMessage');
+          CustomSnackBar.error(errorMessage);
+          throw Exception(errorMessage);
+        } catch (e) {
+          log('❌ Error parsing error response: ${response.body}');
+          throw Exception('Server error: ${response.statusCode}');
+        }
       }
     } catch (e) {
       log('🐞🐞🐞 ERROR: ${e.toString()}');
+
+      // ✅ Specific error messages
+      if (e.toString().contains('SocketException')) {
+        CustomSnackBar.error('No internet connection');
+      } else if (e.toString().contains('TimeoutException')) {
+        CustomSnackBar.error('Request timeout');
+      } else if (!e.toString().contains('Exception:')) {
+        CustomSnackBar.error('Something went wrong!');
+      }
+
       throw Exception(e.toString());
     } finally {
       isLoading.value = false;
@@ -504,20 +541,26 @@ class ApiRequest {
     String? customSuccessMessage,
     Map<String, dynamic>? customBody,
     Map<String, dynamic>? queryParams,
+    bool useAiBaseUrl = false, // ✅ নতুন parameter
   }) async {
     final oldValue = isFavorite.value;
 
     try {
       isFavorite.value = !oldValue;
 
-      final uri = Uri.parse(
-        '${ApiEndPoints.baseUrl}$endPoint',
-      ).replace(queryParameters: queryParams);
+      // ✅ Base URL select করুন
+      final baseUrl = useAiBaseUrl ? ApiEndPoints.aiBaseUrl : ApiEndPoints.baseUrl;
+
+      final uri = Uri.parse('$baseUrl$endPoint').replace(
+        queryParameters: queryParams,
+      );
+
       final body = customBody ?? {itemKey: itemId};
 
       final response = await http
           .post(uri, headers: await _bearerHeaderInfo(), body: jsonEncode(body))
           .timeout(const Duration(seconds: 120));
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> json = jsonDecode(response.body);
         final isSuccess = json['success'] ?? true;
@@ -527,10 +570,10 @@ class ApiRequest {
           if (showSuccessSnackBar) {
             final successMessage =
                 customSuccessMessage ??
-                json['message'] ??
-                (isFavorite.value
-                    ? 'Added to favorites'
-                    : 'Removed from favorites');
+                    json['message'] ??
+                    (isFavorite.value
+                        ? 'Added to favorites'
+                        : 'Removed from favorites');
             CustomSnackBar.success(
               title: Strings.success,
               message: successMessage,
@@ -547,7 +590,7 @@ class ApiRequest {
       } else {
         isFavorite.value = oldValue;
         final error = jsonDecode(response.body);
-        final errorMessage = (error);
+        final errorMessage = error['message'] ?? error['detail'] ?? 'Something went wrong';
         log('❌  Error: $errorMessage');
         onError?.call(errorMessage);
         CustomSnackBar.error(errorMessage);

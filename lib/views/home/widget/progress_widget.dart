@@ -21,10 +21,10 @@ class CalorieProgressWidget extends GetView<HomeController> {
       return 0.0;
     }
     double totalCal = parseDouble(
-      controller.macrosModel?.data.calorie.calorieGoal,
+      controller.macrosModel.value?.data.calorie.calorieGoal,
     );
     double currentCal = parseDouble(
-      controller.macrosModel?.data.calorie.consumedCalorie,
+      controller.macrosModel.value?.data.calorie.consumedCalorie,
     );
 
     final progress = currentCal / totalCal;
@@ -55,7 +55,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
                       padding: EdgeInsetsGeometry.only(
                         bottom: Dimensions.heightSize * 0.2,
                       ),
-                      '${controller.macrosModel?.data.calorie.calorieGoal}',
+                      '${controller.macrosModel.value?.data.calorie.calorieGoal}',
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                     ),
@@ -71,7 +71,7 @@ class CalorieProgressWidget extends GetView<HomeController> {
           ),
         ),
         TextWidget(
-          "${controller.macrosModel?.data.calorie.consumedCalorie}/${controller.macrosModel?.data.calorie.calorieGoal}",
+          "${controller.macrosModel.value?.data.calorie.consumedCalorie}/${controller.macrosModel.value?.data.calorie.calorieGoal}",
           fontWeight: FontWeight.bold,
           fontSize: Dimensions.titleSmall * 0.8,
         ),

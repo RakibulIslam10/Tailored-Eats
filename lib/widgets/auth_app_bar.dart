@@ -91,8 +91,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 horizontal: Dimensions.defaultHorizontalSize,
               ),
               child: Icon(
-                Icons.favorite_border,
-                color: iconColor ?? CustomColors.whiteColor,
+               Icons.favorite, color: iconColor ?? Colors.red,
               ),
             ),
           ),

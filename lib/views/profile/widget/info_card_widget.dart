@@ -5,7 +5,7 @@ class InfoCardWidget extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    final data = Get.find<HomeController>().macrosModel?.data;
+    final data = Get.find<HomeController>().macrosModel.value?.data;
     return Row(
       children: [
         _buildStatCard('${data?.height} cm', 'Height'),

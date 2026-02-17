@@ -1,8 +1,9 @@
 part of '../screen/nutrition_screen.dart';
 
+
 class PlanCardWidget extends StatelessWidget {
   final String title;
-  final RxMap<String, String> currentMeal;
+  final Rx<Meal?> currentMeal;
   final VoidCallback onShuffle;
 
   const PlanCardWidget({
@@ -14,6 +15,8 @@ class PlanCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<NutritionController>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,26 +28,36 @@ class PlanCardWidget extends StatelessWidget {
             top: Dimensions.heightSize * 1.5,
           ),
         ),
-        Obx(
-          () => AnimatedSwitcher(
+        Obx(() {
+          final meal = currentMeal.value;
+          if (meal == null) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: CustomColors.primary,
+              ),
+            );
+          }
+
+          return AnimatedSwitcher(
             duration: const Duration(milliseconds: 400),
             transitionBuilder: (child, animation) =>
                 FadeTransition(opacity: animation, child: child),
             child: FoodCardWidget(
-              key: ValueKey(currentMeal["title"]),
-              title: currentMeal["title"] ?? "",
-              description: currentMeal["description"] ?? "",
-              calories: currentMeal["calories"] ?? "",
-              time: currentMeal["time"] ?? "",
-              imageUrl: currentMeal["imageUrl"] ?? "",
+              key: ValueKey(meal.id),
+              title: meal.mealName,
+              description: meal.description,
+              calories: "${meal.caloriesKcal} kcal",
+              time: "${meal.totalTimeMinutes} min",
+              imageUrl: controller.getRandomImage(),
               isShuffle: true,
               onShuffle: onShuffle,
+              meal: meal,
               onTap: () {
-                Get.toNamed(Routes.detailsScreen);
+                Get.toNamed(Routes.detailsScreen, arguments: meal.mealName,);
               },
             ),
-          ),
-        ),
+          );
+        }),
       ],
     );
   }

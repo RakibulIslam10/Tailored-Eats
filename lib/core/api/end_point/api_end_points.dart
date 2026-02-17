@@ -2,6 +2,14 @@ class ApiEndPoints {
   static final mainDomain = 'https://p2zltbm7-8002.inc1.devtunnels.ms';
   static final baseUrl = '$mainDomain/api/v1/';
 
+  static final aiBaseUrl = 'http://10.10.20.111:8000/';
+
+
+  // আপনার existing endpoints এর সাথে যোগ করুন
+  static const addFavorite = 'favorite/add';
+  static const removeFavorite = 'favorite/remove';
+  static const getAllFavorites = 'favorite';
+
   // Auth
   static const login = 'auth/login';
   static const register = 'auth/register';

@@ -119,7 +119,7 @@ class HomeController extends GetxController {
 
   RxBool getMacrosLoading = false.obs;
 
-  MacrosModel? macrosModel;
+  Rx<MacrosModel?> macrosModel = Rx<MacrosModel?>(null);
 
   Future<MacrosModel> getMacrosApiProcess() async {
     return await ApiRequest.get(
@@ -127,7 +127,7 @@ class HomeController extends GetxController {
       endPoint: ApiEndPoints.macros,
       isLoading: getMacrosLoading,
       onSuccess: (result) {
-        macrosModel = result;
+        macrosModel.value = result;
       },
     );
   }

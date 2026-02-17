@@ -9,6 +9,7 @@ class FoodCardWidget extends StatelessWidget {
   final VoidCallback? onShuffle;
   final VoidCallback? onTap;
   final bool isShuffle;
+  final Meal? meal;
 
   const FoodCardWidget({
     super.key,
@@ -20,10 +21,13 @@ class FoodCardWidget extends StatelessWidget {
     this.onShuffle,
     this.onTap,
     this.isShuffle = false,
+    this.meal,
   });
 
   @override
   Widget build(BuildContext context) {
+    final nutritionController = Get.find<NutritionController>();
+
     return RepaintBoundary(
       child: InkWell(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.85),
@@ -36,7 +40,7 @@ class FoodCardWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image
+              // ✅ Image with Favorite Button
               Stack(
                 children: [
                   ClipRRect(
@@ -75,16 +79,77 @@ class FoodCardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsetsGeometry.all(
-                      Dimensions.paddingSize * 0.1,
+
+                  // ✅ Favorite Icon - InkWell দিয়ে wrap করুন
+// ✅ Favorite button section
+          if (meal != null)
+      Positioned(
+      top: 0,
+      left: 0,
+      child: Obx(() {
+        final isFav = meal!.isFavorite.value;
+        print('🎨 Widget rebuilding - Meal: ${meal!.mealName} (ID: ${meal!.id}), isFavorite: $isFav');
+
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              print('👆 Clicked favorite for: ${meal!.mealName} (ID: ${meal!.id})');
+              nutritionController.toggleFavorite(meal!);
+            },
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(Dimensions.radius * 0.8),
+              bottomRight: Radius.circular(Dimensions.radius * 0.8),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.3),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(Dimensions.radius * 0.8),
+                  bottomRight: Radius.circular(Dimensions.radius * 0.8),
+                ),
+              ),
+              child: Icon(
+                isFav ? Icons.favorite : Icons.favorite_border,
+                color: isFav ? Colors.red : Colors.white,
+                size: Dimensions.iconSizeDefault * 1.2,
+              ),
+            ),
+          ),
+        );
+      }),
+    )
+                  else
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(
+                          Dimensions.paddingSize * 0.4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.3),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(
+                              Dimensions.radius * 0.8,
+                            ),
+                            bottomRight: Radius.circular(
+                              Dimensions.radius * 0.8,
+                            ),
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.favorite_border,
+                          color: Colors.white,
+                          size: Dimensions.iconSizeDefault * 1.2,
+                        ),
+                      ),
                     ),
-                    child: Icon(Icons.favorite, color: Colors.white),
-                  ),
                 ],
               ),
 
-              // Details
+              // Details Section
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -94,52 +159,16 @@ class FoodCardWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Title
-                      Row(
-                        mainAxisAlignment: mainSpaceBet,
-                        children: [
-                          TextWidget(
-                            title,
-                            fontWeight: FontWeight.bold,
-                            fontSize: Dimensions.titleSmall,
-                            maxLines: 1,
-                            textOverflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                            width: 24.w,
-                            child: Checkbox(
-                              value: false,
-                              onChanged: (bool? newValue) {
-                                // _isChecked.value = newValue ?? false;
-                              },
-                              activeColor: CustomColors.progressColor,
-                              checkColor: Colors.white,
-                              fillColor:
-                                  MaterialStateProperty.resolveWith<Color>((
-                                    Set<MaterialState> states,
-                                  ) {
-                                    if (states.contains(
-                                      MaterialState.selected,
-                                    )) {
-                                      return CustomColors.progressColor;
-                                    }
-                                    return const Color(0xFF3B3B3B);
-                                  }),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              side: const BorderSide(
-                                color: Color(0xFF3B3B3B),
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                        ],
+                      TextWidget(
+                        title,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Dimensions.titleSmall,
+                        maxLines: 1,
+                        textOverflow: TextOverflow.ellipsis,
                       ),
 
                       Space.height.v5,
-                      // Description
+
                       TextWidget(
                         description,
                         fontSize: Dimensions.titleSmall * 0.85,
@@ -180,7 +209,6 @@ class FoodCardWidget extends StatelessWidget {
                             ],
                           ),
 
-                          // Shuffle Button
                           Visibility(
                             visible: isShuffle,
                             child: InkWell(

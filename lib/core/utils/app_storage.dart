@@ -6,6 +6,7 @@ class AppStorage {
 
   static const String tokenKey = 'token';
   static const String userIdKey = 'userId';
+  static const String userEmailKey = 'userEmail';
   static const String temporaryTokenKey = 'temporaryToken';
   static const String mobileCodeKey = 'mobileCode';
   static const String onboardSaveKey = 'onboardSave';
@@ -19,6 +20,7 @@ class AppStorage {
   static Future<void> save({
     String? token,
     String? userId,
+    String? userEmail,
     String? temporaryToken,
     String? mobileCode,
     bool? onboardSave,
@@ -31,6 +33,7 @@ class AppStorage {
   }) async {
     if (token != null) await _storage.write(tokenKey, token);
     if (userId != null) await _storage.write(userIdKey, userId);
+    if (userEmail != null) await _storage.write(userEmailKey, userEmail);
     if (temporaryToken != null) await _storage.write(temporaryTokenKey, temporaryToken);
     if (mobileCode != null) await _storage.write(mobileCodeKey, mobileCode);
     if (onboardSave != null) await _storage.write(onboardSaveKey, onboardSave);
@@ -44,6 +47,7 @@ class AppStorage {
 
   static String get token => _storage.read(tokenKey) ?? '';
   static String get userId => _storage.read(userIdKey) ?? '';
+  static String get userEmail => _storage.read(userEmailKey) ?? '';
   static String get temporaryToken => _storage.read(temporaryTokenKey) ?? '';
   static String get mobileCode => _storage.read(mobileCodeKey) ?? '';
   static String get waitTime => _storage.read(waitTimeKey) ?? '01:00';
@@ -58,6 +62,7 @@ class AppStorage {
     return AppStorageModel(
       _storage.read(tokenKey) ?? '',
       _storage.read(userIdKey) ?? '',
+      _storage.read(userEmailKey) ?? '',
       _storage.read(onboardSaveKey) ?? false,
       _storage.read(waitTimeKey) ?? '01:00',
       _storage.read(isLoggedInKey) ?? false,

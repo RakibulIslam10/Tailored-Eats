@@ -1,316 +1,30 @@
+import 'package:flutter/services.dart';
+import 'package:tailored_eats/core/utils/app_storage.dart';
+import 'package:tailored_eats/views/nutrition/model/meals_model.dart';
+import '../../../core/api/end_point/api_end_points.dart';
+import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
 
 class NutritionController extends GetxController {
-  RxMap<String, String> currentLunch = <String, String>{}.obs;
-  RxMap<String, String> currentDinner = <String, String>{}.obs;
-  RxMap<String, String> currentSnacks = <String, String>{}.obs;
-  RxMap<String, String> currentBreakFast = <String, String>{}.obs;
+  Rx<Meal?> currentLunch = Rx<Meal?>(null);
+  Rx<Meal?> currentDinner = Rx<Meal?>(null);
+  Rx<Meal?> currentSnacks = Rx<Meal?>(null);
+  Rx<Meal?> currentBreakFast = Rx<Meal?>(null);
 
-  RxList breakFastList = <Map<String, String>>[
-    {
-      "title": "Grilled Chicken",
-      "description":
-          "Served with fresh seasonal vegetables and a light drizzle of olive oil for extra flavor.",
-      "calories": "250 kcal",
-      "time": "20 min",
-      "imageUrl": "https://picsum.photos/200/150",
-    },
-    {
-      "title": "Pasta Carbonara",
-      "description":
-          "Classic Italian pasta cooked to perfection with creamy sauce, bacon bits, and freshly grated parmesan cheese.",
-      "calories": "320 kcal",
-      "time": "15 min",
-      "imageUrl": "https://picsum.photos/200/160",
-    },
-    {
-      "title": "Avocado Toast",
-      "description":
-          "Whole grain bread topped with smashed avocado, a pinch of salt, pepper, and a sprinkle of chili flakes.",
-      "calories": "180 kcal",
-      "time": "10 min",
-      "imageUrl": "https://picsum.photos/200/170",
-    },
-    {
-      "title": "Caesar Salad",
-      "description":
-          "Crispy lettuce, homemade croutons, and Caesar dressing topped with shaved parmesan and grilled chicken slices.",
-      "calories": "220 kcal",
-      "time": "12 min",
-      "imageUrl": "https://picsum.photos/200/180",
-    },
-    {
-      "title": "Beef Burger",
-      "description":
-          "Juicy beef patty grilled to perfection, served with melted cheese, fresh lettuce, tomato, and golden crispy fries.",
-      "calories": "450 kcal",
-      "time": "25 min",
-      "imageUrl": "https://picsum.photos/200/190",
-    },
-    {
-      "title": "Fruit Smoothie",
-      "description":
-          "A refreshing blend of mixed berries, banana, and yogurt, perfect for a healthy breakfast or snack.",
-      "calories": "150 kcal",
-      "time": "8 min",
-      "imageUrl": "https://picsum.photos/200/200",
-    },
-    {
-      "title": "Sushi Platter",
-      "description":
-          "Assorted sushi rolls including salmon, tuna, and vegetarian options served with soy sauce, wasabi, and pickled ginger.",
-      "calories": "280 kcal",
-      "time": "18 min",
-      "imageUrl": "https://picsum.photos/200/210",
-    },
-    {
-      "title": "Vegetable Soup",
-      "description":
-          "Light and healthy soup with seasonal vegetables, herbs, and a touch of olive oil for added flavor.",
-      "calories": "120 kcal",
-      "time": "15 min",
-      "imageUrl": "https://picsum.photos/200/220",
-    },
-    {
-      "title": "Steak & Potatoes",
-      "description":
-          "Grilled steak cooked to your liking with roasted potatoes and a side of sautéed vegetables.",
-      "calories": "500 kcal",
-      "time": "30 min",
-      "imageUrl": "https://picsum.photos/200/230",
-    },
-    {
-      "title": "Pancakes",
-      "description":
-          "Fluffy pancakes served with warm maple syrup, fresh berries, and a dollop of whipped cream.",
-      "calories": "300 kcal",
-      "time": "20 min",
-      "imageUrl": "https://picsum.photos/200/240",
-    },
-  ].obs;
-  RxList lunchList = <Map<String, String>>[
-    {
-      "title": "Grilled Chicken",
-      "description":
-          "Served with fresh seasonal vegetables and a light drizzle of olive oil for extra flavor.",
-      "calories": "250 kcal",
-      "time": "20 min",
-      "imageUrl": "https://picsum.photos/200/150",
-    },
+  RxList<Meal> breakFastList = <Meal>[].obs;
+  RxList<Meal> lunchList = <Meal>[].obs;
+  RxList<Meal> dinnerList = <Meal>[].obs;
+  RxList<Meal> snacksList = <Meal>[].obs;
+  RxList<Meal> favoriteMealsList = <Meal>[].obs;
 
-    {
-      "title": "Avocado Toast",
-      "description":
-          "Whole grain bread topped with smashed avocado, a pinch of salt, pepper, and a sprinkle of chili flakes.",
-      "calories": "180 kcal",
-      "time": "10 min",
-      "imageUrl": "https://picsum.photos/200/170",
-    },
-    {
-      "title": "Caesar Salad",
-      "description":
-          "Crispy lettuce, homemade croutons, and Caesar dressing topped with shaved parmesan and grilled chicken slices.",
-      "calories": "220 kcal",
-      "time": "12 min",
-      "imageUrl": "https://picsum.photos/200/180",
-    },
-    {
-      "title": "Pasta Carbonara",
-      "description":
-          "Classic Italian pasta cooked to perfection with creamy sauce, bacon bits, and freshly grated parmesan cheese.",
-      "calories": "320 kcal",
-      "time": "15 min",
-      "imageUrl": "https://picsum.photos/200/160",
-    },
-    {
-      "title": "Beef Burger",
-      "description":
-          "Juicy beef patty grilled to perfection, served with melted cheese, fresh lettuce, tomato, and golden crispy fries.",
-      "calories": "450 kcal",
-      "time": "25 min",
-      "imageUrl": "https://picsum.photos/200/190",
-    },
-    {
-      "title": "Fruit Smoothie",
-      "description":
-          "A refreshing blend of mixed berries, banana, and yogurt, perfect for a healthy breakfast or snack.",
-      "calories": "150 kcal",
-      "time": "8 min",
-      "imageUrl": "https://picsum.photos/200/200",
-    },
-    {
-      "title": "Sushi Platter",
-      "description":
-          "Assorted sushi rolls including salmon, tuna, and vegetarian options served with soy sauce, wasabi, and pickled ginger.",
-      "calories": "280 kcal",
-      "time": "18 min",
-      "imageUrl": "https://picsum.photos/200/210",
-    },
-    {
-      "title": "Vegetable Soup",
-      "description":
-          "Light and healthy soup with seasonal vegetables, herbs, and a touch of olive oil for added flavor.",
-      "calories": "120 kcal",
-      "time": "15 min",
-      "imageUrl": "https://picsum.photos/200/220",
-    },
-    {
-      "title": "Steak & Potatoes",
-      "description":
-          "Grilled steak cooked to your liking with roasted potatoes and a side of sautéed vegetables.",
-      "calories": "500 kcal",
-      "time": "30 min",
-      "imageUrl": "https://picsum.photos/200/230",
-    },
-    {
-      "title": "Pancakes",
-      "description":
-          "Fluffy pancakes served with warm maple syrup, fresh berries, and a dollop of whipped cream.",
-      "calories": "300 kcal",
-      "time": "20 min",
-      "imageUrl": "https://picsum.photos/200/240",
-    },
-  ].obs;
-  RxList dinnerList = <Map<String, String>>[
-    {
-      "title": "Avocado Toast",
-      "description":
-          "Whole grain bread topped with smashed avocado, a pinch of salt, pepper, and a sprinkle of chili flakes.",
-      "calories": "180 kcal",
-      "time": "10 min",
-      "imageUrl": "https://picsum.photos/200/170",
-    },
-    {
-      "title": "Caesar Salad",
-      "description":
-          "Crispy lettuce, homemade croutons, and Caesar dressing topped with shaved parmesan and grilled chicken slices.",
-      "calories": "220 kcal",
-      "time": "12 min",
-      "imageUrl": "https://picsum.photos/200/180",
-    },
-    {
-      "title": "Grilled Chicken",
-      "description":
-          "Served with fresh seasonal vegetables and a light drizzle of olive oil for extra flavor.",
-      "calories": "250 kcal",
-      "time": "20 min",
-      "imageUrl": "https://picsum.photos/200/150",
-    },
-    {
-      "title": "Pasta Carbonara",
-      "description":
-          "Classic Italian pasta cooked to perfection with creamy sauce, bacon bits, and freshly grated parmesan cheese.",
-      "calories": "320 kcal",
-      "time": "15 min",
-      "imageUrl": "https://picsum.photos/200/160",
-    },
-    {
-      "title": "Beef Burger",
-      "description":
-          "Juicy beef patty grilled to perfection, served with melted cheese, fresh lettuce, tomato, and golden crispy fries.",
-      "calories": "450 kcal",
-      "time": "25 min",
-      "imageUrl": "https://picsum.photos/200/190",
-    },
-    {
-      "title": "Fruit Smoothie",
-      "description":
-          "A refreshing blend of mixed berries, banana, and yogurt, perfect for a healthy breakfast or snack.",
-      "calories": "150 kcal",
-      "time": "8 min",
-      "imageUrl": "https://picsum.photos/200/200",
-    },
-    {
-      "title": "Sushi Platter",
-      "description":
-          "Assorted sushi rolls including salmon, tuna, and vegetarian options served with soy sauce, wasabi, and pickled ginger.",
-      "calories": "280 kcal",
-      "time": "18 min",
-      "imageUrl": "https://picsum.photos/200/210",
-    },
-    {
-      "title": "Vegetable Soup",
-      "description":
-          "Light and healthy soup with seasonal vegetables, herbs, and a touch of olive oil for added flavor.",
-      "calories": "120 kcal",
-      "time": "15 min",
-      "imageUrl": "https://picsum.photos/200/220",
-    },
-    {
-      "title": "Steak & Potatoes",
-      "description":
-          "Grilled steak cooked to your liking with roasted potatoes and a side of sautéed vegetables.",
-      "calories": "500 kcal",
-      "time": "30 min",
-      "imageUrl": "https://picsum.photos/200/230",
-    },
-    {
-      "title": "Pancakes",
-      "description":
-          "Fluffy pancakes served with warm maple syrup, fresh berries, and a dollop of whipped cream.",
-      "calories": "300 kcal",
-      "time": "20 min",
-      "imageUrl": "https://picsum.photos/200/240",
-    },
-  ].obs;
-  RxList snacksList = <Map<String, String>>[
-    {
-      "title": "Caesar Salad",
-      "description":
-          "Crispy lettuce, homemade croutons, and Caesar dressing topped with shaved parmesan and grilled chicken slices.",
-      "calories": "220 kcal",
-      "time": "12 min",
-      "imageUrl": "https://picsum.photos/200/180",
-    },
-    {
-      "title": "Beef Burger",
-      "description":
-          "Juicy beef patty grilled to perfection, served with melted cheese, fresh lettuce, tomato, and golden crispy fries.",
-      "calories": "450 kcal",
-      "time": "25 min",
-      "imageUrl": "https://picsum.photos/200/190",
-    },
-    {
-      "title": "Fruit Smoothie",
-      "description":
-          "A refreshing blend of mixed berries, banana, and yogurt, perfect for a healthy breakfast or snack.",
-      "calories": "150 kcal",
-      "time": "8 min",
-      "imageUrl": "https://picsum.photos/200/200",
-    },
-    {
-      "title": "Sushi Platter",
-      "description":
-          "Assorted sushi rolls including salmon, tuna, and vegetarian options served with soy sauce, wasabi, and pickled ginger.",
-      "calories": "280 kcal",
-      "time": "18 min",
-      "imageUrl": "https://picsum.photos/200/210",
-    },
-    {
-      "title": "Vegetable Soup",
-      "description":
-          "Light and healthy soup with seasonal vegetables, herbs, and a touch of olive oil for added flavor.",
-      "calories": "120 kcal",
-      "time": "15 min",
-      "imageUrl": "https://picsum.photos/200/220",
-    },
-    {
-      "title": "Steak & Potatoes",
-      "description":
-          "Grilled steak cooked to your liking with roasted potatoes and a side of sautéed vegetables.",
-      "calories": "500 kcal",
-      "time": "30 min",
-      "imageUrl": "https://picsum.photos/200/230",
-    },
-    {
-      "title": "Pancakes",
-      "description":
-          "Fluffy pancakes served with warm maple syrup, fresh berries, and a dollop of whipped cream.",
-      "calories": "300 kcal",
-      "time": "20 min",
-      "imageUrl": "https://picsum.photos/200/240",
-    },
-  ].obs;
+  RxBool breakfastLoading = false.obs;
+  RxBool lunchLoading = false.obs;
+  RxBool dinnerLoading = false.obs;
+  RxBool snacksLoading = false.obs;
+
+  RxBool generateMealsLoading = false.obs;
+  RxBool loadAllData = false.obs;
+  RxString currentLoadingMeal = ''.obs;
 
   @override
   void onInit() {
@@ -318,20 +32,188 @@ class NutritionController extends GetxController {
     loadInitialData();
   }
 
-  RxBool loadAllData = false.obs;
-
-  void loadInitialData() {
-    loadAllData.value = true; // start loading
+  Future<void> getAllMeals(String mealType) async {
+    switch (mealType.toLowerCase()) {
+      case 'breakfast':
+        breakfastLoading.value = true;
+        currentLoadingMeal.value = 'Generating Breakfast...';
+        break;
+      case 'lunch':
+        lunchLoading.value = true;
+        currentLoadingMeal.value = 'Generating Lunch...';
+        break;
+      case 'dinner':
+        dinnerLoading.value = true;
+        currentLoadingMeal.value = 'Generating Dinner...';
+        break;
+      case 'snacks':
+        snacksLoading.value = true;
+        currentLoadingMeal.value = 'Generating Snacks...';
+        break;
+    }
 
     try {
-      shuffleBreakFastList();
-      shuffleLunchListList();
-      shuffleDinnerList();
-      shuffleSnacksList();
+      await ApiRequest.get(
+        fromJson: MealsModel.fromJson,
+        endPoint: 'generate/$mealType',
+        useAiBaseUrl: true,
+        queryParams: {
+          'user_id': AppStorage.userEmail.toString(),
+          'num_meals': '2',
+        },
+        isLoading: RxBool(false),
+        showResponse: false,
+        onSuccess: (result) {
+          print(
+            '✅ Successfully loaded ${result.meals.length} meals for $mealType',
+          );
+
+          if (mealType == 'breakfast') {
+            breakFastList.addAll(result.meals);
+            shuffleBreakFastList();
+          }
+          if (mealType == 'lunch') {
+            lunchList.addAll(result.meals);
+            shuffleLunchListList();
+          }
+          if (mealType == 'dinner') {
+            dinnerList.addAll(result.meals);
+            shuffleDinnerList();
+          }
+          if (mealType == 'snacks') {
+            snacksList.addAll(result.meals);
+            shuffleSnacksList();
+          }
+        },
+      );
+    } finally {
+      switch (mealType.toLowerCase()) {
+        case 'breakfast':
+          breakfastLoading.value = false;
+          break;
+        case 'lunch':
+          lunchLoading.value = false;
+          break;
+        case 'dinner':
+          dinnerLoading.value = false;
+          break;
+        case 'snacks':
+          snacksLoading.value = false;
+          break;
+      }
+    }
+  }
+
+  // ✅ Toggle Favorite with API Call
+  Future<void> toggleFavorite(Meal meal) async {
+    print('🔄 Toggle favorite for: ${meal.mealName}');
+
+    final wasAlreadyFavorite = meal.isFavorite.value;
+
+    // ✅ Instant UI update
+    HapticFeedback.lightImpact();
+    meal.isFavorite.value = !wasAlreadyFavorite;
+
+    // ✅ Update local favorites list
+    if (meal.isFavorite.value) {
+      if (!favoriteMealsList.any((m) => m.id == meal.id)) {
+        favoriteMealsList.add(meal);
+      }
+    } else {
+      favoriteMealsList.removeWhere((m) => m.id == meal.id);
+    }
+
+    // ✅ Force refresh
+    breakFastList.refresh();
+    lunchList.refresh();
+    dinnerList.refresh();
+    snacksList.refresh();
+
+    // ✅ API Call
+    try {
+      if (wasAlreadyFavorite) {
+        await _removeFavorite(meal);
+      } else {
+        await _addFavorite(meal);
+      }
     } catch (e) {
-      print("Error shuffling lists: $e");
+      print('❌ Favorite API error: $e');
+
+      // ✅ Revert on error
+      meal.isFavorite.value = wasAlreadyFavorite;
+      if (wasAlreadyFavorite) {
+        if (!favoriteMealsList.any((m) => m.id == meal.id)) {
+          favoriteMealsList.add(meal);
+        }
+      } else {
+        favoriteMealsList.removeWhere((m) => m.id == meal.id);
+      }
+
+      breakFastList.refresh();
+      lunchList.refresh();
+      dinnerList.refresh();
+      snacksList.refresh();
+
+      CustomSnackBar.error('Failed to update favorite');
+    }
+  }
+
+  Future<void> _addFavorite(Meal meal) async {
+    print('➕ Adding to favorites: ${meal.mealName}');
+
+    await ApiRequest.post(
+      fromJson: (json) => json,
+      endPoint: 'favorite/add',
+      isLoading: RxBool(false),
+      useAiBaseUrl: true,
+
+
+      body: {
+        'user_id': AppStorage.userEmail.toString(),
+        'meal_type': meal.mealType.toLowerCase(),
+        'recipe_name': meal.mealName,
+      },
+      onSuccess: (result) {
+        print('✅ Added to favorites successfully');
+        print('📦 Response: $result');
+      },
+    );
+  }
+
+  // ✅ Remove from Favorites API
+  Future<void> _removeFavorite(Meal meal) async {
+    print('➖ Removing from favorites: ${meal.mealName}');
+
+    await ApiRequest.delete(
+      fromJson: (json) => json,
+      endPoint: 'favorite/remove',
+      isLoading: RxBool(false),
+      body: {
+        'user_id': AppStorage.userEmail.toString(),
+        'recipe_name': meal.mealName,
+      },
+      onSuccess: (result) {
+        print('✅ Removed from favorites successfully');
+        print('📦 Response: $result');
+      },
+    );
+  }
+
+  void loadInitialData() async {
+    loadAllData.value = true;
+    generateMealsLoading.value = true;
+
+    try {
+      await getAllMeals('breakfast');
+      await getAllMeals('lunch');
+      await getAllMeals('dinner');
+      await getAllMeals('snacks');
+    } catch (e) {
+      print("Error loading meals: $e");
     } finally {
       loadAllData.value = false;
+      generateMealsLoading.value = false;
+      currentLoadingMeal.value = '';
     }
   }
 
@@ -353,5 +235,22 @@ class NutritionController extends GetxController {
   void shuffleSnacksList() {
     if (snacksList.isEmpty) return;
     currentSnacks.value = (snacksList..shuffle()).first;
+  }
+
+  final List<String> staticImages = [
+    "https://picsum.photos/200/150",
+    "https://picsum.photos/200/160",
+    "https://picsum.photos/200/170",
+    "https://picsum.photos/200/180",
+    "https://picsum.photos/200/190",
+    "https://picsum.photos/200/200",
+    "https://picsum.photos/200/210",
+    "https://picsum.photos/200/220",
+    "https://picsum.photos/200/230",
+    "https://picsum.photos/200/240",
+  ];
+
+  String getRandomImage() {
+    return (staticImages..shuffle()).first;
   }
 }

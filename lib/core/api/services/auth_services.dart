@@ -25,6 +25,8 @@ class AuthService {
           token: result.data.accessToken,
           isLoggedIn: true,
           userId: result.data.user.userId,
+          userEmail: result.data.user.email
+
         );
         Get.offAllNamed(Routes.navigationScreen);
       },

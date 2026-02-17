@@ -16,23 +16,19 @@ class MacrosWidget extends GetView<DetailsController> {
             CalorieTrackerWidget(
               path: Assets.icons.agun.path,
               title: 'Fat',
-              value: '150',
+              value: controller.mealDetails.value?.fatG.toString() ?? '0',
             ),
             CalorieTrackerWidget(
               path: Assets.icons.pro.path,
               title: 'Protein',
-              value: '150',
+              value: controller.mealDetails.value?.proteinG.toString() ?? '0',
             ),
             CalorieTrackerWidget(
               path: Assets.icons.carb.path,
               title: 'Carbs',
-              value: '150',
+              value: controller.mealDetails.value?.carbsG.toString() ?? '0',
             ),
-            CalorieTrackerWidget(
-              path: Assets.icons.fat.path,
-              title: 'Fat',
-              value: '150',
-            ),
+      SizedBox()
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:tailored_eats/routes/routes.dart';
 import 'package:tailored_eats/views/home/controller/home_controller.dart';
 import 'package:tailored_eats/widgets/profile_avater_widget.dart';
 
+import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../../widgets/auth_app_bar.dart';
