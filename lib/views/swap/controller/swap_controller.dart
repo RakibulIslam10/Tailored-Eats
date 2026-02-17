@@ -76,7 +76,6 @@ class SwapController extends GetxController {
       }).toList();
     }
 
-    // Calorie range filter (minPrice/maxPrice কে calorie range হিসেবে use করা)
     meals = meals.where((meal) {
       return meal.caloriesKcal >= minPrice.value &&
           meal.caloriesKcal <= maxPrice.value;
@@ -85,7 +84,6 @@ class SwapController extends GetxController {
     return meals.obs;
   }
 
-  // Sort By options
   var selectedSortBy = 'All Meals'.obs;
   final sortByOptions = ['All Meals', 'Favorites'];
 

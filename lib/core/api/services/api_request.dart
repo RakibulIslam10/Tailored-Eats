@@ -149,7 +149,6 @@ class ApiRequest {
       log('╚════════════════════════════════════════════════════════════════════════════════════════════');
 
       if (response.statusCode == 200) {
-        // ✅ Response body empty check করুন
         if (response.body.isEmpty) {
           log('⚠️ Warning: Response body is empty');
           throw Exception('Empty response from server');
@@ -157,7 +156,6 @@ class ApiRequest {
 
         final Map<String, dynamic> json = jsonDecode(response.body);
 
-        // ✅ Model parsing error handling
         try {
           final result = fromJson(json);
 
@@ -176,7 +174,6 @@ class ApiRequest {
           throw Exception('Failed to parse response: $parseError');
         }
       } else {
-        // ✅ Error response handle করুন
         try {
           final error = jsonDecode(response.body);
           final errorMessage = error['message'] ?? error['error'] ?? 'Something went wrong!';
@@ -191,7 +188,6 @@ class ApiRequest {
     } catch (e) {
       log('🐞🐞🐞 ERROR: ${e.toString()}');
 
-      // ✅ Specific error messages
       if (e.toString().contains('SocketException')) {
         CustomSnackBar.error('No internet connection');
       } else if (e.toString().contains('TimeoutException')) {
@@ -207,14 +203,13 @@ class ApiRequest {
   }
 
   // others
-
   /// =========================================================== ✅ PATCH REQUEST =========================================================== ///
   static Future<R> patch<R>({
     required R Function(Map<String, dynamic>) fromJson,
     required String endPoint,
     required RxBool isLoading,
     required Map<String, dynamic> body,
-    String? id, // 🔥 NEW PARAMETER (single string)
+    String? id,
     Map<String, dynamic>? queryParams,
     bool showSuccessSnackBar = false,
     Function(R result)? onSuccess,
@@ -222,8 +217,6 @@ class ApiRequest {
     try {
       isLoading.value = true;
       log('|📤|---------[ 📦 PATCH REQUEST STARTED ]---------|📤|');
-
-      // 🔥 Build final endpoint (if id provided -> /endpoint/id)
       final fullEndPoint = id != null ? '$endPoint/$id' : endPoint;
 
       // Build URL

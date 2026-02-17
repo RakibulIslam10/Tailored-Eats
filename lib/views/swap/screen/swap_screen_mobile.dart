@@ -85,7 +85,7 @@ class SwapScreenMobile extends GetView<SwapController> {
                     time: "${meal.totalTimeMinutes} min",
                     imageUrl: nutritionController.getRandomImage(),
                     isShuffle: false,
-                    meal: meal, // ✅ Meal object pass করুন
+                    meal: meal,
                     onTap: () {
                       Get.toNamed(Routes.detailsScreen, arguments: meal);
                     },
