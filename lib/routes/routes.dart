@@ -1,5 +1,7 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:tailored_eats/views/add_custom_meal_screen/add_custom_meal_screen.dart';
 
+import '../bind/add_custom_meal_binding.dart';
 import '../bind/change_password_binding.dart';
 import '../bind/consistency_binding.dart';
 import '../bind/details_binding.dart';
@@ -70,7 +72,8 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
-static const find_frinedScreen = '/find_frinedScreen';
+  static const find_frinedScreen = '/find_frinedScreen';
+  static const addCustomMealScreen = '/addCustomMealScreen';
   static const pictureProgressScreen = '/picture_progressScreen';
   static const friendsConsistencyScreen = '/friends_consistencyScreen';
   static const previewProfileScreen = '/preview_profileScreen';

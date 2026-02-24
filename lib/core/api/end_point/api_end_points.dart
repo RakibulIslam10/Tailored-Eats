@@ -4,7 +4,6 @@ class ApiEndPoints {
 
   static final aiBaseUrl = 'https://thfgnbd8-8000.asse.devtunnels.ms/';
 
-
   static const addFavorite = 'favorite/add';
   static const removeFavorite = 'favorite/remove';
   static const getAllFavorites = 'favorite';
@@ -16,6 +15,7 @@ class ApiEndPoints {
   static const resetPassword = 'auth/reset-password';
   static const forgotPassword = 'auth/forget-password';
   static const changePassword = 'settings/change-password';
+  static const addCustomMeal = 'https://p2zltbm7-8002.inc1.devtunnels.ms/api/v1/meal/add-custom-meal';
 
   //home
   static const macros = 'user/user-detail';

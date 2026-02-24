@@ -12,7 +12,18 @@ class NutritionScreenMobile extends GetView<NutritionController> {
         }
       },
       child: Scaffold(
-        appBar: CommonAppBar(title: "Meals", isBack: false),
+        appBar: CommonAppBar(title: "Meals", isBack: false,actions: [
+
+            IconButton(
+              onPressed: () {
+                
+                Get.toNamed(Routes.addCustomMealScreen);
+
+              },
+              icon: Icon(Icons.add,color: Colors.white,),
+            ),
+
+        ],),
         body: SafeArea(
           child: Obx(
             () => controller.generateMealsLoading.value

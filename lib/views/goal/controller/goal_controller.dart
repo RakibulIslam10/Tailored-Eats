@@ -135,9 +135,9 @@ class GoalController extends GetxController {
       body: {'userId': AppStorage.userId, 'title': addGoalController.text},
       showSuccessSnackBar: true,
       onSuccess: (result) {
-        Get.close(1);
         addGoalController.clear();
         refreshGoals();
+        Get.close(1);
       },
     );
   }

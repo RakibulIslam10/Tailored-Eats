@@ -7,6 +7,10 @@ class RoutePageList {
       name: Routes.find_frinedScreen,
       page: () => const FindFrinedScreen(),
       binding: FindFrinedBinding(),
+    ),    GetPage(
+      name: Routes.addCustomMealScreen,
+      page: () => const AddCustomMealScreen(),
+      binding: AddCustomMealBinding(),
     ),
     GetPage(
       name: Routes.friendsConsistencyScreen,
