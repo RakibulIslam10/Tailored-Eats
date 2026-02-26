@@ -9,7 +9,9 @@ import '../model/home_consistency_model.dart';
 import '../model/macros_model.dart';
 
 class HomeController extends GetxController {
+
   final TextEditingController weightController = TextEditingController();
+
   RxList nextBiteFoodsList = <Map<String, String>>[
     {
       "title": "Grilled Chicken",
@@ -102,8 +104,8 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  RxBool isLoading = false.obs;
 
+  RxBool isLoading = false.obs;
   Future<void> loadInitialData() async {
     try {
       isLoading.value = true;
@@ -118,7 +120,6 @@ class HomeController extends GetxController {
   }
 
   RxBool getMacrosLoading = false.obs;
-
   Rx<MacrosModel?> macrosModel = Rx<MacrosModel?>(null);
 
   Future<MacrosModel> getMacrosApiProcess() async {
@@ -133,11 +134,11 @@ class HomeController extends GetxController {
   }
 
   RxBool getConsistencyLoading = false.obs;
-
   HomeConsistencyModel? consistencyModel;
 
   List<Consistency> friendsProgressList = [];
   List<FriendData> friendsDoingPercentList = [];
+
 
   Future<HomeConsistencyModel> getConsistencyApiProcess() async {
     return await ApiRequest.get(
