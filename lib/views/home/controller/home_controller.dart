@@ -1,6 +1,5 @@
 import 'package:tailored_eats/core/api/model/basic_success_model.dart';
 import 'package:tailored_eats/views/home/model/home_goal_model.dart';
-
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
