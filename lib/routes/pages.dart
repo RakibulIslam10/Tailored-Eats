@@ -7,7 +7,12 @@ class RoutePageList {
       name: Routes.find_frinedScreen,
       page: () => const FindFrinedScreen(),
       binding: FindFrinedBinding(),
-    ),    GetPage(
+    ),   GetPage(
+      name: Routes.myMealScreen,
+      page: () => const MyMealScreen(),
+      binding: MyMealBinding(),
+    ),
+    GetPage(
       name: Routes.addCustomMealScreen,
       page: () => const AddCustomMealScreen(),
       binding: AddCustomMealBinding(),

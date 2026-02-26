@@ -336,7 +336,6 @@ class AddCustomMealScreen extends GetView<AddCustomMealController> {
 
               Space.height.v20,
 
-              // ── Instructions Section ──
               _DarkSectionCard(
                 title: 'Instructions',
                 icon: Icons.format_list_numbered,
@@ -442,7 +441,6 @@ class AddCustomMealScreen extends GetView<AddCustomMealController> {
   }
 }
 
-// ── Dark Label ──
 class _DarkLabel extends StatelessWidget {
   final String text;
   final bool optional;

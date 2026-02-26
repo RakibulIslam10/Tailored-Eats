@@ -167,7 +167,6 @@ class NutritionController extends GetxController {
       isLoading: RxBool(false),
       useAiBaseUrl: true,
 
-
       body: {
         'user_id': AppStorage.userEmail.toString(),
         'meal_type': meal.mealType.toLowerCase(),

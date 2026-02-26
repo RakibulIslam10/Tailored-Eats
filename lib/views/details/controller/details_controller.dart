@@ -5,7 +5,6 @@ import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
 
 class DetailsController extends GetxController {
-
   RxDouble progress = 0.45.obs;
 
   // Meal data
@@ -18,7 +17,6 @@ class DetailsController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // 🔎 Get recipe name from previous screen
     recipeName = Get.arguments ?? '';
 
     if (recipeName.isNotEmpty) {
@@ -43,9 +41,7 @@ class DetailsController extends GetxController {
         useAiBaseUrl: true,
 
         // ❌ REMOVE recipe-name from query param
-        queryParams: {
-          'user_id': AppStorage.userEmail.toString(),
-        },
+        queryParams: {'user_id': AppStorage.userEmail.toString()},
 
         isLoading: RxBool(false),
         showResponse: true,
@@ -55,7 +51,6 @@ class DetailsController extends GetxController {
           print('✅ Meal details loaded: ${result.recipeName}');
         },
       );
-
     } catch (e) {
       print('❌ Error loading meal details: $e');
       CustomSnackBar.error('Failed to load meal details');

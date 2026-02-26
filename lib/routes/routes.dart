@@ -50,6 +50,7 @@ import '../views/friends/screen/friends_screen.dart';
 import '../views/friends_consistency/screen/friends_consistency_screen.dart';
 import '../views/goal/screen/goal_screen.dart';
 import '../views/home/screen/home_screen.dart';
+import '../views/my_meal/my_meal_screen.dart';
 import '../views/navigation/screen/navigation_screen.dart';
 import '../views/notification/screen/notification_screen.dart';
 import '../views/nutrition/screen/nutrition_screen.dart';
@@ -82,6 +83,7 @@ class Routes {
   static const termsScreen = '/termsScreen';
   static const faqScreen = '/faqScreen';
   static const supportScreen = '/supportScreen';
+  static const myMealScreen = '/myMealScreen';
   static const changePasswordScreen = '/change_passwordScreen';
   static const settingScreen = '/settingScreen';
   static const notificationScreen = '/notificationScreen';

@@ -43,7 +43,7 @@ class AllFriendsWidget extends GetView<FriendsController> {
                       child: CircleAvatar(
                         radius: 20.r,
                         backgroundImage: CachedNetworkImageProvider(
-                          controller.allFriendsList[index].image ??
+                         '${ApiEndPoints.mainDomain}/${controller.allFriendsList[index].image}' ??
                               'https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg',
                         ),
                         backgroundColor: Colors.grey.shade200,
