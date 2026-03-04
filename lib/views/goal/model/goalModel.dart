@@ -39,15 +39,6 @@ class HomeGoalModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'statusCode': statusCode,
-      'success': success,
-      'message': message,
-      'meta': meta,
-      'data': data?.map((x) => x.toJson()).toList(),
-    };
-  }
 }
 
 class GoalData {
@@ -84,16 +75,4 @@ class GoalData {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'user': user,
-      'title': title,
-      'isCompleted': isCompleted,
-      'type': type,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      '__v': v,
-    };
-  }
 }

@@ -37,6 +37,7 @@ class GoalController extends GetxController {
       fromJson: HomeGoalModel.fromJson,
       endPoint: ApiEndPoints.getALlGoal,
       isLoading: isGoalLoading,
+
       onSuccess: (HomeGoalModel result) {
         dailyGoals.clear();
         weeklyGoals.clear();
@@ -124,20 +125,25 @@ class GoalController extends GetxController {
     await getAllGoals();
   }
 
-  // add goal process api
-  RxBool isAddGoalLoading = false.obs;
+  final isAddGoalLoading = false.obs;
+  final goalType = 'daily'.obs;
 
   Future<BasicSuccessModel> addNewGoal() async {
     return await ApiRequest.post(
       fromJson: BasicSuccessModel.fromJson,
       endPoint: ApiEndPoints.createGoal,
       isLoading: isAddGoalLoading,
-      body: {'userId': AppStorage.userId, 'title': addGoalController.text},
+      body: {
+        'userId': AppStorage.userId,
+        'title': addGoalController.text,
+        'type': goalType.value,   // 👈 type added
+      },
       showSuccessSnackBar: true,
       onSuccess: (result) {
         addGoalController.clear();
+        goalType.value = 'daily';
         refreshGoals();
-        Get.close(1);
+        Get.back();
       },
     );
   }

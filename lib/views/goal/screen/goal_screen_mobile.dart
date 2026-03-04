@@ -9,7 +9,14 @@ class GoalScreenMobile extends GetView<GoalController> {
       appBar: CommonAppBar(
         title: 'Yet to Achieve',
         isBack: false,
-        actions: [GoalAddPopWidget()],
+        actions: [
+          IconButton(
+          onPressed: () {
+    Get.dialog(const GoalAddDialogWidget());
+    },
+      icon: Icon(Icons.add, color: CustomColors.whiteColor),
+    )
+        ],
       ),
       body: RefreshIndicator(
         backgroundColor: Colors.white,

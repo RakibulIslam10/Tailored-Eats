@@ -25,7 +25,6 @@ class LoginController extends GetxController {
 
   //Login api
   RxBool isLoading = false.obs;
-
   loginProcess() async {
     return await AuthService.loginService(
       isLoading: isLoading,
