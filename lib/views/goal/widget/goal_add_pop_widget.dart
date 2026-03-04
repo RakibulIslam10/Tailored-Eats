@@ -6,57 +6,93 @@ class GoalAddDialogWidget extends GetView<GoalController> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: CustomColors.blackColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
+        padding: EdgeInsets.all(Dimensions.defaultHorizontalSize),
         child: Obx(
               () => Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              /// Title
-              TextWidget(
-                 "Add New Goal",
-                fontSize: Dimensions.titleLarge,
-                fontWeight: FontWeight.bold,
+              /// Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextWidget(
+                     "Add New Goal",
+                    fontSize: Dimensions.titleLarge,
+                    fontWeight: FontWeight.w600,
+                    color: CustomColors.whiteColor,
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Icon(Icons.close,
+                        color: CustomColors.grayShade),
+                  )
+                ],
               ),
 
-              SizedBox(height: Dimensions.verticalSize),
+              SizedBox(height: Dimensions.verticalSize * 1.2),
 
               /// Goal Title Field
-              PrimaryInputFieldWidget(
-                controller: controller.addGoalController,
-                hintText: "Enter goal title",
+              Container(
+                decoration: BoxDecoration(
+                  color: CustomColors.primaryDark,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                      color: CustomColors.grayShade.withOpacity(.2)),
+                ),
+                child: PrimaryInputFieldWidget(
+                  controller: controller.addGoalController,
+                  hintText: "Enter goal title",
+
+                  fillColor: Colors.transparent,
+                ),
               ),
 
               SizedBox(height: Dimensions.verticalSize),
 
-              /// Type Dropdown
+              /// Type Label
+              TextWidget(
+                 "Goal Type",
+                color: CustomColors.grayShade,
+              ),
+
+              SizedBox(height: Dimensions.verticalSize * .5),
+
+              /// Type Selector
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.defaultHorizontalSize,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(color: CustomColors.grayShade),
-                  borderRadius: BorderRadius.circular(8),
+                  color: CustomColors.primaryDark,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: CustomColors.grayShade.withOpacity(.2),
+                  ),
                 ),
                 child: DropdownButton<String>(
+                  dropdownColor: CustomColors.blackColor,
                   value: controller.goalType.value,
                   isExpanded: true,
-                  underline: SizedBox(),
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'daily',
-                      child: Text("Daily"),
+                  iconEnabledColor: CustomColors.whiteColor,
+                  underline: const SizedBox(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  items: controller.goalTypes
+                      .map(
+                        (type) => DropdownMenuItem(
+                      value: type,
+                      child: Text(type),
                     ),
-                    DropdownMenuItem(
-                      value: 'weekly',
-                      child: Text("Weekly"),
-                    ),
-                  ],
+                  )
+                      .toList(),
                   onChanged: (value) {
                     controller.goalType.value = value!;
                   },
@@ -67,10 +103,13 @@ class GoalAddDialogWidget extends GetView<GoalController> {
 
               /// Button
               controller.isAddGoalLoading.value
-                  ? Center(child: CircularProgressIndicator())
-                  : PrimaryButtonWidget(
-                onPressed: controller.addNewGoal,
-                title: 'Add',
+                  ? const Center(child: CircularProgressIndicator())
+                  : SizedBox(
+                width: double.infinity,
+                child: PrimaryButtonWidget(
+                  title: "Add Goal",
+                  onPressed: controller.addNewGoal,
+                ),
               ),
             ],
           ),

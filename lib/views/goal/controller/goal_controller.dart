@@ -92,6 +92,24 @@ class GoalController extends GetxController {
     }
   }
 
+
+
+
+
+
+
+  Future<BasicSuccessModel> goalMark(String id) async {
+    return await ApiRequest.patch(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: ApiEndPoints.goalMark,
+      isLoading: false.obs,
+      body: {'goalId': id},
+      showSuccessSnackBar: true,
+    );
+  }
+
+
+
   void _handleSuggestedToggle(int index) {
     final goal = suggestedGoals[index];
     goal.completed = !goal.completed;
@@ -126,7 +144,13 @@ class GoalController extends GetxController {
   }
 
   final isAddGoalLoading = false.obs;
-  final goalType = 'daily'.obs;
+
+  final goalType = 'Daily'.obs;
+
+  final List<String> goalTypes = [
+    'Daily',
+    'Weekly',
+  ];
 
   Future<BasicSuccessModel> addNewGoal() async {
     return await ApiRequest.post(
@@ -135,15 +159,16 @@ class GoalController extends GetxController {
       isLoading: isAddGoalLoading,
       body: {
         'userId': AppStorage.userId,
-        'title': addGoalController.text,
-        'type': goalType.value,   // 👈 type added
+        'title': addGoalController.text.trim(),
+        'type': goalType.value,
       },
       showSuccessSnackBar: true,
       onSuccess: (result) {
         addGoalController.clear();
-        goalType.value = 'daily';
+        goalType.value = 'Daily';
+
+        Get.close(1);
         refreshGoals();
-        Get.back();
       },
     );
   }

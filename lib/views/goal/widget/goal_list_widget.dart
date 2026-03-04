@@ -123,7 +123,7 @@ class GoalListWidget extends StatelessWidget {
                                     size: 20.sp,
                                   ),
                                   onPressed: () {
-                                    _editDialog(index, isWeekly,context,);
+                                    _editDialog(index, isWeekly, context);
                                   },
                                   padding: EdgeInsets.all(8.w),
                                   constraints: const BoxConstraints(),
@@ -136,7 +136,7 @@ class GoalListWidget extends StatelessWidget {
                                     size: 20.sp,
                                   ),
                                   onPressed: () {
-                                    _deleteDialog(index, isWeekly,context);
+                                    _deleteDialog(index, isWeekly, context);
                                   },
                                   padding: EdgeInsets.all(8.w),
                                   constraints: const BoxConstraints(),
@@ -183,37 +183,46 @@ class GoalListWidget extends StatelessWidget {
     ),
   );
 
-  void _editDialog(int index, bool isWeekly,context,) {
+  void _editDialog(int index, bool isWeekly, context) {
     controller.editGoalController.text = goals[index].title;
 
     showModalBottomSheet(
       context: context,
-      builder: (context) => BottomSheetDialogWidget(
-        isLoading: controller.isEditGoalLoading,
-        inputController: controller.editGoalController,
-        title: "Edit Goal",
-        buttonTex: "Update",
-        isInputField: true,
-        subTitle: "Edit your Goal",
-        action: (){controller.editGoal(goals[index].id.toString());},
-        buttonColor: CustomColors.primary,
-        hintText: goals[index].title,
+      builder: (context) => SafeArea(
+        child: BottomSheetDialogWidget(
+          isLoading: controller.isEditGoalLoading,
+          inputController: controller.editGoalController,
+          title: "Edit Goal",
+          buttonTex: "Update",
+          isInputField: true,
+          subTitle: "Edit your Goal",
+          action: () {
+            controller.editGoal(goals[index].id.toString());
+          },
+          buttonColor: CustomColors.primary,
+          hintText: goals[index].title,
+        ),
       ),
     );
   }
 
-  void _deleteDialog(int index, bool isWeekly,context) {
+  void _deleteDialog(int index, bool isWeekly, context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => BottomSheetDialogWidget(
-        isLoading: controller.isEditGoalLoading,
-        // inputController: controller.editGoalController,
-        // title: "Edit Goal",
-        // buttonTex: "Update",
-        // isInputField: true,
-        subTitle: "Delete your Goal",
-        action: (){controller.deleteGoal(goals[index].id.toString());},
-        hintText: goals[index].title, title: 'Delete your goal',
+      builder: (context) => SafeArea(
+        child: BottomSheetDialogWidget(
+          isLoading: controller.isEditGoalLoading,
+          // inputController: controller.editGoalController,
+          // title: "Edit Goal",
+          // buttonTex: "Update",
+          // isInputField: true,
+          subTitle: "Delete your Goal",
+          action: () {
+            controller.deleteGoal(goals[index].id.toString());
+          },
+          hintText: goals[index].title,
+          title: 'Delete your goal',
+        ),
       ),
     );
   }
