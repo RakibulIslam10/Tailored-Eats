@@ -86,51 +86,51 @@ class AddCustomMealScreen extends GetView<AddCustomMealController> {
                     Space.height.betweenInputBox,
                     _DarkLabel('Meal Time'),
                     Space.height.btnInputTitleAndBox,
-                    Obx(() => Row(
-                      children: controller.timeOptions.map((time) {
-                        final isSelected =
-                            controller.selectedTime.value == time;
-                        return Expanded(
-                          child: GestureDetector(
-                            onTap: () =>
-                            controller.selectedTime.value = time,
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              margin: EdgeInsets.only(
-                                right:
-                                time != controller.timeOptions.last
-                                    ? 8.w
-                                    : 0,
-                              ),
-                              padding:
-                              EdgeInsets.symmetric(vertical: 11.h),
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? CustomColors.primary
-                                    : const Color(0xFF222222),
-                                borderRadius: BorderRadius.circular(
-                                    Dimensions.radius * 0.8),
-                                border: Border.all(
+                    Obx(
+                      () => Row(
+                        children: controller.timeOptions.map((time) {
+                          final isSelected =
+                              controller.selectedTime.value == time;
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => controller.selectedTime.value = time,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                margin: EdgeInsets.only(
+                                  right: time != controller.timeOptions.last
+                                      ? 8.w
+                                      : 0,
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 11.h),
+                                decoration: BoxDecoration(
                                   color: isSelected
                                       ? CustomColors.primary
-                                      : const Color(0xFF2E2E2E),
-                                  width: 1.4,
+                                      : const Color(0xFF222222),
+                                  borderRadius: BorderRadius.circular(
+                                    Dimensions.radius * 0.8,
+                                  ),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? CustomColors.primary
+                                        : const Color(0xFF2E2E2E),
+                                    width: 1.4,
+                                  ),
+                                ),
+                                child: TextWidget(
+                                  time,
+                                  textAlign: TextAlign.center,
+                                  fontSize: Dimensions.labelMedium,
+                                  fontWeight: FontWeight.w600,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : const Color(0xFF888888),
                                 ),
                               ),
-                              child: TextWidget(
-                                time,
-                                textAlign: TextAlign.center,
-                                fontSize: Dimensions.labelMedium,
-                                fontWeight: FontWeight.w600,
-                                color: isSelected
-                                    ? Colors.white
-                                    : const Color(0xFF888888),
-                              ),
                             ),
-                          ),
-                        );
-                      }).toList(),
-                    )),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -152,9 +152,9 @@ class AddCustomMealScreen extends GetView<AddCustomMealController> {
                           PrimaryInputFieldWidget(
                             hintText: '0.00',
                             controller: controller.priceController,
-                            keyBoardType:
-                            const TextInputType.numberWithOptions(
-                                decimal: true),
+                            keyBoardType: const TextInputType.numberWithOptions(
+                              decimal: true,
+                            ),
                           ),
                         ],
                       ),
@@ -235,103 +235,109 @@ class AddCustomMealScreen extends GetView<AddCustomMealController> {
                 title: 'Ingredients',
                 icon: Icons.egg_alt_outlined,
                 trailing: _AddButton(onTap: controller.addIngredient),
-                child: Obx(() => Column(
-                  children: List.generate(
-                    controller.ingredients.length,
-                        (index) => Padding(
-                      padding: EdgeInsets.only(
-                        bottom: index < controller.ingredients.length - 1
-                            ? Dimensions.spaceBetweenInputBox
-                            : 0,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: crossStart,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 8.h),
-                            width: 26.w,
-                            height: 26.h,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  CustomColors.primary,
-                                  CustomColors.primary.withOpacity(0.6),
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              shape: BoxShape.circle,
-                            ),
-                            child: TextWidget(
-                              '${index + 1}',
-                              fontSize: Dimensions.labelSmall,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Space.width.v10,
-                          Expanded(
-                            flex: 3,
-                            child: Column(
-                              crossAxisAlignment: crossStart,
-                              children: [
-                                _DarkLabel('Name'),
-                                Space.height.btnInputTitleAndBox,
-                                PrimaryInputFieldWidget(
-                                  hintText: 'Chicken Breast',
-                                  controller: controller
-                                      .ingredients[index].nameController,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Space.width.v10,
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              crossAxisAlignment: crossStart,
-                              children: [
-                                _DarkLabel('Qty'),
-                                Space.height.btnInputTitleAndBox,
-                                PrimaryInputFieldWidget(
-                                  hintText: '200g',
-                                  controller: controller
-                                      .ingredients[index].quantityController,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Space.width.v10,
-                          GestureDetector(
-                            onTap: () =>
-                                controller.removeIngredient(index),
-                            child: Container(
-                              margin: EdgeInsets.only(top: 24.h),
-                              padding: EdgeInsets.all(7.r),
+                child: Obx(
+                  () => Column(
+                    children: List.generate(
+                      controller.ingredients.length,
+                      (index) => Padding(
+                        padding: EdgeInsets.only(
+                          bottom: index < controller.ingredients.length - 1
+                              ? Dimensions.spaceBetweenInputBox
+                              : 0,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: crossStart,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: 8.h),
+                              width: 26.w,
+                              height: 26.h,
+                              alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: CustomColors.rejected
-                                    .withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(
-                                    Dimensions.radius * 0.5),
-                                border: Border.all(
-                                  color: CustomColors.rejected
-                                      .withOpacity(0.3),
-                                  width: 1,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    CustomColors.primary,
+                                    CustomColors.primary.withOpacity(0.6),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
                                 ),
+                                shape: BoxShape.circle,
                               ),
-                              child: Icon(
-                                Icons.delete_outline,
-                                color: CustomColors.rejected,
-                                size: 16.h,
+                              child: TextWidget(
+                                '${index + 1}',
+                                fontSize: Dimensions.labelSmall,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
                               ),
                             ),
-                          ),
-                        ],
+                            Space.width.v10,
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: crossStart,
+                                children: [
+                                  _DarkLabel('Name'),
+                                  Space.height.btnInputTitleAndBox,
+                                  PrimaryInputFieldWidget(
+                                    hintText: 'Chicken Breast',
+                                    controller: controller
+                                        .ingredients[index]
+                                        .nameController,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Space.width.v10,
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                crossAxisAlignment: crossStart,
+                                children: [
+                                  _DarkLabel('Qty'),
+                                  Space.height.btnInputTitleAndBox,
+                                  PrimaryInputFieldWidget(
+                                    hintText: '200g',
+                                    controller: controller
+                                        .ingredients[index]
+                                        .quantityController,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Space.width.v10,
+                            GestureDetector(
+                              onTap: () => controller.removeIngredient(index),
+                              child: Container(
+                                margin: EdgeInsets.only(top: 24.h),
+                                padding: EdgeInsets.all(7.r),
+                                decoration: BoxDecoration(
+                                  color: CustomColors.rejected.withOpacity(
+                                    0.15,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    Dimensions.radius * 0.5,
+                                  ),
+                                  border: Border.all(
+                                    color: CustomColors.rejected.withOpacity(
+                                      0.3,
+                                    ),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.delete_outline,
+                                  color: CustomColors.rejected,
+                                  size: 16.h,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                )),
+                ),
               ),
 
               Space.height.v20,
@@ -340,97 +346,102 @@ class AddCustomMealScreen extends GetView<AddCustomMealController> {
                 title: 'Instructions',
                 icon: Icons.format_list_numbered,
                 trailing: _AddButton(onTap: controller.addInstruction),
-                child: Obx(() => Column(
-                  children: List.generate(
-                    controller.instructionControllers.length,
-                        (index) => Padding(
-                      padding: EdgeInsets.only(
-                        bottom: index <
-                            controller.instructionControllers.length - 1
-                            ? Dimensions.spaceBetweenInputBox
-                            : 0,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: crossStart,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 8.h),
-                            width: 26.w,
-                            height: 26.h,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color:
-                              CustomColors.primary.withOpacity(0.15),
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: CustomColors.primary.withOpacity(0.4),
-                                width: 1,
-                              ),
-                            ),
-                            child: TextWidget(
-                              '${index + 1}',
-                              fontSize: Dimensions.labelSmall,
-                              fontWeight: FontWeight.w700,
-                              color: CustomColors.primary,
-                            ),
-                          ),
-                          Space.width.v10,
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: crossStart,
-                              children: [
-                                _DarkLabel('Step ${index + 1}'),
-                                Space.height.btnInputTitleAndBox,
-                                PrimaryInputFieldWidget(
-                                  hintText: 'Enter instruction step...',
-                                  controller: controller
-                                      .instructionControllers[index],
-                                  maxLines: 2,
-                                  requiredField: false,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Space.width.v10,
-                          GestureDetector(
-                            onTap: () =>
-                                controller.removeInstruction(index),
-                            child: Container(
-                              margin: EdgeInsets.only(top: 24.h),
-                              padding: EdgeInsets.all(7.r),
+                child: Obx(
+                  () => Column(
+                    children: List.generate(
+                      controller.instructionControllers.length,
+                      (index) => Padding(
+                        padding: EdgeInsets.only(
+                          bottom:
+                              index <
+                                  controller.instructionControllers.length - 1
+                              ? Dimensions.spaceBetweenInputBox
+                              : 0,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: crossStart,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: 8.h),
+                              width: 26.w,
+                              height: 26.h,
+                              alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: CustomColors.rejected
-                                    .withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(
-                                    Dimensions.radius * 0.5),
+                                color: CustomColors.primary.withOpacity(0.15),
+                                shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: CustomColors.rejected
-                                      .withOpacity(0.3),
+                                  color: CustomColors.primary.withOpacity(0.4),
                                   width: 1,
                                 ),
                               ),
-                              child: Icon(
-                                Icons.delete_outline,
-                                color: CustomColors.rejected,
-                                size: 16.h,
+                              child: TextWidget(
+                                '${index + 1}',
+                                fontSize: Dimensions.labelSmall,
+                                fontWeight: FontWeight.w700,
+                                color: CustomColors.primary,
                               ),
                             ),
-                          ),
-                        ],
+                            Space.width.v10,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: crossStart,
+                                children: [
+                                  _DarkLabel('Step ${index + 1}'),
+                                  Space.height.btnInputTitleAndBox,
+                                  PrimaryInputFieldWidget(
+                                    hintText: 'Enter instruction step...',
+                                    controller: controller
+                                        .instructionControllers[index],
+                                    maxLines: 2,
+                                    requiredField: false,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Space.width.v10,
+                            GestureDetector(
+                              onTap: () => controller.removeInstruction(index),
+                              child: Container(
+                                margin: EdgeInsets.only(top: 24.h),
+                                padding: EdgeInsets.all(7.r),
+                                decoration: BoxDecoration(
+                                  color: CustomColors.rejected.withOpacity(
+                                    0.15,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    Dimensions.radius * 0.5,
+                                  ),
+                                  border: Border.all(
+                                    color: CustomColors.rejected.withOpacity(
+                                      0.3,
+                                    ),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.delete_outline,
+                                  color: CustomColors.rejected,
+                                  size: 16.h,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                )),
+                ),
               ),
 
               Space.height.v30,
 
-              // ── Submit Button ──
-              Obx(() => PrimaryButtonWidget(
-                title: 'Add Custom Meal',
-                isLoading: controller.isLoading.value,
-                onPressed: controller.addCustomMeal,
-              )),
+              Obx(
+                () => PrimaryButtonWidget(
+                  title: 'Add Meal',
+                  isLoading: controller.isLoading.value,
+                  onPressed: controller.addCustomMeal,
+                ),
+              ),
 
               Space.height.v30,
             ],
@@ -444,6 +455,7 @@ class AddCustomMealScreen extends GetView<AddCustomMealController> {
 class _DarkLabel extends StatelessWidget {
   final String text;
   final bool optional;
+
   const _DarkLabel(this.text, {this.optional = false});
 
   @override
@@ -475,6 +487,7 @@ class _MacroBox extends StatelessWidget {
   final String label;
   final Color color;
   final TextEditingController controller;
+
   const _MacroBox({
     required this.label,
     required this.color,
@@ -491,8 +504,7 @@ class _MacroBox extends StatelessWidget {
             Container(
               width: 8.w,
               height: 8.h,
-              decoration:
-              BoxDecoration(color: color, shape: BoxShape.circle),
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             ),
             Space.width.v5,
             TextWidget(
@@ -517,6 +529,7 @@ class _MacroBox extends StatelessWidget {
 // ── Add Button ──
 class _AddButton extends StatelessWidget {
   final VoidCallback onTap;
+
   const _AddButton({required this.onTap});
 
   @override
@@ -536,8 +549,11 @@ class _AddButton extends StatelessWidget {
         child: Row(
           mainAxisSize: mainMin,
           children: [
-            Icon(Icons.add_circle_outline,
-                color: CustomColors.primary, size: 15.h),
+            Icon(
+              Icons.add_circle_outline,
+              color: CustomColors.primary,
+              size: 15.h,
+            ),
             Space.width.v5,
             TextWidget(
               'Add',
@@ -592,11 +608,7 @@ class _DarkSectionCard extends StatelessWidget {
                       color: CustomColors.primary.withOpacity(0.12),
                       borderRadius: BorderRadius.circular(6.r),
                     ),
-                    child: Icon(
-                      icon,
-                      color: CustomColors.primary,
-                      size: 15.h,
-                    ),
+                    child: Icon(icon, color: CustomColors.primary, size: 15.h),
                   ),
                   Space.width.v10,
                   TextWidget(

@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
           Get.lazyPut(() => SplashController());
         }),
 
-        // ✅ FIXED BUILDER
         builder: (context, widget) {
           return Overlay(
             initialEntries: [

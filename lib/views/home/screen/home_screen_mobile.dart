@@ -79,39 +79,39 @@ class HomeScreenMobile extends GetView<HomeController> {
                         ),
                       if (controller.friendsDoingPercentList.isNotEmpty)
                         RepaintBoundary(child: const FriendsProgressWidget()),
-                      TextWidget(
-                        'Your Next Bite',
-                        fontWeight: FontWeight.bold,
-                        padding: Dimensions.heightSize.edgeVertical,
-                      ),
-                      RepaintBoundary(
-                        child: Obx(
-                          () => AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 300),
-                            transitionBuilder: (child, animation) =>
-                                FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                ),
-                            child: FoodCardWidget(
-                              key: ValueKey(controller.currentFood["title"]),
-                              title: controller.currentFood["title"] ?? "",
-                              description:
-                                  controller.currentFood["description"] ?? "",
-                              calories:
-                                  controller.currentFood["calories"] ?? "",
-                              time: controller.currentFood["time"] ?? "",
-                              imageUrl:
-                                  controller.currentFood["imageUrl"] ?? "",
-                              isShuffle: true,
-                              onShuffle: controller.shuffleList,
-                              onTap: () {
-                                Get.toNamed(Routes.detailsScreen);
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
+                      // TextWidget(
+                      //   'Your Next Bite',
+                      //   fontWeight: FontWeight.bold,
+                      //   padding: Dimensions.heightSize.edgeVertical,
+                      // ),
+                      // RepaintBoundary(
+                      //   child: Obx(
+                      //     () => AnimatedSwitcher(
+                      //       duration: const Duration(milliseconds: 300),
+                      //       transitionBuilder: (child, animation) =>
+                      //           FadeTransition(
+                      //             opacity: animation,
+                      //             child: child,
+                      //           ),
+                      //       child: FoodCardWidget(
+                      //         key: ValueKey(controller.currentFood["title"]),
+                      //         title: controller.currentFood["title"] ?? "",
+                      //         description:
+                      //             controller.currentFood["description"] ?? "",
+                      //         calories:
+                      //             controller.currentFood["calories"] ?? "",
+                      //         time: controller.currentFood["time"] ?? "",
+                      //         imageUrl:
+                      //             controller.currentFood["imageUrl"] ?? "",
+                      //         isShuffle: true,
+                      //         onShuffle: controller.shuffleList,
+                      //         onTap: () {
+                      //           Get.toNamed(Routes.detailsScreen);
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       if (controller.goalList.isNotEmpty) ...[
                         TextWidget(
                           "Don't Forget Your Daily Goal",

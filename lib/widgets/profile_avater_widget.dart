@@ -57,7 +57,7 @@ class ProfileAvatarWidget extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey.shade300,
             ),
-            child: Icon(Icons.error, color: Colors.red.shade300, size: size.h),
+            child: Icon(Icons.image_not_supported, color: Colors.grey, size: 15.h),
           ),
         ),
       ),

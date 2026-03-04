@@ -15,6 +15,6 @@ class NavigationBinding extends Bindings {
     Get.lazyPut<NutritionController>(() => NutritionController());
     Get.lazyPut<GoalController>(() => GoalController());
     Get.lazyPut<ConsistencyController>(() => ConsistencyController());
-    Get.lazyPut<FriendsController>(() => FriendsController());
+    Get.put(FriendsController());
   }
 }
