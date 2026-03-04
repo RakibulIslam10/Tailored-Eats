@@ -64,7 +64,7 @@ class Calorie {
   final int consumedCarb;
   final int consumedFat;
   final int consumedProtein;
-  final int completedGoal;
+  final dynamic completedGoal;
   final DateTime createdAt;
   final DateTime updatedAt;
   final int v;

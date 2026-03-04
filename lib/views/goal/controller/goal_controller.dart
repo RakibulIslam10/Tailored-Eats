@@ -75,20 +75,25 @@ class GoalController extends GetxController {
   }
 
   // Generic toggle method
+// controller এ শুধু এই method টা replace করো
+
   void toggleGoal(
-    int index, {
-    bool isWeekly = false,
-    bool isSuggested = false,
-  }) {
+      int index, {
+        bool isWeekly = false,
+        bool isSuggested = false,
+      }) {
     if (isSuggested) {
       _handleSuggestedToggle(index);
     } else {
       final goalList = isWeekly ? weeklyGoals : dailyGoals;
       final progressVar = isWeekly ? weeklyProgress : dailyProgress;
+      final goal = goalList[index];
 
       goalList[index].completed = !goalList[index].completed;
       goalList.refresh();
       _updateProgress(goalList, progressVar);
+
+      goalMark(goal.id.toString());
     }
   }
 

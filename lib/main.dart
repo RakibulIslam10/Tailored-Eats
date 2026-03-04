@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingsBuilder(() {
           Get.lazyPut(() => SplashController());
         }),
-
         builder: (context, widget) {
           return Overlay(
             initialEntries: [
