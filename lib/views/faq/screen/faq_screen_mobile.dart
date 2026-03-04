@@ -9,8 +9,7 @@ class FaqScreenMobile extends GetView<FaqController> {
       appBar: CommonAppBar(title: "Faq"),
       body: SafeArea(
         child: Obx(
-          () =>
-          controller.isLoading.value ? LoadingWidget() : controller.faqList.isEmpty ? EmptyDataWidget() :
+          () => controller.isLoading.value ? LoadingWidget() : controller.faqList.isEmpty ? EmptyDataWidget() :
               SingleChildScrollView(
                   child: Padding(
                     padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
