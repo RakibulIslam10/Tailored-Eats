@@ -6,10 +6,25 @@ class FriendsScreenMobile extends GetView<FriendsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: "Friends", isBack: false),
+      appBar: CommonAppBar(
+        title: "Friends",
+        isBack: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(AddFriendScreen());
+            },
+            icon: Icon(
+              Icons.person,
+              color: CustomColors.whiteColor,
+              size: Dimensions.iconSizeLarge * 1.1,
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Obx(
-              () => RefreshIndicator(
+          () => RefreshIndicator(
             backgroundColor: Colors.black,
             color: CustomColors.primary,
             onRefresh: () async {

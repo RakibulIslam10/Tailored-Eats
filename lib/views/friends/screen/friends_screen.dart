@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:tailored_eats/core/api/end_point/api_end_points.dart';
 import 'package:tailored_eats/core/api/helpers/helpers.dart';
 import 'package:tailored_eats/routes/routes.dart';
+import 'package:tailored_eats/views/add_frined/add_friend_screen.dart';
 import 'package:tailored_eats/widgets/empty_data_widget.dart';
 import 'package:tailored_eats/widgets/loading_widget.dart';
 import '../../../core/utils/basic_import.dart';
