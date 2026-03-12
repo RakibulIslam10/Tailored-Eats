@@ -5,7 +5,7 @@ class MacrosWidget extends GetView<DetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Obx(() => SizedBox(
       height: 100.h,
       child: Padding(
         padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
@@ -28,14 +28,13 @@ class MacrosWidget extends GetView<DetailsController> {
               title: 'Carbs',
               value: controller.mealDetails.value?.carbsG.toString() ?? '0',
             ),
-      SizedBox()
+            SizedBox()
           ],
         ),
       ),
-    );
+    ));
   }
 }
-
 class CalorieTrackerWidget extends GetView<DetailsController> {
   final String path;
   final String title;

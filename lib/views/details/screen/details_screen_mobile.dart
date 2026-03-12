@@ -1,3 +1,5 @@
+// details_screen_mobile.dart
+
 part of 'details_screen.dart';
 
 class DetailsScreenMobile extends GetView<DetailsController> {
@@ -12,17 +14,23 @@ class DetailsScreenMobile extends GetView<DetailsController> {
         }
       },
       child: Scaffold(
-        bottomNavigationBar: PrimaryButtonWidget(
-          padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.defaultHorizontalSize,
-            vertical: Dimensions.verticalSize,
+        bottomNavigationBar: Obx(
+              () => PrimaryButtonWidget(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.defaultHorizontalSize,
+              vertical: Dimensions.verticalSize,
+            ),
+            title: 'I Ate this',
+            isLoading: controller.isAteLoading.value,
+            onPressed: controller.ateMeal,
           ),
-          title: 'I Ate this',
-          onPressed: () {},
         ),
         extendBodyBehindAppBar: true,
         extendBody: true,
-        appBar: CommonAppBar(title: "Menu Details", fav: controller.mealDetails.value?.isFavorite ?? false),
+        appBar: CommonAppBar(
+          title: "Menu Details",
+          fav: controller.mealDetails.value?.isFavorite ?? false,
+        ),
         body: ListView(
           padding: EdgeInsets.zero,
           children: [
