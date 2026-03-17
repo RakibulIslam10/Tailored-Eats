@@ -127,28 +127,27 @@ class ProfileCreationController extends GetxController {
       "title": "1-2 sessions / week",
       "subtitle": "Easy start, light commitment",
       "iconPath": "assets/icons/Group 1000004266.svg",
-      "sendBacked": "1-2_sessions/week",
+      "sendBacked": "1-2_sessions/week",   // ✅
     },
     {
       "title": "3 sessions / week",
       "subtitle": "Balanced & flexible",
       "iconPath": "assets/icons/Group 1000004267.svg",
-      "sendBacked": "2-3_sessions/week",
+      "sendBacked": "2-3_sessions/week",   // ✅
     },
     {
       "title": "4 sessions / week",
       "subtitle": "Serious progress ahead",
       "iconPath": "assets/icons/Group 1000004268.svg",
-      "sendBacked": "4-5_sessions/week",
+      "sendBacked": "3-4_sessions/week",   // ✅ Fix: "4-5_sessions/week" → "3-4_sessions/week"
     },
     {
       "title": "5 sessions / week",
       "subtitle": "Full dedication mode",
       "iconPath": "assets/icons/Group 1000004269.svg",
-      "sendBacked": "5+_sessions/week",
+      "sendBacked": "5+_sessions/week",    // ✅
     },
   ];
-
   void previousStep() {
     if (currentStep.value > 0) {
       currentStep.value--;

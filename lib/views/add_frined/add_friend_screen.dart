@@ -97,28 +97,7 @@ class AddFriendScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                decoration: BoxDecoration(
-                  color: CustomColors.primary.withOpacity(0.12),
-                  borderRadius: BorderRadius.circular(20.r),
-                  border: Border.all(color: CustomColors.primary.withOpacity(0.3), width: 1),
-                ),
-                child: Row(
-                  mainAxisSize: mainMin,
-                  children: [
-                    Icon(Icons.people_alt_outlined, size: 13.sp, color: CustomColors.primary),
-                    SizedBox(width: 5.w),
-                    TextWidget(
-                      'People You May Know',
-                      fontSize: Dimensions.labelSmall,
-                      color: CustomColors.primary,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ],
-                ),
-              ),
+
             ],
           ),
           Space.height.v20,
@@ -289,7 +268,7 @@ class _SuggestionCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: isSent
-                      ? const Color(0xFF1E1E1E)
+                      ?  CustomColors.primary
                       : CustomColors.primary,
                   border: Border.all(
                     color: isSent

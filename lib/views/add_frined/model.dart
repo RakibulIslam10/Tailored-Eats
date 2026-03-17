@@ -1,32 +1,23 @@
 class SuggestFriendModel {
-  final int statusCode;
-  final bool success;
-  final String message;
-  final dynamic meta;
   final List<Suggests> data;
 
-  SuggestFriendModel({
-    required this.statusCode,
-    required this.success,
-    required this.message,
-    required this.meta,
-    required this.data,
-  });
+  SuggestFriendModel({required this.data});
 
-  factory SuggestFriendModel.fromJson(Map<String, dynamic> json) => SuggestFriendModel(
-    statusCode: json["statusCode"],
-    success: json["success"],
-    message: json["message"],
-    meta: json["meta"],
-    data: List<Suggests>.from(json["data"].map((x) => Suggests.fromJson(x))),
-  );
+  factory SuggestFriendModel.fromJson(Map<String, dynamic> json) {
+    return SuggestFriendModel(
+      data: (json['data'] as List<dynamic>? ?? [])
+          .map((e) => Suggests.fromJson(e as Map<String, dynamic>))
+          .where((s) => s.name.isNotEmpty)
+          .toList(),
+    );
+  }
 }
 
 class Suggests {
   final String id;
   final String name;
   final String email;
-  final dynamic age;
+  final int age;
   final String gender;
   final String mainGoal;
 
@@ -39,13 +30,14 @@ class Suggests {
     required this.mainGoal,
   });
 
-  factory Suggests.fromJson(Map<String, dynamic> json) => Suggests(
-    id: json["_id"],
-    name: json["name"] ?? '',
-    email: json["email"] ?? '',
-    age: json["age"] ?? 0,
-    gender: json["gender"] ?? '',
-    mainGoal: json["mainGoal"] ?? '',
-  );
-
+  factory Suggests.fromJson(Map<String, dynamic> json) {
+    return Suggests(
+      id: json['_id'] ?? '',
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      age: json['age'] ?? 0,
+      gender: json['gender'] ?? '',
+      mainGoal: json['mainGoal'] ?? '',
+    );
+  }
 }

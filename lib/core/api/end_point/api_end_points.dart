@@ -2,7 +2,7 @@ class ApiEndPoints {
   static final mainDomain = 'https://p2zltbm7-8002.inc1.devtunnels.ms';
   static final baseUrl = '$mainDomain/api/v1/';
 
-  static final aiBaseUrl = 'http://10.10.20.111:8000/';
+  static final aiBaseUrl = 'https://0phq0c9r-8000.inc1.devtunnels.ms/';
 
   static const addFavorite = 'favorite/add';
   static const removeFavorite = 'favorite/remove';
