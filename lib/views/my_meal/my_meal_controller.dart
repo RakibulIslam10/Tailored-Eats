@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../core/api/model/basic_success_model.dart';
 import '../../core/api/services/api_request.dart';
 import '../nutrition/model/meals_model.dart';
 import 'model/my_custom_meal_model.dart';
@@ -28,9 +29,11 @@ class MyMealController extends GetxController {
     return (staticImages..shuffle()).first;
   }
 
-    RxList<Datum> myMealsList = <Datum>[].obs;
+  RxList<Datum> myMealsList = <Datum>[].obs;
+  Rxn<Datum> mealDetails = Rxn<Datum>();
 
   RxBool isLoading = false.obs;
+  RxBool isAteLoading = false.obs;
 
   Future<MyCustomMealModel> fetchMeals() async {
     return await ApiRequest.get(
@@ -41,7 +44,27 @@ class MyMealController extends GetxController {
         myMealsList.clear();
         myMealsList.addAll(result.data);
       },
+    );
+  }
 
+  Future<void> ateMeal() async {
+    final meal = mealDetails.value;
+    if (meal == null) return;
+
+    await ApiRequest.patch(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: 'meal/ate-meal',
+      isLoading: isAteLoading,
+      showSuccessSnackBar: true,
+      body: {
+        'consumedCalorie': meal.details.calories,
+        'consumedProtein': meal.macros.protein,
+        'consumedCarb': meal.macros.carbs,
+        'consumedFat': meal.macros.fat,
+      },
+      onSuccess: (result) {
+        Get.close(1);
+      },
     );
   }
 }

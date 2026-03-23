@@ -62,6 +62,7 @@ import '../views/profile_creation/screen/profile_creation_screen.dart';
 import '../views/report/screen/report_screen.dart';
 import '../views/setting/screen/setting_screen.dart';
 import '../views/splash/screen/splash_screen.dart';
+import '../views/my_meal/screen/my_meal_details_screen.dart';
 
 import '../views/support/screen/support_screen.dart';
 import '../views/swap/screen/swap_screen.dart';
@@ -84,6 +85,7 @@ class Routes {
   static const faqScreen = '/faqScreen';
   static const supportScreen = '/supportScreen';
   static const myMealScreen = '/myMealScreen';
+  static const myMealDetails = '/myMealDetails';
   static const changePasswordScreen = '/change_passwordScreen';
   static const settingScreen = '/settingScreen';
   static const notificationScreen = '/notificationScreen';

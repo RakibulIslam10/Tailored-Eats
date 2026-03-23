@@ -13,6 +13,11 @@ class RoutePageList {
       binding: MyMealBinding(),
     ),
     GetPage(
+      name: Routes.myMealDetails,
+      page: () => const MyMealDetailsScreen(),
+      binding: MyMealBinding(),
+    ),
+    GetPage(
       name: Routes.addCustomMealScreen,
       page: () => const AddCustomMealScreen(),
       binding: AddCustomMealBinding(),

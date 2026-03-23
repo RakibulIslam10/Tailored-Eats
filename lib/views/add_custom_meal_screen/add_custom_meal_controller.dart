@@ -106,16 +106,16 @@ class AddCustomMealController extends GetxController {
         'description': descriptionController.text.trim(),
         'image': imageController.text.trim(),
         'time': selectedTime.value,
-        'details': {
-          'price': double.tryParse(priceController.text.trim()) ?? 0,
-          'calories': int.tryParse(caloriesController.text.trim()) ?? 0,
-          'prepTime': int.tryParse(prepTimeController.text.trim()) ?? 0,
-        },
-        'macros': {
-          'carbs': int.tryParse(carbsController.text.trim()) ?? 0,
-          'protein': int.tryParse(proteinController.text.trim()) ?? 0,
-          'fat': int.tryParse(fatController.text.trim()) ?? 0,
-        },
+        'price': double.tryParse(priceController.text.trim()) ?? 0,
+        'calories': int.tryParse(caloriesController.text.trim()) ?? 0,
+        'prepTime': int.tryParse(prepTimeController.text.trim()) ?? 0,
+
+        'carbs': int.tryParse(carbsController.text.trim()) ?? 0,
+        'protein': int.tryParse(proteinController.text.trim()) ?? 0,
+        'fat': int.tryParse(fatController.text.trim()) ?? 0,
+
+
+
         'ingredients': ingredients
             .where((e) => e.nameController.text.trim().isNotEmpty)
             .map((e) => e.toJson())

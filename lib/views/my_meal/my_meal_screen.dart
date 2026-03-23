@@ -74,10 +74,8 @@ class _MyMealCard extends GetView<MyMealController> {
       child: InkWell(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.85),
         onTap: () {
-
-
-
-
+          controller.mealDetails.value = meal;
+          Get.toNamed(Routes.myMealDetails);
         },
         child: Container(
           margin: EdgeInsets.only(bottom: Dimensions.heightSize * 1.5),
