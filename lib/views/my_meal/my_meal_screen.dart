@@ -73,7 +73,12 @@ class _MyMealCard extends GetView<MyMealController> {
     return RepaintBoundary(
       child: InkWell(
         borderRadius: BorderRadius.circular(Dimensions.radius * 0.85),
-        // onTap: () => Get.toNamed(Routes.detailsScreen, arguments: meal.name),
+        onTap: () {
+
+
+
+
+        },
         child: Container(
           margin: EdgeInsets.only(bottom: Dimensions.heightSize * 1.5),
           decoration: BoxDecoration(

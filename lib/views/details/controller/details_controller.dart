@@ -33,28 +33,20 @@ class DetailsController extends GetxController {
     }
   }
 
+
   Future<void> getMealDetails() async {
-    try {
-      isLoading.value = true;
-      print("🔎 Recipe Name: $recipeName");
-      await ApiRequest.get(
-        fromJson: SingleMealsModel.fromJson,
-        endPoint: 'meal/${Uri.encodeComponent(recipeName)}',
-        useAiBaseUrl: true,
-        queryParams: {'user_id': AppStorage.userEmail.toString()},
-        isLoading: RxBool(false),
-        showResponse: true,
-        onSuccess: (result) {
-          mealDetails.value = result;
-          print('✅ Meal details loaded: ${result.recipeName}');
-        },
-      );
-    } catch (e) {
-      print('❌ Error loading meal details: $e');
-      CustomSnackBar.error('Failed to load meal details');
-    } finally {
-      isLoading.value = false;
-    }
+    await ApiRequest.get(
+      fromJson: SingleMealsModel.fromJson,
+      endPoint: 'meal/${Uri.encodeComponent(recipeName)}',
+      useAiBaseUrl: true,
+      queryParams: {'user_id': AppStorage.userEmail.toString()},
+      isLoading: isLoading,
+      showResponse: true,
+      onSuccess: (result) {
+        mealDetails.value = result;
+        print('✅ Meal details loaded: ${result.recipeName}');
+      },
+    );
   }
 
   Future<void> ateMeal() async {
