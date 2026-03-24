@@ -43,7 +43,7 @@ class FriendsProgressWidget extends GetView<HomeController> {
               final imageUrl =
                   (controller.friendsDoingPercentList[index].image.isNotEmpty ??
                       false)
-                  ?       '${ApiEndPoints.mainDomain}/${controller.friendsDoingPercentList[index].image}'
+                  ? '${ApiEndPoints.mainDomain}/${controller.friendsDoingPercentList[index].image}'
                   : "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg";
               return RepaintBoundary(
                 child: Container(
