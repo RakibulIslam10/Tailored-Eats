@@ -17,11 +17,11 @@ class SettingScreenMobile extends GetView<SettingController> {
               title: 'Change Password',
               onTap: () => Get.toNamed(Routes.changePasswordScreen),
             ),
-            _buildMenuItem(
-              icon: Icons.support_agent,
-              title: 'Contact Support',
-              onTap: () => Get.toNamed(Routes.supportScreen),
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.support_agent,
+            //   title: 'Contact Support',
+            //   onTap: () => Get.toNamed(Routes.supportScreen),
+            // ),
             // _buildMenuItem(
             //   icon: Icons.report_gmailerrorred,
             //   title: 'Report Problem',
